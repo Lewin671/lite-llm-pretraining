@@ -20,6 +20,7 @@ from lite_llm_pretraining.common import (
     save_checkpoint,
     save_json,
     set_seed,
+    token_dtype_from_meta,
 )
 
 
@@ -62,8 +63,9 @@ def train_from_config(config_path: Path):
     )
     mx.eval(model.parameters(), optimizer.state)
 
-    train_data = load_memmap(data_dir, "train")
-    val_data = load_memmap(data_dir, "val")
+    token_dtype = token_dtype_from_meta(meta)
+    train_data = load_memmap(data_dir, "train", token_dtype=token_dtype)
+    val_data = load_memmap(data_dir, "val", token_dtype=token_dtype)
     loss_and_grad_fn = nn.value_and_grad(model, loss_fn)
 
     batch_size = train_config["batch_size"]

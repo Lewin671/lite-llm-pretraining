@@ -3,8 +3,10 @@ from pathlib import Path
 
 from lite_llm_pretraining.common import load_json, save_json
 from lite_llm_pretraining.prepare_tiny_shakespeare import prepare_dataset
+from lite_llm_pretraining.prepare_tinystories import prepare_dataset as prepare_tinystories
 from lite_llm_pretraining.sample import sample_from_checkpoint
 from lite_llm_pretraining.train import train_from_config
+from lite_llm_pretraining.validate_checkpoint import validate_checkpoint
 
 
 def parse_args():
@@ -31,7 +33,7 @@ def parse_args():
         "--train_split",
         type=float,
         default=0.9,
-        help="Train split used when preparing Tiny Shakespeare.",
+        help="Train split used when preparing split-based raw text datasets.",
     )
     parser.add_argument(
         "--force_prepare",
@@ -39,6 +41,22 @@ def parse_args():
         help="Rebuild the local dataset even if files already exist.",
     )
     return parser.parse_args()
+
+
+def prepare_from_config(config, data_dir: Path, train_split: float):
+    prepare_config = config.get("prepare", {})
+    prepare_name = prepare_config.get("name", "tinyshakespeare")
+
+    if prepare_name == "tinyshakespeare":
+        split = prepare_config.get("train_split", train_split)
+        return prepare_dataset(data_dir, train_split=split)
+
+    if prepare_name == "tinystories":
+        train_url = prepare_config.get("train_url")
+        val_url = prepare_config.get("val_url")
+        return prepare_tinystories(data_dir, train_url=train_url, val_url=val_url)
+
+    raise ValueError(f"unsupported prepare dataset: {prepare_name}")
 
 
 def main():
@@ -49,7 +67,7 @@ def main():
     meta_path = data_dir / "meta.json"
 
     if args.force_prepare or not meta_path.exists():
-        meta = prepare_dataset(data_dir, train_split=args.train_split)
+        meta = prepare_from_config(config, data_dir, train_split=args.train_split)
         print(f"prepared dataset at {data_dir}")
         print(f"train tokens: {meta['train_tokens']}, val tokens: {meta['val_tokens']}")
     else:
@@ -77,9 +95,33 @@ def main():
         "loaded_step": sample_state.get("step"),
         **train_result,
     }
+
+    validation_config = config.get("validation")
+    if validation_config:
+        prompts = validation_config.get("prompts")
+        validation_report = validate_checkpoint(
+            checkpoint_dir,
+            data_dir=data_dir,
+            prompts=prompts,
+            max_new_tokens=validation_config.get(
+                "max_new_tokens", min(160, max_new_tokens)
+            ),
+            temperature=validation_config.get("temperature", 0.8),
+            eval_batches=validation_config.get("eval_batches", 10),
+        )
+        validation_path = out_dir / "validation_report.json"
+        save_json(validation_path, validation_report)
+        summary["validation_report_path"] = str(validation_path)
+        summary["validation_passed"] = (
+            validation_report["summary"]["passed_samples"]
+            == validation_report["summary"]["total_samples"]
+        )
+
     save_json(out_dir / "local_run_summary.json", summary)
 
     print(f"final sample saved to {final_sample_path}")
+    if validation_config:
+        print(f"validation report saved to {summary['validation_report_path']}")
     print(
         f"local run complete: step={summary['loaded_step']}, "
         f"best_val_loss={summary['best_val_loss']:.4f}"

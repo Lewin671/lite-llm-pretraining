@@ -10,6 +10,9 @@ import numpy as np
 from mlx.utils import tree_flatten
 
 
+DEFAULT_TOKEN_DTYPE = "uint16"
+
+
 class TransformerLM(nn.Module):
     def __init__(
         self,
@@ -78,8 +81,12 @@ def set_seed(seed: int):
     mx.random.seed(seed)
 
 
-def load_memmap(data_dir: Path, split: str):
-    return np.memmap(data_dir / f"{split}.bin", dtype=np.uint16, mode="r")
+def token_dtype_from_meta(meta):
+    return meta.get("token_dtype", DEFAULT_TOKEN_DTYPE)
+
+
+def load_memmap(data_dir: Path, split: str, token_dtype: str = DEFAULT_TOKEN_DTYPE):
+    return np.memmap(data_dir / f"{split}.bin", dtype=np.dtype(token_dtype), mode="r")
 
 
 def get_batch(data, batch_size: int, context_size: int):

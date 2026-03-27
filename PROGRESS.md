@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 已补齐本地交互式 TUI，并完成模型层 / 应用层分离
-- Latest Progress: 已在当前 checkpoint 上验证终端可以输入消息并接收流式回复，`sample` 与 `tui_chat` 都已接入新的分层结构
-- Issues: 暂无
-- Next Step: 在现有分层结构上继续推进更适合对话的数据和 tokenizer
+- Current Task: 已落地 `TinyStories` 全量训练闭环，并验证约 `50M` 参数模型可在本机训练
+- Latest Progress: 已跑通 `TinyStories` 全量数据准备、`49.7M` 配置、自动化验证，并完成到 `2000` 步的真实训练探路
+- Issues: `2000` 步训练后 `val_loss` 已降到 `1.4707`，但固定 seed 的严格验证只通过 `3` 个 prompt 中的 `1` 个，当前还不能称为高质量模型
+- Next Step: 在现有 `TinyStories` 路线上继续拉长训练，并优先评估切换 tokenizer 以提升文本质量
 
 ## How To Read
 
@@ -23,10 +23,11 @@
 
 ## Open Threads
 
-- [progress/threads/dataset-research-50m.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/dataset-research-50m.md)
+- [progress/threads/tinystories-full-training.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-full-training.md)
 
 ## Closed Threads
 
+- [progress/threads/dataset-research-50m.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/dataset-research-50m.md)
 - [progress/threads/chat-tui-layering.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/chat-tui-layering.md)
 - [progress/threads/x-search-local-dataset-fit.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/x-search-local-dataset-fit.md)
 - [progress/threads/streaming-sampling.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/streaming-sampling.md)

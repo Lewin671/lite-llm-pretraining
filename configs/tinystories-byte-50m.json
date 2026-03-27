@@ -1,0 +1,40 @@
+{
+  "run_name": "tinystories-byte-50m",
+  "seed": 42,
+  "prepare": {
+    "name": "tinystories"
+  },
+  "data_dir": "data/tinystories-byte",
+  "out_dir": "checkpoints/tinystories-byte-50m",
+  "sample_prompt": "Once upon a time,",
+  "validation": {
+    "prompts": [
+      "Once upon a time,",
+      "There was a little",
+      "One day, a child named"
+    ],
+    "max_new_tokens": 160,
+    "temperature": 0.8,
+    "eval_batches": 10
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 640,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 4,
+    "max_steps": 50000,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "warmup_steps": 500,
+    "log_interval": 10,
+    "eval_interval": 200,
+    "eval_batches": 20,
+    "checkpoint_interval": 1000,
+    "sample_interval": 1000,
+    "sample_tokens": 200
+  }
+}

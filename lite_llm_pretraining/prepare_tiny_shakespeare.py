@@ -36,8 +36,8 @@ def prepare_dataset(out_dir: Path, train_split: float = 0.9):
     raw_path = out_dir / "input.txt"
     urlretrieve(DATASET_URL, raw_path)
 
-    raw_text = raw_path.read_text(encoding="utf-8")
-    token_ids = np.frombuffer(raw_text.encode("utf-8"), dtype=np.uint8).astype(np.uint16)
+    raw_bytes = raw_path.read_bytes()
+    token_ids = np.frombuffer(raw_bytes, dtype=np.uint8)
 
     split_idx = int(len(token_ids) * train_split)
     train_ids = token_ids[:split_idx]
@@ -50,6 +50,7 @@ def prepare_dataset(out_dir: Path, train_split: float = 0.9):
         "dataset": "tinyshakespeare",
         "tokenizer": "utf8-bytes",
         "vocab_size": 256,
+        "token_dtype": "uint8",
         "train_tokens": int(train_ids.size),
         "val_tokens": int(val_ids.size),
         "source_url": DATASET_URL,
