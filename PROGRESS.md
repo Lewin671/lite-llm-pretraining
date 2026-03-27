@@ -5,7 +5,7 @@
 ## Current Status
 
 - Current Task: 初始化第一版训练代码骨架
-- Latest Progress: 已新增 supervisor 提示词，并把 AI agent 工作流设计记录到独立主题线程
+- Latest Progress: 已补充 README 同步规则，并明确 `README.md` 与 `AGENTS.md` 的职责边界，减少后续文档重复
 - Issues: 暂无
 - Next Step: 初始化第一版训练代码骨架
 
@@ -27,6 +27,7 @@
 
 ## Closed Threads
 
+- [progress/threads/readme-sync-rule.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/readme-sync-rule.md)
 - [progress/threads/agent-workflow.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/agent-workflow.md)
 - [progress/threads/progress-issue-tracking.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/progress-issue-tracking.md)
 - [progress/threads/collaboration-docs.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/collaboration-docs.md)
