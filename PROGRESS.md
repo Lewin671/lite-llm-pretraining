@@ -4,8 +4,8 @@
 
 ## Current Status
 
-- Current Task: 明确第一版训练代码和依赖范围
-- Latest Progress: 已明确 `Issues` 只用于未解决事项，且要求与 `Open Threads` 保持一一对应
+- Current Task: 初始化第一版训练代码骨架
+- Latest Progress: 已新增 supervisor 提示词，并把 AI agent 工作流设计记录到独立主题线程
 - Issues: 暂无
 - Next Step: 初始化第一版训练代码骨架
 
@@ -27,5 +27,6 @@
 
 ## Closed Threads
 
+- [progress/threads/agent-workflow.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/agent-workflow.md)
 - [progress/threads/progress-issue-tracking.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/progress-issue-tracking.md)
 - [progress/threads/collaboration-docs.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/collaboration-docs.md)
