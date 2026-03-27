@@ -1,3 +1,4 @@
+import codecs
 import json
 import math
 import random
@@ -154,9 +155,29 @@ def sample_text(
     max_new_tokens: int,
     temperature: float = 1.0,
 ):
+    return "".join(
+        sample_text_stream(
+            model,
+            prompt,
+            max_new_tokens,
+            temperature=temperature,
+        )
+    )
+
+
+def sample_text_stream(
+    model: TransformerLM,
+    prompt: str,
+    max_new_tokens: int,
+    temperature: float = 1.0,
+):
     prompt_tokens = encode_text(prompt) or [10]
     tokens = list(prompt_tokens)
+    decoder = codecs.getincrementaldecoder("utf-8")("ignore")
     model.eval()
+
+    if prompt:
+        yield prompt
 
     for _ in range(max_new_tokens):
         x = mx.array([tokens[-model.context_size :]], dtype=mx.int32)
@@ -165,9 +186,16 @@ def sample_text(
             logits = logits / temperature
         next_token = mx.random.categorical(logits)
         mx.eval(next_token)
-        tokens.append(int(next_token.item()))
+        token_value = int(next_token.item())
+        tokens.append(token_value)
 
-    return decode_tokens(tokens)
+        piece = decoder.decode(bytes([token_value]), final=False)
+        if piece:
+            yield piece
+
+    tail = decoder.decode(b"", final=True)
+    if tail:
+        yield tail
 
 
 def perplexity(loss_value: float):

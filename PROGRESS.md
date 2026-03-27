@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 已补齐单命令本地完整运行入口，准备进入更接近真实 LLM 的第二阶段
-- Latest Progress: 已在当前电脑上验证 `python -m lite_llm_pretraining.run_local --force_prepare` 能完整执行数据准备、训练、checkpoint 和最终采样
+- Current Task: 已补齐本地采样的终端实时 streaming 输出
+- Latest Progress: 已验证 `python -m lite_llm_pretraining.sample --stream` 能基于现有 checkpoint 实时输出生成文本
 - Issues: 暂无
-- Next Step: 引入更接近真实 LLM 的 tokenizer 和稍大一点的数据集，在当前本地链路上继续放大实验
+- Next Step: 如继续推进，优先把 tokenizer 和数据规模从 smoke 级别继续放大
 
 ## How To Read
 
@@ -27,6 +27,7 @@
 
 ## Closed Threads
 
+- [progress/threads/streaming-sampling.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/streaming-sampling.md)
 - [progress/threads/full-local-run.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/full-local-run.md)
 - [progress/threads/mlx-minimal-loop.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/mlx-minimal-loop.md)
 - [progress/threads/research-mac-16gb.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/research-mac-16gb.md)

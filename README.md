@@ -86,6 +86,16 @@ python -m lite_llm_pretraining.sample \
   --max_new_tokens 120
 ```
 
+如果希望终端里实时 streaming 输出：
+
+```bash
+python -m lite_llm_pretraining.sample \
+  --checkpoint_dir checkpoints/tinyshakespeare-byte-smoke/best \
+  --prompt "ROMEO:\n" \
+  --max_new_tokens 120 \
+  --stream
+```
+
 ## 训练产物
 
 - 数据输出：`data/tinyshakespeare-byte/`
