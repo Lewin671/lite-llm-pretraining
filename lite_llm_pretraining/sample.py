@@ -2,7 +2,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from lite_llm_pretraining.common import load_checkpoint, sample_text, sample_text_stream
+from lite_llm_pretraining.model import CheckpointLanguageModel
 
 
 def parse_args():
@@ -32,14 +32,14 @@ def parse_args():
 
 
 def sample_from_checkpoint(checkpoint_dir: Path, prompt: str, max_new_tokens: int):
-    model, _, state = load_checkpoint(checkpoint_dir)
-    output = sample_text(model, prompt, max_new_tokens)
-    return output, state
+    model = CheckpointLanguageModel(checkpoint_dir)
+    output = model.generate(prompt, max_new_tokens)
+    return output, model.state
 
 
 def stream_from_checkpoint(checkpoint_dir: Path, prompt: str, max_new_tokens: int):
-    model, _, state = load_checkpoint(checkpoint_dir)
-    return sample_text_stream(model, prompt, max_new_tokens), state
+    model = CheckpointLanguageModel(checkpoint_dir)
+    return model.stream_generate(prompt, max_new_tokens), model.state
 
 
 def main():
@@ -49,6 +49,8 @@ def main():
             Path(args.checkpoint_dir), args.prompt, args.max_new_tokens
         )
         print(f"loaded checkpoint step={state.get('step', 'unknown')}")
+        sys.stdout.write(args.prompt)
+        sys.stdout.flush()
         for piece in stream:
             sys.stdout.write(piece)
             sys.stdout.flush()
@@ -58,7 +60,7 @@ def main():
             Path(args.checkpoint_dir), args.prompt, args.max_new_tokens
         )
         print(f"loaded checkpoint step={state.get('step', 'unknown')}")
-        print(output)
+        print(f"{args.prompt}{output}")
 
 
 if __name__ == "__main__":

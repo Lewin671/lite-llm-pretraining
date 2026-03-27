@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 已补齐本地采样的终端实时 streaming 输出
-- Latest Progress: 已验证 `python -m lite_llm_pretraining.sample --stream` 能基于现有 checkpoint 实时输出生成文本
+- Current Task: 已补齐本地交互式 TUI，并完成模型层 / 应用层分离
+- Latest Progress: 已在当前 checkpoint 上验证终端可以输入消息并接收流式回复，`sample` 与 `tui_chat` 都已接入新的分层结构
 - Issues: 暂无
-- Next Step: 如继续推进，优先把 tokenizer 和数据规模从 smoke 级别继续放大
+- Next Step: 在现有分层结构上继续推进更适合对话的数据和 tokenizer
 
 ## How To Read
 
@@ -23,10 +23,12 @@
 
 ## Open Threads
 
-- 暂无
+- [progress/threads/dataset-research-50m.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/dataset-research-50m.md)
 
 ## Closed Threads
 
+- [progress/threads/chat-tui-layering.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/chat-tui-layering.md)
+- [progress/threads/x-search-local-dataset-fit.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/x-search-local-dataset-fit.md)
 - [progress/threads/streaming-sampling.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/streaming-sampling.md)
 - [progress/threads/full-local-run.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/full-local-run.md)
 - [progress/threads/mlx-minimal-loop.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/mlx-minimal-loop.md)

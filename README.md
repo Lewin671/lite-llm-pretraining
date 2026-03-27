@@ -9,6 +9,7 @@
 - tokenizer：`UTF-8 byte-level`
 - 模型：decoder-only Transformer
 - 验证目标：训练、验证、checkpoint 保存/加载、基础采样
+- 交互入口：streaming 采样与交互式 TUI 对话
 
 ## 范围
 
@@ -23,6 +24,8 @@
 - 周期性输出 train/val loss，并写入 `metrics.jsonl`
 - 保存 `best` / `latest` checkpoint
 - 从保存的 checkpoint 重新加载并采样
+- 提供模型层 / 应用层分离的对话结构
+- 提供终端交互式 TUI 聊天入口
 
 ## 环境
 
@@ -95,6 +98,33 @@ python -m lite_llm_pretraining.sample \
   --max_new_tokens 120 \
   --stream
 ```
+
+如果希望进入交互式 TUI 对话：
+
+```bash
+python -m lite_llm_pretraining.tui_chat \
+  --checkpoint_dir checkpoints/tinyshakespeare-byte-smoke/best \
+  --max_new_tokens 120
+```
+
+TUI 内置命令：
+
+- `/clear` 清空当前会话
+- `/quit` 退出界面
+
+## 分层结构
+
+当前交互能力按两层组织：
+
+- 模型层：`lite_llm_pretraining/model/`
+  - 负责 checkpoint 加载、一次性生成和流式生成
+- 应用层：`lite_llm_pretraining/app/`
+  - 负责对话历史、prompt 组织和 assistant 回复流
+
+终端入口：
+
+- 单次采样：`lite_llm_pretraining/sample.py`
+- 交互式对话：`lite_llm_pretraining/tui_chat.py`
 
 ## 训练产物
 

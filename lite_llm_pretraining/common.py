@@ -154,6 +154,7 @@ def sample_text(
     prompt: str,
     max_new_tokens: int,
     temperature: float = 1.0,
+    include_prompt: bool = True,
 ):
     return "".join(
         sample_text_stream(
@@ -161,6 +162,7 @@ def sample_text(
             prompt,
             max_new_tokens,
             temperature=temperature,
+            include_prompt=include_prompt,
         )
     )
 
@@ -170,13 +172,14 @@ def sample_text_stream(
     prompt: str,
     max_new_tokens: int,
     temperature: float = 1.0,
+    include_prompt: bool = True,
 ):
     prompt_tokens = encode_text(prompt) or [10]
     tokens = list(prompt_tokens)
     decoder = codecs.getincrementaldecoder("utf-8")("ignore")
     model.eval()
 
-    if prompt:
+    if prompt and include_prompt:
         yield prompt
 
     for _ in range(max_new_tokens):
