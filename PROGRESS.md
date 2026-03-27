@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 初始化第一版训练代码骨架
-- Latest Progress: 已补充 README 同步规则，并明确 `README.md` 与 `AGENTS.md` 的职责边界，减少后续文档重复
+- Current Task: 已完成当前电脑上的 MLX 最小预训练闭环，准备决定是否进入第二阶段扩展
+- Latest Progress: 已在 M1 Pro 16GB 上跑通 `Tiny Shakespeare + UTF-8 byte-level + MLX` 的 200 step smoke stage，产出可加载 checkpoint、指标日志和基础采样结果
 - Issues: 暂无
-- Next Step: 初始化第一版训练代码骨架
+- Next Step: 如继续推进，优先扩展 tokenizer 和数据规模，而不是重做最小训练骨架
 
 ## How To Read
 
@@ -27,6 +27,8 @@
 
 ## Closed Threads
 
+- [progress/threads/mlx-minimal-loop.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/mlx-minimal-loop.md)
+- [progress/threads/research-mac-16gb.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/research-mac-16gb.md)
 - [progress/threads/readme-sync-rule.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/readme-sync-rule.md)
 - [progress/threads/agent-workflow.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/agent-workflow.md)
 - [progress/threads/progress-issue-tracking.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/progress-issue-tracking.md)

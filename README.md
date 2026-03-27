@@ -2,7 +2,13 @@
 
 一个面向当前电脑的轻量级 LLM 预训练实验仓库。
 
-目标是用尽可能少的依赖，把数据准备、分词、训练、评估串起来，先跑通单机版本，再逐步迭代模型和训练策略。
+当前仓库已经落地一条可在 Apple Silicon Mac 16GB 上直接运行的最小闭环：
+
+- 框架：`MLX + Metal`
+- 数据：`Tiny Shakespeare`
+- tokenizer：`UTF-8 byte-level`
+- 模型：decoder-only Transformer
+- 验证目标：训练、验证、checkpoint 保存/加载、基础采样
 
 ## 范围
 
@@ -10,15 +16,66 @@
 - 小模型优先，先保证能训练、能收敛、能生成
 - 文档和脚本保持精简，避免过早抽象
 
-## 当前约定
+## 当前能力
 
-- 默认运行环境：当前本机
-- 默认目标：完成一个可复现的 lite LLM 预训练最小闭环
-- 优先补齐以下能力：
-  - 数据下载与清洗
-  - tokenizer 训练或接入
-  - 预训练脚本
-  - 基础评估与采样
+- 下载并准备 `Tiny Shakespeare` 字节级数据集
+- 在本机用 `MLX` 启动一个最小 decoder-only LM 训练
+- 周期性输出 train/val loss，并写入 `metrics.jsonl`
+- 保存 `best` / `latest` checkpoint
+- 从保存的 checkpoint 重新加载并采样
+
+## 环境
+
+- 已验证机器：`Apple M1 Pro / 16 GB`
+- Python：`3.14`
+- 依赖见 `requirements.txt`
+
+## 快速开始
+
+1. 创建环境并安装依赖
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+2. 准备数据
+
+```bash
+python -m lite_llm_pretraining.prepare_tiny_shakespeare
+```
+
+3. 启动训练
+
+```bash
+python -m lite_llm_pretraining.train
+```
+
+默认配置在 `configs/tinyshakespeare-byte-smoke.json`，当前 smoke stage 为：
+
+- `context_size=128`
+- `dim=256`
+- `num_layers=4`
+- `num_heads=4`
+- `batch_size=16`
+- `max_steps=200`
+
+4. 从 checkpoint 采样
+
+```bash
+python -m lite_llm_pretraining.sample \
+  --checkpoint_dir checkpoints/tinyshakespeare-byte-smoke/best \
+  --prompt "ROMEO:\n" \
+  --max_new_tokens 120
+```
+
+## 训练产物
+
+- 数据输出：`data/tinyshakespeare-byte/`
+- 训练输出：`checkpoints/tinyshakespeare-byte-smoke/`
+- 指标日志：`checkpoints/tinyshakespeare-byte-smoke/metrics.jsonl`
+- 采样结果：`checkpoints/tinyshakespeare-byte-smoke/samples/`
 
 ## 推荐目录
 
@@ -39,12 +96,17 @@ logs/        训练日志
 - 先本地闭环，再扩展规模
 - 优先可读性，不引入不必要框架
 
+## 当前结果
+
+- 已在当前电脑上跑通 200 step smoke stage
+- `val_loss` 从 `5.1821` 降到 `2.4444`
+- 已生成可加载 checkpoint，并完成一次基础采样
+
 ## 下一步
 
-如果你接下来要继续补仓库，建议按这个顺序推进：
+如果要继续扩展，不再优先补“有没有闭环”，而是优先补“闭环之后的第二阶段能力”：
 
-1. 初始化 Python 环境与依赖
-2. 选定一个极小数据集做 smoke test
-3. 跑通 tokenizer 和 dataloader
-4. 跑通最小训练循环
-5. 增加保存、恢复、评估和采样
+1. 把 byte-level smoke run 扩展成更长训练阶段
+2. 引入更接近 LLM 习惯的 tokenizer 方案
+3. 切换到稍大的文本集，例如 `TinyStories` 子集
+4. 增加更清晰的 eval 和 sample 对比入口

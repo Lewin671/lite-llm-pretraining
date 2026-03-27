@@ -1,0 +1,28 @@
+{
+  "run_name": "tinyshakespeare-byte-smoke",
+  "seed": 42,
+  "data_dir": "data/tinyshakespeare-byte",
+  "out_dir": "checkpoints/tinyshakespeare-byte-smoke",
+  "sample_prompt": "ROMEO:\n",
+  "model": {
+    "context_size": 128,
+    "dim": 256,
+    "num_layers": 4,
+    "num_heads": 4,
+    "gradient_checkpointing": false
+  },
+  "train": {
+    "batch_size": 16,
+    "max_steps": 200,
+    "learning_rate": 0.0003,
+    "weight_decay": 1e-05,
+    "warmup_steps": 20,
+    "log_interval": 10,
+    "eval_interval": 20,
+    "eval_batches": 20,
+    "checkpoint_interval": 100,
+    "sample_interval": 100,
+    "sample_tokens": 200
+  }
+}
+
