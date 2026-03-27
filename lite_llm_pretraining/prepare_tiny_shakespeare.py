@@ -30,9 +30,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def main():
-    args = parse_args()
-    out_dir = Path(args.out_dir)
+def prepare_dataset(out_dir: Path, train_split: float = 0.9):
     out_dir.mkdir(parents=True, exist_ok=True)
 
     raw_path = out_dir / "input.txt"
@@ -41,30 +39,33 @@ def main():
     raw_text = raw_path.read_text(encoding="utf-8")
     token_ids = np.frombuffer(raw_text.encode("utf-8"), dtype=np.uint8).astype(np.uint16)
 
-    split_idx = int(len(token_ids) * args.train_split)
+    split_idx = int(len(token_ids) * train_split)
     train_ids = token_ids[:split_idx]
     val_ids = token_ids[split_idx:]
 
     train_ids.tofile(out_dir / "train.bin")
     val_ids.tofile(out_dir / "val.bin")
 
-    save_json(
-        out_dir / "meta.json",
-        {
-            "dataset": "tinyshakespeare",
-            "tokenizer": "utf8-bytes",
-            "vocab_size": 256,
-            "train_tokens": int(train_ids.size),
-            "val_tokens": int(val_ids.size),
-            "source_url": DATASET_URL,
-        },
-    )
+    meta = {
+        "dataset": "tinyshakespeare",
+        "tokenizer": "utf8-bytes",
+        "vocab_size": 256,
+        "train_tokens": int(train_ids.size),
+        "val_tokens": int(val_ids.size),
+        "source_url": DATASET_URL,
+    }
+    save_json(out_dir / "meta.json", meta)
+    return meta
 
+
+def main():
+    args = parse_args()
+    out_dir = Path(args.out_dir)
+    meta = prepare_dataset(out_dir, train_split=args.train_split)
     print(f"saved dataset to {out_dir}")
-    print(f"train tokens: {train_ids.size}")
-    print(f"val tokens: {val_ids.size}")
+    print(f"train tokens: {meta['train_tokens']}")
+    print(f"val tokens: {meta['val_tokens']}")
 
 
 if __name__ == "__main__":
     main()
-

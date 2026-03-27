@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 已完成当前电脑上的 MLX 最小预训练闭环，准备决定是否进入第二阶段扩展
-- Latest Progress: 已在 M1 Pro 16GB 上跑通 `Tiny Shakespeare + UTF-8 byte-level + MLX` 的 200 step smoke stage，产出可加载 checkpoint、指标日志和基础采样结果
+- Current Task: 已补齐单命令本地完整运行入口，准备进入更接近真实 LLM 的第二阶段
+- Latest Progress: 已在当前电脑上验证 `python -m lite_llm_pretraining.run_local --force_prepare` 能完整执行数据准备、训练、checkpoint 和最终采样
 - Issues: 暂无
-- Next Step: 如继续推进，优先扩展 tokenizer 和数据规模，而不是重做最小训练骨架
+- Next Step: 引入更接近真实 LLM 的 tokenizer 和稍大一点的数据集，在当前本地链路上继续放大实验
 
 ## How To Read
 
@@ -27,6 +27,7 @@
 
 ## Closed Threads
 
+- [progress/threads/full-local-run.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/full-local-run.md)
 - [progress/threads/mlx-minimal-loop.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/mlx-minimal-loop.md)
 - [progress/threads/research-mac-16gb.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/research-mac-16gb.md)
 - [progress/threads/readme-sync-rule.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/readme-sync-rule.md)

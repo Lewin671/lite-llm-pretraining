@@ -39,9 +39,7 @@ def append_metrics(path: Path, payload):
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 
 
-def main():
-    args = parse_args()
-    config_path = Path(args.config)
+def train_from_config(config_path: Path):
     config = load_json(config_path)
     set_seed(config["seed"])
 
@@ -72,10 +70,12 @@ def main():
     context_size = model_config["context_size"]
     best_val_loss = float("inf")
     metrics_path = out_dir / "metrics.jsonl"
+    metrics_path.unlink(missing_ok=True)
 
     print(f"run: {config['run_name']}")
     print(f"params: {count_parameters(model):,}")
     print(f"train tokens: {meta['train_tokens']}, val tokens: {meta['val_tokens']}")
+    last_val_loss = None
 
     for step in range(1, train_config["max_steps"] + 1):
         current_lr = learning_rate_at(
@@ -119,6 +119,7 @@ def main():
                 f"val_loss={val_loss:.4f} "
                 f"val_ppl={perplexity(val_loss):.2f}"
             )
+            last_val_loss = val_loss
 
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
@@ -148,7 +149,22 @@ def main():
             sample_path.write_text(sample, encoding="utf-8")
             print(f"sample saved to {sample_path}")
 
+    return {
+        "run_name": config["run_name"],
+        "out_dir": str(out_dir),
+        "best_val_loss": best_val_loss,
+        "last_val_loss": last_val_loss,
+        "final_step": train_config["max_steps"],
+        "best_checkpoint_dir": str(out_dir / "best"),
+        "latest_checkpoint_dir": str(out_dir / "latest"),
+        "metrics_path": str(metrics_path),
+    }
+
+
+def main():
+    args = parse_args()
+    train_from_config(Path(args.config))
+
 
 if __name__ == "__main__":
     main()
-

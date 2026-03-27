@@ -25,10 +25,17 @@ def parse_args():
     return parser.parse_args()
 
 
+def sample_from_checkpoint(checkpoint_dir: Path, prompt: str, max_new_tokens: int):
+    model, _, state = load_checkpoint(checkpoint_dir)
+    output = sample_text(model, prompt, max_new_tokens)
+    return output, state
+
+
 def main():
     args = parse_args()
-    model, _, state = load_checkpoint(Path(args.checkpoint_dir))
-    output = sample_text(model, args.prompt, args.max_new_tokens)
+    output, state = sample_from_checkpoint(
+        Path(args.checkpoint_dir), args.prompt, args.max_new_tokens
+    )
     print(f"loaded checkpoint step={state.get('step', 'unknown')}")
     print(output)
 

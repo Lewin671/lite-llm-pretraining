@@ -40,13 +40,29 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-2. 准备数据
+2. 一条命令跑完整本地链路
+
+```bash
+python -m lite_llm_pretraining.run_local --force_prepare
+```
+
+这条命令会顺序执行：
+
+- 准备 `Tiny Shakespeare` 字节级数据
+- 启动训练
+- 保存 `best` / `latest` checkpoint
+- 从 `best` checkpoint 重新加载并生成最终 sample
+- 写出 `local_run_summary.json`
+
+3. 如果只想拆开执行，也可以手动跑各阶段
+
+准备数据：
 
 ```bash
 python -m lite_llm_pretraining.prepare_tiny_shakespeare
 ```
 
-3. 启动训练
+启动训练：
 
 ```bash
 python -m lite_llm_pretraining.train
@@ -61,7 +77,7 @@ python -m lite_llm_pretraining.train
 - `batch_size=16`
 - `max_steps=200`
 
-4. 从 checkpoint 采样
+从 checkpoint 采样：
 
 ```bash
 python -m lite_llm_pretraining.sample \
@@ -76,6 +92,8 @@ python -m lite_llm_pretraining.sample \
 - 训练输出：`checkpoints/tinyshakespeare-byte-smoke/`
 - 指标日志：`checkpoints/tinyshakespeare-byte-smoke/metrics.jsonl`
 - 采样结果：`checkpoints/tinyshakespeare-byte-smoke/samples/`
+- 本地完整运行摘要：`checkpoints/tinyshakespeare-byte-smoke/local_run_summary.json`
+- 最终 sample：`checkpoints/tinyshakespeare-byte-smoke/final_sample.txt`
 
 ## 推荐目录
 
@@ -101,6 +119,7 @@ logs/        训练日志
 - 已在当前电脑上跑通 200 step smoke stage
 - `val_loss` 从 `5.1821` 降到 `2.4444`
 - 已生成可加载 checkpoint，并完成一次基础采样
+- 已验证 `python -m lite_llm_pretraining.run_local --force_prepare` 可直接完成本地完整链路
 
 ## 下一步
 
