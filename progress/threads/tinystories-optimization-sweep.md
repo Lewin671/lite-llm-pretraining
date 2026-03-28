@@ -108,11 +108,29 @@
 - Result: `best_val_loss=4.2541`；严格校验 `0/3`；未知标记总数 `16`
 - Conclusion: 这是目前短窗里最好的 loss，但 sample 仍不干净，只能保留为备选
 
+### A13
+
+- Change: 以 `A05` 为基座，`warmup_steps=600`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.6493`；严格校验 `0/3`；未知标记总数 `10`
+- Conclusion: 更长 warmup 过慢，短窗里明显吃亏
+
+### A14
+
+- Change: 以 `A05` 为基座，`warmup_steps=50`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.5479`；严格校验 `1/3`；未知标记总数 `15`
+- Conclusion: 这是当前短训里第一个 `1/3` 通过的配置，值得继续做温度复核和拉长训练
+
+### A15
+
+- Change: 以 `A05` 为基座，关闭 `gradient_checkpointing`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.4524`；严格校验 `0/3`；未知标记总数 `13`
+- Conclusion: 不开 gradient checkpointing 没带来质量收益，只是提供一个速度/显存参考点
+
 ### Pending Batch
 
-- A13: `SentencePiece unigram 2048 + longer warmup`
-- A14: `SentencePiece unigram 2048 + shorter warmup`
-- A15: `SentencePiece unigram 2048 + no gradient checkpointing`
 - A16: `Best short-run checkpoint + lower temperature`
 - A17: `Best short-run checkpoint + higher temperature`
 - A18: `Byte-level 50M / 2000step under strict validator`
@@ -125,8 +143,9 @@
 - 严格校验后，旧 `32M / 1000step` 基线只在 `temperature=0.6` 下有 `1/3` 通过
 - 在当前 `200 step` 窗口里，结构 sweep 没有出现比基线更强的明显赢家
 - `context=384` 和 `batch=12` 都能降低 loss，但还没有转化成更干净的文本
+- 到目前为止，唯一在短训里真正改善通过数的是 `warmup=50`
 
 ## Conclusion
 
 - 当前主线先不再继续放大模型或 context
-- 下一批重点转到学习率、batch 和 warmup，而不是结构扩张
+- A14 进入 carry-forward 候选，下一步优先做温度复核

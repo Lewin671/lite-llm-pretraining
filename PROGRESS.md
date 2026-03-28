@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 执行 `TinyStories` 连续优化 sweep，至少完成 20 个方案尝试
-- Latest Progress: 已完成 A09-A12 的学习率与 batch sweep；`batch=12` 把短窗 `val_loss` 压到当前最好，但 sample 仍然充满未知标记
+- Latest Progress: 已完成 A13-A15；`warmup=50` 的 A14 成为当前首个短训 `1/3` 通过的配置，优先级上升为 carry-forward 候选
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 跑完 A13-A15 的 warmup / checkpointing 对照，再做 A16-A19 的严格复核，最后把最优路线拉长
+- Next Step: 先对 A14 做 A16-A17 温度复核，再跑 A18-A19 的历史 checkpoint 严格复核，最后执行 A20 更长训练
 
 ## How To Read
 
