@@ -147,3 +147,53 @@
   - `strict_pass_rate=0.0`
   - `exact_match=0.0`
   - 手工简单题采样仍会生成重复短语
+
+## Next Optimization
+
+- 下一轮主线切到 `open_qa-only`
+- 目标：
+  - 先把无 `context` 的短事实问答做对
+  - 不再让 `closed_qa` 和 `information_extraction` 混进主训练口径
+- 计划：
+  - 生成 `open_qa-only` 的 `dev/holdout` suite
+  - 跑一条小模型 `open_qa-only + short answer + loss_window` 基线
+  - 只要 `exact_match` 或 `strict_pass_rate` 首次变成非零，就优先沿这条线继续
+
+## Open QA-Only
+
+- 数据集分析：
+  - `open_qa` 原始样本 `3742`
+  - 加上 `max_answer_words=12`、`max_question_words=24`、`require_single_line_answer=true` 后，剩余 `1173`
+  - 平均答案长度约 `5.43` 词，平均问题长度约 `9.03` 词
+- 新增：
+  - [dolly_open_qa_short_dev_v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/dolly_open_qa_short_dev_v1.json)
+  - [dolly_open_qa_short_holdout_v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/dolly_open_qa_short_holdout_v1.json)
+  - [dolly-open-qa-short-c096-compact.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-open-qa-short-c096-compact.json)
+  - [prepare_dolly_qa_eval.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/prepare_dolly_qa_eval.py) 现在支持 `suite_name_prefix`
+
+## Open QA Results
+
+- 配置：
+  - `open_qa-only`
+  - `context_size=96`
+  - `dim=256`
+  - `num_layers=4`
+  - `num_heads=4`
+  - `batch_sampling_mode=loss_window`
+- 结果：
+  - `best_suite` 出现在 `step 500`
+  - `dev token_f1=0.1077`
+  - `holdout token_f1=0.0949`
+  - `exact_match=0.0`
+  - `strict_pass_rate=0.0`
+- 报告：
+  - [dolly-open-qa-short-dev-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/dolly-open-qa-short-dev-v1.json)
+  - [dolly-open-qa-short-holdout-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/dolly-open-qa-short-holdout-v1.json)
+
+## Open QA Conclusion
+
+- `open_qa-only` 明显比混合 `simple QA` 更对齐目标
+- 这是当前第一次把 `holdout token_f1` 推近 `0.1`
+- 但当前瓶颈已经从“任务不对齐”变成“答案表面形态不稳定”：
+  - 模型会生成看起来像答案的短语
+  - 但仍然经常是伪词、错实体或半对半错

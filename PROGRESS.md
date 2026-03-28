@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 沿 `Dolly Q/A` 主线继续优化，目标先收紧成“简单问题能稳定答出来”
-- Latest Progress: 已补 `Dolly simple QA` 评测、简单问答子集过滤和多条聚焦配置；当前最优是 `4.2M compact + context=128 + loss_window` 路线，`simple QA dev token_f1=0.0297`，`holdout token_f1=0.0126`
-- Issues: 当前 best 仍然是 `strict_pass_rate=0.0 / exact_match=0.0`，真实采样还会退化成伪词和重复短语；说明现在虽然比原始 smoke 有进展，但离“简单问题回答好”还差很远
-- Next Step: 继续围绕当前 compact simple-QA 主线优化输出质量，优先考虑更强的答案对齐，而不是再扩大数据范围
+- Latest Progress: 已跑出 `open_qa-only + short answer + small model` 基线；当前 best 在 `open_qa holdout` 上到 `token_f1=0.0949`，明显高于之前混合 `simple QA` 的 `0.0126`
+- Issues: 当前 `open_qa-only` 虽然把 holdout 拉高了，但 `strict_pass_rate=0.0 / exact_match=0.0` 仍没破，真实采样还是会把事实答成伪词或错误短语
+- Next Step: 继续沿 `open_qa-only` 主线优化，优先考虑把答案对齐再收紧一层，而不是回到混合任务
 
 ## How To Read
 

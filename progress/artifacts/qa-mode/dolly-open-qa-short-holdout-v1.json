@@ -1,0 +1,680 @@
+{
+  "checkpoint_dir": "checkpoints/dolly-open-qa-short-c096-compact/best_suite",
+  "suite_path": "prompts/dolly_open_qa_short_holdout_v1.json",
+  "suite_name": "dolly_open_qa_short_holdout_v1",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "qa",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer with a short factual phrase.",
+    "prompt_template": "Question: {question}\n{context_block}Answer:"
+  },
+  "samples": [
+    {
+      "id": "dolly_open_qa_short_holdout_v1-001",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How long is a professional football field.",
+      "context": "",
+      "answers": [
+        "A professional football field is 100 yards long."
+      ],
+      "model_prompt": "Question: How long is a professional football field.\nAnswer:",
+      "output": "If takre are played in the most pineapples, you have 75",
+      "predicted_answer": "If takre are played in the most pineapples, you have 75",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-002",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest American city by population?",
+      "context": "",
+      "answers": [
+        "New York City is the largest US city"
+      ],
+      "model_prompt": "Question: What is the largest American city by population?\nAnswer:",
+      "output": "Washington by 2al title is Duches went and Susse",
+      "predicted_answer": "Washington by 2al title is Duches went and Susse",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.125,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-003",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "In what state is Yosemite located?",
+      "context": "",
+      "answers": [
+        "Yosemite National Park is located in California."
+      ],
+      "model_prompt": "Question: In what state is Yosemite located?\nAnswer:",
+      "output": "Augustullphamilletellent and the capital",
+      "predicted_answer": "Augustullphamilletellent and the capital",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-004",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Where were the sunspots first observed?",
+      "context": "",
+      "answers": [
+        "Galileo Galilei, Father of observational astronomy"
+      ],
+      "model_prompt": "Question: Where were the sunspots first observed?\nAnswer:",
+      "output": "The first Battle of Snowm of Ferrcialw",
+      "predicted_answer": "The first Battle of Snowm of Ferrcialw",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1667,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-005",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is a good soccer club in Lake Washington area in the USA?",
+      "context": "",
+      "answers": [
+        "Crossfire is a good soccer club with Rec, Select and Premier levels"
+      ],
+      "model_prompt": "Question: What is a good soccer club in Lake Washington area in the USA?\nAnswer:",
+      "output": "Five teams in Seattle Washington DC is in the in the year 11at was",
+      "predicted_answer": "Five teams in Seattle Washington DC is in the in the year 11at was",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.087,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-006",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What does the Constitution do?",
+      "context": "",
+      "answers": [
+        "Protects basic rights of Americans"
+      ],
+      "model_prompt": "Question: What does the Constitution do?\nAnswer:",
+      "output": "4 all are seven continents are played in the world",
+      "predicted_answer": "4 all are seven continents are played in the world",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-007",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest state in the US?",
+      "context": "",
+      "answers": [
+        "Alaska"
+      ],
+      "model_prompt": "Question: What is the largest state in the US?\nAnswer:",
+      "output": "California is the capital city of the United Statesaudreuin",
+      "predicted_answer": "California is the capital city of the United Statesaudreuin",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-008",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Name the Khals known to currently be alive in A Song of Ice and Fire.",
+      "context": "",
+      "answers": [
+        "Jhaqo, Pono, Moro, Jommo, Zekko, and Motho."
+      ],
+      "model_prompt": "Question: Name the Khals known to currently be alive in A Song of Ice and Fire.\nAnswer:",
+      "output": "Toran Beethovenzeé.z Sanditan, a",
+      "predicted_answer": "Toran Beethovenzeé.z Sanditan, a",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-009",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are the words of House Swyft?",
+      "context": "",
+      "answers": [
+        "\"Awake! Awake!\""
+      ],
+      "model_prompt": "Question: What are the words of House Swyft?\nAnswer:",
+      "output": "\"Be\"a Me Rohaa Braylsat",
+      "predicted_answer": "\"Be\"a Me Rohaa Braylsat",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-010",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who was the quarterback for the Denver Broncos when they won their first Super Bowl and what was his number?",
+      "context": "",
+      "answers": [
+        "His name was John Elway and he wore #7"
+      ],
+      "model_prompt": "Question: Who was the quarterback for the Denver Broncos when they won their first Super Bowl and what was his number?\nAnswer:",
+      "output": "Augustair, And Chinaeta Kathereder and",
+      "predicted_answer": "Augustair, And Chinaeta Kathereder and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1429,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-011",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How do you make the color green out of other colors?",
+      "context": "",
+      "answers": [
+        "You can make green by mixing blue and yellow together"
+      ],
+      "model_prompt": "Question: How do you make the color green out of other colors?\nAnswer:",
+      "output": "Albenver Broncosaintman on September 9.",
+      "predicted_answer": "Albenver Broncosaintman on September 9.",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-012",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is another name for the Great Pyramid in Egypt?",
+      "context": "",
+      "answers": [
+        "Giza, Khufu"
+      ],
+      "model_prompt": "Question: What is another name for the Great Pyramid in Egypt?\nAnswer:",
+      "output": "Fererrtre Cnized Alaska, reps, a",
+      "predicted_answer": "Fererrtre Cnized Alaska, reps, a",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-013",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who won six consecutive Wimbledon titles in the 1980s",
+      "context": "",
+      "answers": [
+        "Martina Navratilova"
+      ],
+      "model_prompt": "Question: Who won six consecutive Wimbledon titles in the 1980s\nAnswer:",
+      "output": "Five differenttart cheesesartsar, Sandhu(",
+      "predicted_answer": "Five differenttart cheesesartsar, Sandhu(",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-014",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the tallest building in Chicago?",
+      "context": "",
+      "answers": [
+        "The tallest building in Chicago is the Sears Tower"
+      ],
+      "model_prompt": "Question: What is the tallest building in Chicago?\nAnswer:",
+      "output": "The Denver Broncos Bat Sales Blatau",
+      "predicted_answer": "The Denver Broncos Bat Sales Blatau",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-015",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "When did Uber IPO?",
+      "context": "",
+      "answers": [
+        "Uber went public on May 9, 2019"
+      ],
+      "model_prompt": "Question: When did Uber IPO?\nAnswer:",
+      "output": "The & Jane the year of the first and Islam wh",
+      "predicted_answer": "The & Jane the year of the first and Islam wh",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-016",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Name every month that has 30 days",
+      "context": "",
+      "answers": [
+        "January, March, April, May, June, July, August, September, October, November, December"
+      ],
+      "model_prompt": "Question: Name every month that has 30 days\nAnswer:",
+      "output": "Te, Someteret, Sax Roloune, Russia",
+      "predicted_answer": "Te, Someteret, Sax Roloune, Russia",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-017",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is a good dad joke?",
+      "context": "",
+      "answers": [
+        "What do you call an okay factory?  A satisfactory."
+      ],
+      "model_prompt": "Question: What is a good dad joke?\nAnswer:",
+      "output": "Amendment professional monst A programusse selIT",
+      "predicted_answer": "Amendment professional monst A programusse selIT",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-018",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "United Nation General Assembly has declared the year 2023 as",
+      "context": "",
+      "answers": [
+        "The International Year of Millet"
+      ],
+      "model_prompt": "Question: United Nation General Assembly has declared the year 2023 as\nAnswer:",
+      "output": "Fazzart,8nderzeczar,",
+      "predicted_answer": "Fazzart,8nderzeczar,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-019",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which parts do people train on the upper body?",
+      "context": "",
+      "answers": [
+        "Shoulder, chest, back and arms"
+      ],
+      "model_prompt": "Question: Which parts do people train on the upper body?\nAnswer:",
+      "output": "Beater, cheaterneestt, ch",
+      "predicted_answer": "Beater, cheaterneestt, ch",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-020",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Name three national parks in California.",
+      "context": "",
+      "answers": [
+        "Three national parks in California are Yosemite, Sequoia, and Joshua Tree."
+      ],
+      "model_prompt": "Question: Name three national parks in California.\nAnswer:",
+      "output": "Three national parks are Yosemite, and Joshuaa Three",
+      "predicted_answer": "Three national parks are Yosemite, and Joshuaa Three",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.6316,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-021",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Name three poems by William Wordsworth.",
+      "context": "",
+      "answers": [
+        "Tintern Abbey, I Wandered Lonely as a Cloud, and the Solitary Reaper"
+      ],
+      "model_prompt": "Question: Name three poems by William Wordsworth.\nAnswer:",
+      "output": "Ty Fellent Tintern Abbkaila",
+      "predicted_answer": "Ty Fellent Tintern Abbkaila",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1429,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-022",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Names some of the famous bravolebrities from Million Dollar Listing Los Angeles",
+      "context": "",
+      "answers": [
+        "Tracy Tutor, Josh Flagg, Heather Altman and Josh Altman"
+      ],
+      "model_prompt": "Question: Names some of the famous bravolebrities from Million Dollar Listing Los Angeles\nAnswer:",
+      "output": "G, DuckDe, Bryuet Hay",
+      "predicted_answer": "G, DuckDe, Bryuet Hay",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-023",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest American state by land mass?",
+      "context": "",
+      "answers": [
+        "Alaska is the largest state in the United States"
+      ],
+      "model_prompt": "Question: What is the largest American state by land mass?\nAnswer:",
+      "output": "Augustus of the United States was the United States was George Washingtonhold",
+      "predicted_answer": "Augustus of the United States was the United States was George Washingtonhold",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.2353,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-024",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How can I make the paint color purple from primary colors?",
+      "context": "",
+      "answers": [
+        "By combining Red and Blue primary colors, you can make purple."
+      ],
+      "model_prompt": "Question: How can I make the paint color purple from primary colors?\nAnswer:",
+      "output": "By combinchehold using Red and Blue",
+      "predicted_answer": "By combinchehold using Red and Blue",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.4706,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-025",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the state flower of California?",
+      "context": "",
+      "answers": [
+        "The state flower of California is the Golden Poppy"
+      ],
+      "model_prompt": "Question: What is the state flower of California?\nAnswer:",
+      "output": "California is the capitalape is the capital city of Maine.ath",
+      "predicted_answer": "California is the capitalape is the capital city of Maine.ath",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.375,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-026",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Name some of the bravolebrities from The Real Housewives of Salt Lake City",
+      "context": "",
+      "answers": [
+        "Heather Gay, Lisa Barlow, Meredith Marks and Whitney Rose"
+      ],
+      "model_prompt": "Question: Name some of the bravolebrities from The Real Housewives of Salt Lake City\nAnswer:",
+      "output": "Heather Gay, Lion, Lind Whitney Rose",
+      "predicted_answer": "Heather Gay, Lion, Lind Whitney Rose",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5333,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-027",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Is rule 606 good for the industry",
+      "context": "",
+      "answers": [
+        "yes, overall create consistent accounting rules regardless of business or revenue model"
+      ],
+      "model_prompt": "Question: Is rule 606 good for the industry\nAnswer:",
+      "output": "yeschy were cities in America are Foart,",
+      "predicted_answer": "yeschy were cities in America are Foart,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-028",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are the words of House Allyrion?",
+      "context": "",
+      "answers": [
+        "\"No Foe May Pass\""
+      ],
+      "model_prompt": "Question: What are the words of House Allyrion?\nAnswer:",
+      "output": "\"Bea Me Roh (conowing Faaut",
+      "predicted_answer": "\"Bea Me Roh (conowing Faaut",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-029",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are three capital cities in South America?",
+      "context": "",
+      "answers": [
+        "Three capital cities in South America are Montevideo, Quito, and Lima."
+      ],
+      "model_prompt": "Question: What are three capital cities in South America?\nAnswer:",
+      "output": "Fune, Dumae, and Buch Pul",
+      "predicted_answer": "Fune, Dumae, and Buch Pul",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.125,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-030",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who is the star of the movie Breakfast at Tiffany's?",
+      "context": "",
+      "answers": [
+        "Audrey Hepburn starred in Breakfast at Tiffany's"
+      ],
+      "model_prompt": "Question: Who is the star of the movie Breakfast at Tiffany's?\nAnswer:",
+      "output": "learhoodtustriars)ne, &",
+      "predicted_answer": "learhoodtustriars)ne, &",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-031",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is a baby cat called?",
+      "context": "",
+      "answers": [
+        "A baby cat is called a kitten"
+      ],
+      "model_prompt": "Question: What is a baby cat called?\nAnswer:",
+      "output": "A kitute on September on January 3, ne,",
+      "predicted_answer": "A kitute on September on January 3, ne,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-032",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the name of the largest red-light district in Amsterdam?",
+      "context": "",
+      "answers": [
+        "The largest red-light district in Amsterdam is De Wallen."
+      ],
+      "model_prompt": "Question: What is the name of the largest red-light district in Amsterdam?\nAnswer:",
+      "output": "January 3 League consistent, Augusta, California, Ivyl,",
+      "predicted_answer": "January 3 League consistent, Augusta, California, Ivyl,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    }
+  ],
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 7.262631,
+    "val_ppl": 1426.003879,
+    "checkpoint_step": 500,
+    "best_val_loss": 5.798303031921387
+  },
+  "summary": {
+    "strict_passed": 0,
+    "total_samples": 32,
+    "strict_pass_rate": 0.0,
+    "exact_match": 0.0,
+    "token_f1": 0.0949,
+    "answer_presence_rate": 0.0,
+    "tag_summary": {
+      "open_qa": {
+        "total": 32,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0949
+      }
+    }
+  }
+}

@@ -203,6 +203,22 @@ python -m lite_llm_pretraining.run_local \
 
 它比基础 `smoke` 更贴近“简单问题回答”，但当前仍不是可用成品。
 
+如果要跑当前更聚焦的 `open_qa-only` 配置：
+
+```bash
+python -m lite_llm_pretraining.run_local \
+  --config configs/dolly-open-qa-short-c096-compact.json
+```
+
+这条线会：
+
+- 只保留 `open_qa`
+- 只保留短答案、短问题、单行输出
+- 用 `loss_window` 采样避免 answer-only 训练抽到全零窗口
+- 用 `prompts/dolly_open_qa_short_dev_v1.json` 做训练内 `suite_eval`
+
+它是当前最强的窄任务问答基线，但还没有达到可用成品水平。
+
 从 checkpoint 采样：
 
 ```bash
@@ -305,6 +321,8 @@ TUI 内置命令：
 - 评测集：`prompts/squad_qa_holdout_v1.json`
 - 评测集：`prompts/dolly_qa_simple_dev_v1.json`
 - 评测集：`prompts/dolly_qa_simple_holdout_v1.json`
+- 评测集：`prompts/dolly_open_qa_short_dev_v1.json`
+- 评测集：`prompts/dolly_open_qa_short_holdout_v1.json`
 - 训练输出：`checkpoints/tinyshakespeare-byte-smoke/`
 - 指标日志：`checkpoints/tinyshakespeare-byte-smoke/metrics.jsonl`
 - 采样结果：`checkpoints/tinyshakespeare-byte-smoke/samples/`

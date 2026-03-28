@@ -19,6 +19,7 @@ def parse_args():
     parser.add_argument("--holdout_count", type=int, default=32)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--context_word_limit", type=int, default=96)
+    parser.add_argument("--suite_name_prefix", default="dolly_qa_simple")
     parser.add_argument("--allowed_categories_json", default=None)
     parser.add_argument("--min_answer_words", type=int, default=1)
     parser.add_argument("--max_answer_words", type=int, default=12)
@@ -77,13 +78,13 @@ def main():
     holdout_examples = shuffled[args.dev_count : args.dev_count + args.holdout_count]
 
     dev_payload = suite_payload(
-        "dolly_qa_simple_dev_v1",
+        f"{args.suite_name_prefix}_dev_v1",
         dev_examples,
         args.context_word_limit,
         args.pass_f1_threshold,
     )
     holdout_payload = suite_payload(
-        "dolly_qa_simple_holdout_v1",
+        f"{args.suite_name_prefix}_holdout_v1",
         holdout_examples,
         args.context_word_limit,
         args.pass_f1_threshold,

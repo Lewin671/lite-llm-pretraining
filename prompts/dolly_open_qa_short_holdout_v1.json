@@ -1,0 +1,359 @@
+{
+  "name": "dolly_open_qa_short_holdout_v1",
+  "task": "qa",
+  "pass_f1_threshold": 0.9,
+  "samples": [
+    {
+      "id": "dolly_open_qa_short_holdout_v1-001",
+      "question": "How long is a professional football field.",
+      "context": "",
+      "answers": [
+        "A professional football field is 100 yards long."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-002",
+      "question": "What is the largest American city by population?",
+      "context": "",
+      "answers": [
+        "New York City is the largest US city"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-003",
+      "question": "In what state is Yosemite located?",
+      "context": "",
+      "answers": [
+        "Yosemite National Park is located in California."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-004",
+      "question": "Where were the sunspots first observed?",
+      "context": "",
+      "answers": [
+        "Galileo Galilei, Father of observational astronomy"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-005",
+      "question": "What is a good soccer club in Lake Washington area in the USA?",
+      "context": "",
+      "answers": [
+        "Crossfire is a good soccer club with Rec, Select and Premier levels"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-006",
+      "question": "What does the Constitution do?",
+      "context": "",
+      "answers": [
+        "Protects basic rights of Americans"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-007",
+      "question": "What is the largest state in the US?",
+      "context": "",
+      "answers": [
+        "Alaska"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-008",
+      "question": "Name the Khals known to currently be alive in A Song of Ice and Fire.",
+      "context": "",
+      "answers": [
+        "Jhaqo, Pono, Moro, Jommo, Zekko, and Motho."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-009",
+      "question": "What are the words of House Swyft?",
+      "context": "",
+      "answers": [
+        "\"Awake! Awake!\""
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-010",
+      "question": "Who was the quarterback for the Denver Broncos when they won their first Super Bowl and what was his number?",
+      "context": "",
+      "answers": [
+        "His name was John Elway and he wore #7"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-011",
+      "question": "How do you make the color green out of other colors?",
+      "context": "",
+      "answers": [
+        "You can make green by mixing blue and yellow together"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-012",
+      "question": "What is another name for the Great Pyramid in Egypt?",
+      "context": "",
+      "answers": [
+        "Giza, Khufu"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-013",
+      "question": "Who won six consecutive Wimbledon titles in the 1980s",
+      "context": "",
+      "answers": [
+        "Martina Navratilova"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-014",
+      "question": "What is the tallest building in Chicago?",
+      "context": "",
+      "answers": [
+        "The tallest building in Chicago is the Sears Tower"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-015",
+      "question": "When did Uber IPO?",
+      "context": "",
+      "answers": [
+        "Uber went public on May 9, 2019"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-016",
+      "question": "Name every month that has 30 days",
+      "context": "",
+      "answers": [
+        "January, March, April, May, June, July, August, September, October, November, December"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-017",
+      "question": "What is a good dad joke?",
+      "context": "",
+      "answers": [
+        "What do you call an okay factory?  A satisfactory."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-018",
+      "question": "United Nation General Assembly has declared the year 2023 as",
+      "context": "",
+      "answers": [
+        "The International Year of Millet"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-019",
+      "question": "Which parts do people train on the upper body?",
+      "context": "",
+      "answers": [
+        "Shoulder, chest, back and arms"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-020",
+      "question": "Name three national parks in California.",
+      "context": "",
+      "answers": [
+        "Three national parks in California are Yosemite, Sequoia, and Joshua Tree."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-021",
+      "question": "Name three poems by William Wordsworth.",
+      "context": "",
+      "answers": [
+        "Tintern Abbey, I Wandered Lonely as a Cloud, and the Solitary Reaper"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-022",
+      "question": "Names some of the famous bravolebrities from Million Dollar Listing Los Angeles",
+      "context": "",
+      "answers": [
+        "Tracy Tutor, Josh Flagg, Heather Altman and Josh Altman"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-023",
+      "question": "What is the largest American state by land mass?",
+      "context": "",
+      "answers": [
+        "Alaska is the largest state in the United States"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-024",
+      "question": "How can I make the paint color purple from primary colors?",
+      "context": "",
+      "answers": [
+        "By combining Red and Blue primary colors, you can make purple."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-025",
+      "question": "What is the state flower of California?",
+      "context": "",
+      "answers": [
+        "The state flower of California is the Golden Poppy"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-026",
+      "question": "Name some of the bravolebrities from The Real Housewives of Salt Lake City",
+      "context": "",
+      "answers": [
+        "Heather Gay, Lisa Barlow, Meredith Marks and Whitney Rose"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-027",
+      "question": "Is rule 606 good for the industry",
+      "context": "",
+      "answers": [
+        "yes, overall create consistent accounting rules regardless of business or revenue model"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-028",
+      "question": "What are the words of House Allyrion?",
+      "context": "",
+      "answers": [
+        "\"No Foe May Pass\""
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-029",
+      "question": "What are three capital cities in South America?",
+      "context": "",
+      "answers": [
+        "Three capital cities in South America are Montevideo, Quito, and Lima."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-030",
+      "question": "Who is the star of the movie Breakfast at Tiffany's?",
+      "context": "",
+      "answers": [
+        "Audrey Hepburn starred in Breakfast at Tiffany's"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-031",
+      "question": "What is a baby cat called?",
+      "context": "",
+      "answers": [
+        "A baby cat is called a kitten"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_short_holdout_v1-032",
+      "question": "What is the name of the largest red-light district in Amsterdam?",
+      "context": "",
+      "answers": [
+        "The largest red-light district in Amsterdam is De Wallen."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    }
+  ]
+}

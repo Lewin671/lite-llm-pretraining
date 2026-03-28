@@ -1,0 +1,680 @@
+{
+  "checkpoint_dir": "checkpoints/dolly-open-qa-short-c096-compact/best_suite",
+  "suite_path": "prompts/dolly_open_qa_short_dev_v1.json",
+  "suite_name": "dolly_open_qa_short_dev_v1",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "qa",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer with a short factual phrase.",
+    "prompt_template": "Question: {question}\n{context_block}Answer:"
+  },
+  "samples": [
+    {
+      "id": "dolly_open_qa_short_dev_v1-001",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many provinces are there in the Netherlands",
+      "context": "",
+      "answers": [
+        "The Netherlands has 18 provinces."
+      ],
+      "model_prompt": "Question: How many provinces are there in the Netherlands\nAnswer:",
+      "output": "There are seven continent. of the worlda Denver Broncos",
+      "predicted_answer": "There are seven continent. of the worlda Denver Broncos",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-002",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who wrote the novel Tom Jones in 1749",
+      "context": "",
+      "answers": [
+        "Henry Fielding"
+      ],
+      "model_prompt": "Question: Who wrote the novel Tom Jones in 1749\nAnswer:",
+      "output": "The Denver Broncosn Abbhazarthri",
+      "predicted_answer": "The Denver Broncosn Abbhazarthri",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-003",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the best club soccer team in Spain?",
+      "context": "",
+      "answers": [
+        "Real Madrid"
+      ],
+      "model_prompt": "Question: What is the best club soccer team in Spain?\nAnswer:",
+      "output": "Remember on 9.a in the beltriace",
+      "predicted_answer": "Remember on 9.a in the beltriace",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-004",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What band sang \"Clint Eastwood\"?",
+      "context": "",
+      "answers": [
+        "\"Clint Eastwood\" is a song by Gorillaz off their self-titled album."
+      ],
+      "model_prompt": "Question: What band sang \"Clint Eastwood\"?\nAnswer:",
+      "output": "13, the chyperor are and the Maggiso",
+      "predicted_answer": "13, the chyperor are and the Maggiso",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-005",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many cents is a nickel worth?",
+      "context": "",
+      "answers": [
+        "A nickel is worth 5 cents."
+      ],
+      "model_prompt": "Question: How many cents is a nickel worth?\nAnswer:",
+      "output": "5 cents. on & Dhase sts Three",
+      "predicted_answer": "5 cents. on & Dhase sts Three",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.3636,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-006",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Whale skin is how many cm deep?",
+      "context": "",
+      "answers": [
+        "15 cm"
+      ],
+      "model_prompt": "Question: Whale skin is how many cm deep?\nAnswer:",
+      "output": "Four713s of Qund Bub",
+      "predicted_answer": "Four713s of Qund Bub",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-007",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What part of history called a fervent period of European cultural, artistic, political, and economic “rebirth” following the Middle Ages?",
+      "context": "",
+      "answers": [
+        "The Renaissance"
+      ],
+      "model_prompt": "Question: What part of history called a fervent period of European cultural, artistic, political, and economic “rebirth” following the Middle Ages?\nAnswer:",
+      "output": "Augustusse on ear, and Hawaiisant",
+      "predicted_answer": "Augustusse on ear, and Hawaiisant",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-008",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "In 93rd Academy Awards(Oscar Awards)The Best Picture award was given to whom?",
+      "context": "",
+      "answers": [
+        "Nomadland"
+      ],
+      "model_prompt": "Question: In 93rd Academy Awards(Oscar Awards)The Best Picture award was given to whom?\nAnswer:",
+      "output": "Fchgi Borph was founded Bajailder",
+      "predicted_answer": "Fchgi Borph was founded Bajailder",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-009",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "List some of the minor houses in the series \"A Song of Ice and Fire.\"",
+      "context": "",
+      "answers": [
+        "Florent, Caron, Graceford, Jordayne, Piper, Penrose, Waxley, Wydman, Wensington"
+      ],
+      "model_prompt": "Question: List some of the minor houses in the series \"A Song of Ice and Fire.\"\nAnswer:",
+      "output": "George Washington Artisan Dod, And Rickelel",
+      "predicted_answer": "George Washington Artisan Dod, And Rickelel",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-010",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are the four ingredients for beer?",
+      "context": "",
+      "answers": [
+        "Water, Barley, Yeast and Hops"
+      ],
+      "model_prompt": "Question: What are the four ingredients for beer?\nAnswer:",
+      "output": "There are played in the worldial medianized Alaska, and",
+      "predicted_answer": "There are played in the worldial medianized Alaska, and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1538,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-011",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the standard loft of a 9-iron in golf?",
+      "context": "",
+      "answers": [
+        "The standard loft in today's 9-irons ranges from 45 to 48 degrees."
+      ],
+      "model_prompt": "Question: What is the standard loft of a 9-iron in golf?\nAnswer:",
+      "output": "John Denver Broncosvainet Mets Jes",
+      "predicted_answer": "John Denver Broncosvainet Mets Jes",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-012",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Name five teams in Liga Portugal.",
+      "context": "",
+      "answers": [
+        "Five teams in Liga Portugal are Benfica, Porto, Sporting, Braga, and Arouca."
+      ],
+      "model_prompt": "Question: Name five teams in Liga Portugal.\nAnswer:",
+      "output": "Five countries in America are Ben, Chile, Argentina, and Jennif",
+      "predicted_answer": "Five countries in America are Ben, Chile, Argentina, and Jennif",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.3636,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-013",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Where were the Declaration of Independence, the Constitution, and the Bill of Rights stored during World War II?",
+      "context": "",
+      "answers": [
+        "Fort Knox."
+      ],
+      "model_prompt": "Question: Where were the Declaration of Independence, the Constitution, and the Bill of Rights stored during World War II?\nAnswer:",
+      "output": "Forphan, Fatheron, Wa, Knche",
+      "predicted_answer": "Forphan, Fatheron, Wa, Knche",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-014",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What coloring of cat is almost always male?",
+      "context": "",
+      "answers": [
+        "Orange cats are generally male."
+      ],
+      "model_prompt": "Question: What coloring of cat is almost always male?\nAnswer:",
+      "output": "Torffe cats are framewnhmerican became",
+      "predicted_answer": "Torffe cats are framewnhmerican became",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.4,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-015",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the tallest building in the San Francisco Bay Area?",
+      "context": "",
+      "answers": [
+        "The tallest building in the SF Bay Area is the Salesforce Tower."
+      ],
+      "model_prompt": "Question: What is the tallest building in the San Francisco Bay Area?\nAnswer:",
+      "output": "The tallest minizedalessexanales were 4",
+      "predicted_answer": "The tallest minizedalessexanales were 4",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1538,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-016",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the fastest train in the world?",
+      "context": "",
+      "answers": [
+        "Shanghai Maglev in Shanghai, China"
+      ],
+      "model_prompt": "Question: What is the fastest train in the world?\nAnswer:",
+      "output": "Shanghai Maglev in Shanghai, Chinaaceintriors",
+      "predicted_answer": "Shanghai Maglev in Shanghai, Chinaaceintriors",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.8,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-017",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "In the series A Song of Ice and Fire, who is the founder of House Towers?",
+      "context": "",
+      "answers": [
+        "Walton Towers"
+      ],
+      "model_prompt": "Question: In the series A Song of Ice and Fire, who is the founder of House Towers?\nAnswer:",
+      "output": "Forne, and Ser A freechewor",
+      "predicted_answer": "Forne, and Ser A freechewor",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-018",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the scientific name for a jaguar?",
+      "context": "",
+      "answers": [
+        "Panthera onca"
+      ],
+      "model_prompt": "Question: What is the scientific name for a jaguar?\nAnswer:",
+      "output": "If huneous for Manchester United is the capitalon",
+      "predicted_answer": "If huneous for Manchester United is the capitalon",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-019",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who turned oil drums into steel drums for music?",
+      "context": "",
+      "answers": [
+        "Traditionally, West Indians"
+      ],
+      "model_prompt": "Question: Who turned oil drums into steel drums for music?\nAnswer:",
+      "output": "Five differentman, Alaska, Batts, rep, and",
+      "predicted_answer": "Five differentman, Alaska, Batts, rep, and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-020",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many seasons of Greatest American Hero were there?",
+      "context": "",
+      "answers": [
+        "There were three seasons of The Greatest American Hero."
+      ],
+      "model_prompt": "Question: How many seasons of Greatest American Hero were there?\nAnswer:",
+      "output": "4 yearsne, Kennized fungi Bne, Kent",
+      "predicted_answer": "4 yearsne, Kennized fungi Bne, Kent",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-021",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who was among the famous Roman poets?",
+      "context": "",
+      "answers": [
+        "Virgil"
+      ],
+      "model_prompt": "Question: Who was among the famous Roman poets?\nAnswer:",
+      "output": "Junípertlas Bst Buunes",
+      "predicted_answer": "Junípertlas Bst Buunes",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-022",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "On a golf course where are the holes?",
+      "context": "",
+      "answers": [
+        "The hole is on the green of a golf course"
+      ],
+      "model_prompt": "Question: On a golf course where are the holes?\nAnswer:",
+      "output": "There are seven continent in the ta Chopra, an theirst in",
+      "predicted_answer": "There are seven continent in the ta Chopra, an theirst in",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-023",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Is Daft Punk still together?",
+      "context": "",
+      "answers": [
+        "No. Daft Punk officially broke up in 2021."
+      ],
+      "model_prompt": "Question: Is Daft Punk still together?\nAnswer:",
+      "output": "Bnized Alaska became and and Buam(D",
+      "predicted_answer": "Bnized Alaska became and and Buam(D",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-024",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the capital of Brazil?",
+      "context": "",
+      "answers": [
+        "Brasília is the capital of Brazil"
+      ],
+      "model_prompt": "Question: What is the capital of Brazil?\nAnswer:",
+      "output": "George V the capital city city of Mainere are Brazil is the",
+      "predicted_answer": "George V the capital city city of Mainere are Brazil is the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-025",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "If I wanted to travel the world, would it be faster to travel by air or sea?",
+      "context": "",
+      "answers": [
+        "Generally, you can travel faster by air than sea."
+      ],
+      "model_prompt": "Question: If I wanted to travel the world, would it be faster to travel by air or sea?\nAnswer:",
+      "output": "En Air, Affleing Pickwel, Aryant",
+      "predicted_answer": "En Air, Affleing Pickwel, Aryant",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1429,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-026",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is a synonym for something which is eco friendly?",
+      "context": "",
+      "answers": [
+        "Eco friendly items can also be described as being \"green\""
+      ],
+      "model_prompt": "Question: What is a synonym for something which is eco friendly?\nAnswer:",
+      "output": "ABuzarsss is best hearing language for",
+      "predicted_answer": "ABuzarsss is best hearing language for",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-027",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which MTV show featured Jenny McCarthy hosting a dating show?",
+      "context": "",
+      "answers": [
+        "Singled Out"
+      ],
+      "model_prompt": "Question: Which MTV show featured Jenny McCarthy hosting a dating show?\nAnswer:",
+      "output": "Aicainica Kather tophtainingica",
+      "predicted_answer": "Aicainica Kather tophtainingica",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-028",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Do cats have nine lives?",
+      "context": "",
+      "answers": [
+        "No"
+      ],
+      "model_prompt": "Question: Do cats have nine lives?\nAnswer:",
+      "output": "Because there isnenver Broncosahried Brandon",
+      "predicted_answer": "Because there isnenver Broncosahried Brandon",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-029",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who explored New World?",
+      "context": "",
+      "answers": [
+        "Christopher Columbus"
+      ],
+      "model_prompt": "Question: Who explored New World?\nAnswer:",
+      "output": "Christopher Columbusterner won the Strawigha",
+      "predicted_answer": "Christopher Columbusterner won the Strawigha",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.3333,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-030",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "On which national flag is there an eagle and a snake",
+      "context": "",
+      "answers": [
+        "Mexico"
+      ],
+      "model_prompt": "Question: On which national flag is there an eagle and a snake\nAnswer:",
+      "output": "Redham, Batmet Te Btht B",
+      "predicted_answer": "Redham, Batmet Te Btht B",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-031",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Name five water Pokemon.",
+      "context": "",
+      "answers": [
+        "Five water Pokemon are Squirtle, Poliwhirl, Seel, Horsea, and Staryu"
+      ],
+      "model_prompt": "Question: Name five water Pokemon.\nAnswer:",
+      "output": "Five countries in the most pineapples, and the solcuaa,",
+      "predicted_answer": "Five countries in the most pineapples, and the solcuaa,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.2353,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_short_dev_v1-032",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Where is Seth McFarlane from?",
+      "context": "",
+      "answers": [
+        "Kent, Connecticut"
+      ],
+      "model_prompt": "Question: Where is Seth McFarlane from?\nAnswer:",
+      "output": "Rohrouilkavides\"elssex",
+      "predicted_answer": "Rohrouilkavides\"elssex",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    }
+  ],
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 7.262631,
+    "val_ppl": 1426.003879,
+    "checkpoint_step": 500,
+    "best_val_loss": 5.798303031921387
+  },
+  "summary": {
+    "strict_passed": 0,
+    "total_samples": 32,
+    "strict_pass_rate": 0.0,
+    "exact_match": 0.0,
+    "token_f1": 0.1077,
+    "answer_presence_rate": 0.0625,
+    "tag_summary": {
+      "open_qa": {
+        "total": 32,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.1077
+      }
+    }
+  }
+}
