@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 优化 `TinyStories` 路线的文本质量
-- Latest Progress: 已完成 `SentencePiece` 对照，`33.7M` 模型在 `1000` 步时的样本质量已明显优于 `byte-level 49.7M`
-- Issues: `SentencePiece` 路线仍偶尔出现 `⁇`，下一步需要继续处理 unk / byte fallback 和训练时长
-- Next Step: 继续沿 `SentencePiece` 路线优化，而不是回到 byte-level 继续堆步数
+- Current Task: 执行 `TinyStories` 连续优化 sweep，至少完成 20 个方案尝试
+- Latest Progress: 已完成温度 sweep 第一轮，`0.5` 暂时是最稳默认值；正在重建统一 tokenizer 数据集进入短训练矩阵
+- Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
+- Next Step: 完成 tokenizer 变量面数据准备，随后按统一短训练 protocol 跑 A05 之后的结构与超参数对照
 
 ## How To Read
 
@@ -24,6 +24,7 @@
 ## Open Threads
 
 - [progress/threads/tinystories-full-training.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-full-training.md)
+- [progress/threads/tinystories-optimization-sweep.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-optimization-sweep.md)
 
 ## Closed Threads
 

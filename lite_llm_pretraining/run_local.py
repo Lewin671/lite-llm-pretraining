@@ -68,10 +68,17 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
         return prepare_tinystories_sentencepiece(
             data_dir,
             byte_data_dir=Path(
-                prepare_config.get("byte_data_dir", "data/tinystories-byte-clean")
+                prepare_config.get(
+                    "byte_data_dir",
+                    prepare_config.get(
+                        "source_data_dir", "data/tinystories-byte-clean"
+                    ),
+                )
             ),
             vocab_size=prepare_config.get("vocab_size", 2048),
             model_type=prepare_config.get("model_type", "bpe"),
+            byte_fallback=prepare_config.get("byte_fallback", False),
+            input_sentence_size=prepare_config.get("input_sentence_size", 200000),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")
