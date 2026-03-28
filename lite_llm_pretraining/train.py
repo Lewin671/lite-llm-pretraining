@@ -10,6 +10,7 @@ from lite_llm_pretraining.common import (
     TransformerLM,
     count_parameters,
     estimate_loss,
+    example_start_positions,
     get_batch,
     learning_rate_at,
     load_json,
@@ -85,6 +86,23 @@ def train_from_config(config_path: Path):
 
     batch_size = train_config["batch_size"]
     context_size = model_config["context_size"]
+    batch_sampling_mode = train_config.get("batch_sampling_mode", "random")
+    train_start_positions = None
+    val_start_positions = None
+    if batch_sampling_mode == "example_start":
+        eos_token_id = meta.get("tokenizer", {}).get("eos_token_id")
+        if eos_token_id is None:
+            raise ValueError("batch_sampling_mode=example_start requires tokenizer.eos_token_id")
+        train_start_positions = example_start_positions(
+            train_data,
+            eos_token_id,
+            context_size,
+        )
+        val_start_positions = example_start_positions(
+            val_data,
+            eos_token_id,
+            context_size,
+        )
     best_val_loss = float("inf")
     metrics_path = out_dir / "metrics.jsonl"
     metrics_path.unlink(missing_ok=True)
@@ -92,6 +110,11 @@ def train_from_config(config_path: Path):
     print(f"run: {config['run_name']}")
     print(f"params: {count_parameters(model):,}")
     print(f"train tokens: {meta['train_tokens']}, val tokens: {meta['val_tokens']}")
+    if train_start_positions is not None:
+        print(
+            "example-aligned windows: "
+            f"train={len(train_start_positions)}, val={len(val_start_positions)}"
+        )
     last_val_loss = None
 
     for step in range(1, train_config["max_steps"] + 1):
@@ -109,6 +132,7 @@ def train_from_config(config_path: Path):
             batch_size,
             context_size,
             loss_mask_data=train_loss_mask,
+            start_positions=train_start_positions,
         )
         train_loss, grads = loss_and_grad_fn(model, x, y, loss_mask)
         optimizer.update(model, grads)
@@ -130,6 +154,7 @@ def train_from_config(config_path: Path):
                 context_size,
                 train_config["eval_batches"],
                 loss_mask_data=val_loss_mask,
+                start_positions=val_start_positions,
             )
             metric = {
                 "step": step,

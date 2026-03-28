@@ -334,3 +334,38 @@
 - Change: 给 `prompt_continuation` 数据集增加对齐的 `train_loss_mask.bin` / `val_loss_mask.bin`，并让训练与验证只对 continuation 段计 loss
 - Validation: `compileall` 通过；临时 TinyStories 风格小样本上已验证 mask 长度与 token 长度一致，`train_from_config` 的两步 smoke 训练可正常跑通
 - Conclusion: 现在已经具备一条新的训练目标路线，可以直接测试“减少 prompt 重建负担，是否能提升 prompt 跟踪”
+
+### A36
+
+- Change: 继续沿着 prompted continuation `context256` 路线，把 tokenizer 换成 `SentencePiece unigram 8192 + byte_fallback`，`300 step`
+- Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
+- Result: `best_val_loss=3.9380`；严格相关性 `0/3`
+- Conclusion: 更大词表本身仍然只能压低 loss，没能修复 prompt 中人名和关键物体的丢失；下一轮应该把预算直接切到新的 `Continuation-only loss`
+
+### A37
+
+- Change: 维持 `A36` 的 `unigram8192 + prompted continuation + context256` 不变，只切到 `Continuation-only loss`
+- Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
+- Result: `best_val_loss=4.3688`；严格相关性 `0/3`；`train_loss_mask.bin` / `val_loss_mask.bin` 已真实生效
+- Conclusion: 只改 loss 目标还不够，因为当前 flat random-window 训练仍会让大量 batch 看不到 prompt；下一轮要直接改 batch 采样，对齐到样本起点
+
+### A38
+
+- Change: 在 `A37` 的 continuation-only 路线上加入 `example_start` batch 采样，让训练窗口稳定从样本起点开始
+- Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
+- Result: masked `best_val_loss=4.0878`；严格相关性 `0/3`
+- Conclusion: 即使 prompt 能稳定进入窗口，长 continuation 监督仍会把模型拉回通用故事分布；下一轮要直接压缩 continuation，只保留 prompt 后最相关的前几句
+
+### A39
+
+- Change: 在 `A38` 路线上把 continuation 截到前 `2` 句，继续保留 continuation-only loss 和 example-start sampling
+- Validation: `run_sweep_attempt`
+- Result: 数据准备成功，但训练前即失败；`context_size=256` 下没有任何可用的 example-aligned window
+- Conclusion: 截短 continuation 方向有效，但 `context` 必须同步缩短，否则训练窗口根本无法成立
+
+### A40
+
+- Change: 维持 `A39` 的两句 continuation 数据，改成 `context128`
+- Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
+- Result: masked `best_val_loss=4.1011`；旧 3-prompt 严格相关性 `0/3`
+- Conclusion: 截短路线已经能稳定跑通，但仍未学会保留关键锚点；下一轮不该再看旧 3-prompt，而要切到新的 suite 口径继续拉长训练

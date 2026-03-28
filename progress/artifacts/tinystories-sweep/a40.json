@@ -1,0 +1,77 @@
+{
+  "attempt_id": "A40",
+  "notes": "retry two-sentence continuation truncation with context128 example-start continuation-only",
+  "base_config": "configs/tinystories-spm-prompted-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-17__2wlv-a40.json",
+  "run_name": "tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es",
+  "data_dir": "data/tinystories-spm-u8192-bf-pc1-cm1-s2",
+  "out_dir": "checkpoints/tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "story_format": "prompt_continuation",
+    "prompt_sentence_count": 1
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 300,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 150,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5,
+    "batch_sampling_mode": "example_start"
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.819389,
+    "val_ppl": 123.889349,
+    "checkpoint_step": 300,
+    "best_val_loss": 4.101138162612915
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "She was very three little girl came up and asked his mom, \"What do you?\" \nThe little girl was very curious and said, \"I't have an car and said, \"Mommy, I want to help you can you like a moment and said, \"Okay, it's a moment and I't want to go to eat.\" \nHis mom said, \"I't want to go to go to go to hear a moment and then said, \"Can I's a moment and said, and I't be feeling to go up that?\"\n share it't be very very very so excited and said, \"I's a.\"\n go and help you!\"\nSo he help you.\" \n do you can g",
+  "sample_state": {
+    "step": 300,
+    "best_val_loss": 4.101138162612915
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es",
+    "out_dir": "checkpoints/tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es",
+    "best_val_loss": 4.101138162612915,
+    "last_val_loss": 4.101138162612915,
+    "final_step": 300,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a40-pc1m2-u8192bf-c128-300-es/metrics.jsonl"
+  }
+}

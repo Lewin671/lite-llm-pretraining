@@ -75,6 +75,12 @@ def parse_args():
         default=1,
         help="Number of opening sentences kept in the prompt when using prompt_continuation format.",
     )
+    parser.add_argument(
+        "--continuation_sentence_limit",
+        type=int,
+        default=None,
+        help="Optional number of continuation sentences kept after the prompt when using prompt_continuation format.",
+    )
     return parser.parse_args()
 
 
@@ -150,10 +156,28 @@ def split_prompt_continuation(story: str, prompt_sentence_count: int):
     return prompt, continuation
 
 
-def format_story(story: str, story_format: str, prompt_sentence_count: int):
+def limit_continuation_sentences(continuation: str, continuation_sentence_limit: int | None):
+    if continuation_sentence_limit is None or continuation_sentence_limit <= 0:
+        return continuation
+    sentences = split_story_sentences(continuation)
+    if not sentences:
+        return continuation
+    return " ".join(sentences[:continuation_sentence_limit]).strip()
+
+
+def format_story(
+    story: str,
+    story_format: str,
+    prompt_sentence_count: int,
+    continuation_sentence_limit: int | None = None,
+):
     if story_format == "plain":
         return story
     prompt, continuation = split_prompt_continuation(story, prompt_sentence_count)
+    continuation = limit_continuation_sentences(
+        continuation,
+        continuation_sentence_limit,
+    )
     return f"Prompt: {prompt}\nContinuation: {continuation}"
 
 
@@ -162,9 +186,15 @@ def encode_story_with_optional_loss_mask(
     story: str,
     story_format: str,
     prompt_sentence_count: int,
+    continuation_sentence_limit: int | None = None,
 ):
     eos_id = processor.eos_id()
-    formatted = format_story(story, story_format, prompt_sentence_count)
+    formatted = format_story(
+        story,
+        story_format,
+        prompt_sentence_count,
+        continuation_sentence_limit=continuation_sentence_limit,
+    )
     token_ids = processor.encode(formatted, out_type=int)
     loss_mask = None
 
@@ -188,10 +218,16 @@ def write_formatted_training_corpus(
     out_path: Path,
     story_format: str,
     prompt_sentence_count: int,
+    continuation_sentence_limit: int | None = None,
 ):
     with out_path.open("w", encoding="utf-8") as handle:
         for story in iter_stories(source_path):
-            formatted = format_story(story, story_format, prompt_sentence_count)
+            formatted = format_story(
+                story,
+                story_format,
+                prompt_sentence_count,
+                continuation_sentence_limit=continuation_sentence_limit,
+            )
             handle.write(formatted)
             handle.write("\n\n")
 
@@ -202,6 +238,7 @@ def encode_split(
     processor: spm.SentencePieceProcessor,
     story_format: str,
     prompt_sentence_count: int,
+    continuation_sentence_limit: int | None = None,
     loss_mask_out_path: Path | None = None,
 ):
     total_tokens = 0
@@ -214,6 +251,7 @@ def encode_split(
                     story,
                     story_format,
                     prompt_sentence_count,
+                    continuation_sentence_limit=continuation_sentence_limit,
                 )
                 np.asarray(token_ids, dtype=np.uint16).tofile(handle)
                 total_tokens += len(token_ids)
@@ -226,6 +264,7 @@ def encode_split(
                     story,
                     story_format,
                     prompt_sentence_count,
+                    continuation_sentence_limit=continuation_sentence_limit,
                 )
                 np.asarray(token_ids, dtype=np.uint16).tofile(handle)
                 if loss_mask is not None:
@@ -246,6 +285,7 @@ def prepare_dataset(
     shuffle_input_sentence: bool = True,
     story_format: str = "plain",
     prompt_sentence_count: int = 1,
+    continuation_sentence_limit: int | None = None,
 ):
     out_dir.mkdir(parents=True, exist_ok=True)
     ensure_clean_byte_data(byte_data_dir)
@@ -265,6 +305,7 @@ def prepare_dataset(
         formatted_train_path,
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
+        continuation_sentence_limit=continuation_sentence_limit,
     )
     try:
         model_path, vocab_path = train_sentencepiece(
@@ -288,6 +329,7 @@ def prepare_dataset(
         processor,
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
+        continuation_sentence_limit=continuation_sentence_limit,
         loss_mask_out_path=out_dir / "train_loss_mask.bin" if uses_loss_mask else None,
     )
     val_tokens, val_has_loss_mask = encode_split(
@@ -296,6 +338,7 @@ def prepare_dataset(
         processor,
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
+        continuation_sentence_limit=continuation_sentence_limit,
         loss_mask_out_path=out_dir / "val_loss_mask.bin" if uses_loss_mask else None,
     )
 
@@ -319,6 +362,7 @@ def prepare_dataset(
         "shuffle_input_sentence": shuffle_input_sentence,
         "story_format": story_format,
         "prompt_sentence_count": prompt_sentence_count,
+        "continuation_sentence_limit": continuation_sentence_limit,
         "has_loss_mask": train_has_loss_mask and val_has_loss_mask,
         "loss_mask_dtype": "uint8" if train_has_loss_mask and val_has_loss_mask else None,
         "loss_mask_mode": (
@@ -342,6 +386,7 @@ def main():
         shuffle_input_sentence=not args.disable_shuffle_input_sentence,
         story_format=args.story_format,
         prompt_sentence_count=args.prompt_sentence_count,
+        continuation_sentence_limit=args.continuation_sentence_limit,
     )
     print(f"saved dataset to {args.out_dir}")
     print(f"vocab size: {meta['vocab_size']}")

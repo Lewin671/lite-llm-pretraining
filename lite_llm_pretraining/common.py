@@ -101,13 +101,40 @@ def load_loss_mask(data_dir: Path, split: str, meta=None):
     return np.memmap(mask_path, dtype=np.dtype(mask_dtype), mode="r")
 
 
-def get_batch(data, batch_size: int, context_size: int, loss_mask_data=None):
+def example_start_positions(data, eos_token_id: int, context_size: int):
+    eos_positions = np.flatnonzero(np.asarray(data) == eos_token_id)
+    if eos_positions.size == 0:
+        return np.asarray([0], dtype=np.int64)
+    starts = np.concatenate(
+        [np.asarray([0], dtype=np.int64), eos_positions[:-1].astype(np.int64) + 1]
+    )
+    valid = (eos_positions.astype(np.int64) - starts) >= context_size
+    starts = starts[valid]
+    if starts.size == 0:
+        raise ValueError(
+            "no example-aligned windows fit the requested context size; "
+            f"context_size={context_size}"
+        )
+    return starts
+
+
+def get_batch(
+    data,
+    batch_size: int,
+    context_size: int,
+    loss_mask_data=None,
+    start_positions=None,
+):
     max_start = len(data) - context_size - 1
     if max_start <= 0:
         raise ValueError(
             f"dataset is too small for context_size={context_size}: {len(data)} tokens"
         )
-    starts = np.random.randint(0, max_start + 1, size=batch_size)
+    if start_positions is not None:
+        indices = np.random.randint(0, len(start_positions), size=batch_size)
+        starts = start_positions[indices]
+    else:
+        starts = np.random.randint(0, max_start + 1, size=batch_size)
     x = np.stack([data[idx : idx + context_size] for idx in starts]).astype(np.int32)
     y = np.stack([data[idx + 1 : idx + context_size + 1] for idx in starts]).astype(
         np.int32
@@ -140,6 +167,7 @@ def estimate_loss(
     context_size: int,
     steps: int,
     loss_mask_data=None,
+    start_positions=None,
 ):
     model.eval()
     losses = []
@@ -149,6 +177,7 @@ def estimate_loss(
             batch_size,
             context_size,
             loss_mask_data=loss_mask_data,
+            start_positions=start_positions,
         )
         loss = loss_fn(model, x, y, loss_mask)
         mx.eval(loss)

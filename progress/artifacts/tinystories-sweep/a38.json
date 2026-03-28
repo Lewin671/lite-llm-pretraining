@@ -1,0 +1,77 @@
+{
+  "attempt_id": "A38",
+  "notes": "test example-start batch sampling on continuation-only u8192 prompted continuation route",
+  "base_config": "configs/tinystories-spm-prompted-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-2cxwrgno-a38.json",
+  "run_name": "tinystories-sweep-a38-pc1m-u8192bf-c256-300-es",
+  "data_dir": "data/tinystories-spm-u8192-bf-pc1-cm1",
+  "out_dir": "checkpoints/tinystories-sweep-a38-pc1m-u8192bf-c256-300-es",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a38-pc1m-u8192bf-c256-300-es/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "story_format": "prompt_continuation",
+    "prompt_sentence_count": 1
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 300,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 150,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5,
+    "batch_sampling_mode": "example_start"
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.852243,
+    "val_ppl": 128.027275,
+    "checkpoint_step": 300,
+    "best_val_loss": 4.087775444984436
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "She was a big and her. She was so she had a big man, she was so she saw a big and said, \"I't know the pieces. It was so she said, \"You's. \"I's go to the park and the bench and the ground. I have fun. \"I have a lot of the dog and said, \"I's a big day, \"Yes, \"I's go on their mom. \"No, I's the wall, \"Look, \"What's hand and said, \"No, \"I am a big. \"I's okay. She was so happy. It was a chance. She was a lot of the rope. You are not want to the animal. She said,",
+  "sample_state": {
+    "step": 300,
+    "best_val_loss": 4.087775444984436
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a38-pc1m-u8192bf-c256-300-es",
+    "out_dir": "checkpoints/tinystories-sweep-a38-pc1m-u8192bf-c256-300-es",
+    "best_val_loss": 4.087775444984436,
+    "last_val_loss": 4.087775444984436,
+    "final_step": 300,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a38-pc1m-u8192bf-c256-300-es/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a38-pc1m-u8192bf-c256-300-es/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a38-pc1m-u8192bf-c256-300-es/metrics.jsonl"
+  }
+}

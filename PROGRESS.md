@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 基于 `TinyStories` 全量数据集继续做高标准 tiny LLM 优化，同时收紧 prompt 相关性评测口径
-- Latest Progress: 已用收紧后的相关性口径复核旧基线，`A30` 和 `A31` 在固定 seed 下都掉到 `0/3`；`A35` 也确认仍是 `0/3`。与此同时，`Continuation-only loss` 已接进 prompted 数据准备、训练和验证，并通过临时数据 smoke
-- Issues: 现有 prompted continuation 路线即使能继续压低 `val_loss`，仍然会忽略 prompt 中的人名和关键物体；当前训练目标与“根据 prompt 续写”还不够一致
-- Next Step: 继续等 `A36` 的 `u8192 + prompted continuation` 基线结果；如果仍然忽略 prompt，就直接用新接入的 `Continuation-only loss` 开下一轮 sweep
+- Current Task: 用新的 TinyStories prompt suite 作为北极星继续做条件续写优化
+- Latest Progress: 已落 `24` 条结构化评测集和 suite 汇总脚本；`A36` 与 `A40` 在新口径下都还是 `0/24`，但 `A40` 的前段锚点命中率从 `0.0` 升到 `0.0417`
+- Issues: 当前模型几乎完全学不会稳定保留名字、物体和场景锚点；同时 `A40` 的 example-aligned 窗口只有 `1091` 条，短训很可能还没把截短路线训透
+- Next Step: 提交新的评测集与基线结果，然后直接把 `A40` 这条截短 continuation 路线拉长训练，继续用 suite 复核
 
 ## How To Read
 
@@ -25,6 +25,7 @@
 
 - [progress/threads/tinystories-full-training.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-full-training.md)
 - [progress/threads/tinystories-optimization-sweep.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-optimization-sweep.md)
+- [progress/threads/tinystories-eval-suite.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-eval-suite.md)
 
 ## Closed Threads
 

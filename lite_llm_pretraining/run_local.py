@@ -83,6 +83,7 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             shuffle_input_sentence=prepare_config.get("shuffle_input_sentence", True),
             story_format=prepare_config.get("story_format", "plain"),
             prompt_sentence_count=prepare_config.get("prompt_sentence_count", 1),
+            continuation_sentence_limit=prepare_config.get("continuation_sentence_limit"),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")
