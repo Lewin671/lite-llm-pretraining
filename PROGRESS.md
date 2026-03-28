@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 基于 `TinyStories` 全量数据集继续做 tokenizer 主线优化
-- Latest Progress: `unigram 4096 + byte_fallback` 的 A22 已跑到 `600 step`，严格校验保持 `3/3`，未知标记稳定为 `0`
+- Latest Progress: `unigram 4096 + byte_fallback` 的 A23 已跑到 `1000 step`，严格校验仍是 `3/3`，`best_val_loss` 继续降到 `3.6301`
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 在 A22 基础上继续拉长同配置，确认更长训练是否继续改善而不回退
+- Next Step: 继续拉长同一最优配置，确认更长训练是否还在稳定改善
 
 ## How To Read
 

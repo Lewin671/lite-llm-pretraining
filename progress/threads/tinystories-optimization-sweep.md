@@ -200,3 +200,10 @@
 - Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
 - Result: `best_val_loss=3.9471`；严格校验 `3/3`；未知标记总数 `0`
 - Conclusion: 更长训练没有破坏文本质量，当前最佳主线已经稳定
+
+### A23
+
+- Change: 继续使用 `A22` 的 tokenizer 路线，把训练拉长到 `1000 step`
+- Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
+- Result: `best_val_loss=3.6301`；严格校验 `3/3`；未知标记总数 `0`
+- Conclusion: 当前最优路线继续单调改善，说明这条 tokenizer 主线还没到头

@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A23",
+  "notes": "carry forward unigram 4096 + byte_fallback route to 1000 steps",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-ocfm1sie-a23.json",
+  "run_name": "tinystories-sweep-a23-u4096bf-1000",
+  "data_dir": "data/tinystories-spm-u4096-bf",
+  "out_dir": "checkpoints/tinystories-sweep-a23-u4096bf-1000",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a23-u4096bf-1000/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 1000,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 200,
+    "eval_batches": 10,
+    "checkpoint_interval": 1000,
+    "sample_interval": 1000,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 3.85244,
+    "val_ppl": 47.107869,
+    "checkpoint_step": 1000,
+    "best_val_loss": 3.630056142807007
+  },
+  "validation_summary": {
+    "passed_samples": 3,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "there was a little girl named Lily. She was very big and loved to go on her room. She loved to the garden. She saw a big tree. She was very much. She was a big, but her mom said, \"That is a big, I can play with her friends. It is a good little girl.\"\nThey had a big smile. They had a big man that they were happy. He had a big box. He was very happy to eat. He was very happy and put it in the sky. \nAs they had a lot of fun. He said, \"I don't know what I'm sorry, Lily, Lily's not so happy. \"We were",
+  "sample_state": {
+    "step": 1000,
+    "best_val_loss": 3.630056142807007
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a23-u4096bf-1000",
+    "out_dir": "checkpoints/tinystories-sweep-a23-u4096bf-1000",
+    "best_val_loss": 3.630056142807007,
+    "last_val_loss": 3.630056142807007,
+    "final_step": 1000,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a23-u4096bf-1000/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a23-u4096bf-1000/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a23-u4096bf-1000/metrics.jsonl"
+  }
+}
