@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 基于 `TinyStories` 全量数据集继续做任务对齐优化，提升“按给定开头续写”的相关性
-- Latest Progress: 已确认 plain-story 路线里 `context=256 + unigram8192 + byte_fallback` 可把相关性基线稳定到 `2/3`，且优于更大模型与 decay；显式 `Prompt/Continuation` 路线已准备好，下一步直接做正面对照
-- Issues: 当前最佳 plain-story 模型会快速偏离 prompt 里的实体和事件，需要把训练目标和使用目标对齐
-- Next Step: 等 `Prompt/Continuation` 数据编码完成后，直接跑首轮对照训练并与 plain-story `2/3` 基线比较
+- Latest Progress: plain-story 当前最佳已切到 `A30 (context=256 + unigram8192 + byte_fallback)`，相关性 `2/3`；首轮 `Prompt/Continuation` 对照 `A31` 在 `300 step` 下出现强重复，暂时只有 `0/3`
+- Issues: 当前最佳 plain-story 仍有 prompt 漂移；`Prompt/Continuation` 路线虽然任务更对齐，但短训练窗口里会退化成高重复输出
+- Next Step: 围绕 `A31` 继续做去重复与稳态训练尝试，优先试更长训练、不同温度和更长 context
 
 ## How To Read
 

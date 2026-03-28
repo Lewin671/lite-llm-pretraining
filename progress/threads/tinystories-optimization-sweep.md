@@ -272,3 +272,10 @@
 - Validation: `run_sweep_attempt`，完整 TinyStories prompt，`temperature=0.5`
 - Result: `best_val_loss=4.1106`；相关性严格校验 `2/3`
 - Conclusion: 更大词表在不增大太多模型参数的前提下提升了 plain-story 路线的综合表现，当前最佳 plain-story checkpoint 从 `A26` 切换到 `A30`
+
+### A31
+
+- Change: 切到显式 `Prompt/Continuation` 训练格式，`u4096 + byte_fallback + context128`，`300 step`
+- Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.3`
+- Result: `best_val_loss=4.1340`；相关性严格校验 `0/3`
+- Conclusion: 任务对齐方向本身没错，但在当前短训练窗口里这条线会先塌到高重复输出；下一轮要优先解决 repetition，而不是立刻判定这条路线失败
