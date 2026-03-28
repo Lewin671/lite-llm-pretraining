@@ -1,5 +1,5 @@
 {
-  "run_name": "tinystories-spm-screen",
+  "run_name": "tinystories-spm-prompted-screen",
   "seed": 42,
   "prepare": {
     "name": "tinystories_sentencepiece",
@@ -8,10 +8,12 @@
     "model_type": "unigram",
     "byte_fallback": true,
     "input_sentence_size": 200000,
-    "max_sentence_length": 16384
+    "max_sentence_length": 16384,
+    "story_format": "prompt_continuation",
+    "prompt_sentence_count": 1
   },
-  "data_dir": "data/tinystories-spm-u4096-bf",
-  "out_dir": "checkpoints/tinystories-spm-screen",
+  "data_dir": "data/tinystories-spm-u4096-bf-pc1",
+  "out_dir": "checkpoints/tinystories-spm-prompted-screen",
   "sample_prompt": "There was a little boy named Timmy who loved red kites.",
   "validation": {
     "prompts": [
@@ -24,7 +26,7 @@
     "eval_batches": 10
   },
   "model": {
-    "context_size": 256,
+    "context_size": 128,
     "dim": 512,
     "num_layers": 10,
     "num_heads": 8,
@@ -32,12 +34,12 @@
   },
   "train": {
     "batch_size": 8,
-    "max_steps": 300,
+    "max_steps": 600,
     "learning_rate": 0.00025,
     "weight_decay": 0.01,
-    "warmup_steps": 300,
+    "warmup_steps": 50,
     "log_interval": 10,
-    "eval_interval": 100,
+    "eval_interval": 150,
     "eval_batches": 10,
     "checkpoint_interval": 300,
     "sample_interval": 300,

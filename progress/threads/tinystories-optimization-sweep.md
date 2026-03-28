@@ -190,6 +190,7 @@
 - 同时放开 `vocab_size` 和 `max_sentence_length`
 - 新一轮实验目标是先消掉 `⁇ / <unk>`，再看 sample 是否真正提升
 - 当前新增问题：TUI / chat prompt 格式与 TinyStories 分布不一致，需要同步修正推理入口与验证相关性
+- 当前新增问题：plain-story LM 已会写故事，但还没充分学会“围绕给定开头继续写”，需要把数据形态也对齐到 continuation 任务
 
 ### Inference / Eval Alignment
 
@@ -199,6 +200,7 @@
 - `A24`: `best_val_loss=3.5205`，相关性严格校验 `1/3`
 - `A25`: `best_val_loss=3.5658`，相关性严格校验 `1/3`
 - 新结论：之前的 `3/3` 更像是“文本像故事”，不是“文本继续了这个 prompt 的故事”
+- 当前 plain-story 最强相关性基线是 `2/3`
 - 下一轮 sweep 需要优先提升条件跟踪能力，而不是只继续压低 token loss
 
 ### A21
@@ -235,3 +237,38 @@
 - Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
 - Result: `best_val_loss=3.5658`；严格校验 `3/3`；未知标记总数 `0`
 - Conclusion: decay 没有赢过常数学习率，当前最佳仍然是 `A24`
+
+### A26
+
+- Change: 维持 `u4096 + byte_fallback` 路线不变，把 `context_size` 提到 `256`，`300 step`
+- Validation: `run_sweep_attempt`，完整 TinyStories prompt，`temperature=0.5`
+- Result: `best_val_loss=4.0589`；相关性严格校验 `2/3`
+- Conclusion: 更长 context 比继续压 loss 更有利于 prompt 跟踪，plain-story 线的相关性基线提升到 `2/3`
+
+### A27
+
+- Change: 维持 `u4096 + byte_fallback` 路线不变，把模型放大到约 `64M`，`300 step`
+- Validation: `run_sweep_attempt`，完整 TinyStories prompt，`temperature=0.5`
+- Result: `best_val_loss=4.6838`；相关性严格校验 `1/3`
+- Conclusion: 在当前训练预算下，直接放大模型没有带来条件跟踪收益，当前更值得押注任务对齐而不是盲目增参
+
+### A28
+
+- Change: 沿着 `A26` 的 `context=256` 路线继续拉长到 `600 step`
+- Validation: `run_sweep_attempt`，完整 TinyStories prompt，`temperature=0.5`
+- Result: `best_val_loss=3.8493`；相关性严格校验 `1/3`
+- Conclusion: 单纯继续训练会继续压低 loss，但会再次损伤 prompt 相关性；plain-story 线已经出现“更会写故事，但不更会续写”的分叉
+
+### A29
+
+- Change: 沿着 `A28` 的 `context=256` 路线加入 cosine decay，`min_learning_rate=2.5e-5`
+- Validation: `run_sweep_attempt`，完整 TinyStories prompt，`temperature=0.5`
+- Result: `best_val_loss=3.9371`；相关性严格校验 `0/3`
+- Conclusion: decay 没能修复相关性回落，说明问题不只是后段学习率过高
+
+### A30
+
+- Change: 维持 `context=256` 路线，tokenizer 改为 `SentencePiece unigram 8192 + byte_fallback`，`300 step`
+- Validation: `run_sweep_attempt`，完整 TinyStories prompt，`temperature=0.5`
+- Result: `best_val_loss=4.1106`；相关性严格校验 `2/3`
+- Conclusion: 更大词表在不增大太多模型参数的前提下提升了 plain-story 路线的综合表现，当前最佳 plain-story checkpoint 从 `A26` 切换到 `A30`

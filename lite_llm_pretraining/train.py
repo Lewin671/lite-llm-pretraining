@@ -23,6 +23,11 @@ from lite_llm_pretraining.common import (
     token_dtype_from_meta,
 )
 from lite_llm_pretraining.tokenizer import load_tokenizer_from_meta
+from lite_llm_pretraining.story_inference import (
+    PLAIN_STORY_TEMPLATE,
+    build_story_prompt,
+    resolve_inference_profile_from_config,
+)
 
 
 def parse_args():
@@ -58,6 +63,7 @@ def train_from_config(config_path: Path):
     }
     train_config = config["train"]
     sample_temperature = train_config.get("sample_temperature", 1.0)
+    inference_profile = resolve_inference_profile_from_config(config, path_hint=str(out_dir))
 
     model = TransformerLM(**model_config)
     optimizer = optim.AdamW(
@@ -148,9 +154,15 @@ def train_from_config(config_path: Path):
             )
 
         if step % train_config["sample_interval"] == 0 or step == train_config["max_steps"]:
+            sample_prompt = config["sample_prompt"]
+            if inference_profile.get("mode") == "story":
+                sample_prompt = build_story_prompt(
+                    config["sample_prompt"],
+                    inference_profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
+                )
             sample = sample_text(
                 model,
-                config["sample_prompt"],
+                sample_prompt,
                 train_config["sample_tokens"],
                 temperature=sample_temperature,
                 tokenizer=tokenizer,

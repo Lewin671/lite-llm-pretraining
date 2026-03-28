@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A26",
+  "notes": "test whether context 256 improves prompt relevance under u4096bf route",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-tuzfwrbr-a26.json",
+  "run_name": "tinystories-sweep-a26-u4096bf-c256-300",
+  "data_dir": "data/tinystories-spm-u4096-bf",
+  "out_dir": "checkpoints/tinystories-sweep-a26-u4096bf-c256-300",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a26-u4096bf-c256-300/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 300,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.233616,
+    "val_ppl": 68.966189,
+    "checkpoint_step": 300,
+    "best_val_loss": 4.058932542800903
+  },
+  "validation_summary": {
+    "passed_samples": 2,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "\nLily and the park to be sad and the water and Lily was a special. She saw a little girl namedenly, the sky. She was a big, \"Why are you want to find the toys. The man. He was so happy. Your mom. She said, \"I'shr sister.\nThe little girl was so that he saw that it was so excited to do you want to play with his mom and said, \"I's. She was so happy. She was so brave and said, \"It's. She asked. She said, \"I't know the animals. You can go home. He was a time, and said, \"I love you some light and the ",
+  "sample_state": {
+    "step": 300,
+    "best_val_loss": 4.058932542800903
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a26-u4096bf-c256-300",
+    "out_dir": "checkpoints/tinystories-sweep-a26-u4096bf-c256-300",
+    "best_val_loss": 4.058932542800903,
+    "last_val_loss": 4.058932542800903,
+    "final_step": 300,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a26-u4096bf-c256-300/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a26-u4096bf-c256-300/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a26-u4096bf-c256-300/metrics.jsonl"
+  }
+}

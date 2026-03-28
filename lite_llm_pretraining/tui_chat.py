@@ -4,8 +4,11 @@ import textwrap
 from pathlib import Path
 
 from lite_llm_pretraining.app import ChatApplication, StoryApplication
-from lite_llm_pretraining.common import load_json
 from lite_llm_pretraining.model import CheckpointLanguageModel
+from lite_llm_pretraining.story_inference import (
+    PLAIN_STORY_TEMPLATE,
+    resolve_inference_profile,
+)
 
 
 CHAT_HELP_TEXT = "Enter send | /clear reset | /quit exit"
@@ -134,23 +137,27 @@ class ChatTUI:
                 self.input_buffer += key
 
 
-def infer_mode(checkpoint_dir: Path, requested_mode: str):
-    if requested_mode != "auto":
-        return requested_mode
-    run_config_path = checkpoint_dir.parent / "run_config.json"
-    if run_config_path.exists():
-        config = load_json(run_config_path)
-        if "tinystories" in str(config.get("data_dir", "")).lower():
-            return "story"
-    return "story" if "tinystories" in str(checkpoint_dir).lower() else "chat"
+def resolve_tui_profile(checkpoint_dir: Path, requested_mode: str):
+    profile = resolve_inference_profile(checkpoint_dir)
+    if requested_mode == "chat":
+        return {"mode": "chat", "prompt_template": PLAIN_STORY_TEMPLATE}
+    if requested_mode == "story":
+        return {
+            "mode": "story",
+            "prompt_template": profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
+        }
+    return profile
 
 
 def run_tui(stdscr, args):
     checkpoint_dir = Path(args.checkpoint_dir)
     model = CheckpointLanguageModel(checkpoint_dir)
-    mode = infer_mode(checkpoint_dir, args.mode)
-    if mode == "story":
-        app = StoryApplication(model)
+    profile = resolve_tui_profile(checkpoint_dir, args.mode)
+    if profile.get("mode") == "story":
+        app = StoryApplication(
+            model,
+            prompt_template=profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
+        )
     else:
         app = ChatApplication(model)
     ChatTUI(stdscr, app, args.max_new_tokens, args.temperature).run()

@@ -1,0 +1,76 @@
+{
+  "attempt_id": "A29",
+  "notes": "test whether context 256 unlocks prompted continuation relevance",
+  "base_config": "configs/tinystories-spm-prompted-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-tro4lonm-a29.json",
+  "run_name": "tinystories-sweep-a29-u4096bf-pc1-c256-300",
+  "data_dir": "data/tinystories-spm-u4096-bf-pc1",
+  "out_dir": "checkpoints/tinystories-sweep-a29-u4096bf-pc1-c256-300",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a29-u4096bf-pc1-c256-300/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "story_format": "prompt_continuation",
+    "prompt_sentence_count": 1
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 300,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.2
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 3.919655,
+    "val_ppl": 50.383037,
+    "checkpoint_step": 300,
+    "best_val_loss": 3.858614778518677
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.2,
+  "sample_temperature": 0.2,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "She loved to play with her mommy. One day, but she was very happy. He was a big and he was a big, she was a big. One day, she was a big, she was a big. He was a big. He was a big. The little girl. The girl. The girl. One day, the girl. He was so she was very happy. The girl. One day, she was a big, he was so she was a big, the little girl. She was a big, she was very she was so she was a big. The girl. The girl. The girl said, \"I want to play with her mom and said, \"I want to play with her. She ",
+  "sample_state": {
+    "step": 300,
+    "best_val_loss": 3.858614778518677
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a29-u4096bf-pc1-c256-300",
+    "out_dir": "checkpoints/tinystories-sweep-a29-u4096bf-pc1-c256-300",
+    "best_val_loss": 3.858614778518677,
+    "last_val_loss": 3.858614778518677,
+    "final_step": 300,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a29-u4096bf-pc1-c256-300/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a29-u4096bf-pc1-c256-300/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a29-u4096bf-pc1-c256-300/metrics.jsonl"
+  }
+}

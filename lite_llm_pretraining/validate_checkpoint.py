@@ -13,6 +13,11 @@ from lite_llm_pretraining.common import (
     token_dtype_from_meta,
 )
 from lite_llm_pretraining.model import CheckpointLanguageModel
+from lite_llm_pretraining.story_inference import (
+    PLAIN_STORY_TEMPLATE,
+    build_story_prompt,
+    resolve_inference_profile,
+)
 
 
 DEFAULT_PROMPTS = [
@@ -220,20 +225,33 @@ def validate_checkpoint(
 ):
     prompts = list(prompts or DEFAULT_PROMPTS)
     set_seed(seed)
+    inference_profile = resolve_inference_profile(checkpoint_dir)
     report = {
         "checkpoint_dir": str(checkpoint_dir),
         "prompts": prompts,
         "seed": seed,
+        "inference_profile": inference_profile,
         "samples": [],
     }
 
     lm = CheckpointLanguageModel(checkpoint_dir)
     for prompt in prompts:
-        output = lm.generate(prompt, max_new_tokens=max_new_tokens, temperature=temperature)
+        model_prompt = prompt
+        if inference_profile.get("mode") == "story":
+            model_prompt = build_story_prompt(
+                prompt,
+                inference_profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
+            )
+        output = lm.generate(
+            model_prompt,
+            max_new_tokens=max_new_tokens,
+            temperature=temperature,
+        )
         metrics, checks = sample_metrics(prompt, output)
         report["samples"].append(
             {
                 "prompt": prompt,
+                "model_prompt": model_prompt,
                 "output": output,
                 "metrics": metrics,
                 "checks": checks,

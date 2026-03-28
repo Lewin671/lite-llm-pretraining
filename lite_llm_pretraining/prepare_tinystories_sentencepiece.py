@@ -1,4 +1,6 @@
 import argparse
+import re
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -61,6 +63,18 @@ def parse_args():
         action="store_true",
         help="Disable sentence shuffling when input_sentence_size is set.",
     )
+    parser.add_argument(
+        "--story_format",
+        default="plain",
+        choices=["plain", "prompt_continuation"],
+        help="How each TinyStories sample is formatted before tokenizer training and encoding.",
+    )
+    parser.add_argument(
+        "--prompt_sentence_count",
+        type=int,
+        default=1,
+        help="Number of opening sentences kept in the prompt when using prompt_continuation format.",
+    )
     return parser.parse_args()
 
 
@@ -115,12 +129,60 @@ def iter_stories(text_path: Path):
             yield "\n".join(story_lines)
 
 
-def encode_split(text_path: Path, out_path: Path, processor: spm.SentencePieceProcessor):
+def split_story_sentences(story: str):
+    return [part.strip() for part in re.split(r"(?<=[.!?])\s+", story.strip()) if part.strip()]
+
+
+def split_prompt_continuation(story: str, prompt_sentence_count: int):
+    sentences = split_story_sentences(story)
+    if len(sentences) > prompt_sentence_count:
+        prompt = " ".join(sentences[:prompt_sentence_count]).strip()
+        continuation = " ".join(sentences[prompt_sentence_count:]).strip()
+        return prompt, continuation
+
+    words = story.split()
+    if len(words) < 12:
+        midpoint = max(1, len(words) // 2)
+    else:
+        midpoint = max(8, len(words) // 3)
+    prompt = " ".join(words[:midpoint]).strip()
+    continuation = " ".join(words[midpoint:]).strip()
+    return prompt, continuation
+
+
+def format_story(story: str, story_format: str, prompt_sentence_count: int):
+    if story_format == "plain":
+        return story
+    prompt, continuation = split_prompt_continuation(story, prompt_sentence_count)
+    return f"Prompt: {prompt}\nContinuation: {continuation}"
+
+
+def write_formatted_training_corpus(
+    source_path: Path,
+    out_path: Path,
+    story_format: str,
+    prompt_sentence_count: int,
+):
+    with out_path.open("w", encoding="utf-8") as handle:
+        for story in iter_stories(source_path):
+            formatted = format_story(story, story_format, prompt_sentence_count)
+            handle.write(formatted)
+            handle.write("\n\n")
+
+
+def encode_split(
+    text_path: Path,
+    out_path: Path,
+    processor: spm.SentencePieceProcessor,
+    story_format: str,
+    prompt_sentence_count: int,
+):
     eos_id = processor.eos_id()
     total_tokens = 0
     with out_path.open("wb") as handle:
         for story in iter_stories(text_path):
-            token_ids = processor.encode(story, out_type=int)
+            formatted = format_story(story, story_format, prompt_sentence_count)
+            token_ids = processor.encode(formatted, out_type=int)
             if eos_id >= 0:
                 token_ids.append(eos_id)
             np.asarray(token_ids, dtype=np.uint16).tofile(handle)
@@ -137,26 +199,57 @@ def prepare_dataset(
     input_sentence_size: int = 200000,
     max_sentence_length: int = 16384,
     shuffle_input_sentence: bool = True,
+    story_format: str = "plain",
+    prompt_sentence_count: int = 1,
 ):
     out_dir.mkdir(parents=True, exist_ok=True)
     ensure_clean_byte_data(byte_data_dir)
 
     train_text_path = byte_data_dir / "train.bin"
     val_text_path = byte_data_dir / "val.bin"
-    model_path, vocab_path = train_sentencepiece(
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        encoding="utf-8",
+        suffix="-tinystories-spm-train.txt",
+        prefix="lite-llm-pretraining-",
+        delete=False,
+    ) as handle:
+        formatted_train_path = Path(handle.name)
+    write_formatted_training_corpus(
         train_text_path,
-        out_dir,
-        vocab_size=vocab_size,
-        model_type=model_type,
-        byte_fallback=byte_fallback,
-        input_sentence_size=input_sentence_size,
-        max_sentence_length=max_sentence_length,
-        shuffle_input_sentence=shuffle_input_sentence,
+        formatted_train_path,
+        story_format=story_format,
+        prompt_sentence_count=prompt_sentence_count,
     )
+    try:
+        model_path, vocab_path = train_sentencepiece(
+            formatted_train_path,
+            out_dir,
+            vocab_size=vocab_size,
+            model_type=model_type,
+            byte_fallback=byte_fallback,
+            input_sentence_size=input_sentence_size,
+            max_sentence_length=max_sentence_length,
+            shuffle_input_sentence=shuffle_input_sentence,
+        )
+    finally:
+        formatted_train_path.unlink(missing_ok=True)
     processor = spm.SentencePieceProcessor(model_file=str(model_path))
 
-    train_tokens = encode_split(train_text_path, out_dir / "train.bin", processor)
-    val_tokens = encode_split(val_text_path, out_dir / "val.bin", processor)
+    train_tokens = encode_split(
+        train_text_path,
+        out_dir / "train.bin",
+        processor,
+        story_format=story_format,
+        prompt_sentence_count=prompt_sentence_count,
+    )
+    val_tokens = encode_split(
+        val_text_path,
+        out_dir / "val.bin",
+        processor,
+        story_format=story_format,
+        prompt_sentence_count=prompt_sentence_count,
+    )
 
     meta = {
         "dataset": "tinystories",
@@ -176,6 +269,8 @@ def prepare_dataset(
         "input_sentence_size": input_sentence_size,
         "max_sentence_length": max_sentence_length,
         "shuffle_input_sentence": shuffle_input_sentence,
+        "story_format": story_format,
+        "prompt_sentence_count": prompt_sentence_count,
     }
     save_json(out_dir / "meta.json", meta)
     return meta
@@ -192,6 +287,8 @@ def main():
         input_sentence_size=args.input_sentence_size,
         max_sentence_length=args.max_sentence_length,
         shuffle_input_sentence=not args.disable_shuffle_input_sentence,
+        story_format=args.story_format,
+        prompt_sentence_count=args.prompt_sentence_count,
     )
     print(f"saved dataset to {args.out_dir}")
     print(f"vocab size: {meta['vocab_size']}")

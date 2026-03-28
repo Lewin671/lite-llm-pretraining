@@ -1,0 +1,74 @@
+{
+  "attempt_id": "A30",
+  "notes": "test unigram 8192 + byte_fallback for better entity fidelity on context 256 route",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-9h2pt5hl-a30.json",
+  "run_name": "tinystories-sweep-a30-u8192bf-c256-300",
+  "data_dir": "data/tinystories-spm-u8192-bf",
+  "out_dir": "checkpoints/tinystories-sweep-a30-u8192bf-c256-300",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a30-u8192bf-c256-300/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 8192,
+    "model_type": "unigram",
+    "input_sentence_size": 200000,
+    "byte_fallback": true,
+    "max_sentence_length": 16384
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 300,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.248067,
+    "val_ppl": 69.970059,
+    "checkpoint_step": 300,
+    "best_val_loss": 4.110608863830566
+  },
+  "validation_summary": {
+    "passed_samples": 2,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "\nAfta. The little girl.\nThe old. She was so excited and Lily and said, she could be happy.\nThey were also made a little girl named Timmy was a big and it was so excited for a big boy named Lily and said, and said, but he was a big bear saw a big, and wanted to be scared. She was a big.\nThe little little girl named Timmy't know that he could get to make a big little girl named Timmy was a new friend. He was a little girl named Timmy learned a small toy. She was a big little boy named Timmy was a ",
+  "sample_state": {
+    "step": 300,
+    "best_val_loss": 4.110608863830566
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a30-u8192bf-c256-300",
+    "out_dir": "checkpoints/tinystories-sweep-a30-u8192bf-c256-300",
+    "best_val_loss": 4.110608863830566,
+    "last_val_loss": 4.110608863830566,
+    "final_step": 300,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a30-u8192bf-c256-300/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a30-u8192bf-c256-300/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a30-u8192bf-c256-300/metrics.jsonl"
+  }
+}

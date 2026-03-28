@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 基于 `TinyStories` 全量数据集继续做推理对齐与最佳模型优化
-- Latest Progress: 已完成 TinyStories 推理入口与相关性评测对齐；新口径下 A24/A25 都只有 `1/3` 通过，暴露出 prompt 条件跟踪不足
-- Issues: 当前最佳模型会快速偏离 prompt 里的实体和事件，需要继续通过 sweep 提升相关性与连贯性
-- Next Step: 基于新评测口径继续做 `context`、模型容量和训练长度优化
+- Current Task: 基于 `TinyStories` 全量数据集继续做任务对齐优化，提升“按给定开头续写”的相关性
+- Latest Progress: 已确认 plain-story 路线里 `context=256 + unigram8192 + byte_fallback` 可把相关性基线稳定到 `2/3`，且优于更大模型与 decay；显式 `Prompt/Continuation` 路线已准备好，下一步直接做正面对照
+- Issues: 当前最佳 plain-story 模型会快速偏离 prompt 里的实体和事件，需要把训练目标和使用目标对齐
+- Next Step: 等 `Prompt/Continuation` 数据编码完成后，直接跑首轮对照训练并与 plain-story `2/3` 基线比较
 
 ## How To Read
 

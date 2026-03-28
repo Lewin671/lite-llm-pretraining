@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 
 from lite_llm_pretraining.model import CheckpointLanguageModel
+from lite_llm_pretraining.story_inference import (
+    PLAIN_STORY_TEMPLATE,
+    build_story_prompt,
+)
 
 
 @dataclass
@@ -81,10 +85,12 @@ class StoryApplication:
         model: CheckpointLanguageModel,
         prompt_prefix: str = "Prompt",
         continuation_prefix: str = "Continuation",
+        prompt_template: str = PLAIN_STORY_TEMPLATE,
     ):
         self.model = model
         self.prompt_prefix = prompt_prefix
         self.continuation_prefix = continuation_prefix
+        self.prompt_template = prompt_template
         self.messages: list[ChatMessage] = []
 
     def clear(self):
@@ -106,7 +112,7 @@ class StoryApplication:
         return lines
 
     def build_prompt(self, prompt_text: str):
-        return prompt_text
+        return build_story_prompt(prompt_text, self.prompt_template)
 
     def generate_reply(self, user_text: str, max_new_tokens: int, temperature: float = 1.0):
         self.add_message("prompt", user_text)
