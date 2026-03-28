@@ -129,14 +129,6 @@
 - Result: `best_val_loss=4.4524`；严格校验 `0/3`；未知标记总数 `13`
 - Conclusion: 不开 gradient checkpointing 没带来质量收益，只是提供一个速度/显存参考点
 
-### Pending Batch
-
-- A16: `Best short-run checkpoint + lower temperature`
-- A17: `Best short-run checkpoint + higher temperature`
-- A18: `Byte-level 50M / 2000step under strict validator`
-- A19: `Byte-level clean 50M / 500step under strict validator`
-- A20: `Best overall carry-forward run`
-
 ### A16
 
 - Change: 对 `A14` best checkpoint 降验证温度到 `0.4`
@@ -165,6 +157,13 @@
 - Result: `1/3` 通过；`val_loss=2.2684`；未知标记总数 `0`
 - Conclusion: 清洗 `<|endoftext|>` 的收益是真实的，但 byte-level 主线的文本质量上限仍然偏低
 
+### A20
+
+- Change: 把 `A14` 的 `context=128 + warmup=50` SentencePiece 路线拉长到 `600 step`
+- Validation: 同 A16，温度 `0.5`
+- Result: `best_val_loss=3.9462`；严格校验 `0/3`；未知标记总数 `14`
+- Conclusion: 单纯继续训练能显著降 loss，但没有把文本质量一起拉上来，当前瓶颈更像 tokenizer/解码质量而不是步数不够
+
 ## Validation
 
 - 当前短结论：
@@ -173,8 +172,10 @@
 - `context=384` 和 `batch=12` 都能降低 loss，但还没有转化成更干净的文本
 - 到目前为止，唯一在短训里真正改善通过数的是 `warmup=50`
 - byte-level 清洗线可以达到 `1/3`，但人类可读性仍然不如 SentencePiece 线
+- A20 说明继续堆当前 `SentencePiece 2048` 路线的步数，收益主要体现在 loss，而不是真实 sample 质量
 
 ## Conclusion
 
 - 当前主线先不再继续放大模型或 context
 - A14 经过温度复核后仍保留为最佳 SentencePiece carry-forward 候选
+- 本轮 20 个 attempt 已完成；下一轮最值得做的是 tokenizer 路线重开，而不是继续在当前配置上硬拉步数

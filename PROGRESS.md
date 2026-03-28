@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 执行 `TinyStories` 连续优化 sweep，至少完成 20 个方案尝试
-- Latest Progress: 已完成 A16-A19 严格复核；A14 的温度复核没有继续提升通过数，A19 虽然也到 `1/3`，但 byte-level 仍不是更优主线
+- Current Task: 完成 `TinyStories` 20 轮优化 sweep，并收敛当前最优主线
+- Latest Progress: 已完成 A20；A14 路线拉长到 `600 step` 后 `val_loss` 明显下降到 `3.9462`，但严格校验仍是 `0/3`
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 直接执行 A20，把 A14 这条 SentencePiece 路线拉长训练，再按同一严格口径复核
+- Next Step: 当前 20 轮 sweep 已完成；下一轮应优先回到 tokenizer 方案，而不是继续单纯拉长当前 `SentencePiece 2048` 路线
 
 ## How To Read
 
