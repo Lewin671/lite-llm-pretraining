@@ -107,6 +107,24 @@ def parse_args():
         help="Sampling temperature for validation generations.",
     )
     parser.add_argument(
+        "--top_k",
+        type=int,
+        default=None,
+        help="Optional top-k sampling cutoff for validation generations.",
+    )
+    parser.add_argument(
+        "--repetition_penalty",
+        type=float,
+        default=1.0,
+        help="Optional repetition penalty greater than 1.0 for validation generations.",
+    )
+    parser.add_argument(
+        "--repetition_window",
+        type=int,
+        default=None,
+        help="Optional lookback window used by repetition penalty during validation.",
+    )
+    parser.add_argument(
         "--eval_batches",
         type=int,
         default=10,
@@ -220,6 +238,9 @@ def validate_checkpoint(
     prompts=None,
     max_new_tokens: int = 160,
     temperature: float = 0.8,
+    top_k: int | None = None,
+    repetition_penalty: float = 1.0,
+    repetition_window: int | None = None,
     eval_batches: int = 10,
     seed: int = 123,
 ):
@@ -246,6 +267,9 @@ def validate_checkpoint(
             model_prompt,
             max_new_tokens=max_new_tokens,
             temperature=temperature,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
         )
         metrics, checks = sample_metrics(prompt, output)
         report["samples"].append(
@@ -294,6 +318,9 @@ def main():
         prompts=load_prompts(args.prompts_json),
         max_new_tokens=args.max_new_tokens,
         temperature=args.temperature,
+        top_k=args.top_k,
+        repetition_penalty=args.repetition_penalty,
+        repetition_window=args.repetition_window,
         eval_batches=args.eval_batches,
         seed=args.seed,
     )

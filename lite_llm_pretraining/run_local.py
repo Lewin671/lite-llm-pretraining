@@ -138,6 +138,9 @@ def main():
                 "max_new_tokens", min(160, max_new_tokens)
             ),
             temperature=validation_config.get("temperature", 0.8),
+            top_k=validation_config.get("top_k"),
+            repetition_penalty=validation_config.get("repetition_penalty", 1.0),
+            repetition_window=validation_config.get("repetition_window"),
             eval_batches=validation_config.get("eval_batches", 10),
         )
         validation_path = out_dir / "validation_report.json"

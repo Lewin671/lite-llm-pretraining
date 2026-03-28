@@ -108,6 +108,9 @@ def run_attempt(
         config["sample_prompt"],
         config["train"]["sample_tokens"],
         temperature=sample_temperature,
+        top_k=config["train"].get("sample_top_k"),
+        repetition_penalty=config["train"].get("sample_repetition_penalty", 1.0),
+        repetition_window=config["train"].get("sample_repetition_window"),
     )
 
     validation_config = config.get("validation", {})
@@ -119,6 +122,9 @@ def run_attempt(
             "max_new_tokens", config["train"]["sample_tokens"]
         ),
         temperature=validation_config.get("temperature", sample_temperature),
+        top_k=validation_config.get("top_k"),
+        repetition_penalty=validation_config.get("repetition_penalty", 1.0),
+        repetition_window=validation_config.get("repetition_window"),
         eval_batches=validation_config.get("eval_batches", 10),
     )
 

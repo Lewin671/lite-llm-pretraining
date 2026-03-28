@@ -14,7 +14,15 @@ class CheckpointLanguageModel:
     def loaded_step(self):
         return self.state.get("step", "unknown")
 
-    def generate(self, prompt: str, max_new_tokens: int, temperature: float = 1.0):
+    def generate(
+        self,
+        prompt: str,
+        max_new_tokens: int,
+        temperature: float = 1.0,
+        top_k: int | None = None,
+        repetition_penalty: float = 1.0,
+        repetition_window: int | None = None,
+    ):
         return sample_text(
             self.model,
             prompt,
@@ -22,10 +30,19 @@ class CheckpointLanguageModel:
             temperature=temperature,
             include_prompt=False,
             tokenizer=self.tokenizer,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
         )
 
     def stream_generate(
-        self, prompt: str, max_new_tokens: int, temperature: float = 1.0
+        self,
+        prompt: str,
+        max_new_tokens: int,
+        temperature: float = 1.0,
+        top_k: int | None = None,
+        repetition_penalty: float = 1.0,
+        repetition_window: int | None = None,
     ):
         return sample_text_stream(
             self.model,
@@ -34,4 +51,7 @@ class CheckpointLanguageModel:
             temperature=temperature,
             include_prompt=False,
             tokenizer=self.tokenizer,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
         )

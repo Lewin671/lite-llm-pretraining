@@ -187,6 +187,9 @@ def sample_text(
     temperature: float = 1.0,
     include_prompt: bool = True,
     tokenizer=None,
+    top_k: int | None = None,
+    repetition_penalty: float = 1.0,
+    repetition_window: int | None = None,
 ):
     return "".join(
         sample_text_stream(
@@ -196,8 +199,35 @@ def sample_text(
             temperature=temperature,
             include_prompt=include_prompt,
             tokenizer=tokenizer,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
         )
     )
+
+
+def apply_decoding_constraints(
+    logits,
+    token_history,
+    top_k: int | None = None,
+    repetition_penalty: float = 1.0,
+    repetition_window: int | None = None,
+):
+    logits_np = np.array(logits)
+
+    if repetition_penalty and repetition_penalty > 1.0:
+        recent_tokens = token_history[-repetition_window:] if repetition_window else token_history
+        for token in set(recent_tokens):
+            value = logits_np[0, token]
+            logits_np[0, token] = (
+                value * repetition_penalty if value < 0 else value / repetition_penalty
+            )
+
+    if top_k is not None and 0 < top_k < logits_np.shape[-1]:
+        threshold = np.partition(logits_np[0], -top_k)[-top_k]
+        logits_np[0, logits_np[0] < threshold] = -np.inf
+
+    return mx.array(logits_np)
 
 
 def sample_text_stream(
@@ -207,6 +237,9 @@ def sample_text_stream(
     temperature: float = 1.0,
     include_prompt: bool = True,
     tokenizer=None,
+    top_k: int | None = None,
+    repetition_penalty: float = 1.0,
+    repetition_window: int | None = None,
 ):
     tokenizer = tokenizer or ByteTokenizer()
     prompt_tokens = tokenizer.encode(prompt) or tokenizer.default_prompt_tokens()
@@ -221,9 +254,20 @@ def sample_text_stream(
     for _ in range(max_new_tokens):
         x = mx.array([tokens[-model.context_size :]], dtype=mx.int32)
         logits = model(x)[:, -1, :]
-        if temperature != 1.0:
+        logits = apply_decoding_constraints(
+            logits,
+            tokens,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
+        )
+        if temperature > 0 and temperature != 1.0:
             logits = logits / temperature
-        next_token = mx.random.categorical(logits)
+        next_token = (
+            mx.argmax(logits, axis=-1)
+            if temperature <= 0
+            else mx.random.categorical(logits)
+        )
         mx.eval(next_token)
         token_value = int(next_token.item())
         tokens.append(token_value)

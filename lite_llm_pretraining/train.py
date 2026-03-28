@@ -63,6 +63,9 @@ def train_from_config(config_path: Path):
     }
     train_config = config["train"]
     sample_temperature = train_config.get("sample_temperature", 1.0)
+    sample_top_k = train_config.get("sample_top_k")
+    sample_repetition_penalty = train_config.get("sample_repetition_penalty", 1.0)
+    sample_repetition_window = train_config.get("sample_repetition_window")
     inference_profile = resolve_inference_profile_from_config(config, path_hint=str(out_dir))
 
     model = TransformerLM(**model_config)
@@ -166,6 +169,9 @@ def train_from_config(config_path: Path):
                 train_config["sample_tokens"],
                 temperature=sample_temperature,
                 tokenizer=tokenizer,
+                top_k=sample_top_k,
+                repetition_penalty=sample_repetition_penalty,
+                repetition_window=sample_repetition_window,
             )
             sample_path = out_dir / "samples" / f"step-{step:04d}.txt"
             sample_path.parent.mkdir(parents=True, exist_ok=True)

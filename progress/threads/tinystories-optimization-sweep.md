@@ -205,6 +205,9 @@
 - 新结论：之前的 `3/3` 更像是“文本像故事”，不是“文本继续了这个 prompt 的故事”
 - 当前 plain-story 最强相关性基线是 `2/3`
 - 下一轮 sweep 需要优先提升条件跟踪能力和温度稳态，而不是只继续压低 token loss
+- 当前新增问题：现有采样只有 temperature，没有 top-k / top-p / repetition penalty 之类约束，导致无法把“模型问题”和“解码问题”彻底分开
+- 解码跟进：已补齐 `greedy / top-k / repetition penalty`，并在当前 plain-story / prompted best 上做了首轮复核
+- 解码结论：这些约束能明显压低重复和发散，但还没有把任一路线从 `2/3` 推到 `3/3`
 
 ### A21
 

@@ -40,6 +40,24 @@ def parse_args():
         help="Sampling temperature.",
     )
     parser.add_argument(
+        "--top_k",
+        type=int,
+        default=None,
+        help="Optional top-k sampling cutoff.",
+    )
+    parser.add_argument(
+        "--repetition_penalty",
+        type=float,
+        default=1.0,
+        help="Optional repetition penalty greater than 1.0.",
+    )
+    parser.add_argument(
+        "--repetition_window",
+        type=int,
+        default=None,
+        help="Optional lookback window used by repetition penalty.",
+    )
+    parser.add_argument(
         "--mode",
         default="auto",
         choices=["auto", "raw", "story"],
@@ -73,10 +91,20 @@ def sample_from_checkpoint(
     max_new_tokens: int,
     temperature: float = 1.0,
     mode: str = "auto",
+    top_k: int | None = None,
+    repetition_penalty: float = 1.0,
+    repetition_window: int | None = None,
 ):
     model = CheckpointLanguageModel(checkpoint_dir)
     model_prompt = resolve_prompt(checkpoint_dir, prompt, mode)
-    output = model.generate(model_prompt, max_new_tokens, temperature=temperature)
+    output = model.generate(
+        model_prompt,
+        max_new_tokens,
+        temperature=temperature,
+        top_k=top_k,
+        repetition_penalty=repetition_penalty,
+        repetition_window=repetition_window,
+    )
     return output, model.state
 
 
@@ -86,11 +114,21 @@ def stream_from_checkpoint(
     max_new_tokens: int,
     temperature: float = 1.0,
     mode: str = "auto",
+    top_k: int | None = None,
+    repetition_penalty: float = 1.0,
+    repetition_window: int | None = None,
 ):
     model = CheckpointLanguageModel(checkpoint_dir)
     model_prompt = resolve_prompt(checkpoint_dir, prompt, mode)
     return (
-        model.stream_generate(model_prompt, max_new_tokens, temperature=temperature),
+        model.stream_generate(
+            model_prompt,
+            max_new_tokens,
+            temperature=temperature,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
+        ),
         model.state,
     )
 
@@ -104,6 +142,9 @@ def main():
             args.max_new_tokens,
             args.temperature,
             mode=args.mode,
+            top_k=args.top_k,
+            repetition_penalty=args.repetition_penalty,
+            repetition_window=args.repetition_window,
         )
         print(f"loaded checkpoint step={state.get('step', 'unknown')}")
         sys.stdout.write(args.prompt)
@@ -119,6 +160,9 @@ def main():
             args.max_new_tokens,
             args.temperature,
             mode=args.mode,
+            top_k=args.top_k,
+            repetition_penalty=args.repetition_penalty,
+            repetition_window=args.repetition_window,
         )
         print(f"loaded checkpoint step={state.get('step', 'unknown')}")
         print(f"{args.prompt}{output}")

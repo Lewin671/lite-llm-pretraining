@@ -35,6 +35,24 @@ def parse_args():
         help="Sampling temperature.",
     )
     parser.add_argument(
+        "--top_k",
+        type=int,
+        default=None,
+        help="Optional top-k sampling cutoff.",
+    )
+    parser.add_argument(
+        "--repetition_penalty",
+        type=float,
+        default=1.0,
+        help="Optional repetition penalty greater than 1.0.",
+    )
+    parser.add_argument(
+        "--repetition_window",
+        type=int,
+        default=None,
+        help="Optional lookback window used by repetition penalty.",
+    )
+    parser.add_argument(
         "--mode",
         default="auto",
         choices=["auto", "chat", "story"],
@@ -44,11 +62,23 @@ def parse_args():
 
 
 class ChatTUI:
-    def __init__(self, stdscr, app: ChatApplication, max_new_tokens: int, temperature: float):
+    def __init__(
+        self,
+        stdscr,
+        app: ChatApplication,
+        max_new_tokens: int,
+        temperature: float,
+        top_k: int | None,
+        repetition_penalty: float,
+        repetition_window: int | None,
+    ):
         self.stdscr = stdscr
         self.app = app
         self.max_new_tokens = max_new_tokens
         self.temperature = temperature
+        self.top_k = top_k
+        self.repetition_penalty = repetition_penalty
+        self.repetition_window = repetition_window
         self.input_buffer = ""
         self.status = STORY_HELP_TEXT if isinstance(app, StoryApplication) else CHAT_HELP_TEXT
 
@@ -112,6 +142,9 @@ class ChatTUI:
             user_text,
             max_new_tokens=self.max_new_tokens,
             temperature=self.temperature,
+            top_k=self.top_k,
+            repetition_penalty=self.repetition_penalty,
+            repetition_window=self.repetition_window,
         ):
             self._render()
 
@@ -160,7 +193,15 @@ def run_tui(stdscr, args):
         )
     else:
         app = ChatApplication(model)
-    ChatTUI(stdscr, app, args.max_new_tokens, args.temperature).run()
+    ChatTUI(
+        stdscr,
+        app,
+        args.max_new_tokens,
+        args.temperature,
+        args.top_k,
+        args.repetition_penalty,
+        args.repetition_window,
+    ).run()
 
 
 def main():

@@ -55,16 +55,39 @@ class ChatApplication:
         parts.append(f"{self.assistant_prefix}: ")
         return "\n".join(parts)
 
-    def generate_reply(self, user_text: str, max_new_tokens: int, temperature: float = 1.0):
+    def generate_reply(
+        self,
+        user_text: str,
+        max_new_tokens: int,
+        temperature: float = 1.0,
+        top_k: int | None = None,
+        repetition_penalty: float = 1.0,
+        repetition_window: int | None = None,
+    ):
         self.add_message("user", user_text)
         self.add_message("assistant", "")
         assistant_message = self.messages[-1]
         prompt = self.build_prompt()
-        reply = self.model.generate(prompt, max_new_tokens=max_new_tokens, temperature=temperature)
+        reply = self.model.generate(
+            prompt,
+            max_new_tokens=max_new_tokens,
+            temperature=temperature,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
+        )
         assistant_message.content = reply.strip()
         return assistant_message.content
 
-    def stream_reply(self, user_text: str, max_new_tokens: int, temperature: float = 1.0):
+    def stream_reply(
+        self,
+        user_text: str,
+        max_new_tokens: int,
+        temperature: float = 1.0,
+        top_k: int | None = None,
+        repetition_penalty: float = 1.0,
+        repetition_window: int | None = None,
+    ):
         self.add_message("user", user_text)
         self.add_message("assistant", "")
         assistant_message = self.messages[-1]
@@ -73,6 +96,9 @@ class ChatApplication:
             prompt,
             max_new_tokens=max_new_tokens,
             temperature=temperature,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
         ):
             assistant_message.content += piece
             yield piece
@@ -114,17 +140,36 @@ class StoryApplication:
     def build_prompt(self, prompt_text: str):
         return build_story_prompt(prompt_text, self.prompt_template)
 
-    def generate_reply(self, user_text: str, max_new_tokens: int, temperature: float = 1.0):
+    def generate_reply(
+        self,
+        user_text: str,
+        max_new_tokens: int,
+        temperature: float = 1.0,
+        top_k: int | None = None,
+        repetition_penalty: float = 1.0,
+        repetition_window: int | None = None,
+    ):
         self.add_message("prompt", user_text)
         reply = self.model.generate(
             self.build_prompt(user_text),
             max_new_tokens=max_new_tokens,
             temperature=temperature,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
         )
         self.add_message("continuation", reply.strip())
         return reply.strip()
 
-    def stream_reply(self, user_text: str, max_new_tokens: int, temperature: float = 1.0):
+    def stream_reply(
+        self,
+        user_text: str,
+        max_new_tokens: int,
+        temperature: float = 1.0,
+        top_k: int | None = None,
+        repetition_penalty: float = 1.0,
+        repetition_window: int | None = None,
+    ):
         self.add_message("prompt", user_text)
         self.add_message("continuation", "")
         continuation = self.messages[-1]
@@ -132,6 +177,9 @@ class StoryApplication:
             self.build_prompt(user_text),
             max_new_tokens=max_new_tokens,
             temperature=temperature,
+            top_k=top_k,
+            repetition_penalty=repetition_penalty,
+            repetition_window=repetition_window,
         ):
             continuation.content += piece
             yield piece
