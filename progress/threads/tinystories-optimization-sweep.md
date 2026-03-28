@@ -179,3 +179,10 @@
 - 当前主线先不再继续放大模型或 context
 - A14 经过温度复核后仍保留为最佳 SentencePiece carry-forward 候选
 - 本轮 20 个 attempt 已完成；下一轮最值得做的是 tokenizer 路线重开，而不是继续在当前配置上硬拉步数
+
+## Next Phase
+
+- 继续使用 `TinyStories` 全量数据集
+- 优先尝试 `SentencePiece + byte_fallback`
+- 同时放开 `vocab_size` 和 `max_sentence_length`
+- 新一轮实验目标是先消掉 `⁇ / <unk>`，再看 sample 是否真正提升

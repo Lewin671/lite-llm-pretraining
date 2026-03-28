@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 完成 `TinyStories` 20 轮优化 sweep，并收敛当前最优主线
-- Latest Progress: 已完成 A20；A14 路线拉长到 `600 step` 后 `val_loss` 明显下降到 `3.9462`，但严格校验仍是 `0/3`
+- Current Task: 基于 `TinyStories` 全量数据集继续做 tokenizer 主线优化
+- Latest Progress: 20 轮 sweep 已完成；结论已经收敛到 tokenizer / 解码质量是当前主瓶颈
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 当前 20 轮 sweep 已完成；下一轮应优先回到 tokenizer 方案，而不是继续单纯拉长当前 `SentencePiece 2048` 路线
+- Next Step: 先补齐 SentencePiece tokenizer 控制项，再重开 `byte_fallback / larger vocab / longer sentence` 这条优化线
 
 ## How To Read
 

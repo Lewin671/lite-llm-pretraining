@@ -79,6 +79,8 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             model_type=prepare_config.get("model_type", "bpe"),
             byte_fallback=prepare_config.get("byte_fallback", False),
             input_sentence_size=prepare_config.get("input_sentence_size", 200000),
+            max_sentence_length=prepare_config.get("max_sentence_length", 16384),
+            shuffle_input_sentence=prepare_config.get("shuffle_input_sentence", True),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")

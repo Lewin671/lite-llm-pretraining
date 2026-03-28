@@ -50,6 +50,17 @@ def parse_args():
         default=200000,
         help="Optional number of sampled sentences used for tokenizer training.",
     )
+    parser.add_argument(
+        "--max_sentence_length",
+        type=int,
+        default=16384,
+        help="Maximum sentence length accepted during tokenizer training.",
+    )
+    parser.add_argument(
+        "--disable_shuffle_input_sentence",
+        action="store_true",
+        help="Disable sentence shuffling when input_sentence_size is set.",
+    )
     return parser.parse_args()
 
 
@@ -67,6 +78,8 @@ def train_sentencepiece(
     model_type: str,
     byte_fallback: bool = False,
     input_sentence_size: int = 200000,
+    max_sentence_length: int = 16384,
+    shuffle_input_sentence: bool = True,
 ):
     model_prefix = out_dir / "tokenizer"
     spm.SentencePieceTrainer.train(
@@ -82,7 +95,8 @@ def train_sentencepiece(
         eos_id=1,
         byte_fallback=byte_fallback,
         input_sentence_size=input_sentence_size,
-        shuffle_input_sentence=input_sentence_size > 0,
+        max_sentence_length=max_sentence_length,
+        shuffle_input_sentence=shuffle_input_sentence and input_sentence_size > 0,
     )
     return model_prefix.with_suffix(".model"), model_prefix.with_suffix(".vocab")
 
@@ -121,6 +135,8 @@ def prepare_dataset(
     model_type: str = "bpe",
     byte_fallback: bool = False,
     input_sentence_size: int = 200000,
+    max_sentence_length: int = 16384,
+    shuffle_input_sentence: bool = True,
 ):
     out_dir.mkdir(parents=True, exist_ok=True)
     ensure_clean_byte_data(byte_data_dir)
@@ -134,6 +150,8 @@ def prepare_dataset(
         model_type=model_type,
         byte_fallback=byte_fallback,
         input_sentence_size=input_sentence_size,
+        max_sentence_length=max_sentence_length,
+        shuffle_input_sentence=shuffle_input_sentence,
     )
     processor = spm.SentencePieceProcessor(model_file=str(model_path))
 
@@ -156,6 +174,8 @@ def prepare_dataset(
         "model_type": model_type,
         "byte_fallback": byte_fallback,
         "input_sentence_size": input_sentence_size,
+        "max_sentence_length": max_sentence_length,
+        "shuffle_input_sentence": shuffle_input_sentence,
     }
     save_json(out_dir / "meta.json", meta)
     return meta
@@ -170,6 +190,8 @@ def main():
         model_type=args.model_type,
         byte_fallback=args.byte_fallback,
         input_sentence_size=args.input_sentence_size,
+        max_sentence_length=args.max_sentence_length,
+        shuffle_input_sentence=not args.disable_shuffle_input_sentence,
     )
     print(f"saved dataset to {args.out_dir}")
     print(f"vocab size: {meta['vocab_size']}")
