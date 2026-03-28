@@ -13,6 +13,7 @@ from lite_llm_pretraining.common import (
     get_batch,
     learning_rate_at,
     load_json,
+    load_loss_mask,
     load_memmap,
     loss_fn,
     perplexity,
@@ -78,6 +79,8 @@ def train_from_config(config_path: Path):
     token_dtype = token_dtype_from_meta(meta)
     train_data = load_memmap(data_dir, "train", token_dtype=token_dtype)
     val_data = load_memmap(data_dir, "val", token_dtype=token_dtype)
+    train_loss_mask = load_loss_mask(data_dir, "train", meta)
+    val_loss_mask = load_loss_mask(data_dir, "val", meta)
     loss_and_grad_fn = nn.value_and_grad(model, loss_fn)
 
     batch_size = train_config["batch_size"]
@@ -101,8 +104,13 @@ def train_from_config(config_path: Path):
         )
         optimizer.learning_rate = current_lr
 
-        x, y = get_batch(train_data, batch_size, context_size)
-        train_loss, grads = loss_and_grad_fn(model, x, y)
+        x, y, loss_mask = get_batch(
+            train_data,
+            batch_size,
+            context_size,
+            loss_mask_data=train_loss_mask,
+        )
+        train_loss, grads = loss_and_grad_fn(model, x, y, loss_mask)
         optimizer.update(model, grads)
         mx.eval(model.parameters(), optimizer.state, train_loss)
         train_loss_value = train_loss.item()
@@ -121,6 +129,7 @@ def train_from_config(config_path: Path):
                 batch_size,
                 context_size,
                 train_config["eval_batches"],
+                loss_mask_data=val_loss_mask,
             )
             metric = {
                 "step": step,

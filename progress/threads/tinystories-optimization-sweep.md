@@ -208,6 +208,7 @@
 - 当前新增问题：现有采样只有 temperature，没有 top-k / top-p / repetition penalty 之类约束，导致无法把“模型问题”和“解码问题”彻底分开
 - 解码跟进：已补齐 `greedy / top-k / repetition penalty`，并在当前 plain-story / prompted best 上做了首轮复核
 - 解码结论：这些约束能明显压低重复和发散，但还没有把任一路线从 `2/3` 推到 `3/3`
+- 当前新增问题：prompted continuation 的退化不只是解码；在 `context256` 上继续训练后会失稳，下一轮要优先查学习率稳态和词表容量
 
 ### A21
 
@@ -306,3 +307,30 @@
 - Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
 - Result: `best_val_loss=3.6004`；严格相关性 `0/3`
 - Conclusion: prompted continuation 的问题不只是温度太低；这条线在更长训练后仍然容易失稳，下一轮要优先查清为什么 `300 step` 能到 `2/3`，而 `600 step` 又掉回 `0/3`
+
+### A35
+
+- Change: 继续沿着 `A34` 的 prompted continuation `context256` 路线，只加入 cosine decay，`min_learning_rate=2.5e-5`，`lr_decay_steps=600`
+- Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
+- Result: `best_val_loss=3.6681`；严格相关性 `0/3`
+- Conclusion: 单独加入 decay 只能继续压低 loss，无法修复 prompt 跟踪漂移；下一轮优先收紧相关性评测，并测试更大词表是否能保住实体与关键物体
+
+### Current Recheck
+
+- Change: 用当前更严格的实体/内容词/前段命中规则重新复核 committed 基线
+- Validation: `validate_checkpoint --seed 123 --temperature 0.5`
+- Result: `A30` 和 `A31` 都回落到 `0/3`
+- Conclusion: 之前的部分 `2/3` 结果属于旧口径下的假优解；后续实验必须优先看 prompt 中的人名和关键物体是否真的保留下来
+
+### Next Hypothesis
+
+- Change: 并行推进两条更高价值路线
+- Validation: `A36` 先测 `unigram8192 + byte_fallback + prompted continuation + context256`
+- Validation: 如果 `A36` 仍然忽略 prompt，就改训练目标为 `Continuation-only loss`
+- Conclusion: 继续只调温度、步数或 decay 的边际价值已经很低，后续要把优化重点从“更会写故事”切回“更会按 prompt 续写”
+
+### Continuation-Only Loss
+
+- Change: 给 `prompt_continuation` 数据集增加对齐的 `train_loss_mask.bin` / `val_loss_mask.bin`，并让训练与验证只对 continuation 段计 loss
+- Validation: `compileall` 通过；临时 TinyStories 风格小样本上已验证 mask 长度与 token 长度一致，`train_from_config` 的两步 smoke 训练可正常跑通
+- Conclusion: 现在已经具备一条新的训练目标路线，可以直接测试“减少 prompt 重建负担，是否能提升 prompt 跟踪”

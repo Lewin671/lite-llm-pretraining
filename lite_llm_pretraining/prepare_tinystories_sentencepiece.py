@@ -157,6 +157,32 @@ def format_story(story: str, story_format: str, prompt_sentence_count: int):
     return f"Prompt: {prompt}\nContinuation: {continuation}"
 
 
+def encode_story_with_optional_loss_mask(
+    processor: spm.SentencePieceProcessor,
+    story: str,
+    story_format: str,
+    prompt_sentence_count: int,
+):
+    eos_id = processor.eos_id()
+    formatted = format_story(story, story_format, prompt_sentence_count)
+    token_ids = processor.encode(formatted, out_type=int)
+    loss_mask = None
+
+    if story_format == "prompt_continuation":
+        prompt, _ = split_prompt_continuation(story, prompt_sentence_count)
+        prompt_prefix = f"Prompt: {prompt}\nContinuation:"
+        prompt_prefix_ids = processor.encode(prompt_prefix, out_type=int)
+        prompt_token_count = min(len(prompt_prefix_ids), len(token_ids))
+        loss_mask = [0] * prompt_token_count + [1] * (len(token_ids) - prompt_token_count)
+
+    if eos_id >= 0:
+        token_ids.append(eos_id)
+        if loss_mask is not None:
+            loss_mask.append(1)
+
+    return token_ids, loss_mask
+
+
 def write_formatted_training_corpus(
     source_path: Path,
     out_path: Path,
@@ -176,18 +202,37 @@ def encode_split(
     processor: spm.SentencePieceProcessor,
     story_format: str,
     prompt_sentence_count: int,
+    loss_mask_out_path: Path | None = None,
 ):
-    eos_id = processor.eos_id()
     total_tokens = 0
+    wrote_loss_mask = False
     with out_path.open("wb") as handle:
-        for story in iter_stories(text_path):
-            formatted = format_story(story, story_format, prompt_sentence_count)
-            token_ids = processor.encode(formatted, out_type=int)
-            if eos_id >= 0:
-                token_ids.append(eos_id)
-            np.asarray(token_ids, dtype=np.uint16).tofile(handle)
-            total_tokens += len(token_ids)
-    return total_tokens
+        if loss_mask_out_path is None:
+            for story in iter_stories(text_path):
+                token_ids, _ = encode_story_with_optional_loss_mask(
+                    processor,
+                    story,
+                    story_format,
+                    prompt_sentence_count,
+                )
+                np.asarray(token_ids, dtype=np.uint16).tofile(handle)
+                total_tokens += len(token_ids)
+            return total_tokens, wrote_loss_mask
+
+        with loss_mask_out_path.open("wb") as loss_mask_handle:
+            for story in iter_stories(text_path):
+                token_ids, loss_mask = encode_story_with_optional_loss_mask(
+                    processor,
+                    story,
+                    story_format,
+                    prompt_sentence_count,
+                )
+                np.asarray(token_ids, dtype=np.uint16).tofile(handle)
+                if loss_mask is not None:
+                    np.asarray(loss_mask, dtype=np.uint8).tofile(loss_mask_handle)
+                    wrote_loss_mask = True
+                total_tokens += len(token_ids)
+    return total_tokens, wrote_loss_mask
 
 
 def prepare_dataset(
@@ -236,19 +281,22 @@ def prepare_dataset(
         formatted_train_path.unlink(missing_ok=True)
     processor = spm.SentencePieceProcessor(model_file=str(model_path))
 
-    train_tokens = encode_split(
+    uses_loss_mask = story_format == "prompt_continuation"
+    train_tokens, train_has_loss_mask = encode_split(
         train_text_path,
         out_dir / "train.bin",
         processor,
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
+        loss_mask_out_path=out_dir / "train_loss_mask.bin" if uses_loss_mask else None,
     )
-    val_tokens = encode_split(
+    val_tokens, val_has_loss_mask = encode_split(
         val_text_path,
         out_dir / "val.bin",
         processor,
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
+        loss_mask_out_path=out_dir / "val_loss_mask.bin" if uses_loss_mask else None,
     )
 
     meta = {
@@ -271,6 +319,11 @@ def prepare_dataset(
         "shuffle_input_sentence": shuffle_input_sentence,
         "story_format": story_format,
         "prompt_sentence_count": prompt_sentence_count,
+        "has_loss_mask": train_has_loss_mask and val_has_loss_mask,
+        "loss_mask_dtype": "uint8" if train_has_loss_mask and val_has_loss_mask else None,
+        "loss_mask_mode": (
+            "continuation_only" if train_has_loss_mask and val_has_loss_mask else None
+        ),
     }
     save_json(out_dir / "meta.json", meta)
     return meta

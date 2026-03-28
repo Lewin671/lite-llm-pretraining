@@ -90,7 +90,18 @@ def load_memmap(data_dir: Path, split: str, token_dtype: str = DEFAULT_TOKEN_DTY
     return np.memmap(data_dir / f"{split}.bin", dtype=np.dtype(token_dtype), mode="r")
 
 
-def get_batch(data, batch_size: int, context_size: int):
+def load_loss_mask(data_dir: Path, split: str, meta=None):
+    meta = meta or {}
+    if not meta.get("has_loss_mask"):
+        return None
+    mask_path = data_dir / f"{split}_loss_mask.bin"
+    if not mask_path.exists():
+        return None
+    mask_dtype = meta.get("loss_mask_dtype", "uint8")
+    return np.memmap(mask_path, dtype=np.dtype(mask_dtype), mode="r")
+
+
+def get_batch(data, batch_size: int, context_size: int, loss_mask_data=None):
     max_start = len(data) - context_size - 1
     if max_start <= 0:
         raise ValueError(
@@ -101,20 +112,45 @@ def get_batch(data, batch_size: int, context_size: int):
     y = np.stack([data[idx + 1 : idx + context_size + 1] for idx in starts]).astype(
         np.int32
     )
-    return mx.array(x), mx.array(y)
+    loss_mask = None
+    if loss_mask_data is not None:
+        loss_mask = np.stack(
+            [
+                loss_mask_data[idx + 1 : idx + context_size + 1]
+                for idx in starts
+            ]
+        ).astype(np.float32)
+    return mx.array(x), mx.array(y), mx.array(loss_mask) if loss_mask is not None else None
 
 
-def loss_fn(model: TransformerLM, x, y):
+def loss_fn(model: TransformerLM, x, y, loss_mask=None):
     logits = model(x)
-    return nn.losses.cross_entropy(logits, y, reduction="mean")
+    if loss_mask is None:
+        return nn.losses.cross_entropy(logits, y, reduction="mean")
+    token_losses = nn.losses.cross_entropy(logits, y, reduction="none")
+    weighted_loss = token_losses * loss_mask
+    normalizer = mx.maximum(loss_mask.sum(), mx.array(1.0, dtype=loss_mask.dtype))
+    return weighted_loss.sum() / normalizer
 
 
-def estimate_loss(model: TransformerLM, data, batch_size: int, context_size: int, steps: int):
+def estimate_loss(
+    model: TransformerLM,
+    data,
+    batch_size: int,
+    context_size: int,
+    steps: int,
+    loss_mask_data=None,
+):
     model.eval()
     losses = []
     for _ in range(steps):
-        x, y = get_batch(data, batch_size, context_size)
-        loss = loss_fn(model, x, y)
+        x, y, loss_mask = get_batch(
+            data,
+            batch_size,
+            context_size,
+            loss_mask_data=loss_mask_data,
+        )
+        loss = loss_fn(model, x, y, loss_mask)
         mx.eval(loss)
         losses.append(loss.item())
     model.train()

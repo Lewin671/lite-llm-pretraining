@@ -7,6 +7,7 @@ from lite_llm_pretraining.common import (
     estimate_loss,
     load_checkpoint,
     load_json,
+    load_loss_mask,
     load_memmap,
     perplexity,
     set_seed,
@@ -78,6 +79,51 @@ PROMPT_STOPWORDS = COMMON_WORDS | {
     "shiny",
     "tree",
 }
+
+
+def prompt_feature_metrics(prompt: str, text: str):
+    prompt_names = sorted(
+        {
+            word.lower()
+            for word in re.findall(r"\b[A-Z][a-z']+\b", prompt)
+            if word.lower() not in PROMPT_STOPWORDS
+        }
+    )
+    prompt_words = [
+        word
+        for word in re.findall(r"[A-Za-z']+", prompt.lower())
+        if len(word) >= 3 and word not in PROMPT_STOPWORDS
+    ]
+    prompt_content_words = sorted(
+        {word for word in prompt_words if word not in set(prompt_names)}
+    )
+    prompt_keywords = sorted(set(prompt_names) | set(prompt_content_words))
+
+    output_words = re.findall(r"[A-Za-z']+", text.lower())
+    output_word_set = set(output_words)
+    leading_output_words = set(output_words[:40])
+
+    name_hit_count = sum(word in output_word_set for word in prompt_names)
+    content_hit_count = sum(word in output_word_set for word in prompt_content_words)
+    keyword_hit_count = sum(word in output_word_set for word in prompt_keywords)
+    leading_keyword_hit_count = sum(word in leading_output_words for word in prompt_keywords)
+
+    return {
+        "prompt_name_count": len(prompt_names),
+        "prompt_name_hit_count": name_hit_count,
+        "prompt_name_hit_ratio": round(name_hit_count / max(1, len(prompt_names)), 4),
+        "prompt_content_count": len(prompt_content_words),
+        "prompt_content_hit_count": content_hit_count,
+        "prompt_content_hit_ratio": round(
+            content_hit_count / max(1, len(prompt_content_words)), 4
+        ),
+        "prompt_keyword_count": len(prompt_keywords),
+        "prompt_keyword_hit_count": keyword_hit_count,
+        "prompt_keyword_hit_ratio": round(
+            keyword_hit_count / max(1, len(prompt_keywords)), 4
+        ),
+        "prompt_leading_keyword_hit_count": leading_keyword_hit_count,
+    }
 
 
 def parse_args():
@@ -169,19 +215,7 @@ def max_run_length(text: str):
 
 
 def prompt_keyword_metrics(prompt: str, text: str):
-    prompt_words = [
-        word
-        for word in re.findall(r"[A-Za-z']+", prompt.lower())
-        if len(word) >= 3 and word not in PROMPT_STOPWORDS
-    ]
-    output_words = set(re.findall(r"[A-Za-z']+", text.lower()))
-    unique_prompt_words = sorted(set(prompt_words))
-    hit_count = sum(word in output_words for word in unique_prompt_words)
-    return {
-        "prompt_keyword_count": len(unique_prompt_words),
-        "prompt_keyword_hit_count": hit_count,
-        "prompt_keyword_hit_ratio": round(hit_count / max(1, len(unique_prompt_words)), 4),
-    }
+    return prompt_feature_metrics(prompt, text)
 
 
 def sample_metrics(prompt: str, text: str):
@@ -218,7 +252,15 @@ def sample_metrics(prompt: str, text: str):
         "limited_repetition": metrics["repeated_trigram_ratio"] <= 0.35,
         "no_long_char_runs": metrics["max_char_run"] <= 8,
         "no_unknown_markers": metrics["unknown_marker_count"] == 0,
-        "prompt_relevance": metrics["prompt_keyword_hit_count"] >= 1,
+        "prompt_name_relevance": (
+            metrics["prompt_name_count"] == 0 or metrics["prompt_name_hit_count"] >= 1
+        ),
+        "prompt_content_relevance": (
+            metrics["prompt_content_count"] == 0
+            or metrics["prompt_content_hit_count"] >= 1
+        ),
+        "prompt_early_relevance": metrics["prompt_leading_keyword_hit_count"] >= 1,
+        "prompt_relevance": metrics["prompt_keyword_hit_ratio"] >= 0.5,
     }
     return metrics, checks
 
@@ -288,12 +330,14 @@ def validate_checkpoint(
         model, model_config, state = load_checkpoint(checkpoint_dir)
         token_dtype = token_dtype_from_meta(meta)
         val_data = load_memmap(data_dir, "val", token_dtype=token_dtype)
+        val_loss_mask = load_loss_mask(data_dir, "val", meta)
         val_loss = estimate_loss(
             model,
             val_data,
             batch_size=1,
             context_size=model_config["context_size"],
             steps=eval_batches,
+            loss_mask_data=val_loss_mask,
         )
         report["validation"] = {
             "eval_batches": eval_batches,

@@ -1,0 +1,78 @@
+{
+  "attempt_id": "A35",
+  "notes": "test cosine-style decay for prompted continuation stability on context256 route",
+  "base_config": "configs/tinystories-spm-prompted-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-8gfxn8ma-a35.json",
+  "run_name": "tinystories-sweep-a35-pc1-u4096bf-c256-600-decay",
+  "data_dir": "data/tinystories-spm-u4096-bf-pc1",
+  "out_dir": "checkpoints/tinystories-sweep-a35-pc1-u4096bf-c256-600-decay",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a35-pc1-u4096bf-c256-600-decay/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "story_format": "prompt_continuation",
+    "prompt_sentence_count": 1
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 600,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 150,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5,
+    "min_learning_rate": 2.5e-05,
+    "lr_decay_steps": 600
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 3.719137,
+    "val_ppl": 41.228781,
+    "checkpoint_step": 600,
+    "best_val_loss": 3.66810622215271
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "She loved to play with his mom. One day, a big, Lily and they were very much. One day, they were very happy. The floor and saw a little bear was happy. They would be careful. Prompt: They liked to play in the ground. One day, Lily. They saw a big, they had a big, they had a big dog. They all day, Lily had a big dog. They were very happy. They liked to play together. They were playing together. They had fun. They had a big hug. They were very happy. They saw a big dog. They were playing in the pa",
+  "sample_state": {
+    "step": 600,
+    "best_val_loss": 3.66810622215271
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a35-pc1-u4096bf-c256-600-decay",
+    "out_dir": "checkpoints/tinystories-sweep-a35-pc1-u4096bf-c256-600-decay",
+    "best_val_loss": 3.66810622215271,
+    "last_val_loss": 3.66810622215271,
+    "final_step": 600,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a35-pc1-u4096bf-c256-600-decay/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a35-pc1-u4096bf-c256-600-decay/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a35-pc1-u4096bf-c256-600-decay/metrics.jsonl"
+  }
+}

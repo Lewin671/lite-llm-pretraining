@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 基于 `TinyStories` 全量数据集继续做高标准 tiny LLM 优化，优先解决续写稳定性而不是只压低 loss
-- Latest Progress: 已补齐 `greedy / top-k / repetition penalty` 解码链路，并在 plain-story / prompted 两条 best 上复核；重复和乱飘明显下降，但上限仍停在 `2/3`
-- Issues: 当前最优 checkpoint 仍停在 `2/3`；prompted continuation 对训练长度和采样策略都高度敏感，解码修复还不足以跨过当前上限
-- Next Step: 基于新解码控制继续做 prompted continuation 稳态 sweep，优先验证更稳的训练配置能否把 `2/3` 推到 `3/3`
+- Current Task: 基于 `TinyStories` 全量数据集继续做高标准 tiny LLM 优化，同时收紧 prompt 相关性评测口径
+- Latest Progress: 已用收紧后的相关性口径复核旧基线，`A30` 和 `A31` 在固定 seed 下都掉到 `0/3`；`A35` 也确认仍是 `0/3`。与此同时，`Continuation-only loss` 已接进 prompted 数据准备、训练和验证，并通过临时数据 smoke
+- Issues: 现有 prompted continuation 路线即使能继续压低 `val_loss`，仍然会忽略 prompt 中的人名和关键物体；当前训练目标与“根据 prompt 续写”还不够一致
+- Next Step: 继续等 `A36` 的 `u8192 + prompted continuation` 基线结果；如果仍然忽略 prompt，就直接用新接入的 `Continuation-only loss` 开下一轮 sweep
 
 ## How To Read
 
