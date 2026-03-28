@@ -82,3 +82,61 @@
   - 更窄的训练子任务范围
   - 更强的 answer-only / prompt weighting 设计
   - 更贴近 `Q/A` 的 sample 与 checkpoint 选择策略
+  - 单独补一套 `Dolly simple QA` 评测，避免只用 `SQuAD` 这种偏抽取式口径
+
+## Simple QA Optimization
+
+- 目标收紧成“简单问题能稳定答出来”，不再只看 `SQuAD`
+- 数据集分析：
+  - `Dolly 15k` 中真正接近简单问答的主要是 `open_qa / closed_qa / information_extraction`
+  - 这些类别里，满足“单行短答案”的样本约 `2181` 条
+- 新增：
+  - [prepare_dolly_qa_eval.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/prepare_dolly_qa_eval.py)
+    - 从 `Dolly` 原始或预处理 JSONL 生成本地 `simple QA dev/holdout` suite
+  - [prepare_dolly_qa.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/prepare_dolly_qa.py)
+    - 新增 `min/max_answer_words`、`max_question_words`、`require_single_line_answer`
+  - [common.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/common.py)
+    - 新增 `loss_window_start_positions`
+  - [train.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/train.py)
+    - 新增 `batch_sampling_mode=loss_window`
+    - 新增 `init_checkpoint_dir`
+- 新配置：
+  - [dolly-qa-simple-spm-screen.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-qa-simple-spm-screen.json)
+  - [dolly-qa-simple-spm-c128-screen.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-qa-simple-spm-c128-screen.json)
+  - [dolly-qa-simple-spm-c128-compact.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-qa-simple-spm-c128-compact.json)
+  - [dolly-qa-simple-ft-screen.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-qa-simple-ft-screen.json)
+
+## Optimization Results
+
+- `simple QA suite`
+  - [dolly_qa_simple_dev_v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/dolly_qa_simple_dev_v1.json)
+  - [dolly_qa_simple_holdout_v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/dolly_qa_simple_holdout_v1.json)
+  - `32 / 32`，答案平均约 `5-6` 个词
+- `17M, context=256, from scratch`
+  - best `dev token_f1=0.0283`
+  - `holdout token_f1=0.0117`
+  - 问题：明显过拟合，sample 退化成重复模板
+- `17M, context=128, loss_window`
+  - best `dev token_f1=0.0141`
+  - `holdout token_f1=0.0057`
+  - 结论：修采样是对的，但大模型仍然不够适合这份小数据
+- `4.2M compact, context=128, loss_window`
+  - best `dev token_f1=0.0297`，出现在 `step 250`
+  - `holdout token_f1=0.0126`
+  - 当前最优报告：
+    - [dolly-qa-simple-compact-dev-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/dolly-qa-simple-compact-dev-v1.json)
+    - [dolly-qa-simple-compact-holdout-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/dolly-qa-simple-compact-holdout-v1.json)
+- `17M from full Dolly Q/A checkpoint`
+  - best `dev token_f1=0.0148`
+  - 没有超过 compact 从零训练
+
+## Current Conclusion
+
+- 当前最好的路不是“大模型 + 更长步数”，而是：
+  - 更窄的简单问答子集
+  - 只采样真正带监督的窗口
+  - 更小、更容易学会短答案的模型
+- 但当前 best 仍然达不到“简单问题回答好”：
+  - `strict_pass_rate=0.0`
+  - `exact_match=0.0`
+  - 手工简单题采样仍会生成伪词或重复短语

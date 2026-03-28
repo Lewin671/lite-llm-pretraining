@@ -50,6 +50,10 @@ def parse_args():
         default=None,
         help="Optional JSON array of Dolly categories to keep.",
     )
+    parser.add_argument("--min_answer_words", type=int, default=0)
+    parser.add_argument("--max_answer_words", type=int, default=None)
+    parser.add_argument("--max_question_words", type=int, default=None)
+    parser.add_argument("--require_single_line_answer", action="store_true")
     return parser.parse_args()
 
 
@@ -92,6 +96,52 @@ def trim_context(context: str, context_word_limit: int):
         return context.strip()
     words = context.split()
     return " ".join(words[:context_word_limit]).strip()
+
+
+def answer_word_count(answer: str):
+    return len(answer.replace("\n", " ").split())
+
+
+def example_matches_filters(
+    example: dict,
+    min_answer_words: int = 0,
+    max_answer_words: int | None = None,
+    max_question_words: int | None = None,
+    require_single_line_answer: bool = False,
+):
+    answer = example["response"].strip()
+    answer_words = answer_word_count(answer)
+    if answer_words < max(0, min_answer_words):
+        return False
+    if max_answer_words is not None and answer_words > max_answer_words:
+        return False
+    if max_question_words is not None:
+        question_words = len(example["instruction"].strip().split())
+        if question_words > max_question_words:
+            return False
+    if require_single_line_answer and "\n" in answer:
+        return False
+    return True
+
+
+def filter_examples(
+    examples,
+    min_answer_words: int = 0,
+    max_answer_words: int | None = None,
+    max_question_words: int | None = None,
+    require_single_line_answer: bool = False,
+):
+    return [
+        example
+        for example in examples
+        if example_matches_filters(
+            example,
+            min_answer_words=min_answer_words,
+            max_answer_words=max_answer_words,
+            max_question_words=max_question_words,
+            require_single_line_answer=require_single_line_answer,
+        )
+    ]
 
 
 def format_example(
@@ -266,11 +316,24 @@ def prepare_dataset(
     continuation_head_loss_weight: float = 1.0,
     context_word_limit: int = 96,
     allowed_categories: list[str] | None = None,
+    min_answer_words: int = 0,
+    max_answer_words: int | None = None,
+    max_question_words: int | None = None,
+    require_single_line_answer: bool = False,
 ):
     out_dir.mkdir(parents=True, exist_ok=True)
     source_path = out_dir / "databricks-dolly-15k.jsonl"
     download_if_missing(source_url, source_path)
     examples = load_examples(source_path, allowed_categories=allowed_categories)
+    examples = filter_examples(
+        examples,
+        min_answer_words=min_answer_words,
+        max_answer_words=max_answer_words,
+        max_question_words=max_question_words,
+        require_single_line_answer=require_single_line_answer,
+    )
+    if len(examples) < 2:
+        raise ValueError("filtered Dolly dataset must contain at least 2 examples")
     rng = np.random.default_rng(split_seed)
     indices = np.arange(len(examples))
     rng.shuffle(indices)
@@ -373,6 +436,10 @@ def prepare_dataset(
         "val_examples": len(val_examples),
         "category_counts": category_counts,
         "allowed_categories": allowed_categories,
+        "min_answer_words": min_answer_words,
+        "max_answer_words": max_answer_words,
+        "max_question_words": max_question_words,
+        "require_single_line_answer": require_single_line_answer,
         "question_label": question_label,
         "context_label": context_label,
         "answer_label": answer_label,
@@ -437,6 +504,10 @@ def main():
         continuation_head_loss_weight=args.continuation_head_loss_weight,
         context_word_limit=args.context_word_limit,
         allowed_categories=allowed_categories,
+        min_answer_words=args.min_answer_words,
+        max_answer_words=args.max_answer_words,
+        max_question_words=args.max_question_words,
+        require_single_line_answer=args.require_single_line_answer,
     )
     print(f"saved dataset to {args.out_dir}")
     print(f"train examples: {meta['train_examples']}, val examples: {meta['val_examples']}")

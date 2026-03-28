@@ -138,6 +138,12 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             ),
             context_word_limit=prepare_config.get("context_word_limit", 96),
             allowed_categories=prepare_config.get("allowed_categories"),
+            min_answer_words=prepare_config.get("min_answer_words", 0),
+            max_answer_words=prepare_config.get("max_answer_words"),
+            max_question_words=prepare_config.get("max_question_words"),
+            require_single_line_answer=prepare_config.get(
+                "require_single_line_answer", False
+            ),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")

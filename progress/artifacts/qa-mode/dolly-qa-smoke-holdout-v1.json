@@ -1,0 +1,812 @@
+{
+  "checkpoint_dir": "checkpoints/dolly-qa-spm-smoke/best_suite",
+  "suite_path": "prompts/squad_qa_holdout_v1.json",
+  "suite_name": "squad_qa_holdout_v1",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "qa",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer the question using the context when it is provided.",
+    "prompt_template": "Question: {question}\n{context_block}Answer:"
+  },
+  "samples": [
+    {
+      "id": "5710e8c8a58dae1900cd6b2a",
+      "tags": [
+        "huguenot"
+      ],
+      "question": "French troops put down the Camisard uprisings between what years?",
+      "context": "the Camisards who were Huguenots rioted against the Catholic Church in the region, burning churches and killing clergy. It took French troops years to hunt down and destroy all the bands of Camisards, between 1702 and 1709.",
+      "answers": [
+        "1702 and 1709"
+      ],
+      "model_prompt": "Question: French troops put down the Camisard uprisings between what years?\nContext: the Camisards who were Huguenots rioted against the Catholic Church in the region, burning churches and killing clergy. It took French troops years to hunt down and destroy all the bands of Camisards, between 1702 and 1709.\nAnswer:",
+      "output": ",s thes,,,,, the a,,. is the and,ss,,,,,,.,.s and of,,, thes of,,,,, ofs tos,",
+      "predicted_answer": ",s thes,,,,, the a,,. is the and,ss,,,,,,.,.s and of,,, thes of,,,,, ofs tos,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1333,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "571c8198dd7acb1400e4c0ce",
+      "tags": [
+        "oxygen"
+      ],
+      "question": "Of what were materials that left little residue thought to contain?",
+      "context": "that leave little residue, such as wood or coal, were thought to be made mostly of phlogiston; whereas non-combustible substances that corrode, such as iron, contained very little. Air did not play a role in phlogiston theory, nor were any initial quantitative experiments conducted to test the idea; instead, it was based on observations of what happens when something burns, that most common objects appear to become lighter",
+      "answers": [
+        "phlogiston"
+      ],
+      "model_prompt": "Question: Of what were materials that left little residue thought to contain?\nContext: that leave little residue, such as wood or coal, were thought to be made mostly of phlogiston; whereas non-combustible substances that corrode, such as iron, contained very little. Air did not play a role in phlogiston theory, nor were any initial quantitative experiments conducted to test the idea; instead, it was based on observations of what happens when something burns, that most common objects appear to become lighter\nAnswer:",
+      "output": ", to,, and,,,,,,,, the,, a,s,,, is of,,,, of the,,.., is,., in and, of,,,, and",
+      "predicted_answer": ", to,, and,,,,,,,, the,, a,s,,, is of,,,, of the,,.., is,., in and, of,,,, and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572fffb1b2c2fd14005686fd",
+      "tags": [
+        "islamism"
+      ],
+      "question": "What did Iqbal's Allahabad address inspire?",
+      "context": "session in Lahore in 1932. In his Allahabad Address on 29 December 1930, Iqbal outlined a vision of an independent state for Muslim-majority provinces in northwestern India. This address later inspired the Pakistan movement.",
+      "answers": [
+        "Pakistan movement",
+        "the Pakistan movement"
+      ],
+      "model_prompt": "Question: What did Iqbal's Allahabad address inspire?\nContext: session in Lahore in 1932. In his Allahabad Address on 29 December 1930, Iqbal outlined a vision of an independent state for Muslim-majority provinces in northwestern India. This address later inspired the Pakistan movement.\nAnswer:",
+      "output": "ing,,.,,,,s,,,,\n,,, a, and,,, and,, and,, and,,,,,,s,.,,,,s,,,,",
+      "predicted_answer": "ing,,.,,,,s,,,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "57113c6da58dae1900cd6d32",
+      "tags": [
+        "steam_engine"
+      ],
+      "question": "In what century did the history of the steam engine begin?",
+      "context": "The history of the steam engine stretches back as far as the first century AD; the first recorded rudimentary steam engine being the aeolipile described by Greek mathematician Hero of Alexandria. In the following centuries, the few steam-powered \"engines\" known were, like",
+      "answers": [
+        "first",
+        "first century AD"
+      ],
+      "model_prompt": "Question: In what century did the history of the steam engine begin?\nContext: The history of the steam engine stretches back as far as the first century AD; the first recorded rudimentary steam engine being the aeolipile described by Greek mathematician Hero of Alexandria. In the following centuries, the few steam-powered \"engines\" known were, like\nAnswer:",
+      "output": ". the,.,,,,,,, the,,,s,, and,,,,,.,,,,,.,, in..,.,,,,t,, a, of",
+      "predicted_answer": ". the,.,,,,,,, the,,,s,, and,,,,,.,,,,,.,, in..,.,,,,t,, a, of",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5726385e271a42140099d79a",
+      "tags": [
+        "packet_switching"
+      ],
+      "question": "What happens to the packet at the destination",
+      "context": "the system has to do as much work for every packet as the connection-oriented system has to do in connection set-up, but with less information as to the application's requirements. At the destination, the original message/data is reassembled in the correct order, based on the packet sequence number. Thus a virtual connection, also known as a virtual circuit or byte stream is provided to the end-user by a transport layer protocol, although intermediate network nodes only provides a connectionless network",
+      "answers": [
+        "the original message/data is reassembled in the correct order, based on the packet sequence number",
+        "the original message/data is reassembled in the correct order",
+        "reassembled"
+      ],
+      "model_prompt": "Question: What happens to the packet at the destination\nContext: the system has to do as much work for every packet as the connection-oriented system has to do in connection set-up, but with less information as to the application's requirements. At the destination, the original message/data is reassembled in the correct order, based on the packet sequence number. Thus a virtual connection, also known as a virtual circuit or byte stream is provided to the end-user by a transport layer protocol, although intermediate network nodes only provides a connectionless network\nAnswer:",
+      "output": ",,,,,, the,,,,, of,s,,,s, a,, that, in and, the and,,,,ss,,,,,,,,, of,,",
+      "predicted_answer": ",,,,,, the,,,,, of,s,,,s, a,, that, in and, the and,,,,ss,,,,,,,,, of,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1176,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5706094b52bb8914006897e1",
+      "tags": [
+        "southern_california"
+      ],
+      "question": "Southern California's economy can be described as one of the largest in the United States and what other characteristic?",
+      "context": "Southern California's economy is diverse and one of the largest in the United States. It is dominated and heavily dependent upon abundance of petroleum, as opposed to other regions where automobiles not nearly as dominant, the vast majority of",
+      "answers": [
+        "diverse"
+      ],
+      "model_prompt": "Question: Southern California's economy can be described as one of the largest in the United States and what other characteristic?\nContext: Southern California's economy is diverse and one of the largest in the United States. It is dominated and heavily dependent upon abundance of petroleum, as opposed to other regions where automobiles not nearly as dominant, the vast majority of\nAnswer:",
+      "output": ",,s, in, in,,,,,,, the.,,s,,,,,,,s,,,ing.,,,,,s to,. the,, in to a,",
+      "predicted_answer": ",,s, in, in,,,,,,, the.,,s,,,,,,,s,,,ing.,,,,,s to,. the,, in to a,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5726a34bf1498d1400e8e59e",
+      "tags": [
+        "european_union_law"
+      ],
+      "question": "When was the Lisbon Treaty established?",
+      "context": "The 2007 Lisbon Treaty explicitly recognised fundamental rights by providing in Article 6(1) that \"The Union recognises the rights, freedoms and principles set out in the Charter of Fundamental Rights of the European",
+      "answers": [
+        "2007"
+      ],
+      "model_prompt": "Question: When was the Lisbon Treaty established?\nContext: The 2007 Lisbon Treaty explicitly recognised fundamental rights by providing in Article 6(1) that \"The Union recognises the rights, freedoms and principles set out in the Charter of Fundamental Rights of the European\nAnswer:",
+      "output": "the and,,., to,, the, the,, theingss, in.,,, in,,, and,,,,.,., a of,,,,, the,,,",
+      "predicted_answer": "the and,,., to,, the, the,, theingss, in.,,, in,,, and,,,,.,., a of,,,,, the,,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5726a5525951b619008f78e1",
+      "tags": [
+        "european_union_law"
+      ],
+      "question": "What did the Works Council Directive require?",
+      "context": "as the Social Chapter of the 1997 Treaty of Amsterdam. The UK subsequently adopted the main legislation previously agreed under the Agreement on Social Policy, the 1994 Works Council Directive, which required workforce consultation in businesses, and the 1996 Parental Leave Directive. In the 10 years following the 1997 Treaty of Amsterdam and adoption of the Social Chapter the European Union has undertaken policy initiatives in various social policy",
+      "answers": [
+        "workforce consultation in businesses"
+      ],
+      "model_prompt": "Question: What did the Works Council Directive require?\nContext: as the Social Chapter of the 1997 Treaty of Amsterdam. The UK subsequently adopted the main legislation previously agreed under the Agreement on Social Policy, the 1994 Works Council Directive, which required workforce consultation in businesses, and the 1996 Parental Leave Directive. In the 10 years following the 1997 Treaty of Amsterdam and adoption of the Social Chapter the European Union has undertaken policy initiatives in various social policy\nAnswer:",
+      "output": "ofs the,s,,,,,s, and,,,,,. of, a,s,.,,,,,, a, the, ofs., a,,.,, in,",
+      "predicted_answer": "ofs the,s,,,,,s, and,,,,,. of, a,s,.,,,,,, a, the, ofs., a,,.,, in,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1667,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "57285213ff5b5019007da183",
+      "tags": [
+        "university_of_chicago"
+      ],
+      "question": "What division offers more then one branch of studies that don't fit in with the other four?",
+      "context": "Division, the Social Sciences Collegiate Division, the Humanities Collegiate Division, and the New Collegiate Division. The first four are sections within their corresponding graduate divisions, while the New Collegiate Division administers interdisciplinary majors and studies which do not fit in one of the other four divisions.",
+      "answers": [
+        "the New Collegiate Division",
+        "New Collegiate Division"
+      ],
+      "model_prompt": "Question: What division offers more then one branch of studies that don't fit in with the other four?\nContext: Division, the Social Sciences Collegiate Division, the Humanities Collegiate Division, and the New Collegiate Division. The first four are sections within their corresponding graduate divisions, while the New Collegiate Division administers interdisciplinary majors and studies which do not fit in one of the other four divisions.\nAnswer:",
+      "output": ",,,,, ands of,,s,.,,,s, and,,,,.,.,,. and,,inging,,ing,,,ss, is,,,,",
+      "predicted_answer": ",,,,, ands of,,s,.,,,s, and,,,,.,.,,. and,,inging,,ing,,,ss, is,,,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "571099b2b654c5140001f9b5",
+      "tags": [
+        "huguenot"
+      ],
+      "question": "Why did Berlin Huguenots switch to German from French in their services?",
+      "context": "By 1700, one-fifth of the city's population was French speaking. The Berlin Huguenots preserved the French language in their church services for nearly a century. They ultimately decided to switch to German in protest against the occupation of Prussia by Napoleon in 1806-07. Many of their descendents rose to positions of prominence. Several congregations were founded, such as those of Fredericia (Denmark), Berlin, Stockholm, Hamburg, Frankfurt, Helsinki, and Emden.",
+      "answers": [
+        "in protest against the occupation of Prussia by Napoleon",
+        "in protest"
+      ],
+      "model_prompt": "Question: Why did Berlin Huguenots switch to German from French in their services?\nContext: By 1700, one-fifth of the city's population was French speaking. The Berlin Huguenots preserved the French language in their church services for nearly a century. They ultimately decided to switch to German in protest against the occupation of Prussia by Napoleon in 1806-07. Many of their descendents rose to positions of prominence. Several congregations were founded, such as those of Fredericia (Denmark), Berlin, Stockholm, Hamburg, Frankfurt, Helsinki, and Emden.\nAnswer:",
+      "output": ",,,,,,, ining,, the,,,, as,, thes, the,,,, the,,,s,,,ing, (,s, and,,,,,",
+      "predicted_answer": ",,,,,,, ining,, the,,,, as,, thes, the,,,, the,,,s,,,ing, (,s, and,,,,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5730069004bcaa1900d7702d",
+      "tags": [
+        "rhine"
+      ],
+      "question": "Where do the branches Waal and Nederrijn-Lek discharge to?",
+      "context": "At present, the branches Waal and Nederrijn-Lek discharge to the North Sea, through the former Meuse estuary, near Rotterdam. The river IJssel branch flows to the north and enters the IJsselmeer, formerly the Zuider Zee brackish lagoon; however, since 1932, a freshwater lake. The",
+      "answers": [
+        "North Sea"
+      ],
+      "model_prompt": "Question: Where do the branches Waal and Nederrijn-Lek discharge to?\nContext: At present, the branches Waal and Nederrijn-Lek discharge to the North Sea, through the former Meuse estuary, near Rotterdam. The river IJssel branch flows to the north and enters the IJsselmeer, formerly the Zuider Zee brackish lagoon; however, since 1932, a freshwater lake. The\nAnswer:",
+      "output": ",,s, to the,,,s, the a,,., iss,, and,,, to.s,., the,, the,,,,.s,s, and,,s",
+      "predicted_answer": ",,s, to the,,,s, the a,,., iss,, and,,, to.s,., the,, the,,,,.s,s, and,,s",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5725ca4389a1e219009abeb5",
+      "tags": [
+        "european_union_law"
+      ],
+      "question": "Are there any regions where the Treaty of European Union excludes from jurisdiction?",
+      "context": "the European Council to make specific provisions for regions, as for example done for customs matters in Gibraltar and Saint-Pierre-et-Miquelon. The TEU specifically excludes certain regions, for example the Faroe Islands, from the jurisdiction of European Union law. Treaties apply as soon as they enter into force, unless stated otherwise, and are generally concluded for an unlimited period. The TEU provides that commitments",
+      "answers": [
+        "the Faroe Islands"
+      ],
+      "model_prompt": "Question: Are there any regions where the Treaty of European Union excludes from jurisdiction?\nContext: the European Council to make specific provisions for regions, as for example done for customs matters in Gibraltar and Saint-Pierre-et-Miquelon. The TEU specifically excludes certain regions, for example the Faroe Islands, from the jurisdiction of European Union law. Treaties apply as soon as they enter into force, unless stated otherwise, and are generally concluded for an unlimited period. The TEU provides that commitments\nAnswer:",
+      "output": "s,,, the, is,,,., and, and the,,.,,,,.s,,,,,,,,, the,,, to, and,,, the. the,",
+      "predicted_answer": "s,,, the, is,,,., and, and the,,.,,,,.s,,,,,,,,, the,,, to, and,,, the. the,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572fd47fa23a5019007fca58",
+      "tags": [
+        "scottish_parliament"
+      ],
+      "question": "Other than Scotland's Chief Law Officer, from whence are most ministers drawn from amongst?",
+      "context": "roles by the First Minister. Junior ministers, who do not attend cabinet, are also appointed to assist Scottish ministers in their departments. Most ministers and their juniors are drawn from amongst the elected MSPs, with the exception of Scotland's Chief Law Officers: the Lord Advocate and the Solicitor General. Whilst the First Minister chooses the ministers – and may decide to remove them at any time – the formal",
+      "answers": [
+        "elected MSPs",
+        "the elected MSPs",
+        "amongst the elected MSPs"
+      ],
+      "model_prompt": "Question: Other than Scotland's Chief Law Officer, from whence are most ministers drawn from amongst?\nContext: roles by the First Minister. Junior ministers, who do not attend cabinet, are also appointed to assist Scottish ministers in their departments. Most ministers and their juniors are drawn from amongst the elected MSPs, with the exception of Scotland's Chief Law Officers: the Lord Advocate and the Solicitor General. Whilst the First Minister chooses the ministers – and may decide to remove them at any time – the formal\nAnswer:",
+      "output": "., of,,,,,, is,,., of in,,,,,,,,,s,,,,s, the,,,,s,,s,,,, and.,",
+      "predicted_answer": "., of,,,,,, is,,., of in,,,,,,,,,s,,,,s, the,,,,s,,s,,,, and.,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572fce13a23a5019007fca15",
+      "tags": [
+        "scottish_parliament"
+      ],
+      "question": "If Parliament agrees in a vote to the general principle of a bill, what does it then proceed to?",
+      "context": "submitted to the whole Parliament for a full debate in the chamber on the general principles of the bill. If the whole Parliament agrees in a vote to the general principles of the bill, it then proceeds to Stage 2.",
+      "answers": [
+        "Stage 2"
+      ],
+      "model_prompt": "Question: If Parliament agrees in a vote to the general principle of a bill, what does it then proceed to?\nContext: submitted to the whole Parliament for a full debate in the chamber on the general principles of the bill. If the whole Parliament agrees in a vote to the general principles of the bill, it then proceeds to Stage 2.\nAnswer:",
+      "output": ",.,,, of,, to,,,, the and,,,,,,, ands the,,, of,, in,,, is the, the,,, to,,, in,",
+      "predicted_answer": ",.,,, of,, to,,,, the and,,,,,,, ands the,,, of,, in,,, is the, the,,, to,,, in,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "57335ddbd058e614000b5932",
+      "tags": [
+        "warsaw"
+      ],
+      "question": "Where can Aeolian sand with a number of dunes be found?",
+      "context": "They consist of still quite natural streams and lakes as well as the pattern of drainage ditches. The right side of Warsaw has a different pattern of geomorphological forms. There are several levels of the plain Vistula terraces (flooded as well as former flooded once) and only small part and not so visible moraine escarpment. Aeolian sand with a number of dunes parted by peat swamps or small ponds cover the highest terrace. These",
+      "answers": [
+        "plain Vistula terraces",
+        "highest terrace"
+      ],
+      "model_prompt": "Question: Where can Aeolian sand with a number of dunes be found?\nContext: They consist of still quite natural streams and lakes as well as the pattern of drainage ditches. The right side of Warsaw has a different pattern of geomorphological forms. There are several levels of the plain Vistula terraces (flooded as well as former flooded once) and only small part and not so visible moraine escarpment. Aeolian sand with a number of dunes parted by peat swamps or small ponds cover the highest terrace. These\nAnswer:",
+      "output": "in,, the,,ss,.s,.es, the, in, and,,,,,ss. in,s the,, A,,, in, the,,,ing,,,",
+      "predicted_answer": "in,, the,,ss,.s,.es, the, in, and,,,,,ss. in,s the,, A,,, in, the,,,ing,,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5726ef73f1498d1400e8f061",
+      "tags": [
+        "pharmacy"
+      ],
+      "question": "Who defines what constitutes a patient-doctor relationship?",
+      "context": "purpose by a licensed practitioner acting in the course of legitimate doctor-patient relationship. The filling pharmacy has a corresponding responsibility to ensure that the prescription is valid. Often, individual state laws outline what defines a valid patient-doctor relationship.",
+      "answers": [
+        "individual state laws",
+        "Often, individual state laws outline what defines a valid patient-doctor relationship"
+      ],
+      "model_prompt": "Question: Who defines what constitutes a patient-doctor relationship?\nContext: purpose by a licensed practitioner acting in the course of legitimate doctor-patient relationship. The filling pharmacy has a corresponding responsibility to ensure that the prescription is valid. Often, individual state laws outline what defines a valid patient-doctor relationship.\nAnswer:",
+      "output": ", the,s and,, in,.,, the of,, of the,,,,,,,,,,,,, the,,, the,,, the the, and,.,, and",
+      "predicted_answer": ", the,s and,, in,.,, the of,, of the,,,,,,,,,,,,, the,,, the,,, the the, and,.,, and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572fc8a904bcaa1900d76d1f",
+      "tags": [
+        "scottish_parliament"
+      ],
+      "question": "What is set up to scrutinize private bills submitted by party outsiders?",
+      "context": "A further type of committee is normally set up to scrutinise private bills submitted to the Scottish Parliament by an outside party or promoter who is not a member of the Scottish Parliament or Scottish Government. Private bills",
+      "answers": [
+        "type of committee",
+        "committee"
+      ],
+      "model_prompt": "Question: What is set up to scrutinize private bills submitted by party outsiders?\nContext: A further type of committee is normally set up to scrutinise private bills submitted to the Scottish Parliament by an outside party or promoter who is not a member of the Scottish Parliament or Scottish Government. Private bills\nAnswer:",
+      "output": "the,s.,,,ing ins,,s,,, of thes a and., the, to,Cs,,,, the,,,,,,s,,s,.\n,",
+      "predicted_answer": "the,s.,,,ing ins,,s,,, of thes a and., the, to,Cs,,,, the,,,,,,s,,s,.",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1429,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "57293d116aef051400154bca",
+      "tags": [
+        "intergovernmental_panel_on_climate_change"
+      ],
+      "question": "What is 'grey literature'?",
+      "context": "of IPCC reports assess the available information about climate change based on published sources. According to IPCC guidelines, authors should give priority to peer-reviewed sources. Authors may refer to non-peer-reviewed sources (the \"grey literature\"), provided that they are of sufficient quality. Examples of non-peer-reviewed sources include model results, reports from government agencies and non-governmental organizations, and",
+      "answers": [
+        "non-peer-reviewed sources"
+      ],
+      "model_prompt": "Question: What is 'grey literature'?\nContext: of IPCC reports assess the available information about climate change based on published sources. According to IPCC guidelines, authors should give priority to peer-reviewed sources. Authors may refer to non-peer-reviewed sources (the \"grey literature\"), provided that they are of sufficient quality. Examples of non-peer-reviewed sources include model results, reports from government agencies and non-governmental organizations, and\nAnswer:",
+      "output": "to the.,, ands,,,,,, the ins,,, in in, thes,,,, and,,,,.,, to,s,,.,,,, and,",
+      "predicted_answer": "to the.,, ands,,,,,, the ins,,, in in, thes,,,, and,,,,.,, to,s,,.,,,, and,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572fc41f947a6a140053cc84",
+      "tags": [
+        "scottish_parliament"
+      ],
+      "question": "What language other than English has the Scottish Parliament had meetings in?",
+      "context": "to the chamber are normally delivered in English, but members may use Scots, Gaelic, or any other language with the agreement of the Presiding Officer. The Scottish Parliament has conducted debates in the Gaelic language.",
+      "answers": [
+        "Gaelic",
+        "Scots, Gaelic, or any other language with the agreement of the Presiding Officer"
+      ],
+      "model_prompt": "Question: What language other than English has the Scottish Parliament had meetings in?\nContext: to the chamber are normally delivered in English, but members may use Scots, Gaelic, or any other language with the agreement of the Presiding Officer. The Scottish Parliament has conducted debates in the Gaelic language.\nAnswer:",
+      "output": ".s.,,.,,, the of, ands,,, thes,,,,,..,,,,,,,,, a,,,,,, thes,,s,",
+      "predicted_answer": ".s.,,.,,, the of, ands,,, thes,,,,,..,,,,,,,,, a,,,,,, thes,,s,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1176,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5733e771d058e614000b6547",
+      "tags": [
+        "french_and_indian_war"
+      ],
+      "question": "What issues were not addressed in the Treaty of Aix-la-Chapelle?",
+      "context": "North American theater is known as King George's War) formally ended in 1748 with the signing of the Treaty of Aix-la-Chapelle. The treaty was primarily focused on resolving issues in Europe. The issues of conflicting territorial claims between British and French colonies in North America were turned over to a commission to resolve, but it reached no decision. Frontiers from between Nova Scotia and Acadia in the north, to the Ohio Country in the south, were claimed by",
+      "answers": [
+        "conflicting territorial claims between British and French",
+        "conflicting territorial claims between British and French colonies in North America",
+        "conflicting territorial claims",
+        "The issues of conflicting territorial claims between British and French colonies"
+      ],
+      "model_prompt": "Question: What issues were not addressed in the Treaty of Aix-la-Chapelle?\nContext: North American theater is known as King George's War) formally ended in 1748 with the signing of the Treaty of Aix-la-Chapelle. The treaty was primarily focused on resolving issues in Europe. The issues of conflicting territorial claims between British and French colonies in North America were turned over to a commission to resolve, but it reached no decision. Frontiers from between Nova Scotia and Acadia in the north, to the Ohio Country in the south, were claimed by\nAnswer:",
+      "output": ".,ss,,sss of.s,,,,.,ings,,,,,s,.,,,,,,s,,,,,s,.,,, and,",
+      "predicted_answer": ".,ss,,sss of.s,,,,.,ings,,,,,s,.,,,,,,s,,,,,s,.,,, and,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.2105,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5733a1854776f41900660f0c",
+      "tags": [
+        "warsaw"
+      ],
+      "question": "What type of theatre is the Warsaw Fotoplastikon?",
+      "context": "history of Poland can be found in the Warsaw Uprising Museum and in the Katyń Museum which preserves the memory of the crime. The Warsaw Uprising Museum also operates a rare preserved and operating historic stereoscopic theatre, the Warsaw Fotoplastikon. The Museum of Independence preserves patriotic and political objects connected with Poland's struggles for independence. Dating back to 1936 Warsaw Historical Museum",
+      "answers": [
+        "stereoscopic",
+        "stereoscopic theatre"
+      ],
+      "model_prompt": "Question: What type of theatre is the Warsaw Fotoplastikon?\nContext: history of Poland can be found in the Warsaw Uprising Museum and in the Katyń Museum which preserves the memory of the crime. The Warsaw Uprising Museum also operates a rare preserved and operating historic stereoscopic theatre, the Warsaw Fotoplastikon. The Museum of Independence preserves patriotic and political objects connected with Poland's struggles for independence. Dating back to 1936 Warsaw Historical Museum\nAnswer:",
+      "output": ", in,, a,,,,,,,.,, the,.,,,,,,,s,,,s,,,,,,,,,.,,, ands,, and",
+      "predicted_answer": ", in,, a,,,,,,,.,, the,.,,,,,,,s,,,s,,,,,,,,,.,,, ands,, and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "571153422419e31400955581",
+      "tags": [
+        "steam_engine"
+      ],
+      "question": "For what railroad did Stephenson build a locomotive in 1825?",
+      "context": "Only four years later, the successful twin-cylinder locomotive Salamanca by Matthew Murray was used by the edge railed rack and pinion Middleton Railway. In 1825 George Stephenson built the Locomotion for the Stockton and Darlington Railway. This was the first public steam railway in the world and then in 1829, he built The Rocket which was entered in and won the Rainhill Trials. The Liverpool and Manchester Railway opened in 1830 making",
+      "answers": [
+        "Stockton and Darlington",
+        "Stockton and Darlington Railway"
+      ],
+      "model_prompt": "Question: For what railroad did Stephenson build a locomotive in 1825?\nContext: Only four years later, the successful twin-cylinder locomotive Salamanca by Matthew Murray was used by the edge railed rack and pinion Middleton Railway. In 1825 George Stephenson built the Locomotion for the Stockton and Darlington Railway. This was the first public steam railway in the world and then in 1829, he built The Rocket which was entered in and won the Rainhill Trials. The Liverpool and Manchester Railway opened in 1830 making\nAnswer:",
+      "output": "of,,,,,s,,,.,,,,,,,, to,, to,s in.,,,.s,,, a,.,, in,,, the in,s",
+      "predicted_answer": "of,,,,,s,,,.,,,,,,,, to,, to,s in.,,,.s,,, a,.,, in,,, the in,s",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5728d9403acd2414000e001d",
+      "tags": [
+        "civil_disobedience"
+      ],
+      "question": "What type of person can not be attributed civil disobedience?",
+      "context": "branches of government, conflict. For instance, if the head of government of a country were to refuse to enforce a decision of that country's highest court, it would not be civil disobedience, since the head of government would be acting in her or his capacity as public official rather than private citizen.",
+      "answers": [
+        "head of government",
+        "public official",
+        "public"
+      ],
+      "model_prompt": "Question: What type of person can not be attributed civil disobedience?\nContext: branches of government, conflict. For instance, if the head of government of a country were to refuse to enforce a decision of that country's highest court, it would not be civil disobedience, since the head of government would be acting in her or his capacity as public official rather than private citizen.\nAnswer:",
+      "output": "s,,s the,,,,,,,,,s the,,,,s, the,ser,,,s, a..,,,,,,, in.s,,,,",
+      "predicted_answer": "s,,s the,,,,,,,,,s the,,,,s, the,ser,,,s, a..,,,,,,, in.s,,,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "57293b843f37b31900478133",
+      "tags": [
+        "intergovernmental_panel_on_climate_change"
+      ],
+      "question": "What organization is the IPCC a part of?",
+      "context": "The Intergovernmental Panel on Climate Change (IPCC) is a scientific intergovernmental body under the auspices of the United Nations, set up at the request of member governments. It was first established in 1988 by two United Nations organizations, the World Meteorological Organization (WMO) and the United Nations Environment Programme",
+      "answers": [
+        "the United Nations"
+      ],
+      "model_prompt": "Question: What organization is the IPCC a part of?\nContext: The Intergovernmental Panel on Climate Change (IPCC) is a scientific intergovernmental body under the auspices of the United Nations, set up at the request of member governments. It was first established in 1988 by two United Nations organizations, the World Meteorological Organization (WMO) and the United Nations Environment Programme\nAnswer:",
+      "output": ",,,,, the a,,.,s,, thes,,,,,s.,, to,,,,,,,,,,,s,,,,,,ing,s the",
+      "predicted_answer": ",,,,, the a,,.,s,, thes,,,,,s.,, to,,,,,,,,,,,s,,,,,,ing,s the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "570602fa52bb8914006897a0",
+      "tags": [
+        "southern_california"
+      ],
+      "question": "Cities that anchor the regions are often the hub for what kind of activity?",
+      "context": "and economically into distinctive regions, each containing its own culture and atmosphere, anchored usually by a city with both national and sometimes global recognition, which are often the hub of economic activity for its respective region and being home to many tourist destinations. Each region is further divided into many culturally distinct areas but as a whole combine to create the southern California",
+      "answers": [
+        "economic",
+        "economic activity"
+      ],
+      "model_prompt": "Question: Cities that anchor the regions are often the hub for what kind of activity?\nContext: and economically into distinctive regions, each containing its own culture and atmosphere, anchored usually by a city with both national and sometimes global recognition, which are often the hub of economic activity for its respective region and being home to many tourist destinations. Each region is further divided into many culturally distinct areas but as a whole combine to create the southern California\nAnswer:",
+      "output": ",,s,,,,. a, the. to.s,, ands, of in tos,,,,s tos,,,s,,,s,,,s,,,,.",
+      "predicted_answer": ",,s,,,,. a, the. to.s,, ands, of in tos,,,,s tos,,,s,,,s,,,s,,,,.",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5726a00cf1498d1400e8e551",
+      "tags": [
+        "european_union_law"
+      ],
+      "question": "What are some of the accepted general principles of European Union law?",
+      "context": "doctrines and principles present in the legal systems of European Union member states and in the jurisprudence of the European Court of Human Rights. Accepted general principles of European Union Law include fundamental rights (see human rights), proportionality, legal certainty, equality before the law and subsidiarity.",
+      "answers": [
+        "fundamental rights (see human rights), proportionality, legal certainty, equality before the law and subsidiarity"
+      ],
+      "model_prompt": "Question: What are some of the accepted general principles of European Union law?\nContext: doctrines and principles present in the legal systems of European Union member states and in the jurisprudence of the European Court of Human Rights. Accepted general principles of European Union Law include fundamental rights (see human rights), proportionality, legal certainty, equality before the law and subsidiarity.\nAnswer:",
+      "output": ", the thes ofs,,,s,,s,,, the,,ing in is a the, is,,,,,,,s,,, the, the,,,, the.,,",
+      "predicted_answer": ", the thes ofs,,,s,,s,,, the,,ing in is a the, is,,,,,,,s,,, the, the,,,, the.,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572656e4dd62a815002e81fe",
+      "tags": [
+        "european_union_law"
+      ],
+      "question": "Within the EU, which court believes they have the final word deciding on EU's competence?",
+      "context": "question: who ultimately has the \"competence\" to define the EU's \"competence\". Many member state courts believe they decide, other member state Parliaments believe they decide, while within the EU, the Court of Justice believes it has the final say.",
+      "answers": [
+        "Court of Justice",
+        "the Court of Justice"
+      ],
+      "model_prompt": "Question: Within the EU, which court believes they have the final word deciding on EU's competence?\nContext: question: who ultimately has the \"competence\" to define the EU's \"competence\". Many member state courts believe they decide, other member state Parliaments believe they decide, while within the EU, the Court of Justice believes it has the final say.\nAnswer:",
+      "output": "s, of,,,,,, the,,,,,,, in and, theing,,,, the, the,,.,, of,,,,,,,,,,,, and",
+      "predicted_answer": "s, of,,,,,, the,,,,,,, in and, theing,,,, the, the,,.,, of,,,,,,,,,,,, and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.2,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572fc49d04bcaa1900d76ccc",
+      "tags": [
+        "scottish_parliament"
+      ],
+      "question": "What is heralded by the sounding of the division bell?",
+      "context": "Each sitting day, normally at 5 pm, MSPs decide on all the motions and amendments that have been moved that day. This \"Decision Time\" is heralded by the sounding of the division bell, which is heard throughout the Parliamentary campus and alerts MSPs who are not in the chamber to return and vote. At Decision Time, the Presiding Officer puts",
+      "answers": [
+        "\"Decision Time\"",
+        "Decision Time"
+      ],
+      "model_prompt": "Question: What is heralded by the sounding of the division bell?\nContext: Each sitting day, normally at 5 pm, MSPs decide on all the motions and amendments that have been moved that day. This \"Decision Time\" is heralded by the sounding of the division bell, which is heard throughout the Parliamentary campus and alerts MSPs who are not in the chamber to return and vote. At Decision Time, the Presiding Officer puts\nAnswer:",
+      "output": "the of.,,s,, are, as,,,ings,.,s,,s and,,,, of.,s,,,, the,,, of,,,, the,",
+      "predicted_answer": "the of.,,s,, are, as,,,ings,.,s,,s and,,,, of.,s,,,, the,,, of,,,, the,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "572fe288a23a5019007fcad9",
+      "tags": [
+        "rhine"
+      ],
+      "question": "What is the Proto-Germanic adoption of the Gaulish name of the Rhine?",
+      "context": "with Rh- in English Rhine as well as in German Rhein and French Rhin is due to the influence of Greek orthography, while the vocalisation -i- is due to the Proto-Germanic adoption of the Gaulish name as *Rīnaz, via Old Frankish giving Old English Rín, Old High German Rīn, Dutch Rijn (formerly also spelled Rhijn)). The diphthong in modern German Rhein (also adopted in Romansh Rein, Rain) is a Central German",
+      "answers": [
+        "Rīnaz"
+      ],
+      "model_prompt": "Question: What is the Proto-Germanic adoption of the Gaulish name of the Rhine?\nContext: with Rh- in English Rhine as well as in German Rhein and French Rhin is due to the influence of Greek orthography, while the vocalisation -i- is due to the Proto-Germanic adoption of the Gaulish name as *Rīnaz, via Old Frankish giving Old English Rín, Old High German Rīn, Dutch Rijn (formerly also spelled Rhijn)). The diphthong in modern German Rhein (also adopted in Romansh Rein, Rain) is a Central German\nAnswer:",
+      "output": "ings,,,,,, anding,,.,,,,,s of,,,ing the,,,s,,,s, in,,, the and,s,,s,s,",
+      "predicted_answer": "ings,,,,,, anding,,.,,,,,s of,,,ing the,,,s,,,s, in,,, the and,s,,s,s,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "571c8198dd7acb1400e4c0cf",
+      "tags": [
+        "oxygen"
+      ],
+      "question": "What type of combustible materials were considered to have little philogiston?",
+      "context": "Highly combustible materials that leave little residue, such as wood or coal, were thought to be made mostly of phlogiston; whereas non-combustible substances that corrode, such as iron, contained very little. Air did not play a role in phlogiston theory, nor were any initial quantitative experiments conducted to test the idea; instead, it was based on",
+      "answers": [
+        "non-combustible",
+        "non-combustible substances that corrode",
+        "wood"
+      ],
+      "model_prompt": "Question: What type of combustible materials were considered to have little philogiston?\nContext: Highly combustible materials that leave little residue, such as wood or coal, were thought to be made mostly of phlogiston; whereas non-combustible substances that corrode, such as iron, contained very little. Air did not play a role in phlogiston theory, nor were any initial quantitative experiments conducted to test the idea; instead, it was based on\nAnswer:",
+      "output": "the,. the of the., a the in in,, of,, in the in,,s,,,,,,,,,,,,,,,s, toss,,,,,",
+      "predicted_answer": "the,. the of the., a the in in,, of,, in the in,,s,,,,,,,,,,,,,,,s, toss,,,,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5710ed7bb654c5140001fa2f",
+      "tags": [
+        "huguenot"
+      ],
+      "question": "What was the Dutch leader's religious affiliation?",
+      "context": "by his court minister, the Huguenot Pierre L'Oyseleur, lord of Villiers. Louise de Coligny, daughter of the murdered Huguenot leader Gaspard de Coligny, married William the Silent, leader of the Dutch (Calvinist) revolt against Spanish (Catholic) rule. As both spoke French in daily life, their court church in the Prinsenhof in Delft held services in French. The practice has continued to the present day. The",
+      "answers": [
+        "Calvinist",
+        "Walloon"
+      ],
+      "model_prompt": "Question: What was the Dutch leader's religious affiliation?\nContext: by his court minister, the Huguenot Pierre L'Oyseleur, lord of Villiers. Louise de Coligny, daughter of the murdered Huguenot leader Gaspard de Coligny, married William the Silent, leader of the Dutch (Calvinist) revolt against Spanish (Catholic) rule. As both spoke French in daily life, their court church in the Prinsenhof in Delft held services in French. The practice has continued to the present day. The\nAnswer:",
+      "output": ".,,s the in,,,,,,,,, the,, for, of., of,.,,,,,, a,,, the,, the,,,,,,ss",
+      "predicted_answer": ".,,s the in,,,,,,,,, the,, for, of., of,.,,,,,, a,,, the,, the,,,,,,ss",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "5725bad5271a42140099d0bf",
+      "tags": [
+        "1973_oil_crisis"
+      ],
+      "question": "How many times more did the other nations have to pay for oil after the surprise attack?",
+      "context": "and cement... You buy our crude oil and sell it back to us, refined as petrochemicals, at a hundred times the price you've paid us... It's only fair that, from now on, you should pay more for oil. Let's say ten times more.\"",
+      "answers": [
+        "ten times more",
+        "ten",
+        "a hundred"
+      ],
+      "model_prompt": "Question: How many times more did the other nations have to pay for oil after the surprise attack?\nContext: and cement... You buy our crude oil and sell it back to us, refined as petrochemicals, at a hundred times the price you've paid us... It's only fair that, from now on, you should pay more for oil. Let's say ten times more.\"\nAnswer:",
+      "output": ",s,. in,,,,,,s,,s,,s,,s,,,,,,,.,,,, a,,,,.,,, and,,t,,",
+      "predicted_answer": ",s,. in,,,,,,s,,s,,s,,s,,,,,,,.,,,, a,,,,.,,, and,,t,,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    }
+  ],
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 5.998759,
+    "val_ppl": 402.92825,
+    "checkpoint_step": 50,
+    "best_val_loss": 6.712290811538696
+  },
+  "summary": {
+    "strict_passed": 0,
+    "total_samples": 32,
+    "strict_pass_rate": 0.0,
+    "exact_match": 0.0,
+    "token_f1": 0.034,
+    "answer_presence_rate": 0.0,
+    "tag_summary": {
+      "1973_oil_crisis": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "civil_disobedience": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "european_union_law": {
+        "total": 5,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0733
+      },
+      "french_and_indian_war": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.2105
+      },
+      "huguenot": {
+        "total": 3,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0444
+      },
+      "intergovernmental_panel_on_climate_change": {
+        "total": 2,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "islamism": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "oxygen": {
+        "total": 2,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "packet_switching": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.1176
+      },
+      "pharmacy": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "rhine": {
+        "total": 2,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "scottish_parliament": {
+        "total": 5,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0521
+      },
+      "southern_california": {
+        "total": 2,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "steam_engine": {
+        "total": 2,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "university_of_chicago": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "warsaw": {
+        "total": 2,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      }
+    }
+  }
+}

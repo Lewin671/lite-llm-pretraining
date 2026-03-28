@@ -1,0 +1,359 @@
+{
+  "name": "dolly_qa_simple_dev_v1",
+  "task": "qa",
+  "pass_f1_threshold": 0.9,
+  "samples": [
+    {
+      "id": "dolly_qa_simple_dev_v1-001",
+      "question": "What city is Microsoft Based in?",
+      "context": "",
+      "answers": [
+        "Redmond, Wa"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-002",
+      "question": "What tree nut is commonly used when making pesto?",
+      "context": "",
+      "answers": [
+        "Pine nuts are used in pesto."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-003",
+      "question": "What is an archipelago",
+      "context": "An archipelago (/ˌɑːrkəˈpɛləˌɡoʊ/ (listen) AR-kə-PEL-ə-goh), sometimes called an island group or island chain, is a chain, cluster, or collection of islands, or sometimes a sea containing a small number of scattered islands. Examples of archipelagos include: the Indonesian Archipelago, the Andaman and Nicobar Islands, the Lakshadweep Islands, the Galápagos Islands, the Japanese archipelago, the Philippine Archipelago, the Maldives, the Balearic Islands, The Bahamas, the Aegean Islands, the Hawaiian Islands, the Canary Islands, Malta, the Azores, the Canadian Arctic Archipelago, the British Isles, the islands of the Archipelago Sea, and Shetland. They are sometimes defined by political",
+      "answers": [
+        "An archipelago is a grouping, or clustering, of islands."
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-004",
+      "question": "According to Greek mythology, who was the first woman on earth?",
+      "context": "",
+      "answers": [
+        "Pandora"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-005",
+      "question": "Who was the first president of the United States of America?",
+      "context": "",
+      "answers": [
+        "George Washington"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-006",
+      "question": "Who won the best new artist as well as award for the Best Pop Vocal Album in 64th Annual Grammy Awards",
+      "context": "",
+      "answers": [
+        "Olivia Rodrigo"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-007",
+      "question": "What type of Pokemon is Charizard?",
+      "context": "Whereas its pre-evolutions Charmander and Charmeleon are ground-bound lizard like creatures, Charizard's design is inspired by dragons, more specifically European dragons. Even though Charizard gains the Flying secondary type instead of the Dragon type upon evolving, it belongs to the Dragon Egg Group, learns Dragon moves like Dragon Claw, and has its Flying type replaced by Dragon in its \"Mega Charizard X\" form. Authors Tracey West and Katherine Noll called Charizard the \"best Fire type Pokémon\" and the \"third best Pokémon overall\".",
+      "answers": [
+        "Charizard is a Fire/Flying type Pokemon"
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-008",
+      "question": "According to the paragraph below, what is the relationship between Dungeon Master and Venger?",
+      "context": "Throughout the series, a connection is suggested between Dungeon Master and Venger. At the end of the episode \"The Dragon's Graveyard\", Dungeon Master calls Venger \"my son\". The final unproduced episode \"Requiem\" would have confirmed that Venger is the Dungeon Master's corrupted son (making Kareena the sister of Venger and the daughter of Dungeon Master), redeemed Venger (giving those trapped in the realm their freedom), and ended on a cliffhanger where the six children could finally return home or deal with evil that still existed in the realm.",
+      "answers": [
+        "Venger is Dungeon Master's son."
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-009",
+      "question": "What type of weather is typically associated with the desert?",
+      "context": "",
+      "answers": [
+        "The desert is known for being very hot and very dry"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-010",
+      "question": "What is the more popular name for the Londonderry Air",
+      "context": "",
+      "answers": [
+        "Danny Boy"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-011",
+      "question": "Who was the first woman ever inducted into the Rock and Roll Hall of Fame?",
+      "context": "",
+      "answers": [
+        "Aretha Franklin."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-012",
+      "question": "Which is considered the first human technology?",
+      "context": "",
+      "answers": [
+        "Fire"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-013",
+      "question": "What country did NIKStewart live during middle school?",
+      "context": "NIKStewart (who rebranded her name from Treveen Stewart) is a model from the Cayman Islands. In 2013, she was the first winner of the Caribbean's Next Top Model competition to come from the Cayman Islands. Born in Grand Cayman, Stewart moved to Jamaica in fifth grade and then returned to the Cayman Islands for high school. She won a regional modeling contest at 15 which allowed her to sign with a US modeling agency. In 2015, she landed a deal with Nike and works in New York and Chicago for them. Her other campaign work includes",
+      "answers": [
+        "NIKStewart lived in Jamaica during middle school (6th - 8th grade)."
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-014",
+      "question": "From the passage provided, extract the number of bags of coffee São Paulo produced in 1888.",
+      "context": "Coffee production attracted immigrants in search of better economic opportunities in the early 1900s. Mainly, these were Portuguese, Italian, Spanish, German, and Japanese nationals. For instance, São Paulo received approximately 733,000 immigrants in the decade preceding 1900, whilst only receiving approximately 201,000 immigrants in the six years to 1890. The production yield of coffee increases. In 1880, São Paulo produced 1.2 million bags (25% of total production), in 1888 2.6 million (40%), and in 1902 8 million bags (60%). Coffee is then 63% of the country's exports. The gains made by this trade allow sustained economic",
+      "answers": [
+        "São Paulo produced 2.6 million bags of coffee in 1888."
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-015",
+      "question": "From the passage provided, extract the names of moons/natural satellites of Mars.",
+      "context": "Mars (1.382–1.666 AU (206.7–249.2 million km; 128.5–154.9 million mi) from the Sun) is smaller than Earth and Venus (0.107 MEarth). It has an atmosphere of mostly carbon dioxide with a surface pressure of 6.1 millibars (0.088 psi; 0.18 inHg); roughly 0.6% of that of Earth but sufficient to support weather phenomena. Its surface, peppered with volcanoes, such as Olympus Mons, and rift valleys, such as Valles Marineris, shows geological activity that may have persisted until as recently as 2 million years ago. Its red colour comes from iron oxide (rust) in its soil. Mars has two",
+      "answers": [
+        "Mars has two moons/natural satellites : Deimos and Phobos"
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-016",
+      "question": "what is the name of the podcast hosted by luke burbank?",
+      "context": "",
+      "answers": [
+        "TBTL"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-017",
+      "question": "In the series, A Song of Ice and Fire, who is the founder of House Yew?",
+      "context": "",
+      "answers": [
+        "Alan o' the Oak, also known as \"the blind Bowman\""
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-018",
+      "question": "How many players are there on each side of a water polo game, including the goalie",
+      "context": "",
+      "answers": [
+        "There are seven players on each side of a water polo game"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-019",
+      "question": "What genre did Taylor Swift begin her career in?",
+      "context": "",
+      "answers": [
+        "Taylor Swift began her career as a country artist"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-020",
+      "question": "How can the dialogue be described in this film?",
+      "context": "Wilcox is a Canadian drama film, directed by Denis Côté and released in 2019. Told entirely without dialogue, the film tells the story of Wilcox (Guillaume Tremblay), a mysterious drifter travelling in an apparent search for adventure. Although he does interact with other characters in the film, the dialogue taking place in the story is not heard by the audience.",
+      "answers": [
+        "There is no dialogue."
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-021",
+      "question": "What artists made up the supergroup The Traveling Wilburys?",
+      "context": "",
+      "answers": [
+        "George Harrison, Roy Orbison, Jeff Lynne, Tom Petty and Bob Dylan"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-022",
+      "question": "Extract from the text the Australian city on which the show Bluey is inspired",
+      "context": "The show follows Bluey, an anthropomorphic six-year-old Blue Heeler puppy who is characterised by her abundance of energy, imagination and curiosity of the world. The young dog lives with her father, Bandit; mother, Chilli; and younger sister, Bingo, who regularly joins Bluey on adventures as the pair embark on imaginative play together. Other characters featured each represent a different dog breed. Overarching themes include the focus on family, growing up and Australian culture. The program was created and is produced in Queensland; the culture and lifestyle of Brisbane inspires the show's setting.",
+      "answers": [
+        "Brisbane"
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-023",
+      "question": "Based on this text, please list the members of the band Phish, separated by commas.",
+      "context": "Anastasio is a founding member of the rock band Phish, serving as lead guitarist and vocalist since their inception. Phish is noted for their musical improvisation, extended jams, exploration of a broad range of genres, and original live performances. Formed at the University of Vermont in 1983 (with the current line up solidifying in 1985), the band includes bassist and vocalist Mike Gordon; percussionist, vacuum player, and vocalist Jon Fishman; and keyboardist and vocalist Page McConnell. Phish performed together for over 20 years, releasing 10 studio albums, disbanding in August 2004. They reunited in March 2009",
+      "answers": [
+        "Anastasio, Mike Gordon, Jon Fishman, Page McConnell"
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-024",
+      "question": "Who started the Reformation?",
+      "context": "",
+      "answers": [
+        "The reformation was started by Martin Luther"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-025",
+      "question": "What happens when the sun goes down?",
+      "context": "",
+      "answers": [
+        "When the sun sets, the evening starts."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-026",
+      "question": "Who was in control of the four occupation zones as per the above passage?",
+      "context": "After the end of World War II in Europe, what remained of pre-war Germany west of the Oder-Neisse line was divided into four occupation zones (as per the Potsdam Agreement), each one controlled by one of the four occupying Allied powers: the United States, the United Kingdom, France and the Soviet Union. The capital of Berlin, as the seat of the Allied Control Council, was similarly subdivided into four sectors despite the city's location, which was fully within the Soviet zone. Within two years, political divisions increased between the Soviets and the other occupying powers. These",
+      "answers": [
+        "the United States, the United Kingdom, France and the Soviet Union."
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-027",
+      "question": "What are Gummi Bears called in England?",
+      "context": "",
+      "answers": [
+        "Jelly Babies are what people call Gummi Bears in England"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-028",
+      "question": "Of which generation is Jiang the core leader of China",
+      "context": "Jiang Zemin (17 August 1926 – 30 November 2022) was a Chinese politician who served as general secretary of the Chinese Communist Party (CCP) from 1989 to 2002, as chairman of the Central Military Commission from 1989 to 2004, and as president of China from 1993 to 2003. Jiang was paramount leader of China from 1989 to 2002. He was the core leader of the third generation of Chinese leadership, one of four core leaders alongside Mao Zedong, Deng Xiaoping and Xi Jinping. Born in Yangzhou, Jiangsu, Jiang joined the CCP while he was in college.",
+      "answers": [
+        "He is the third generation of Chinese leadership"
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-029",
+      "question": "Where was city musician Thomas Russell born?",
+      "context": "",
+      "answers": [
+        "Los Angeles"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-030",
+      "question": "Goa used to be a colony of which nation",
+      "context": "",
+      "answers": [
+        "Portugal"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-031",
+      "question": "Who is the winner of International Booker Prize 2022 ?",
+      "context": "",
+      "answers": [
+        "Geetanjali Shree"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_dev_v1-032",
+      "question": "What are the words of House Lannister?",
+      "context": "",
+      "answers": [
+        "\"Hear Me Roar\""
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "name": "dolly_qa_simple_holdout_v1",
+  "task": "qa",
+  "pass_f1_threshold": 0.9,
+  "samples": [
+    {
+      "id": "dolly_qa_simple_holdout_v1-001",
+      "question": "Who wrote The History of Mr Polly",
+      "context": "",
+      "answers": [
+        "H. G. Wells"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-002",
+      "question": "Who created pilates?",
+      "context": "",
+      "answers": [
+        "Pilates was developed by Joseph Pilates."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-003",
+      "question": "Who won highest number of Men's singles Wimbledon titles?",
+      "context": "",
+      "answers": [
+        "Roger Federer won highest number of Wimbledon titles (8 Titles)"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-004",
+      "question": "The BCG vaccine has proved quite effective against which infection",
+      "context": "",
+      "answers": [
+        "SAR infection"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-005",
+      "question": "Who is J.K.Rowling?",
+      "context": "Joanne Rowling CH OBE FRSL (/ˈroʊlɪŋ/ \"rolling\"; born 31 July 1965), also known by her pen name J. K. Rowling, is a British author and philanthropist. She wrote Harry Potter, a seven-volume children's fantasy series published from 1997 to 2007. The series has sold over 600 million copies, been translated into 84 languages, and spawned a global media franchise including films and video games. The Casual Vacancy (2012) was her first novel for adults. She writes Cormoran Strike, an ongoing crime fiction series, under the alias Robert Galbraith.",
+      "answers": [
+        "Joanne Rowling a.k.a J.K.Rowling is the famous author of Harry Potter books."
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-006",
+      "question": "Given the reference text below the eruption of Mount Vesuvius, how high was the mountain after the disaster?",
+      "context": "In December 1631, Mount Vesuvius in Italy erupted. The eruption began on 16 December 1631 and culminated the day after. The Volcanic Explosivity Index was VEI-5, and it was a Plinian eruption that buried many villages under the resulting lava flows. It is estimated that between 4,000 people were killed by the eruption, making it the highest death toll for a volcanic disaster in the Mediterranean in the last 1800 years.[citation needed] The 1631 eruption was considered to be of minor proportions regarding its eruptive magnitude and erupted volumes compared to the AD 79 eruption, but",
+      "answers": [
+        "Mount Vesuvius had a reduced summit by 450 meters."
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-007",
+      "question": "Extract the name of the country where Djidonou was born.",
+      "context": "Born in Domont, France, Djidonou has played club football for Racing Paris, Entente SSG, Red Star, Libourne, Racing Paris and Mulhouse. In June 2013, he signed for Championnat National 2 side Romorantin.",
+      "answers": [
+        "France"
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-008",
+      "question": "Who wrote The Picture of Dorian Grey in 1891",
+      "context": "",
+      "answers": [
+        "Oscar Wilde"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-009",
+      "question": "Given a reference text about the Tampa Bay Buccaneers, how many Super Bowls have they won.",
+      "context": "The Tampa Bay Buccaneers are a professional American football team based in Tampa, Florida. The Buccaneers compete in the National Football League (NFL) as a member club of the league's National Football Conference (NFC) South division. The club joined the NFL in 1976 as an expansion team, along with the Seattle Seahawks, and played its first season in the American Football Conference (AFC) West division. Prior to the 1977 season, Tampa Bay switched conferences and divisions with Seattle, becoming a member of the NFC Central division. As a result of the league's realignment prior to the",
+      "answers": [
+        "The Buccaneers have won two Super Bowl championships."
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-010",
+      "question": "Walter Koenig played which part in the Star Trek series",
+      "context": "",
+      "answers": [
+        "Ensign Chekov"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-011",
+      "question": "What is a bicameral legislature?",
+      "context": "",
+      "answers": [
+        "A legislative body comprised of two separate chambers"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-012",
+      "question": "For whom is Daenerys Targaryen's dragon, Viserion, named for?",
+      "context": "",
+      "answers": [
+        "She named Viserion after her late brother, Viserys"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-013",
+      "question": "What singer has had a Billboard No. 1 hit in each of the last four decades?",
+      "context": "",
+      "answers": [
+        "Mariah Carey"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-014",
+      "question": "Who were King Aenys I Targaryen's children?",
+      "context": "",
+      "answers": [
+        "Aegon, Viserys, Jaehaerys, Rhaena, Alysanne, Vaella"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-015",
+      "question": "What does Lady Gaga affectionately call her fans?",
+      "context": "",
+      "answers": [
+        "Little monsters."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-016",
+      "question": "Name some of the superhero teams of Marvel Comics as per the passage.",
+      "context": "Marvel Comics is an American comic book publisher and the flagship property of Marvel Entertainment, a division of The Walt Disney Company since September 1, 2009. Evolving from Timely Comics in 1939, Magazine Management/Atlas Comics in 1951 and its predecessor, Marvel Mystery Comics, the Marvel Comics title/name/brand was first used in June 1961. Marvel was started in 1939 by Martin Goodman as Timely Comics, and by 1951 had generally become known as Atlas Comics. The Marvel era began in June 1961 with the launch of The Fantastic Four and other superhero titles created by Stan Lee,",
+      "answers": [
+        "Avengers, X-Men, Fantastic Four, and Guardians of the Galaxy."
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-017",
+      "question": "From the passage find parts of plant which can be used as scion. Display the results in comma separated format.",
+      "context": "Grafting or graftage is a horticultural technique whereby tissues of plants are joined so as to continue their growth together. The upper part of the combined plant is called the scion (/ˈsaɪən/) while the lower part is called the rootstock. The success of this joining requires that the vascular tissues grow together and such joining is called inosculation. The technique is most commonly used in asexual propagation of commercially grown plants for the horticultural and agricultural trades. In most cases, one plant is selected for its roots and this is called the stock or rootstock. The",
+      "answers": [
+        "stems, leaves, flowers, fruits"
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-018",
+      "question": "What was the Javelin  throw record made by Neeraj Chopra",
+      "context": "",
+      "answers": [
+        "88.44metres"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-019",
+      "question": "Which was the 5th largest recipient of FDI in world in 2020",
+      "context": "",
+      "answers": [
+        "India"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-020",
+      "question": "In the series A Song of Ice and Fire, who is the founder of House Baratheon?",
+      "context": "",
+      "answers": [
+        "Orys Baratheon"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-021",
+      "question": "What year did humankind walk on the moon?",
+      "context": "",
+      "answers": [
+        "1969"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-022",
+      "question": "What is the smallest state in the USA?",
+      "context": "",
+      "answers": [
+        "Rhode Island"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-023",
+      "question": "How many times have the Boston Celtics won the NBA championship?",
+      "context": "",
+      "answers": [
+        "The Celtics have won 17 NBA championships."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-024",
+      "question": "What is the largest lake in the united states?",
+      "context": "",
+      "answers": [
+        "Lake Superior"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-025",
+      "question": "Who betrayed Jesus to the Romans",
+      "context": "",
+      "answers": [
+        "Judas Escariot"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-026",
+      "question": "Give me a title of one of the \"Harry Potter\" novels.",
+      "context": "",
+      "answers": [
+        "Harry Potter and the Order of the Phoenix"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-027",
+      "question": "Best film in Motion Picture  27th Screen Actors Guild(SAG) Awards was given to which film?",
+      "context": "",
+      "answers": [
+        "Chicago 7"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-028",
+      "question": "What are five capital cities in Asia?",
+      "context": "",
+      "answers": [
+        "Five capital cities in Asia are Bangkok, Jakarta, Seoul, Manila, and Hanoi."
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-029",
+      "question": "Which is the last dynasty in China?",
+      "context": "",
+      "answers": [
+        "The Qing Dynasty"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-030",
+      "question": "From the passage provided, extract the languages in which Kishore Kumar provided his vocals as a playback singer. Separate them with a comma.",
+      "context": "Kishore Kumar (born Abhas Kumar Ganguly; pronunciation (help·info); 4 August 1929 – 13 October 1987) was an Indian playback singer and actor. He is widely regarded as one of the greatest, most influential and dynamic singers in the history of Indian music. He was one of the most popular singers in the Indian subcontinent, notable for his yodeling and ability to sing songs in different voices. He used to sing in different genres but some of his rare compositions, considered classics, were lost in time. According to his brother and legendary actor Ashok Kumar, Kishore Kumar",
+      "answers": [
+        "Hindi, Bengali, Marathi, Assamese, Gujarati, Kannada, Bhojpuri, Malayalam, Odia, Urdu"
+      ],
+      "tags": [
+        "information_extraction"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-031",
+      "question": "The latest Gold Medal was won by Neeraj Chopra in",
+      "context": "",
+      "answers": [
+        "Diamond League Final, Zurich"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-032",
+      "question": "How is Toshiyuki written?",
+      "context": "Toshiyuki can be written using different combinations of kanji characters. Here are some examples: 敏幸, \"agile, happiness\" 敏行, \"agile, go\" 敏之, \"agile, of\" 敏志, \"agile, determination\" 敏恭, \"agile, respectful\" 俊幸, \"talented, happiness\" 俊行, \"talented, go\" 俊之, \"talented, of\" 俊志, \"talented, determination\" 俊恭, \"talented, respectful\" 利幸, \"benefit, happiness\" 利行, \"benefit, go\" 利之, \"benefit, of\" 寿幸, \"long life, happiness\" 寿行, \"long life, go\" 寿之, \"long life, of\" 年幸, \"year, happiness\" 年行, \"year, go\" 年之, \"year, of\" The name can also be written in hiragana としゆき or katakana トシユキ.",
+      "answers": [
+        "Toshiyuki can be written using different combinations of kanji characters."
+      ],
+      "tags": [
+        "closed_qa"
+      ]
+    }
+  ]
+}

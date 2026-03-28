@@ -1,0 +1,63 @@
+{
+  "run_name": "dolly-qa-simple-spm-c128-screen",
+  "seed": 42,
+  "prepare": {
+    "name": "dolly_qa",
+    "source_url": "https://huggingface.co/datasets/databricks/databricks-dolly-15k/resolve/main/databricks-dolly-15k.jsonl",
+    "train_split": 0.95,
+    "split_seed": 42,
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer the question with a short direct answer. Use the context when it is provided.",
+    "context_word_limit": 96,
+    "prompt_loss_weight": 0.0,
+    "continuation_head_token_count": 16,
+    "continuation_head_loss_weight": 2.0,
+    "allowed_categories": ["open_qa", "closed_qa", "information_extraction"],
+    "min_answer_words": 1,
+    "max_answer_words": 12,
+    "max_question_words": 24,
+    "require_single_line_answer": true
+  },
+  "data_dir": "data/dolly-qa-simple-spm-u4096",
+  "out_dir": "checkpoints/dolly-qa-simple-spm-c128-screen",
+  "sample_prompt": "When did Virgin Australia start operating?",
+  "sample_context": "Virgin Australia, the trading name of Virgin Australia Airlines Pty Ltd, is an Australian-based airline. It commenced services on 31 August 2000 as Virgin Blue, with two aircraft on a single route.",
+  "suite_eval": {
+    "suite_path": "prompts/dolly_qa_simple_dev_v1.json",
+    "temperature": 0.2,
+    "top_k": 10,
+    "max_new_tokens": 24,
+    "eval_batches": 10,
+    "seed": 123
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 384,
+    "num_layers": 8,
+    "num_heads": 6,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 16,
+    "max_steps": 400,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 50,
+    "eval_batches": 10,
+    "checkpoint_interval": 50,
+    "sample_interval": 50,
+    "sample_tokens": 32,
+    "sample_temperature": 0.2,
+    "sample_top_k": 10,
+    "batch_sampling_mode": "loss_window"
+  }
+}

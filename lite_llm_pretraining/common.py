@@ -118,6 +118,26 @@ def example_start_positions(data, eos_token_id: int, context_size: int):
     return starts
 
 
+def loss_window_start_positions(data, loss_mask_data, context_size: int):
+    max_start = len(data) - context_size - 1
+    if max_start <= 0:
+        raise ValueError(
+            f"dataset is too small for context_size={context_size}: {len(data)} tokens"
+        )
+    mask = np.asarray(loss_mask_data, dtype=np.float32)
+    prefix = np.concatenate([np.asarray([0.0], dtype=np.float32), np.cumsum(mask)])
+    starts = np.arange(max_start + 1, dtype=np.int64)
+    window_sums = prefix[starts + context_size + 1] - prefix[starts + 1]
+    valid = window_sums > 0
+    starts = starts[valid]
+    if starts.size == 0:
+        raise ValueError(
+            "no loss-bearing windows fit the requested context size; "
+            f"context_size={context_size}"
+        )
+    return starts
+
+
 def get_batch(
     data,
     batch_size: int,

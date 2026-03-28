@@ -101,6 +101,18 @@ python -m lite_llm_pretraining.prepare_dolly_qa \
 python -m lite_llm_pretraining.prepare_squad_qa_eval
 ```
 
+如果要准备更贴近“简单问题短答案”的 `Dolly simple QA` 评测集：
+
+```bash
+python -m lite_llm_pretraining.prepare_dolly_qa_eval \
+  --source_path data/dolly-qa-spm-u4096/databricks-dolly-15k.jsonl \
+  --allowed_categories_json '["open_qa","closed_qa","information_extraction"]' \
+  --min_answer_words 1 \
+  --max_answer_words 12 \
+  --max_question_words 24 \
+  --require_single_line_answer
+```
+
 启动默认 smoke 训练：
 
 ```bash
@@ -172,6 +184,16 @@ python -m lite_llm_pretraining.run_local \
 - 训练内 `suite_eval` 指向 `prompts/squad_qa_dev_v1.json`
 
 这份 `smoke` 配置主要用于验证 `Q/A` 训练闭环，不代表当前已经得到高质量问答模型。
+
+如果要跑当前更聚焦的 `simple QA` compact 配置：
+
+```bash
+python -m lite_llm_pretraining.run_local \
+  --config configs/dolly-qa-simple-spm-c128-compact.json \
+  --force_prepare
+```
+
+这条线会先过滤到 `Dolly` 中更接近简单问答的短答案样本，并使用 `loss_window` 采样避免大量全零 loss 窗口。它是当前比基础 `smoke` 更好的 `simple QA` 基线，但还不是可用成品。
 
 从 checkpoint 采样：
 
@@ -273,6 +295,8 @@ TUI 内置命令：
 - 数据输出：`data/dolly-qa-spm-u4096/`
 - 评测集：`prompts/squad_qa_dev_v1.json`
 - 评测集：`prompts/squad_qa_holdout_v1.json`
+- 评测集：`prompts/dolly_qa_simple_dev_v1.json`
+- 评测集：`prompts/dolly_qa_simple_holdout_v1.json`
 - 训练输出：`checkpoints/tinyshakespeare-byte-smoke/`
 - 指标日志：`checkpoints/tinyshakespeare-byte-smoke/metrics.jsonl`
 - 采样结果：`checkpoints/tinyshakespeare-byte-smoke/samples/`

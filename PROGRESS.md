@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 已落地 `Dolly 15k -> Q/A 训练 -> SQuAD 风格评测 -> Q/A TUI` 主线，下一步转到 `Q/A` 质量优化
-- Latest Progress: 新增了 `prepare_dolly_qa.py`、`prepare_squad_qa_eval.py`、`evaluate_qa_suite.py`、通用 `evaluate_suite.py`，并把 `sample.py`、`tui_chat.py`、训练内 sample 和 `run_local.py` 全部接到真正的 `Question / Context / Answer` 模式；`configs/dolly-qa-spm-smoke.json` 已完成一次本机 smoke 闭环
-- Issues: 当前 `Dolly Q/A smoke` 只能证明链路打通，质量仍然很弱；当前 `best_suite` 在 `SQuAD dev/holdout v1` 上都是 `strict_pass_rate=0.0`，`token_f1` 仅约 `0.0281 / 0.0340`
-- Next Step: 以当前 `Q/A` 主线为基线开始做质量优化，优先收紧训练数据形态与损失设计，而不是继续沿故事续写路线调参
+- Current Task: 沿 `Dolly Q/A` 主线继续优化，目标先收紧成“简单问题能稳定答出来”
+- Latest Progress: 已补 `Dolly simple QA` 评测、简单问答子集过滤和多条聚焦配置；当前最优是 `4.2M compact + context=128 + loss_window` 路线，`simple QA dev token_f1=0.0297`，`holdout token_f1=0.0126`
+- Issues: 当前 best 仍然是 `strict_pass_rate=0.0 / exact_match=0.0`，真实采样还会退化成伪词和重复短语；说明现在虽然比原始 smoke 有进展，但离“简单问题回答好”还差很远
+- Next Step: 继续围绕当前 compact simple-QA 主线优化输出质量，优先考虑更强的答案对齐，而不是再扩大数据范围
 
 ## How To Read
 

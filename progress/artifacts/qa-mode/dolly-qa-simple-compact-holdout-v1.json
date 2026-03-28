@@ -1,0 +1,694 @@
+{
+  "checkpoint_dir": "checkpoints/dolly-qa-simple-spm-c128-compact/best_suite",
+  "suite_path": "prompts/dolly_qa_simple_holdout_v1.json",
+  "suite_name": "dolly_qa_simple_holdout_v1",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "qa",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer the question with a short direct answer. Use the context when it is provided.",
+    "prompt_template": "Question: {question}\n{context_block}Answer:"
+  },
+  "samples": [
+    {
+      "id": "dolly_qa_simple_holdout_v1-001",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who wrote The History of Mr Polly",
+      "context": "",
+      "answers": [
+        "H. G. Wells"
+      ],
+      "model_prompt": "Question: Who wrote The History of Mr Polly\nAnswer:",
+      "output": "The y of yfted the capital of yes of the first a",
+      "predicted_answer": "The y of yfted the capital of yes of the first a",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-002",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who created pilates?",
+      "context": "",
+      "answers": [
+        "Pilates was developed by Joseph Pilates."
+      ],
+      "model_prompt": "Question: Who created pilates?\nAnswer:",
+      "output": "The sns of Serns in of yned in n,",
+      "predicted_answer": "The sns of Serns in of yned in n,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-003",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who won highest number of Men's singles Wimbledon titles?",
+      "context": "",
+      "answers": [
+        "Roger Federer won highest number of Wimbledon titles (8 Titles)"
+      ],
+      "model_prompt": "Question: Who won highest number of Men's singles Wimbledon titles?\nAnswer:",
+      "output": "Andern, and sya, and Bronncress,",
+      "predicted_answer": "Andern, and sya, and Bronncress,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-004",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "The BCG vaccine has proved quite effective against which infection",
+      "context": "",
+      "answers": [
+        "SAR infection"
+      ],
+      "model_prompt": "Question: The BCG vaccine has proved quite effective against which infection\nAnswer:",
+      "output": "The snksn was born in 19111, 1913.",
+      "predicted_answer": "The snksn was born in 19111, 1913.",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-005",
+      "tags": [
+        "closed_qa"
+      ],
+      "question": "Who is J.K.Rowling?",
+      "context": "Joanne Rowling CH OBE FRSL (/ˈroʊlɪŋ/ \"rolling\"; born 31 July 1965), also known by her pen name J. K. Rowling, is a British author and philanthropist. She wrote Harry Potter, a seven-volume children's fantasy series published from 1997 to 2007. The series has sold over 600 million copies, been translated into 84 languages, and spawned a global media franchise including films and video games. The Casual Vacancy (2012) was her first novel for adults. She writes Cormoran Strike, an ongoing crime fiction series, under the alias Robert Galbraith.",
+      "answers": [
+        "Joanne Rowling a.k.a J.K.Rowling is the famous author of Harry Potter books."
+      ],
+      "model_prompt": "Question: Who is J.K.Rowling?\nContext: Joanne Rowling CH OBE FRSL (/ˈroʊlɪŋ/ \"rolling\"; born 31 July 1965), also known by her pen name J. K. Rowling, is a British author and philanthropist. She wrote Harry Potter, a seven-volume children's fantasy series published from 1997 to 2007. The series has sold over 600 million copies, been translated into 84 languages, and spawned a global media franchise including films and video games. The Casual Vacancy (2012) was her first novel for adults. She writes Cormoran Strike, an ongoing crime fiction series, under the alias Robert Galbraith.\nAnswer:",
+      "output": "The As, and Wals, and sy, and sy, and sy",
+      "predicted_answer": "The As, and Wals, and sy, and sy, and sy",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-006",
+      "tags": [
+        "closed_qa"
+      ],
+      "question": "Given the reference text below the eruption of Mount Vesuvius, how high was the mountain after the disaster?",
+      "context": "In December 1631, Mount Vesuvius in Italy erupted. The eruption began on 16 December 1631 and culminated the day after. The Volcanic Explosivity Index was VEI-5, and it was a Plinian eruption that buried many villages under the resulting lava flows. It is estimated that between 4,000 people were killed by the eruption, making it the highest death toll for a volcanic disaster in the Mediterranean in the last 1800 years.[citation needed] The 1631 eruption was considered to be of minor proportions regarding its eruptive magnitude and erupted volumes compared to the AD 79 eruption, but",
+      "answers": [
+        "Mount Vesuvius had a reduced summit by 450 meters."
+      ],
+      "model_prompt": "Question: Given the reference text below the eruption of Mount Vesuvius, how high was the mountain after the disaster?\nContext: In December 1631, Mount Vesuvius in Italy erupted. The eruption began on 16 December 1631 and culminated the day after. The Volcanic Explosivity Index was VEI-5, and it was a Plinian eruption that buried many villages under the resulting lava flows. It is estimated that between 4,000 people were killed by the eruption, making it the highest death toll for a volcanic disaster in the Mediterranean in the last 1800 years.[citation needed] The 1631 eruption was considered to be of minor proportions regarding its eruptive magnitude and erupted volumes compared to the AD 79 eruption, but\nAnswer:",
+      "output": "The first a a a in the first a in the a a a a in the a in the",
+      "predicted_answer": "The first a a a in the first a in the a a a a in the a in the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-007",
+      "tags": [
+        "information_extraction"
+      ],
+      "question": "Extract the name of the country where Djidonou was born.",
+      "context": "Born in Domont, France, Djidonou has played club football for Racing Paris, Entente SSG, Red Star, Libourne, Racing Paris and Mulhouse. In June 2013, he signed for Championnat National 2 side Romorantin.",
+      "answers": [
+        "France"
+      ],
+      "model_prompt": "Question: Extract the name of the country where Djidonou was born.\nContext: Born in Domont, France, Djidonou has played club football for Racing Paris, Entente SSG, Red Star, Libourne, Racing Paris and Mulhouse. In June 2013, he signed for Championnat National 2 side Romorantin.\nAnswer:",
+      "output": "\"We, and 191, and the 197, and sree,",
+      "predicted_answer": "\"We, and 191, and the 197, and sree,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-008",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who wrote The Picture of Dorian Grey in 1891",
+      "context": "",
+      "answers": [
+        "Oscar Wilde"
+      ],
+      "model_prompt": "Question: Who wrote The Picture of Dorian Grey in 1891\nAnswer:",
+      "output": "The Harry a famous in 196. Z.nks.s",
+      "predicted_answer": "The Harry a famous in 196. Z.nks.s",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-009",
+      "tags": [
+        "closed_qa"
+      ],
+      "question": "Given a reference text about the Tampa Bay Buccaneers, how many Super Bowls have they won.",
+      "context": "The Tampa Bay Buccaneers are a professional American football team based in Tampa, Florida. The Buccaneers compete in the National Football League (NFL) as a member club of the league's National Football Conference (NFC) South division. The club joined the NFL in 1976 as an expansion team, along with the Seattle Seahawks, and played its first season in the American Football Conference (AFC) West division. Prior to the 1977 season, Tampa Bay switched conferences and divisions with Seattle, becoming a member of the NFC Central division. As a result of the league's realignment prior to the",
+      "answers": [
+        "The Buccaneers have won two Super Bowl championships."
+      ],
+      "model_prompt": "Question: Given a reference text about the Tampa Bay Buccaneers, how many Super Bowls have they won.\nContext: The Tampa Bay Buccaneers are a professional American football team based in Tampa, Florida. The Buccaneers compete in the National Football League (NFL) as a member club of the league's National Football Conference (NFC) South division. The club joined the NFL in 1976 as an expansion team, along with the Seattle Seahawks, and played its first season in the American Football Conference (AFC) West division. Prior to the 1977 season, Tampa Bay switched conferences and divisions with Seattle, becoming a member of the NFC Central division. As a result of the league's realignment prior to the\nAnswer:",
+      "output": "The Edack and Sern, and Sern a a a a a f",
+      "predicted_answer": "The Edack and Sern, and Sern a a a a a f",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-010",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Walter Koenig played which part in the Star Trek series",
+      "context": "",
+      "answers": [
+        "Ensign Chekov"
+      ],
+      "model_prompt": "Question: Walter Koenig played which part in the Star Trek series\nAnswer:",
+      "output": "The Wencess in y is a famous a facke",
+      "predicted_answer": "The Wencess in y is a famous a facke",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-011",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is a bicameral legislature?",
+      "context": "",
+      "answers": [
+        "A legislative body comprised of two separate chambers"
+      ],
+      "model_prompt": "Question: What is a bicameral legislature?\nAnswer:",
+      "output": "The y is alorts.n.lent is",
+      "predicted_answer": "The y is alorts.n.lent is",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-012",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "For whom is Daenerys Targaryen's dragon, Viserion, named for?",
+      "context": "",
+      "answers": [
+        "She named Viserion after her late brother, Viserys"
+      ],
+      "model_prompt": "Question: For whom is Daenerys Targaryen's dragon, Viserion, named for?\nAnswer:",
+      "output": "The denn.n, and Bron, agles, C",
+      "predicted_answer": "The denn.n, and Bron, agles, C",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-013",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What singer has had a Billboard No. 1 hit in each of the last four decades?",
+      "context": "",
+      "answers": [
+        "Mariah Carey"
+      ],
+      "model_prompt": "Question: What singer has had a Billboard No. 1 hit in each of the last four decades?\nAnswer:",
+      "output": "The yed in the Wened in Z.a, 19",
+      "predicted_answer": "The yed in the Wened in Z.a, 19",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-014",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who were King Aenys I Targaryen's children?",
+      "context": "",
+      "answers": [
+        "Aegon, Viserys, Jaehaerys, Rhaena, Alysanne, Vaella"
+      ],
+      "model_prompt": "Question: Who were King Aenys I Targaryen's children?\nAnswer:",
+      "output": "The slingss of enss the ress in the capital of the",
+      "predicted_answer": "The slingss of enss the ress in the capital of the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-015",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What does Lady Gaga affectionately call her fans?",
+      "context": "",
+      "answers": [
+        "Little monsters."
+      ],
+      "model_prompt": "Question: What does Lady Gaga affectionately call her fans?\nAnswer:",
+      "output": "The lesssss of lesssssssss",
+      "predicted_answer": "The lesssss of lesssssssss",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-016",
+      "tags": [
+        "information_extraction"
+      ],
+      "question": "Name some of the superhero teams of Marvel Comics as per the passage.",
+      "context": "Marvel Comics is an American comic book publisher and the flagship property of Marvel Entertainment, a division of The Walt Disney Company since September 1, 2009. Evolving from Timely Comics in 1939, Magazine Management/Atlas Comics in 1951 and its predecessor, Marvel Mystery Comics, the Marvel Comics title/name/brand was first used in June 1961. Marvel was started in 1939 by Martin Goodman as Timely Comics, and by 1951 had generally become known as Atlas Comics. The Marvel era began in June 1961 with the launch of The Fantastic Four and other superhero titles created by Stan Lee,",
+      "answers": [
+        "Avengers, X-Men, Fantastic Four, and Guardians of the Galaxy."
+      ],
+      "model_prompt": "Question: Name some of the superhero teams of Marvel Comics as per the passage.\nContext: Marvel Comics is an American comic book publisher and the flagship property of Marvel Entertainment, a division of The Walt Disney Company since September 1, 2009. Evolving from Timely Comics in 1939, Magazine Management/Atlas Comics in 1951 and its predecessor, Marvel Mystery Comics, the Marvel Comics title/name/brand was first used in June 1961. Marvel was started in 1939 by Martin Goodman as Timely Comics, and by 1951 had generally become known as Atlas Comics. The Marvel era began in June 1961 with the launch of The Fantastic Four and other superhero titles created by Stan Lee,\nAnswer:",
+      "output": "The Beee, Ea, and ada, and the WA and the capital",
+      "predicted_answer": "The Beee, Ea, and ada, and the WA and the capital",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1176,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-017",
+      "tags": [
+        "information_extraction"
+      ],
+      "question": "From the passage find parts of plant which can be used as scion. Display the results in comma separated format.",
+      "context": "Grafting or graftage is a horticultural technique whereby tissues of plants are joined so as to continue their growth together. The upper part of the combined plant is called the scion (/ˈsaɪən/) while the lower part is called the rootstock. The success of this joining requires that the vascular tissues grow together and such joining is called inosculation. The technique is most commonly used in asexual propagation of commercially grown plants for the horticultural and agricultural trades. In most cases, one plant is selected for its roots and this is called the stock or rootstock. The",
+      "answers": [
+        "stems, leaves, flowers, fruits"
+      ],
+      "model_prompt": "Question: From the passage find parts of plant which can be used as scion. Display the results in comma separated format.\nContext: Grafting or graftage is a horticultural technique whereby tissues of plants are joined so as to continue their growth together. The upper part of the combined plant is called the scion (/ˈsaɪən/) while the lower part is called the rootstock. The success of this joining requires that the vascular tissues grow together and such joining is called inosculation. The technique is most commonly used in asexual propagation of commercially grown plants for the horticultural and agricultural trades. In most cases, one plant is selected for its roots and this is called the stock or rootstock. The\nAnswer:",
+      "output": "The ranic the a freears in the a fars in the",
+      "predicted_answer": "The ranic the a freears in the a fars in the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-018",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What was the Javelin  throw record made by Neeraj Chopra",
+      "context": "",
+      "answers": [
+        "88.44metres"
+      ],
+      "model_prompt": "Question: What was the Javelin  throw record made by Neeraj Chopra\nAnswer:",
+      "output": "The Ceeee, COssss, Cl, Cars",
+      "predicted_answer": "The Ceeee, COssss, Cl, Cars",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-019",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which was the 5th largest recipient of FDI in world in 2020",
+      "context": "",
+      "answers": [
+        "India"
+      ],
+      "model_prompt": "Question: Which was the 5th largest recipient of FDI in world in 2020\nAnswer:",
+      "output": "The University of eneeeeeeeeeeeeeee",
+      "predicted_answer": "The University of eneeeeeeeeeeeeeee",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-020",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "In the series A Song of Ice and Fire, who is the founder of House Baratheon?",
+      "context": "",
+      "answers": [
+        "Orys Baratheon"
+      ],
+      "model_prompt": "Question: In the series A Song of Ice and Fire, who is the founder of House Baratheon?\nAnswer:",
+      "output": "The see for a freeeeened in 191, and",
+      "predicted_answer": "The see for a freeeeened in 191, and",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-021",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What year did humankind walk on the moon?",
+      "context": "",
+      "answers": [
+        "1969"
+      ],
+      "model_prompt": "Question: What year did humankind walk on the moon?\nAnswer:",
+      "output": "The sys in the capital of 193.an of the Wnks",
+      "predicted_answer": "The sys in the capital of 193.an of the Wnks",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-022",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the smallest state in the USA?",
+      "context": "",
+      "answers": [
+        "Rhode Island"
+      ],
+      "model_prompt": "Question: What is the smallest state in the USA?\nAnswer:",
+      "output": "The Chicago of 1911, 1917.ed in the 191392",
+      "predicted_answer": "The Chicago of 1911, 1917.ed in the 191392",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-023",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many times have the Boston Celtics won the NBA championship?",
+      "context": "",
+      "answers": [
+        "The Celtics have won 17 NBA championships."
+      ],
+      "model_prompt": "Question: How many times have the Boston Celtics won the NBA championship?\nAnswer:",
+      "output": "The sCAyree, 1972lAenky is",
+      "predicted_answer": "The sCAyree, 1972lAenky is",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-024",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest lake in the united states?",
+      "context": "",
+      "answers": [
+        "Lake Superior"
+      ],
+      "model_prompt": "Question: What is the largest lake in the united states?\nAnswer:",
+      "output": "The Ed the Wre for a famous y is a frid the the",
+      "predicted_answer": "The Ed the Wre for a famous y is a frid the the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-025",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who betrayed Jesus to the Romans",
+      "context": "",
+      "answers": [
+        "Judas Escariot"
+      ],
+      "model_prompt": "Question: Who betrayed Jesus to the Romans\nAnswer:",
+      "output": "\"ee, y, 191, 191, 198, 191, 19",
+      "predicted_answer": "\"ee, y, 191, 191, 198, 191, 19",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-026",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Give me a title of one of the \"Harry Potter\" novels.",
+      "context": "",
+      "answers": [
+        "Harry Potter and the Order of the Phoenix"
+      ],
+      "model_prompt": "Question: Give me a title of one of the \"Harry Potter\" novels.\nAnswer:",
+      "output": "Ab, and Blosssss, and Brossss",
+      "predicted_answer": "Ab, and Blosssss, and Brossss",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1818,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-027",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Best film in Motion Picture  27th Screen Actors Guild(SAG) Awards was given to which film?",
+      "context": "",
+      "answers": [
+        "Chicago 7"
+      ],
+      "model_prompt": "Question: Best film in Motion Picture  27th Screen Actors Guild(SAG) Awards was given to which film?\nAnswer:",
+      "output": "The swn, Sy is a frinks in 191411",
+      "predicted_answer": "The swn, Sy is a frinks in 191411",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-028",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are five capital cities in Asia?",
+      "context": "",
+      "answers": [
+        "Five capital cities in Asia are Bangkok, Jakarta, Seoul, Manila, and Hanoi."
+      ],
+      "model_prompt": "Question: What are five capital cities in Asia?\nAnswer:",
+      "output": "The se, 1913.s is a fres in the 1912",
+      "predicted_answer": "The se, 1913.s is a fres in the 1912",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.1053,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-029",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which is the last dynasty in China?",
+      "context": "",
+      "answers": [
+        "The Qing Dynasty"
+      ],
+      "model_prompt": "Question: Which is the last dynasty in China?\nAnswer:",
+      "output": "a famous in in Enkuened in is adare",
+      "predicted_answer": "a famous in in Enkuened in is adare",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-030",
+      "tags": [
+        "information_extraction"
+      ],
+      "question": "From the passage provided, extract the languages in which Kishore Kumar provided his vocals as a playback singer. Separate them with a comma.",
+      "context": "Kishore Kumar (born Abhas Kumar Ganguly; pronunciation (help·info); 4 August 1929 – 13 October 1987) was an Indian playback singer and actor. He is widely regarded as one of the greatest, most influential and dynamic singers in the history of Indian music. He was one of the most popular singers in the Indian subcontinent, notable for his yodeling and ability to sing songs in different voices. He used to sing in different genres but some of his rare compositions, considered classics, were lost in time. According to his brother and legendary actor Ashok Kumar, Kishore Kumar",
+      "answers": [
+        "Hindi, Bengali, Marathi, Assamese, Gujarati, Kannada, Bhojpuri, Malayalam, Odia, Urdu"
+      ],
+      "model_prompt": "Question: From the passage provided, extract the languages in which Kishore Kumar provided his vocals as a playback singer. Separate them with a comma.\nContext: Kishore Kumar (born Abhas Kumar Ganguly; pronunciation (help·info); 4 August 1929 – 13 October 1987) was an Indian playback singer and actor. He is widely regarded as one of the greatest, most influential and dynamic singers in the history of Indian music. He was one of the most popular singers in the Indian subcontinent, notable for his yodeling and ability to sing songs in different voices. He used to sing in different genres but some of his rare compositions, considered classics, were lost in time. According to his brother and legendary actor Ashok Kumar, Kishore Kumar\nAnswer:",
+      "output": "The swns, and sy, and sns, and swn,",
+      "predicted_answer": "The swns, and sy, and sns, and swn,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-031",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "The latest Gold Medal was won by Neeraj Chopra in",
+      "context": "",
+      "answers": [
+        "Diamond League Final, Zurich"
+      ],
+      "model_prompt": "Question: The latest Gold Medal was won by Neeraj Chopra in\nAnswer:",
+      "output": "The Amsacks in 197 in 191n.n.",
+      "predicted_answer": "The Amsacks in 197 in 191n.n.",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_qa_simple_holdout_v1-032",
+      "tags": [
+        "closed_qa"
+      ],
+      "question": "How is Toshiyuki written?",
+      "context": "Toshiyuki can be written using different combinations of kanji characters. Here are some examples: 敏幸, \"agile, happiness\" 敏行, \"agile, go\" 敏之, \"agile, of\" 敏志, \"agile, determination\" 敏恭, \"agile, respectful\" 俊幸, \"talented, happiness\" 俊行, \"talented, go\" 俊之, \"talented, of\" 俊志, \"talented, determination\" 俊恭, \"talented, respectful\" 利幸, \"benefit, happiness\" 利行, \"benefit, go\" 利之, \"benefit, of\" 寿幸, \"long life, happiness\" 寿行, \"long life, go\" 寿之, \"long life, of\" 年幸, \"year, happiness\" 年行, \"year, go\" 年之, \"year, of\" The name can also be written in hiragana としゆき or katakana トシユキ.",
+      "answers": [
+        "Toshiyuki can be written using different combinations of kanji characters."
+      ],
+      "model_prompt": "Question: How is Toshiyuki written?\nContext: Toshiyuki can be written using different combinations of kanji characters. Here are some examples: 敏幸, \"agile, happiness\" 敏行, \"agile, go\" 敏之, \"agile, of\" 敏志, \"agile, determination\" 敏恭, \"agile, respectful\" 俊幸, \"talented, happiness\" 俊行, \"talented, go\" 俊之, \"talented, of\" 俊志, \"talented, determination\" 俊恭, \"talented, respectful\" 利幸, \"benefit, happiness\" 利行, \"benefit, go\" 利之, \"benefit, of\" 寿幸, \"long life, happiness\" 寿行, \"long life, go\" 寿之, \"long life, of\" 年幸, \"year, happiness\" 年行, \"year, go\" 年之, \"year, of\" The name can also be written in hiragana としゆき or katakana トシユキ.\nAnswer:",
+      "output": "They, and the a fa, and the a fa, and the Wee",
+      "predicted_answer": "They, and the a fa, and the a fa, and the Wee",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    }
+  ],
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 3.83196,
+    "val_ppl": 46.152891,
+    "checkpoint_step": 250,
+    "best_val_loss": 5.457771682739258
+  },
+  "summary": {
+    "strict_passed": 0,
+    "total_samples": 32,
+    "strict_pass_rate": 0.0,
+    "exact_match": 0.0,
+    "token_f1": 0.0126,
+    "answer_presence_rate": 0.0,
+    "tag_summary": {
+      "closed_qa": {
+        "total": 4,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "information_extraction": {
+        "total": 4,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0294
+      },
+      "open_qa": {
+        "total": 24,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.012
+      }
+    }
+  }
+}

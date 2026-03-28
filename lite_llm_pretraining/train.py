@@ -13,6 +13,7 @@ from lite_llm_pretraining.common import (
     example_start_positions,
     get_batch,
     learning_rate_at,
+    loss_window_start_positions,
     load_json,
     load_loss_mask,
     load_memmap,
@@ -87,6 +88,22 @@ def train_from_config(config_path: Path):
     inference_profile = resolve_inference_profile_from_config(config, path_hint=str(out_dir))
 
     model = TransformerLM(**model_config)
+    init_checkpoint_dir = config.get("init_checkpoint_dir")
+    if init_checkpoint_dir:
+        init_checkpoint_dir = Path(init_checkpoint_dir)
+        init_model_config = load_json(init_checkpoint_dir / "model_config.json")
+        comparable_keys = ["vocab_size", "context_size", "dim", "num_layers", "num_heads"]
+        mismatches = [
+            key
+            for key in comparable_keys
+            if init_model_config.get(key) != model_config.get(key)
+        ]
+        if mismatches:
+            raise ValueError(
+                "init checkpoint model config mismatch for keys: "
+                + ", ".join(sorted(mismatches))
+            )
+        model.load_weights(str(init_checkpoint_dir / "weights.npz"))
     optimizer = optim.AdamW(
         learning_rate=train_config["learning_rate"],
         weight_decay=train_config["weight_decay"],
@@ -120,6 +137,19 @@ def train_from_config(config_path: Path):
         val_start_positions = example_start_positions(
             val_data,
             eos_token_id,
+            context_size,
+        )
+    elif batch_sampling_mode == "loss_window":
+        if train_loss_mask is None or val_loss_mask is None:
+            raise ValueError("batch_sampling_mode=loss_window requires loss masks")
+        train_start_positions = loss_window_start_positions(
+            train_data,
+            train_loss_mask,
+            context_size,
+        )
+        val_start_positions = loss_window_start_positions(
+            val_data,
+            val_loss_mask,
             context_size,
         )
     best_val_loss = float("inf")
