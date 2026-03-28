@@ -82,6 +82,9 @@ def train_from_config(config_path: Path):
     val_data = load_memmap(data_dir, "val", token_dtype=token_dtype)
     train_loss_mask = load_loss_mask(data_dir, "train", meta)
     val_loss_mask = load_loss_mask(data_dir, "val", meta)
+    if not train_config.get("use_loss_mask", True):
+        train_loss_mask = None
+        val_loss_mask = None
     loss_and_grad_fn = nn.value_and_grad(model, loss_fn)
 
     batch_size = train_config["batch_size"]

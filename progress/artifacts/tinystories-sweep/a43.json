@@ -1,0 +1,77 @@
+{
+  "attempt_id": "A43",
+  "notes": "push context below median prompt-continuation length to emphasize prompt anchors and first continuation tokens",
+  "base_config": "configs/tinystories-spm-prompted-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-261bu6kp-a43.json",
+  "run_name": "tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es",
+  "data_dir": "data/tinystories-spm-u8192-bf-pc1-cm1-s2",
+  "out_dir": "checkpoints/tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "story_format": "prompt_continuation",
+    "prompt_sentence_count": 1
+  },
+  "model": {
+    "context_size": 32,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 24,
+    "max_steps": 900,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 150,
+    "eval_batches": 10,
+    "checkpoint_interval": 900,
+    "sample_interval": 900,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5,
+    "batch_sampling_mode": "example_start"
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.453684,
+    "val_ppl": 85.943012,
+    "checkpoint_step": 750,
+    "best_val_loss": 2.8632992267608643
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "He was very much and he liked to play with his friends. One day, he saw a big boy in the sea. He had a big and would use for his mom. They wanted to make a trip. He was his. He wanted to explore the the world with it. He had a special. He wanted to make a little. She was so much and put to it. He couldn't explore the the the world and all the one to his own. He saw the things. He was it around and it was beautiful. He had a new boy. He was sad and the fun. They wanted to explore the the world ar",
+  "sample_state": {
+    "step": 750,
+    "best_val_loss": 2.8632992267608643
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es",
+    "out_dir": "checkpoints/tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es",
+    "best_val_loss": 2.8632992267608643,
+    "last_val_loss": 2.965882420539856,
+    "final_step": 900,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a43-pc1m2-u8192bf-c32-900-es/metrics.jsonl"
+  }
+}

@@ -28,9 +28,16 @@ def resolve_inference_profile_from_config(config, path_hint: str = ""):
 
     prepare = config.get("prepare", {})
     if prepare.get("story_format") == "prompt_continuation":
+        prompt_label = prepare.get("prompt_label", "Prompt")
+        continuation_label = prepare.get("continuation_label", "Continuation")
+        instruction_text = prepare.get("instruction_text", "").strip()
+        template_lines = [f"{prompt_label}: {{prompt}}"]
+        if instruction_text:
+            template_lines.append(instruction_text)
+        template_lines.append(f"{continuation_label}:")
         return {
             "mode": "story",
-            "prompt_template": PROMPT_CONTINUATION_TEMPLATE,
+            "prompt_template": "\n".join(template_lines),
         }
 
     data_dir = str(config.get("data_dir", "")).lower()

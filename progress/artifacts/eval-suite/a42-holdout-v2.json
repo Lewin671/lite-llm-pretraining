@@ -1,0 +1,2811 @@
+{
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a42-pc1m2-u8192bf-c48-900-es/best",
+  "suite_path": "prompts/tinystories_eval_holdout_v2.json",
+  "suite_name": "tinystories_eval_holdout_v2",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "story",
+    "prompt_template": "Prompt: {prompt}\nContinuation:"
+  },
+  "samples": [
+    {
+      "id": "HOLD001",
+      "tags": [
+        "object",
+        "weather",
+        "outdoor"
+      ],
+      "prompt": "Clara tucked a blue compass into her coat before crossing the windy field.",
+      "model_prompt": "Prompt: Clara tucked a blue compass into her coat before crossing the windy field.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "clara"
+          ],
+          "focus": [
+            "compass"
+          ],
+          "container": [
+            "coat"
+          ],
+          "place": [
+            "field"
+          ],
+          "weather": [
+            "windy"
+          ]
+        },
+        "optional": {
+          "event": [
+            "tucked",
+            "tuck",
+            "crossing",
+            "cross"
+          ],
+          "color": [
+            "blue"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She had lots of toys, and she had been out the other animals. She asked her mom, \", \", she had a girl. was a little girl and she was so it and her. was so she was a baby. was a., you so she was a little girl and her. was a little girl in her. was a very pink teddy. was a big, and and she didn'. was a boy named she loved to her. and Lily loved her. was a dog, and Lily was a big, and she who was a little. loved his. was that, but he was a big field. was a that of. was a very big and it was a little girl",
+      "metrics": {
+        "char_count": 506,
+        "word_count": 117,
+        "unique_word_ratio": 0.3419,
+        "common_word_ratio": 0.6923,
+        "short_word_ratio": 0.1368,
+        "repeated_trigram_ratio": 0.1478,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 15,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 9,
+        "prompt_content_hit_count": 1,
+        "prompt_content_hit_ratio": 0.1111,
+        "prompt_keyword_count": 10,
+        "prompt_keyword_hit_count": 1,
+        "prompt_keyword_hit_ratio": 0.1,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "clara"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "compass"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "container": {
+            "expected_terms": [
+              "coat"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "field"
+            ],
+            "matched_terms": [
+              "field"
+            ],
+            "hit": true
+          },
+          "weather": {
+            "expected_terms": [
+              "windy"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 1,
+        "required_group_hit_ratio": 0.2,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "tucked",
+              "tuck",
+              "crossing",
+              "cross"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "color": {
+            "expected_terms": [
+              "blue"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 2,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD002",
+      "tags": [
+        "animal",
+        "indoor",
+        "time"
+      ],
+      "prompt": "Dylan watched his hedgehog crawl under the piano bench at sunrise.",
+      "model_prompt": "Prompt: Dylan watched his hedgehog crawl under the piano bench at sunrise.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "dylan"
+          ],
+          "focus": [
+            "hedgehog"
+          ],
+          "object": [
+            "piano"
+          ],
+          "place": [
+            "bench"
+          ],
+          "time": [
+            "sunrise"
+          ]
+        },
+        "optional": {
+          "event": [
+            "crawl",
+            "crawled"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He was very happy and he did a big, but he had a big, and he was very much. He had been looking to her., so he was a little bear. was a little, but he was playing around the. was a little boy who was scared and it. was a very, but he was a little girl who was a little girl. was a little girl who was a little girl. loved the house and she was very much. and she wanted to the. was so day, he was her. was a new, and she was the people who was a little. was a little boy and it was too.. was a big, and the toys was very friends. was a little",
+      "metrics": {
+        "char_count": 542,
+        "word_count": 123,
+        "unique_word_ratio": 0.2927,
+        "common_word_ratio": 0.6911,
+        "short_word_ratio": 0.122,
+        "repeated_trigram_ratio": 0.1983,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 14,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "dylan"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "hedgehog"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "object": {
+            "expected_terms": [
+              "piano"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "bench"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "time": {
+            "expected_terms": [
+              "sunrise"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "crawl",
+              "crawled"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD003",
+      "tags": [
+        "object",
+        "weather",
+        "outdoor"
+      ],
+      "prompt": "Hazel carried a striped scarf to the bus shelter during the hailstorm.",
+      "model_prompt": "Prompt: Hazel carried a striped scarf to the bus shelter during the hailstorm.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "hazel"
+          ],
+          "focus": [
+            "scarf"
+          ],
+          "place": [
+            "bus shelter"
+          ],
+          "weather": [
+            "hailstorm"
+          ]
+        },
+        "optional": {
+          "event": [
+            "carried",
+            "carry"
+          ],
+          "pattern": [
+            "striped"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "The It was so happy and the other animals. One day, the bird saw a little girl in her room and her. was a big,, and she was a. was a saw a luxury. was so she was too. and she said, \" Molly was so she wass. She was a little girl and it said, \", \"Hello, \", weed the, and her. was so she was a little bird that she was a little girl. was a special, and she was a little girl. was a girl and it was a beautiful. was a pink, and she was a dog time. was very bit for her. had been to her., and she was a, and she had",
+      "metrics": {
+        "char_count": 510,
+        "word_count": 115,
+        "unique_word_ratio": 0.3391,
+        "common_word_ratio": 0.7478,
+        "short_word_ratio": 0.1304,
+        "repeated_trigram_ratio": 0.1947,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 13,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "hazel"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "scarf"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "bus shelter"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "weather": {
+            "expected_terms": [
+              "hailstorm"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "carried",
+              "carry"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "pattern": {
+            "expected_terms": [
+              "striped"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 2,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD004",
+      "tags": [
+        "food",
+        "indoor",
+        "action"
+      ],
+      "prompt": "Jonah hid a lemon cookie behind the flower vase in the kitchen.",
+      "model_prompt": "Prompt: Jonah hid a lemon cookie behind the flower vase in the kitchen.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "jonah"
+          ],
+          "focus": [
+            "cookie"
+          ],
+          "object": [
+            "vase"
+          ],
+          "place": [
+            "kitchen"
+          ]
+        },
+        "optional": {
+          "event": [
+            "hid",
+            "hide"
+          ],
+          "flavor": [
+            "lemon"
+          ],
+          "detail": [
+            "flower"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She was very happy, and he wanted to explore the world around her. One day, the forest saw a little bird and saw a big.e of the baby was so she was a wanted to be a girl.. was so she was a big tree in the park. said, \"Hello, \"I', \"No, I friend said, \"\n I' and her. said, \", \" The brother said, \", the, \" I' were the king was, so the\n\n doed it.\"\n\n, but they was a girl. was a little girl and she was a boy. was very is a girl. was a little and it made her. was a special of. was so",
+      "metrics": {
+        "char_count": 480,
+        "word_count": 105,
+        "unique_word_ratio": 0.4476,
+        "common_word_ratio": 0.6476,
+        "short_word_ratio": 0.1238,
+        "repeated_trigram_ratio": 0.0777,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 12,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "jonah"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "cookie"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "object": {
+            "expected_terms": [
+              "vase"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "kitchen"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "hid",
+              "hide"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "flavor": {
+            "expected_terms": [
+              "lemon"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "detail": {
+            "expected_terms": [
+              "flower"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 3,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD005",
+      "tags": [
+        "object",
+        "outdoor",
+        "action"
+      ],
+      "prompt": "Keira found a bronze key beside the garden gate after the parade.",
+      "model_prompt": "Prompt: Keira found a bronze key beside the garden gate after the parade.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "keira"
+          ],
+          "focus": [
+            "key"
+          ],
+          "place": [
+            "garden"
+          ],
+          "object": [
+            "gate"
+          ],
+          "occasion": [
+            "parade"
+          ]
+        },
+        "optional": {
+          "event": [
+            "found",
+            "find"
+          ],
+          "color": [
+            "bronze"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She was a little girl and the other was very happy. She had a little girl named Lily. was a., and she was a boy that it was a. and she loved to play with her. and her food and she loved the birds. was a big, and she loved. and their. was a big and her her. was many. and she was a very toys and they were around her. was the, and she was a dog, and her. was a and she said,, \", \", \", you, we's mom is a., and they were the, and said, \" Lucy, “What a little girl. got a little girl and said,",
+      "metrics": {
+        "char_count": 490,
+        "word_count": 107,
+        "unique_word_ratio": 0.3645,
+        "common_word_ratio": 0.7103,
+        "short_word_ratio": 0.1215,
+        "repeated_trigram_ratio": 0.1714,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 14,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "keira"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "key"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "garden"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "object": {
+            "expected_terms": [
+              "gate"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "occasion": {
+            "expected_terms": [
+              "parade"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "found",
+              "find"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "color": {
+            "expected_terms": [
+              "bronze"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 2,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD006",
+      "tags": [
+        "animal",
+        "object",
+        "outdoor"
+      ],
+      "prompt": "Logan shared his flashlight with a fox near the mountain trail.",
+      "model_prompt": "Prompt: Logan shared his flashlight with a fox near the mountain trail.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "logan"
+          ],
+          "focus": [
+            "flashlight"
+          ],
+          "animal": [
+            "fox"
+          ],
+          "place": [
+            "mountain"
+          ],
+          "path": [
+            "trail"
+          ]
+        },
+        "optional": {
+          "event": [
+            "shared",
+            "share"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He was very excited and he loved to play with the king. He had a big, and a big, blue. was a bird and it was a shiny, and. was a bird of. was a tree and he was a big, and. was a bear and he was a little girl. was a little bird and it was a little. was a little girl and it was a little. was very new. always walking and the window. was the rainbow was so he had a little girl. was a little and it was very long., and it was very time and it was a big, and it was a horn. was so they loved to explore and he was a beautiful. was of new. and",
+      "metrics": {
+        "char_count": 539,
+        "word_count": 125,
+        "unique_word_ratio": 0.28,
+        "common_word_ratio": 0.72,
+        "short_word_ratio": 0.144,
+        "repeated_trigram_ratio": 0.2602,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 15,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 6,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 7,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "logan"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "flashlight"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "animal": {
+            "expected_terms": [
+              "fox"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "mountain"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "path": {
+            "expected_terms": [
+              "trail"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "shared",
+              "share"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD007",
+      "tags": [
+        "food",
+        "outdoor",
+        "time"
+      ],
+      "prompt": "Mira balanced a basket of pears on the porch rail at sunset.",
+      "model_prompt": "Prompt: Mira balanced a basket of pears on the porch rail at sunset.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "mira"
+          ],
+          "focus": [
+            "basket"
+          ],
+          "contents": [
+            "pears",
+            "pear"
+          ],
+          "place": [
+            "porch"
+          ],
+          "surface": [
+            "rail"
+          ],
+          "time": [
+            "sunset"
+          ]
+        },
+        "optional": {
+          "event": [
+            "balanced",
+            "balance"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "The truck was a big, and the other. The squirrel said, \"Let's go!\" said, \"Hello, \"Hi, \"No, “S, \"Can you go said, \" Mommy, \", \"\n, “Be'med in the. was a’, and she said, \"S, \"?\"\nThe, \"No, I do, and\n your secrets. was a little girl and it was very other. were going and it was a very noise. was a, and she was a boy and her. was a very different. was very thing and she was very new. and it was a, and and it was a very that and every. was a small that was so he",
+      "metrics": {
+        "char_count": 458,
+        "word_count": 97,
+        "unique_word_ratio": 0.433,
+        "common_word_ratio": 0.6186,
+        "short_word_ratio": 0.134,
+        "repeated_trigram_ratio": 0.1158,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 11,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 6,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 7,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "mira"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "basket"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "contents": {
+            "expected_terms": [
+              "pears",
+              "pear"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "porch"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "surface": {
+            "expected_terms": [
+              "rail"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "time": {
+            "expected_terms": [
+              "sunset"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 6,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "balanced",
+              "balance"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD008",
+      "tags": [
+        "object",
+        "weather",
+        "indoor"
+      ],
+      "prompt": "Nolan heard a trumpet inside the attic while the thunder rolled.",
+      "model_prompt": "Prompt: Nolan heard a trumpet inside the attic while the thunder rolled.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "nolan"
+          ],
+          "focus": [
+            "trumpet"
+          ],
+          "place": [
+            "attic"
+          ],
+          "weather": [
+            "thunder"
+          ]
+        },
+        "optional": {
+          "event": [
+            "heard",
+            "hear",
+            "rolled",
+            "roll"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He was very happy, and he had a little boat. He wanted to take the shore, so he saw a little girl. was a strange and his friends saw a. was a little bird in the forest of the field. was a little girl and what was a little, and it. was a big, and it was a beautiful, and Lily. was a little girl, and she had a little. was a boy and she' and she loved her. to her. was happy, and Lily was very other., and Lily was a doll and her. was the mommy and she was it and her. the park, and her her her new. was a. and Lily was a teddy was a and her.",
+      "metrics": {
+        "char_count": 540,
+        "word_count": 122,
+        "unique_word_ratio": 0.3361,
+        "common_word_ratio": 0.7295,
+        "short_word_ratio": 0.1311,
+        "repeated_trigram_ratio": 0.125,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 15,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "nolan"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "trumpet"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "attic"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "weather": {
+            "expected_terms": [
+              "thunder"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "heard",
+              "hear",
+              "rolled",
+              "roll"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD009",
+      "tags": [
+        "animal",
+        "indoor",
+        "action"
+      ],
+      "prompt": "Olive rescued her duckling from the laundry basket by the stairs.",
+      "model_prompt": "Prompt: Olive rescued her duckling from the laundry basket by the stairs.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "olive"
+          ],
+          "focus": [
+            "duckling",
+            "duck"
+          ],
+          "container": [
+            "basket"
+          ],
+          "place": [
+            "stairs"
+          ],
+          "detail": [
+            "laundry"
+          ]
+        },
+        "optional": {
+          "event": [
+            "rescued",
+            "rescue"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She was very happy and made her mom had a big hair. She wanted to go to play, so she was and her. was the car was a weird and. was a little, and she was so she was so she was a pink, and she was a little girl. was a. and she was a very red and she was a, and she was very doll and her her. was a special, and she made her. was a little girl and it was a magic. was a little, a favorite place and her. was the girl and it was a long. was a bear and she was so she was always of her. was a bear and she and her. was always in and her. was a big",
+      "metrics": {
+        "char_count": 542,
+        "word_count": 129,
+        "unique_word_ratio": 0.2713,
+        "common_word_ratio": 0.7364,
+        "short_word_ratio": 0.1318,
+        "repeated_trigram_ratio": 0.2756,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 13,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 6,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 7,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "olive"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "duckling",
+              "duck"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "container": {
+            "expected_terms": [
+              "basket"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "stairs"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "detail": {
+            "expected_terms": [
+              "laundry"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "rescued",
+              "rescue"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD010",
+      "tags": [
+        "object",
+        "school",
+        "action"
+      ],
+      "prompt": "Piper taped a note onto the music stand before the choir began.",
+      "model_prompt": "Prompt: Piper taped a note onto the music stand before the choir began.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "piper"
+          ],
+          "focus": [
+            "note"
+          ],
+          "object": [
+            "music stand"
+          ],
+          "occasion": [
+            "choir"
+          ]
+        },
+        "optional": {
+          "event": [
+            "taped",
+            "tape",
+            "began",
+            "begin"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He wanted to do it to play in a big, but he could be too. He had a few day, but the room was a butterfly! was a. was time and it was a little. was a special and of the other. was a brave, and the friends was a boy. was the grass was very child and he was a little. were in the, and he was called the. was a big, and he was so he was a bird. was so he was a boy, and and the friends was too. was a big, and his. was a little boy and his friends was a little. was a little boy and his friends was a little. was a special, and the friends were",
+      "metrics": {
+        "char_count": 540,
+        "word_count": 125,
+        "unique_word_ratio": 0.296,
+        "common_word_ratio": 0.728,
+        "short_word_ratio": 0.144,
+        "repeated_trigram_ratio": 0.2439,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 13,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 8,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 9,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "piper"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "note"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "object": {
+            "expected_terms": [
+              "music stand"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "occasion": {
+            "expected_terms": [
+              "choir"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "taped",
+              "tape",
+              "began",
+              "begin"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD011",
+      "tags": [
+        "object",
+        "school",
+        "action"
+      ],
+      "prompt": "Quinn chased a paper airplane across the library rug after lunch.",
+      "model_prompt": "Prompt: Quinn chased a paper airplane across the library rug after lunch.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "quinn"
+          ],
+          "focus": [
+            "airplane"
+          ],
+          "place": [
+            "library"
+          ],
+          "surface": [
+            "rug"
+          ],
+          "time": [
+            "lunch"
+          ]
+        },
+        "optional": {
+          "event": [
+            "paper",
+            "chased",
+            "chase"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He was three years old and he didn't wait to the park. He saw a big, magic tree and a big tree. was so he was so one day, and he had a little. made a new. was a little girl that was so he was a big, and a very lots. was very much and he had all of. was a. was so his. was a little, and he was a very friends. was happy and all the. was a shiny that he was the animals and his friends was a little. was very beautiful, and he was all the other. was a big, and and she was a big. was a little, and the friends was always in the. was a",
+      "metrics": {
+        "char_count": 532,
+        "word_count": 123,
+        "unique_word_ratio": 0.3252,
+        "common_word_ratio": 0.6829,
+        "short_word_ratio": 0.1301,
+        "repeated_trigram_ratio": 0.1074,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 14,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 8,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 9,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "quinn"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "airplane"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "library"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "surface": {
+            "expected_terms": [
+              "rug"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "time": {
+            "expected_terms": [
+              "lunch"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "paper",
+              "chased",
+              "chase"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD012",
+      "tags": [
+        "object",
+        "outdoor",
+        "action"
+      ],
+      "prompt": "Rosa placed her violin case under the bench in the train station.",
+      "model_prompt": "Prompt: Rosa placed her violin case under the bench in the train station.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "rosa"
+          ],
+          "focus": [
+            "violin",
+            "case"
+          ],
+          "object": [
+            "bench"
+          ],
+          "place": [
+            "train station"
+          ]
+        },
+        "optional": {
+          "event": [
+            "placed",
+            "place"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She was chefs and a small, but her mom had that she was a big, and shiny. One day, she wanted to a walk and her. went. and a special in the. was a big, like a beautiful. was a new. was the field and it was a big!. was very pink. said, \"\n I', \"No, \"S, \", we been, you in the sky and the eyes. had a bird, so a little boy came, and she was so they were up and was to a girl. was the flowers and the other. were a big, and it was a bear. was the red, and she loved to play and the. was",
+      "metrics": {
+        "char_count": 482,
+        "word_count": 110,
+        "unique_word_ratio": 0.4818,
+        "common_word_ratio": 0.6545,
+        "short_word_ratio": 0.1273,
+        "repeated_trigram_ratio": 0.0463,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 14,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "rosa"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "violin",
+              "case"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "object": {
+            "expected_terms": [
+              "bench"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "train station"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "placed",
+              "place"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD013",
+      "tags": [
+        "animal",
+        "outdoor",
+        "time"
+      ],
+      "prompt": "Silas fed a shy alpaca beside the red barn before bedtime.",
+      "model_prompt": "Prompt: Silas fed a shy alpaca beside the red barn before bedtime.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "silas"
+          ],
+          "focus": [
+            "alpaca"
+          ],
+          "place": [
+            "barn"
+          ],
+          "time": [
+            "bedtime"
+          ]
+        },
+        "optional": {
+          "event": [
+            "fed",
+            "feed"
+          ],
+          "state": [
+            "shy"
+          ],
+          "color": [
+            "red"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He wanted to play in the forest and play. He would be a big, so he saw a baby. was a magic place in the. was so he said to the., \", \", but they were the animals?\" was. was so excited, so the first. was the and he got the colourful. was so he was a pink, but it was a boy and it was a big. was a boy and it was a, but he wanted to the. was the park and the other was the sea. was the and a bird was very other. was a little, and he was all the animals. was a princess and the other animals were the toys. were the same animals",
+      "metrics": {
+        "char_count": 525,
+        "word_count": 118,
+        "unique_word_ratio": 0.339,
+        "common_word_ratio": 0.6525,
+        "short_word_ratio": 0.0932,
+        "repeated_trigram_ratio": 0.0948,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 14,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 8,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 9,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "silas"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "alpaca"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "barn"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "time": {
+            "expected_terms": [
+              "bedtime"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "fed",
+              "feed"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "state": {
+            "expected_terms": [
+              "shy"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "color": {
+            "expected_terms": [
+              "red"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 3,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD014",
+      "tags": [
+        "object",
+        "school",
+        "action"
+      ],
+      "prompt": "Tessa lost her marble ring in the sandbox during recess.",
+      "model_prompt": "Prompt: Tessa lost her marble ring in the sandbox during recess.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "tessa"
+          ],
+          "focus": [
+            "ring"
+          ],
+          "place": [
+            "sandbox"
+          ],
+          "occasion": [
+            "recess"
+          ]
+        },
+        "optional": {
+          "event": [
+            "lost",
+            "lose"
+          ],
+          "material": [
+            "marble"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She was very smart and she wanted to get out the world around her. She went to play with her dolls and her mom and see her. was a garden and her. was a pink, and she was a new. and it was ready for her. and it was a little. was a. and her. was she was so she was a bit in the. was a little girl and her. was a big, and she was a little. was a little girl and she was very cat that she was a, and she was a new. was very smart becauseever she was the long, and her. was the wardrobe and she was a girl. was very paper and she couldch her. was a",
+      "metrics": {
+        "char_count": 543,
+        "word_count": 124,
+        "unique_word_ratio": 0.3145,
+        "common_word_ratio": 0.7419,
+        "short_word_ratio": 0.1129,
+        "repeated_trigram_ratio": 0.2213,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 15,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 6,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 7,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "tessa"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "ring"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "sandbox"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "occasion": {
+            "expected_terms": [
+              "recess"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "lost",
+              "lose"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "material": {
+            "expected_terms": [
+              "marble"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 2,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD015",
+      "tags": [
+        "animal",
+        "outdoor",
+        "action"
+      ],
+      "prompt": "Uri found a sleepy owl perched above the orchard ladder.",
+      "model_prompt": "Prompt: Uri found a sleepy owl perched above the orchard ladder.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "uri"
+          ],
+          "focus": [
+            "owl"
+          ],
+          "place": [
+            "orchard"
+          ],
+          "object": [
+            "ladder"
+          ]
+        },
+        "optional": {
+          "event": [
+            "found",
+            "find",
+            "perched",
+            "perch"
+          ],
+          "state": [
+            "sleepy"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "The house was very happy and it made a little girl. One day, the girl saw a little girl named Lucy came for her. was a little girl and she was so she was too. was she was a big and her. was a little girl and her. was playing and the other. was a very pretty. and she had a very crystalr. was the day, and she had a. of a little, and the friends was a big. was a. that the time was always in the sky and the every. was a little girl, and she was the baby. was so she was a beautiful. and she was a very time and she said, \"Mommy, \", and her friends was the",
+      "metrics": {
+        "char_count": 555,
+        "word_count": 122,
+        "unique_word_ratio": 0.3279,
+        "common_word_ratio": 0.7295,
+        "short_word_ratio": 0.1148,
+        "repeated_trigram_ratio": 0.175,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 14,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 6,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 7,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "uri"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "owl"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "orchard"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "object": {
+            "expected_terms": [
+              "ladder"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "found",
+              "find",
+              "perched",
+              "perch"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "state": {
+            "expected_terms": [
+              "sleepy"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 2,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD016",
+      "tags": [
+        "food",
+        "weather",
+        "time"
+      ],
+      "prompt": "Vera carried hot cocoa to the skating pond in the frosty morning.",
+      "model_prompt": "Prompt: Vera carried hot cocoa to the skating pond in the frosty morning.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "vera"
+          ],
+          "focus": [
+            "cocoa"
+          ],
+          "place": [
+            "pond"
+          ],
+          "weather": [
+            "frosty"
+          ],
+          "time": [
+            "morning"
+          ]
+        },
+        "optional": {
+          "event": [
+            "carried",
+            "carry"
+          ],
+          "activity": [
+            "skating"
+          ],
+          "state": [
+            "hot"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She asked her mom, \"Lily, I said, \"Let's go for a big box. She said, \" Mom, \" the, \"\n Joe if as she was in the and her. said, \"No, \"What is the girl, \", \"No, you said, \" I have him, “Hi, \"No, \"No, I said, \"\n I said, \" can I's mom,, \n Mommy, and said the brother. said, \", \"\n I'!\"\n we you is up on the.'s mom said, \" Timmy said, \" I's a’s?\"\n\nThe'med new. and said, \"\n I's go",
+      "metrics": {
+        "char_count": 373,
+        "word_count": 75,
+        "unique_word_ratio": 0.5467,
+        "common_word_ratio": 0.5333,
+        "short_word_ratio": 0.0933,
+        "repeated_trigram_ratio": 0.0,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 7,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "vera"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "cocoa"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "pond"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "weather": {
+            "expected_terms": [
+              "frosty"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "time": {
+            "expected_terms": [
+              "morning"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "carried",
+              "carry"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "activity": {
+            "expected_terms": [
+              "skating"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "state": {
+            "expected_terms": [
+              "hot"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 3,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD017",
+      "tags": [
+        "object",
+        "indoor",
+        "action"
+      ],
+      "prompt": "Wes tucked a paintbrush inside the toolbox under the stage stairs.",
+      "model_prompt": "Prompt: Wes tucked a paintbrush inside the toolbox under the stage stairs.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "wes"
+          ],
+          "focus": [
+            "paintbrush"
+          ],
+          "container": [
+            "toolbox"
+          ],
+          "place": [
+            "stage"
+          ],
+          "area": [
+            "stage stairs"
+          ]
+        },
+        "optional": {
+          "event": [
+            "tucked",
+            "tuck"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He had never seen her friends and the other other was so much. She wanted to find her mom and she said, \"Hello, \" Lucy is the other, we's, \", can I have a special car. was that it was and it was a. was a mom said, \", \" I said, \" Sarah, \"No, \"\n I', I', I's mom!\"'s mom said, \", \" Molly, \" The bird's some mom 's mom, but him was was the, and it a little girl. was a little girl and it was going to her.. said, \" we'  other, \"\n, \", we's mom'med",
+      "metrics": {
+        "char_count": 442,
+        "word_count": 89,
+        "unique_word_ratio": 0.5056,
+        "common_word_ratio": 0.5393,
+        "short_word_ratio": 0.0787,
+        "repeated_trigram_ratio": 0.0345,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 7,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "wes"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "paintbrush"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "container": {
+            "expected_terms": [
+              "toolbox"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "stage"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "area": {
+            "expected_terms": [
+              "stage stairs"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "tucked",
+              "tuck"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD018",
+      "tags": [
+        "animal",
+        "food",
+        "outdoor"
+      ],
+      "prompt": "Xena watched her ferret sniff the picnic basket near the fountain.",
+      "model_prompt": "Prompt: Xena watched her ferret sniff the picnic basket near the fountain.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "xena"
+          ],
+          "focus": [
+            "ferret"
+          ],
+          "object": [
+            "basket"
+          ],
+          "place": [
+            "fountain"
+          ],
+          "food_context": [
+            "picnic"
+          ]
+        },
+        "optional": {
+          "event": [
+            "sniff",
+            "sniffed"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "She was a little girl and a little girl named her friends. She had lots of feathers and she said, \", \" I's, \" Mom, bubbles, andever they said, \"It's the children, \"Can I's mom is the friend, \" weed the car, \" wech,,,, and the friends,, you said \"\n\n I', \"\n I's a little girl. was a little car and it was a cat, and she was the animals. and her. was many. and it was so they were in the. was a little girl and her. was a very time and her. was a little girl and it was too. her. her each her.",
+      "metrics": {
+        "char_count": 490,
+        "word_count": 99,
+        "unique_word_ratio": 0.4141,
+        "common_word_ratio": 0.6566,
+        "short_word_ratio": 0.0808,
+        "repeated_trigram_ratio": 0.1443,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 11,
+        "max_char_run": 4,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "xena"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "ferret"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "object": {
+            "expected_terms": [
+              "basket"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "fountain"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "food_context": {
+            "expected_terms": [
+              "picnic"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "sniff",
+              "sniffed"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD019",
+      "tags": [
+        "food",
+        "outdoor",
+        "action"
+      ],
+      "prompt": "Yara planted mint seeds beside the fence after the summer fair.",
+      "model_prompt": "Prompt: Yara planted mint seeds beside the fence after the summer fair.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "yara"
+          ],
+          "focus": [
+            "mint",
+            "seeds",
+            "seed"
+          ],
+          "place": [
+            "fence"
+          ],
+          "season": [
+            "summer"
+          ],
+          "occasion": [
+            "fair"
+          ]
+        },
+        "optional": {
+          "event": [
+            "planted",
+            "plant"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "He was a very happy and a bit happy. He was very happy and he wanted to start a shiny time. was a big and of things. was a big, and the other. was a, and but the window was a. was a, so and he was a big, and it was happy. was a bright, and it was a boy that was a little. was a girl, and it was a mixer. was a little girl and he was very much. and her her friends was a very cat. and loved a little, and he was a very much. was always on the and he was a little. was a little girl who on the and the street. was a very and it was a",
+      "metrics": {
+        "char_count": 531,
+        "word_count": 126,
+        "unique_word_ratio": 0.2857,
+        "common_word_ratio": 0.7222,
+        "short_word_ratio": 0.1746,
+        "repeated_trigram_ratio": 0.2177,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 13,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 8,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 9,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "yara"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "mint",
+              "seeds",
+              "seed"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "fence"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "season": {
+            "expected_terms": [
+              "summer"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "occasion": {
+            "expected_terms": [
+              "fair"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 5,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "planted",
+              "plant"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 1,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "HOLD020",
+      "tags": [
+        "object",
+        "outdoor",
+        "water"
+      ],
+      "prompt": "Zane held a silver bucket under the waterfall beside the cave.",
+      "model_prompt": "Prompt: Zane held a silver bucket under the waterfall beside the cave.\nContinuation:",
+      "anchors": {
+        "required": {
+          "name": [
+            "zane"
+          ],
+          "focus": [
+            "bucket"
+          ],
+          "water": [
+            "waterfall"
+          ],
+          "place": [
+            "cave"
+          ]
+        },
+        "optional": {
+          "event": [
+            "held",
+            "hold"
+          ],
+          "color": [
+            "silver"
+          ]
+        },
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ]
+      },
+      "output": "It was a little girl that it was a little boy and he loved to play. One day, the family was playing in the park and when the were the sea. was a little girl and ed her. was very other. was a big, and she was a big car. was a little girl and they were very. was a blue, but it was very pretty. was that and it was very cool. was a girl and she wanted to the. was a book and her. was her. was a, and she had a bright, and she could help her. was a pink, and Lily and her. was a., and it was a big, and her her. had lots of",
+      "metrics": {
+        "char_count": 520,
+        "word_count": 120,
+        "unique_word_ratio": 0.3667,
+        "common_word_ratio": 0.7083,
+        "short_word_ratio": 0.1167,
+        "repeated_trigram_ratio": 0.1441,
+        "printable_ratio": 1.0,
+        "sentence_end_count": 15,
+        "max_char_run": 2,
+        "unknown_marker_count": 0,
+        "prompt_name_count": 1,
+        "prompt_name_hit_count": 0,
+        "prompt_name_hit_ratio": 0.0,
+        "prompt_content_count": 7,
+        "prompt_content_hit_count": 0,
+        "prompt_content_hit_ratio": 0.0,
+        "prompt_keyword_count": 8,
+        "prompt_keyword_hit_count": 0,
+        "prompt_keyword_hit_ratio": 0.0,
+        "prompt_leading_keyword_hit_count": 0
+      },
+      "quality_checks": {
+        "enough_words": true,
+        "has_sentence_end": true,
+        "mostly_printable": true,
+        "enough_common_words": true,
+        "limited_short_words": true,
+        "limited_repetition": true,
+        "no_long_char_runs": true,
+        "no_unknown_markers": true
+      },
+      "anchor_metrics": {
+        "required_groups": {
+          "name": {
+            "expected_terms": [
+              "zane"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "focus": {
+            "expected_terms": [
+              "bucket"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "water": {
+            "expected_terms": [
+              "waterfall"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "place": {
+            "expected_terms": [
+              "cave"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "required_group_count": 4,
+        "required_group_hit_count": 0,
+        "required_group_hit_ratio": 0.0,
+        "optional_groups": {
+          "event": {
+            "expected_terms": [
+              "held",
+              "hold"
+            ],
+            "matched_terms": [],
+            "hit": false
+          },
+          "color": {
+            "expected_terms": [
+              "silver"
+            ],
+            "matched_terms": [],
+            "hit": false
+          }
+        },
+        "optional_group_count": 2,
+        "optional_group_hit_count": 0,
+        "optional_group_hit_ratio": 0.0,
+        "early_anchor_groups": [
+          "name",
+          "focus"
+        ],
+        "early_anchor_hit": false
+      },
+      "strict_pass": false
+    }
+  ],
+  "summary": {
+    "strict_passed": 0,
+    "total_samples": 20,
+    "strict_pass_rate": 0.0,
+    "required_group_hit_ratio": 0.0109,
+    "early_anchor_hit_rate": 0.0,
+    "tag_summary": {
+      "action": {
+        "total": 10,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0
+      },
+      "animal": {
+        "total": 6,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0
+      },
+      "food": {
+        "total": 5,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0
+      },
+      "indoor": {
+        "total": 5,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0
+      },
+      "object": {
+        "total": 11,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0182
+      },
+      "outdoor": {
+        "total": 11,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0182
+      },
+      "school": {
+        "total": 3,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0
+      },
+      "time": {
+        "total": 4,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0
+      },
+      "water": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.0
+      },
+      "weather": {
+        "total": 4,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "avg_required_group_hit_ratio": 0.05
+      }
+    }
+  }
+}

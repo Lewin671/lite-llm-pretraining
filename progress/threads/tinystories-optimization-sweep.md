@@ -389,3 +389,75 @@
   - `dev 0/20`
   - `holdout 0/20`
 - Conclusion: 这条 continuation 路线不是“只差一点训练步数”，而是条件跟踪能力本身没有建立起来；继续单纯堆步数不值得
+
+## Current Focus
+
+- 不再继续沿 `A41` 纯加步数
+- 先检查三件事是否错位：
+  - prompt-continuation 数据形态是否真的让模型学“续写给定开头”
+  - loss mask 是否过度忽略 prompt 侧监督
+  - 推理模板是否与训练分布一致
+- 下一轮优先做更强的条件对齐实验，再用 `v2 dev/holdout` 复核
+
+### A42
+
+- Change: 维持 `A41` 的两句 continuation 路线，但把 `context` 从 `128` 降到 `64`，并维持 `example_start`
+- Validation:
+  - 旧 `3` prompt 严格口径，`temperature=0.5`
+  - `tinystories_eval_dev_v2`
+  - `tinystories_eval_holdout_v2`
+- Result:
+  - `best_val_loss=3.4019`
+  - 旧 `3` prompt `0/3`
+  - `dev required_group_hit_ratio=0.0230`
+  - `holdout required_group_hit_ratio=0.0109`
+- Conclusion: 修正短样本和长 context 的错配后，锚点命中第一次从全零回到非零；说明 `context=128` 确实把这条数据线的有效训练信号压没了
+
+### A43
+
+- Change: 切回完整 `prompt_continuation` 数据 `u4096-bf-pc1`，保持 full prompt+continuation 监督，使用 `context=64 + example_start`
+- Validation:
+  - 旧 `3` prompt 严格口径，`temperature=0.5`
+  - `tinystories_eval_dev_v2`
+  - `tinystories_eval_holdout_v2`
+- Result:
+  - `best_val_loss=2.8633`
+  - 旧 `3` prompt `0/3`
+  - `dev required_group_hit_ratio=0.0230`
+  - `dev early_anchor_hit_rate=0.0500`
+  - `holdout required_group_hit_ratio=0.0000`
+- Conclusion: 当前最值得继续追的是 `full prompt+continuation + short context + example_start`；它是唯一把早段锚点重新拉回来的路线，但泛化到 holdout 仍然失败
+
+### A44
+
+- Change: 沿 `A43` 路线把 `context` 提到 `96`
+- Validation:
+  - 旧 `3` prompt 严格口径，`temperature=0.5`
+  - `tinystories_eval_dev_v2`
+  - `tinystories_eval_holdout_v2`
+- Result:
+  - `best_val_loss=3.0743`
+  - 旧 `3` prompt `0/3`
+  - `dev required_group_hit_ratio=0.0000`
+  - `holdout required_group_hit_ratio=0.0000`
+- Conclusion: 单纯把 context 拉长会把 `A43` 那点条件信号重新抹平，当前更像是 prompt 对齐优先级高于更长上下文
+
+### A45
+
+- Change: 沿 `A43` 路线把 `context` 提到 `128`
+- Validation:
+  - 旧 `3` prompt 严格口径，`temperature=0.5`
+  - `tinystories_eval_dev_v2`
+- Result:
+  - `best_val_loss=3.2868`
+  - 旧 `3` prompt `0/3`
+  - `dev required_group_hit_ratio=0.0000`
+- Conclusion: `128` 比 `96` 更差；在当前 tiny 模型和数据形态下，更长 context 不是当前解
+
+## Current Hypothesis
+
+- 当前最有希望的改进方向不是继续调 `context`
+- 要继续追的是：
+  - `A43` 这种 `full prompt+continuation + example_start + short context`
+  - 更强的 instruction 模板，显式要求保留人物、物体和场景
+  - 同一份 instruction 数据同时比较 `masked` 和 `full-loss`

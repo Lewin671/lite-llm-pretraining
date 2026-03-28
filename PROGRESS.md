@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 用新的 TinyStories `dev/holdout` suite 作为北极星继续做条件续写优化
-- Latest Progress: 已完成 `v2` 评测重构，新增 `dev/holdout` 双 suite、`required/optional` anchors 和短语锚点匹配；`A40` 与 `A41` 在 `dev/holdout` 上都仍是 `0/20`
-- Issues: 当前模型会生成通顺故事，但几乎完全不会保留 prompt 里的名字、物体和场景；当前 continuation 路线即使拉长训练也没有把锚点命中拉起来
-- Next Step: 用 `v2` suite 继续做数据形态和训练目标对齐优化，优先解决“输出像故事但不跟 prompt”这个核心问题
+- Current Task: 沿 `v2 dev/holdout` 评测继续优化 TinyStories 条件续写能力
+- Latest Progress: 已完成 `A42-A45` 一轮新 sweep；`A42/A43` 证明 short context 能把锚点命中从全零拉回非零，但 `A44/A45` 又说明把 context 拉回 `96/128` 会重新退化；同时 instruction 模板链路已经接入，`A46` 正在准备和训练
+- Issues: 当前最佳信号仍然很弱，`A43` 只在 `dev` 上出现少量锚点回流，holdout 仍然是 `0`；bare prompt 模板和 loss mask 设计仍可能抑制条件跟踪泛化
+- Next Step: 跑完 instruction 线，并比较同一份 instruction 数据上的 `masked` / `full-loss`；继续围绕 `A43` 的 `short context + example_start` 主线做更强任务对齐
 
 ## How To Read
 

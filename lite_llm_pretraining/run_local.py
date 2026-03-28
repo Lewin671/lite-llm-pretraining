@@ -84,6 +84,11 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             story_format=prepare_config.get("story_format", "plain"),
             prompt_sentence_count=prepare_config.get("prompt_sentence_count", 1),
             continuation_sentence_limit=prepare_config.get("continuation_sentence_limit"),
+            prompt_label=prepare_config.get("prompt_label", "Prompt"),
+            continuation_label=prepare_config.get("continuation_label", "Continuation"),
+            instruction_text=prepare_config.get("instruction_text", ""),
+            use_loss_mask=prepare_config.get("use_loss_mask"),
+            prompt_loss_weight=prepare_config.get("prompt_loss_weight", 0.0),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")

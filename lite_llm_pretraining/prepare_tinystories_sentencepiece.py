@@ -81,6 +81,32 @@ def parse_args():
         default=None,
         help="Optional number of continuation sentences kept after the prompt when using prompt_continuation format.",
     )
+    parser.add_argument(
+        "--prompt_label",
+        default="Prompt",
+        help="Label used before the prompt text in prompt_continuation format.",
+    )
+    parser.add_argument(
+        "--continuation_label",
+        default="Continuation",
+        help="Label used before the continuation text in prompt_continuation format.",
+    )
+    parser.add_argument(
+        "--instruction_text",
+        default="",
+        help="Optional instruction line inserted between prompt and continuation labels.",
+    )
+    parser.add_argument(
+        "--disable_loss_mask",
+        action="store_true",
+        help="Do not emit continuation-only loss masks for prompt_continuation data.",
+    )
+    parser.add_argument(
+        "--prompt_loss_weight",
+        type=float,
+        default=0.0,
+        help="Optional non-zero loss weight applied to prompt tokens in prompt_continuation format.",
+    )
     return parser.parse_args()
 
 
@@ -170,6 +196,9 @@ def format_story(
     story_format: str,
     prompt_sentence_count: int,
     continuation_sentence_limit: int | None = None,
+    prompt_label: str = "Prompt",
+    continuation_label: str = "Continuation",
+    instruction_text: str = "",
 ):
     if story_format == "plain":
         return story
@@ -178,7 +207,24 @@ def format_story(
         continuation,
         continuation_sentence_limit,
     )
-    return f"Prompt: {prompt}\nContinuation: {continuation}"
+    parts = [f"{prompt_label}: {prompt}"]
+    if instruction_text.strip():
+        parts.append(instruction_text.strip())
+    parts.append(f"{continuation_label}: {continuation}")
+    return "\n".join(parts)
+
+
+def prompt_prefix_text(
+    prompt: str,
+    prompt_label: str,
+    continuation_label: str,
+    instruction_text: str = "",
+):
+    parts = [f"{prompt_label}: {prompt}"]
+    if instruction_text.strip():
+        parts.append(instruction_text.strip())
+    parts.append(f"{continuation_label}:")
+    return "\n".join(parts)
 
 
 def encode_story_with_optional_loss_mask(
@@ -187,6 +233,10 @@ def encode_story_with_optional_loss_mask(
     story_format: str,
     prompt_sentence_count: int,
     continuation_sentence_limit: int | None = None,
+    prompt_label: str = "Prompt",
+    continuation_label: str = "Continuation",
+    instruction_text: str = "",
+    prompt_loss_weight: float = 0.0,
 ):
     eos_id = processor.eos_id()
     formatted = format_story(
@@ -194,16 +244,26 @@ def encode_story_with_optional_loss_mask(
         story_format,
         prompt_sentence_count,
         continuation_sentence_limit=continuation_sentence_limit,
+        prompt_label=prompt_label,
+        continuation_label=continuation_label,
+        instruction_text=instruction_text,
     )
     token_ids = processor.encode(formatted, out_type=int)
     loss_mask = None
 
     if story_format == "prompt_continuation":
         prompt, _ = split_prompt_continuation(story, prompt_sentence_count)
-        prompt_prefix = f"Prompt: {prompt}\nContinuation:"
+        prompt_prefix = prompt_prefix_text(
+            prompt,
+            prompt_label=prompt_label,
+            continuation_label=continuation_label,
+            instruction_text=instruction_text,
+        )
         prompt_prefix_ids = processor.encode(prompt_prefix, out_type=int)
         prompt_token_count = min(len(prompt_prefix_ids), len(token_ids))
-        loss_mask = [0] * prompt_token_count + [1] * (len(token_ids) - prompt_token_count)
+        loss_mask = [prompt_loss_weight] * prompt_token_count + [1.0] * (
+            len(token_ids) - prompt_token_count
+        )
 
     if eos_id >= 0:
         token_ids.append(eos_id)
@@ -219,6 +279,9 @@ def write_formatted_training_corpus(
     story_format: str,
     prompt_sentence_count: int,
     continuation_sentence_limit: int | None = None,
+    prompt_label: str = "Prompt",
+    continuation_label: str = "Continuation",
+    instruction_text: str = "",
 ):
     with out_path.open("w", encoding="utf-8") as handle:
         for story in iter_stories(source_path):
@@ -227,6 +290,9 @@ def write_formatted_training_corpus(
                 story_format,
                 prompt_sentence_count,
                 continuation_sentence_limit=continuation_sentence_limit,
+                prompt_label=prompt_label,
+                continuation_label=continuation_label,
+                instruction_text=instruction_text,
             )
             handle.write(formatted)
             handle.write("\n\n")
@@ -240,6 +306,10 @@ def encode_split(
     prompt_sentence_count: int,
     continuation_sentence_limit: int | None = None,
     loss_mask_out_path: Path | None = None,
+    prompt_label: str = "Prompt",
+    continuation_label: str = "Continuation",
+    instruction_text: str = "",
+    prompt_loss_weight: float = 0.0,
 ):
     total_tokens = 0
     wrote_loss_mask = False
@@ -252,6 +322,10 @@ def encode_split(
                     story_format,
                     prompt_sentence_count,
                     continuation_sentence_limit=continuation_sentence_limit,
+                    prompt_label=prompt_label,
+                    continuation_label=continuation_label,
+                    instruction_text=instruction_text,
+                    prompt_loss_weight=prompt_loss_weight,
                 )
                 np.asarray(token_ids, dtype=np.uint16).tofile(handle)
                 total_tokens += len(token_ids)
@@ -265,10 +339,14 @@ def encode_split(
                     story_format,
                     prompt_sentence_count,
                     continuation_sentence_limit=continuation_sentence_limit,
+                    prompt_label=prompt_label,
+                    continuation_label=continuation_label,
+                    instruction_text=instruction_text,
+                    prompt_loss_weight=prompt_loss_weight,
                 )
                 np.asarray(token_ids, dtype=np.uint16).tofile(handle)
                 if loss_mask is not None:
-                    np.asarray(loss_mask, dtype=np.uint8).tofile(loss_mask_handle)
+                    np.asarray(loss_mask, dtype=np.float16).tofile(loss_mask_handle)
                     wrote_loss_mask = True
                 total_tokens += len(token_ids)
     return total_tokens, wrote_loss_mask
@@ -286,6 +364,11 @@ def prepare_dataset(
     story_format: str = "plain",
     prompt_sentence_count: int = 1,
     continuation_sentence_limit: int | None = None,
+    prompt_label: str = "Prompt",
+    continuation_label: str = "Continuation",
+    instruction_text: str = "",
+    use_loss_mask: bool | None = None,
+    prompt_loss_weight: float = 0.0,
 ):
     out_dir.mkdir(parents=True, exist_ok=True)
     ensure_clean_byte_data(byte_data_dir)
@@ -306,6 +389,9 @@ def prepare_dataset(
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
         continuation_sentence_limit=continuation_sentence_limit,
+        prompt_label=prompt_label,
+        continuation_label=continuation_label,
+        instruction_text=instruction_text,
     )
     try:
         model_path, vocab_path = train_sentencepiece(
@@ -322,7 +408,11 @@ def prepare_dataset(
         formatted_train_path.unlink(missing_ok=True)
     processor = spm.SentencePieceProcessor(model_file=str(model_path))
 
-    uses_loss_mask = story_format == "prompt_continuation"
+    uses_loss_mask = (
+        story_format == "prompt_continuation"
+        if use_loss_mask is None
+        else use_loss_mask
+    )
     train_tokens, train_has_loss_mask = encode_split(
         train_text_path,
         out_dir / "train.bin",
@@ -330,6 +420,10 @@ def prepare_dataset(
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
         continuation_sentence_limit=continuation_sentence_limit,
+        prompt_label=prompt_label,
+        continuation_label=continuation_label,
+        instruction_text=instruction_text,
+        prompt_loss_weight=prompt_loss_weight,
         loss_mask_out_path=out_dir / "train_loss_mask.bin" if uses_loss_mask else None,
     )
     val_tokens, val_has_loss_mask = encode_split(
@@ -339,6 +433,10 @@ def prepare_dataset(
         story_format=story_format,
         prompt_sentence_count=prompt_sentence_count,
         continuation_sentence_limit=continuation_sentence_limit,
+        prompt_label=prompt_label,
+        continuation_label=continuation_label,
+        instruction_text=instruction_text,
+        prompt_loss_weight=prompt_loss_weight,
         loss_mask_out_path=out_dir / "val_loss_mask.bin" if uses_loss_mask else None,
     )
 
@@ -363,10 +461,21 @@ def prepare_dataset(
         "story_format": story_format,
         "prompt_sentence_count": prompt_sentence_count,
         "continuation_sentence_limit": continuation_sentence_limit,
+        "prompt_label": prompt_label,
+        "continuation_label": continuation_label,
+        "instruction_text": instruction_text,
+        "use_loss_mask": uses_loss_mask,
+        "prompt_loss_weight": prompt_loss_weight,
         "has_loss_mask": train_has_loss_mask and val_has_loss_mask,
-        "loss_mask_dtype": "uint8" if train_has_loss_mask and val_has_loss_mask else None,
+        "loss_mask_dtype": "float16" if train_has_loss_mask and val_has_loss_mask else None,
         "loss_mask_mode": (
-            "continuation_only" if train_has_loss_mask and val_has_loss_mask else None
+            (
+                "prompt_weighted_continuation"
+                if prompt_loss_weight > 0
+                else "continuation_only"
+            )
+            if train_has_loss_mask and val_has_loss_mask
+            else None
         ),
     }
     save_json(out_dir / "meta.json", meta)
@@ -387,6 +496,11 @@ def main():
         story_format=args.story_format,
         prompt_sentence_count=args.prompt_sentence_count,
         continuation_sentence_limit=args.continuation_sentence_limit,
+        prompt_label=args.prompt_label,
+        continuation_label=args.continuation_label,
+        instruction_text=args.instruction_text,
+        use_loss_mask=not args.disable_loss_mask,
+        prompt_loss_weight=args.prompt_loss_weight,
     )
     print(f"saved dataset to {args.out_dir}")
     print(f"vocab size: {meta['vocab_size']}")
