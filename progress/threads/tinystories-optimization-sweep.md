@@ -193,3 +193,10 @@
 - Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
 - Result: `best_val_loss=4.2806`；严格校验 `3/3`；未知标记总数 `0`
 - Conclusion: tokenizer 方向命中根因，当前最优主线已经从旧 `spm-2048` 切换到 `u4096 + byte_fallback`
+
+### A22
+
+- Change: 继续使用 `A21` 的 tokenizer 路线，把训练拉长到 `600 step`
+- Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
+- Result: `best_val_loss=3.9471`；严格校验 `3/3`；未知标记总数 `0`
+- Conclusion: 更长训练没有破坏文本质量，当前最佳主线已经稳定

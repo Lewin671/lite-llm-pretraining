@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A22",
+  "notes": "carry forward unigram 4096 + byte_fallback route to 600 steps",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-fg3s93uq-a22.json",
+  "run_name": "tinystories-sweep-a22-u4096bf-600",
+  "data_dir": "data/tinystories-spm-u4096-bf",
+  "out_dir": "checkpoints/tinystories-sweep-a22-u4096bf-600",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a22-u4096bf-600/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 600,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 600,
+    "sample_interval": 600,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.181894,
+    "val_ppl": 65.489798,
+    "checkpoint_step": 600,
+    "best_val_loss": 3.9471238374710085
+  },
+  "validation_summary": {
+    "passed_samples": 3,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "there was a little girl named Lily.\nOne day, Lily came to the market. He wanted to the park.\nThe girl saw a big tree. The little girl.\nThe girl looked in the park.\nThe man wanted to the park was a big rabbit. He had a big and a big man. The little boy.\nThe bear was very very sad to his friends.\nThe little girl was very very very sad.\nThe little girl.\nThen it. She was very very sad and some friends.\nOn, but he saw her and closed her mommy. The little girl. The old cream.\nThe little boy was so exc",
+  "sample_state": {
+    "step": 600,
+    "best_val_loss": 3.9471238374710085
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a22-u4096bf-600",
+    "out_dir": "checkpoints/tinystories-sweep-a22-u4096bf-600",
+    "best_val_loss": 3.9471238374710085,
+    "last_val_loss": 3.9471238374710085,
+    "final_step": 600,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a22-u4096bf-600/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a22-u4096bf-600/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a22-u4096bf-600/metrics.jsonl"
+  }
+}
