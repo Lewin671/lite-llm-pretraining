@@ -186,3 +186,10 @@
 - 优先尝试 `SentencePiece + byte_fallback`
 - 同时放开 `vocab_size` 和 `max_sentence_length`
 - 新一轮实验目标是先消掉 `⁇ / <unk>`，再看 sample 是否真正提升
+
+### A21
+
+- Change: `SentencePiece unigram 4096 + byte_fallback + max_sentence_length=16384`，训练配置沿用 `context=128 + warmup=50`，`300 step`
+- Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
+- Result: `best_val_loss=4.2806`；严格校验 `3/3`；未知标记总数 `0`
+- Conclusion: tokenizer 方向命中根因，当前最优主线已经从旧 `spm-2048` 切换到 `u4096 + byte_fallback`

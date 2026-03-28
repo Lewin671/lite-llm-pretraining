@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A21",
+  "notes": "unigram 4096 + byte_fallback + context128 + warmup50 at 300 steps",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-7x13tmp5-a21.json",
+  "run_name": "tinystories-sweep-a21-u4096bf-300",
+  "data_dir": "data/tinystories-spm-u4096-bf",
+  "out_dir": "checkpoints/tinystories-sweep-a21-u4096bf-300",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a21-u4096bf-300/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 300,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.450074,
+    "val_ppl": 85.633308,
+    "checkpoint_step": 300,
+    "best_val_loss": 4.280614185333252
+  },
+  "validation_summary": {
+    "passed_samples": 3,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "\"I't know and said, \"Yes, \"I's a special.\nThe girl named Lily.\n\"I's you love it was a moment.\n\"I want to find the toys. The man. He was a big little girl named Lily. She was very excited. She was so excited.\n\"Can the park. The boy namedd Lily. They were happy. Once upon a little girl named Lily. They said, there was very excited, \"I's mom. She was a big special little girl named Lily. \n\"I't a time, \"I't want to the angel.\nLily and a big. She was so happy. He was a big man. She wanted to play",
+  "sample_state": {
+    "step": 300,
+    "best_val_loss": 4.280614185333252
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a21-u4096bf-300",
+    "out_dir": "checkpoints/tinystories-sweep-a21-u4096bf-300",
+    "best_val_loss": 4.280614185333252,
+    "last_val_loss": 4.280614185333252,
+    "final_step": 300,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a21-u4096bf-300/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a21-u4096bf-300/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a21-u4096bf-300/metrics.jsonl"
+  }
+}

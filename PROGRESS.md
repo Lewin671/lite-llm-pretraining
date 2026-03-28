@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 基于 `TinyStories` 全量数据集继续做 tokenizer 主线优化
-- Latest Progress: 20 轮 sweep 已完成；结论已经收敛到 tokenizer / 解码质量是当前主瓶颈
+- Latest Progress: `unigram 4096 + byte_fallback` 的 A21 已完成，严格校验直接到 `3/3`，未知标记降为 `0`
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 先补齐 SentencePiece tokenizer 控制项，再重开 `byte_fallback / larger vocab / longer sentence` 这条优化线
+- Next Step: 直接把 A21 这条 tokenizer 路线拉长训练，确认它是不是当前最优主线
 
 ## How To Read
 
