@@ -197,3 +197,67 @@
 - 但当前瓶颈已经从“任务不对齐”变成“答案表面形态不稳定”：
   - 模型会生成看起来像答案的短语
   - 但仍然经常是伪词、错实体或半对半错
+
+## Factoid Optimization
+
+- 新增：
+  - [prepare_dolly_qa.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/prepare_dolly_qa.py)
+    - 支持 `factoid_only`
+    - 支持 `normalize_factoid_answers`
+    - 支持 `max_normalized_answer_words`
+  - [prepare_dolly_qa_eval.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/prepare_dolly_qa_eval.py)
+    - 评测集也复用同一套 `factoid` 过滤和答案归一化
+  - [story_inference.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/story_inference.py)
+    - QA profile 新增 `answer_word_limit`
+  - [sample.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/sample.py), [tui_chat.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/tui_chat.py), [app/chat.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/app/chat.py), [evaluate_qa_suite.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/evaluate_qa_suite.py)
+    - 推理、TUI 和评测统一按短答案裁剪
+  - [run_local.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/run_local.py)
+    - 最终 sample 现在会正确继承 `sample_top_k / repetition_*`
+  - 新配置：
+    - [dolly-open-qa-factoid-c096-ft.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-open-qa-factoid-c096-ft.json)
+    - [dolly-open-qa-factoid-c096-scratch.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-open-qa-factoid-c096-scratch.json)
+  - 新评测集：
+    - [dolly_open_qa_factoid_dev_v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/dolly_open_qa_factoid_dev_v1.json)
+    - [dolly_open_qa_factoid_holdout_v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/dolly_open_qa_factoid_holdout_v1.json)
+
+## Factoid Data
+
+- 口径：
+  - `open_qa` only
+  - 原始答案 `<= 12` 词
+  - 问题 `<= 24` 词
+  - 单行答案
+  - 只保留 `who / what / which / where / when / how many / how much` 风格问题
+  - 答案归一化到短 factoid
+  - 归一化后答案 `<= 3` 词
+- 结果：
+  - 过滤后样本 `508`
+  - `train_tokens=19990`
+  - `val_tokens=1017`
+
+## Factoid Results
+
+- `factoid finetune`
+  - 配置：[dolly-open-qa-factoid-c096-ft.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-open-qa-factoid-c096-ft.json)
+  - 初始化：`checkpoints/dolly-open-qa-short-c096-compact/best_suite`
+  - 最佳 checkpoint：`step 240`
+  - 推荐推理口径：`max_new_tokens=5`, `temperature=0.1`, `top_k=1`
+  - `dev exact_match=0.2188`, `token_f1=0.3844`
+  - `holdout exact_match=0.3438`, `token_f1=0.4448`
+  - 报告：
+    - [dolly-open-qa-factoid-dev-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/dolly-open-qa-factoid-dev-v1.json)
+    - [dolly-open-qa-factoid-holdout-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/dolly-open-qa-factoid-holdout-v1.json)
+- `factoid scratch`
+  - 配置：[dolly-open-qa-factoid-c096-scratch.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/dolly-open-qa-factoid-c096-scratch.json)
+  - 结论：明显弱于 finetune 线，`best_suite` 最好也只有 `dev exact_match=0.0625`
+
+## Factoid Conclusion
+
+- 当前最有价值的突破不是“大模型”或“更多数据”，而是：
+  - 把 QA 任务收紧成真正的短 factoid
+  - 让训练、评测、TUI 都共享同一套短答案约束
+  - 用更短的 greedy decode 避免“先答对再吐垃圾”
+- 当前已经满足“至少有一批极简单问题能答对”，但还远没到稳定可用：
+  - `holdout exact_match` 首次到 `0.3438`
+  - 手写问题仍会出现实体混淆
+  - 常见错误从“纯伪词”变成了“答到相近实体”

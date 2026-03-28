@@ -1,0 +1,681 @@
+{
+  "checkpoint_dir": "checkpoints/dolly-open-qa-factoid-c096-ft/best_suite",
+  "suite_path": "prompts/dolly_open_qa_factoid_holdout_v1.json",
+  "suite_name": "dolly_open_qa_factoid_holdout_v1",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "qa",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer with only the exact short fact.",
+    "prompt_template": "Question: {question}\n{context_block}Answer:",
+    "answer_word_limit": 3
+  },
+  "samples": [
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-001",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many events were completed in first modern Olympic Games?",
+      "context": "",
+      "answers": [
+        "43 events"
+      ],
+      "model_prompt": "Question: How many events were completed in first modern Olympic Games?\nAnswer:",
+      "output": "43 events",
+      "predicted_answer": "43 events",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-002",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which was the 5th largest recipient of FDI in world in 2020",
+      "context": "",
+      "answers": [
+        "India"
+      ],
+      "model_prompt": "Question: Which was the 5th largest recipient of FDI in world in 2020\nAnswer:",
+      "output": "India",
+      "predicted_answer": "India",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-003",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "when was the 2nd world war?",
+      "context": "",
+      "answers": [
+        "1939"
+      ],
+      "model_prompt": "Question: when was the 2nd world war?\nAnswer:",
+      "output": "1939se",
+      "predicted_answer": "1939se",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-004",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who was the first Grand Prix driver to used a safety belt in 1967",
+      "context": "",
+      "answers": [
+        "Jackie Stuart"
+      ],
+      "model_prompt": "Question: Who was the first Grand Prix driver to used a safety belt in 1967\nAnswer:",
+      "output": "Jackie Stuart",
+      "predicted_answer": "Jackie Stuart",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-005",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the capital of Alabama?",
+      "context": "",
+      "answers": [
+        "Montgomery"
+      ],
+      "model_prompt": "Question: What is the capital of Alabama?\nAnswer:",
+      "output": "Mockingbird",
+      "predicted_answer": "Mockingbird",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-006",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the 24 hour equivalent to 2PM?",
+      "context": "",
+      "answers": [
+        "14:00"
+      ],
+      "model_prompt": "Question: What is the 24 hour equivalent to 2PM?\nAnswer:",
+      "output": "14:0",
+      "predicted_answer": "14:0",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-007",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are the words of House Bulwer?",
+      "context": "",
+      "answers": [
+        "\"Death Before Disgrace\""
+      ],
+      "model_prompt": "Question: What are the words of House Bulwer?\nAnswer:",
+      "output": "\"None Soar\"",
+      "predicted_answer": "\"None Soar\"",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-008",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which player has won the most Superbowls?",
+      "context": "",
+      "answers": [
+        "Tom Brady"
+      ],
+      "model_prompt": "Question: Which player has won the most Superbowls?\nAnswer:",
+      "output": "Tom Brady",
+      "predicted_answer": "Tom Brady",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-009",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "When did Uber IPO?",
+      "context": "",
+      "answers": [
+        "May 9, 2019"
+      ],
+      "model_prompt": "Question: When did Uber IPO?\nAnswer:",
+      "output": "May 9, 2019",
+      "predicted_answer": "May 9, 2019",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-010",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who was offered the presidency of Israel in 1952 (turned down)",
+      "context": "",
+      "answers": [
+        "Albert Einstein"
+      ],
+      "model_prompt": "Question: Who was offered the presidency of Israel in 1952 (turned down)\nAnswer:",
+      "output": "Albert Einstein",
+      "predicted_answer": "Albert Einstein",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-011",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the state bird of Texas?",
+      "context": "",
+      "answers": [
+        "Mockingbird"
+      ],
+      "model_prompt": "Question: What is the state bird of Texas?\nAnswer:",
+      "output": "Mockingbird",
+      "predicted_answer": "Mockingbird",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-012",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What nationality was Morse inventor of the famous code",
+      "context": "",
+      "answers": [
+        "American"
+      ],
+      "model_prompt": "Question: What nationality was Morse inventor of the famous code\nAnswer:",
+      "output": "Americann",
+      "predicted_answer": "Americann",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-013",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What was Freddie Mercury's real name?",
+      "context": "",
+      "answers": [
+        "Farrokh Bulsara"
+      ],
+      "model_prompt": "Question: What was Freddie Mercury's real name?\nAnswer:",
+      "output": "INs",
+      "predicted_answer": "INs",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-014",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest land animal in the world?",
+      "context": "",
+      "answers": [
+        "African Elephant"
+      ],
+      "model_prompt": "Question: What is the largest land animal in the world?\nAnswer:",
+      "output": "Blue Whale",
+      "predicted_answer": "Blue Whale",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-015",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which is the oldest dynasty still ruling?",
+      "context": "",
+      "answers": [
+        "Japan"
+      ],
+      "model_prompt": "Question: Which is the oldest dynasty still ruling?\nAnswer:",
+      "output": "Qing9",
+      "predicted_answer": "Qing9",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-016",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest lake in the united states?",
+      "context": "",
+      "answers": [
+        "Lake Superior"
+      ],
+      "model_prompt": "Question: What is the largest lake in the united states?\nAnswer:",
+      "output": "Redmond, Wa",
+      "predicted_answer": "Redmond, Wa",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-017",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What year did The X-Files TV show debut?",
+      "context": "",
+      "answers": [
+        "1993"
+      ],
+      "model_prompt": "Question: What year did The X-Files TV show debut?\nAnswer:",
+      "output": "Staples Cent",
+      "predicted_answer": "Staples Cent",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-018",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the highest score possible in ten pin bowling?",
+      "context": "",
+      "answers": [
+        "300"
+      ],
+      "model_prompt": "Question: What is the highest score possible in ten pin bowling?\nAnswer:",
+      "output": "Nine innings",
+      "predicted_answer": "Nine innings",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-019",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who is the winner of International Booker Prize 2020?",
+      "context": "",
+      "answers": [
+        "Mariee Lucas Rijneveld(Dutch)"
+      ],
+      "model_prompt": "Question: Who is the winner of International Booker Prize 2020?\nAnswer:",
+      "output": "Kelly Ce B",
+      "predicted_answer": "Kelly Ce B",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-020",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What city is the capital of Alberta Canada?",
+      "context": "",
+      "answers": [
+        "Edmonton"
+      ],
+      "model_prompt": "Question: What city is the capital of Alberta Canada?\nAnswer:",
+      "output": "Mockingbird",
+      "predicted_answer": "Mockingbird",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-021",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is another name for the Great Pyramid in Egypt?",
+      "context": "",
+      "answers": [
+        "Giza, Khufu"
+      ],
+      "model_prompt": "Question: What is another name for the Great Pyramid in Egypt?\nAnswer:",
+      "output": "Giza, K",
+      "predicted_answer": "Giza, K",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-022",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What links Willie Brant, Lech Walesa, Yasser Arafat",
+      "context": "",
+      "answers": [
+        "Nobel Peace Prize"
+      ],
+      "model_prompt": "Question: What links Willie Brant, Lech Walesa, Yasser Arafat\nAnswer:",
+      "output": "Nobel Peace Prize",
+      "predicted_answer": "Nobel Peace Prize",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-023",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are the words of House Frey?",
+      "context": "",
+      "answers": [
+        "\"We Stand Together\""
+      ],
+      "model_prompt": "Question: What are the words of House Frey?\nAnswer:",
+      "output": "\"Here We Stand",
+      "predicted_answer": "\"Here We Stand",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.6667,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-024",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the name of the first ten amendments to the Constitution?",
+      "context": "",
+      "answers": [
+        "bill of rights"
+      ],
+      "model_prompt": "Question: What is the name of the first ten amendments to the Constitution?\nAnswer:",
+      "output": "bill of rights",
+      "predicted_answer": "bill of rights",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-025",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What was Skippy ( on TV )",
+      "context": "",
+      "answers": [
+        "bush kangaroo"
+      ],
+      "model_prompt": "Question: What was Skippy ( on TV )\nAnswer:",
+      "output": "198kangaro",
+      "predicted_answer": "198kangaro",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-026",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which country was the first to introduce old age pensions",
+      "context": "",
+      "answers": [
+        "Germany"
+      ],
+      "model_prompt": "Question: Which country was the first to introduce old age pensions\nAnswer:",
+      "output": "Germanyseus Caesar",
+      "predicted_answer": "Germanyseus Caesar",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-027",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the loudest animal on Earth?",
+      "context": "",
+      "answers": [
+        "sperm whale"
+      ],
+      "model_prompt": "Question: What is the loudest animal on Earth?\nAnswer:",
+      "output": "sperm",
+      "predicted_answer": "sperm",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.6667,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-028",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many continents are in the world?",
+      "context": "",
+      "answers": [
+        "seven continents"
+      ],
+      "model_prompt": "Question: How many continents are in the world?\nAnswer:",
+      "output": "seven continents",
+      "predicted_answer": "seven continents",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-029",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "When was the Indian National Flag adopted",
+      "context": "",
+      "answers": [
+        "1947"
+      ],
+      "model_prompt": "Question: When was the Indian National Flag adopted\nAnswer:",
+      "output": "1947ells",
+      "predicted_answer": "1947ells",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-030",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What colors are on the United States of America flag?",
+      "context": "",
+      "answers": [
+        "Red, white, blue"
+      ],
+      "model_prompt": "Question: What colors are on the United States of America flag?\nAnswer:",
+      "output": "Red, white, blue",
+      "predicted_answer": "Red, white, blue",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-031",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is Ralph Baer famous for?",
+      "context": "",
+      "answers": [
+        "Invented video games"
+      ],
+      "model_prompt": "Question: What is Ralph Baer famous for?\nAnswer:",
+      "output": "Invented vi",
+      "predicted_answer": "Invented vi",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.4,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-032",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many times has Tiger Woods won the Masters tournament?",
+      "context": "",
+      "answers": [
+        "5 times"
+      ],
+      "model_prompt": "Question: How many times has Tiger Woods won the Masters tournament?\nAnswer:",
+      "output": "5 timesf",
+      "predicted_answer": "5 timesf",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    }
+  ],
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 6.223963,
+    "val_ppl": 504.699529,
+    "checkpoint_step": 240,
+    "best_val_loss": 5.009622192382812
+  },
+  "summary": {
+    "strict_passed": 11,
+    "total_samples": 32,
+    "strict_pass_rate": 0.3438,
+    "exact_match": 0.3438,
+    "token_f1": 0.4448,
+    "answer_presence_rate": 0.5,
+    "tag_summary": {
+      "open_qa": {
+        "total": 32,
+        "strict_passed": 11,
+        "strict_pass_rate": 0.3438,
+        "exact_match": 0.3438,
+        "token_f1": 0.4448
+      }
+    }
+  }
+}

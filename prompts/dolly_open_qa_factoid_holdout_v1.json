@@ -1,0 +1,359 @@
+{
+  "name": "dolly_open_qa_factoid_holdout_v1",
+  "task": "qa",
+  "pass_f1_threshold": 0.9,
+  "samples": [
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-001",
+      "question": "How many events were completed in first modern Olympic Games?",
+      "context": "",
+      "answers": [
+        "43 events"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-002",
+      "question": "Which was the 5th largest recipient of FDI in world in 2020",
+      "context": "",
+      "answers": [
+        "India"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-003",
+      "question": "when was the 2nd world war?",
+      "context": "",
+      "answers": [
+        "1939"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-004",
+      "question": "Who was the first Grand Prix driver to used a safety belt in 1967",
+      "context": "",
+      "answers": [
+        "Jackie Stuart"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-005",
+      "question": "What is the capital of Alabama?",
+      "context": "",
+      "answers": [
+        "Montgomery"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-006",
+      "question": "What is the 24 hour equivalent to 2PM?",
+      "context": "",
+      "answers": [
+        "14:00"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-007",
+      "question": "What are the words of House Bulwer?",
+      "context": "",
+      "answers": [
+        "\"Death Before Disgrace\""
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-008",
+      "question": "Which player has won the most Superbowls?",
+      "context": "",
+      "answers": [
+        "Tom Brady"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-009",
+      "question": "When did Uber IPO?",
+      "context": "",
+      "answers": [
+        "May 9, 2019"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-010",
+      "question": "Who was offered the presidency of Israel in 1952 (turned down)",
+      "context": "",
+      "answers": [
+        "Albert Einstein"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-011",
+      "question": "What is the state bird of Texas?",
+      "context": "",
+      "answers": [
+        "Mockingbird"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-012",
+      "question": "What nationality was Morse inventor of the famous code",
+      "context": "",
+      "answers": [
+        "American"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-013",
+      "question": "What was Freddie Mercury's real name?",
+      "context": "",
+      "answers": [
+        "Farrokh Bulsara"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-014",
+      "question": "What is the largest land animal in the world?",
+      "context": "",
+      "answers": [
+        "African Elephant"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-015",
+      "question": "Which is the oldest dynasty still ruling?",
+      "context": "",
+      "answers": [
+        "Japan"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-016",
+      "question": "What is the largest lake in the united states?",
+      "context": "",
+      "answers": [
+        "Lake Superior"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-017",
+      "question": "What year did The X-Files TV show debut?",
+      "context": "",
+      "answers": [
+        "1993"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-018",
+      "question": "What is the highest score possible in ten pin bowling?",
+      "context": "",
+      "answers": [
+        "300"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-019",
+      "question": "Who is the winner of International Booker Prize 2020?",
+      "context": "",
+      "answers": [
+        "Mariee Lucas Rijneveld(Dutch)"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-020",
+      "question": "What city is the capital of Alberta Canada?",
+      "context": "",
+      "answers": [
+        "Edmonton"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-021",
+      "question": "What is another name for the Great Pyramid in Egypt?",
+      "context": "",
+      "answers": [
+        "Giza, Khufu"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-022",
+      "question": "What links Willie Brant, Lech Walesa, Yasser Arafat",
+      "context": "",
+      "answers": [
+        "Nobel Peace Prize"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-023",
+      "question": "What are the words of House Frey?",
+      "context": "",
+      "answers": [
+        "\"We Stand Together\""
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-024",
+      "question": "What is the name of the first ten amendments to the Constitution?",
+      "context": "",
+      "answers": [
+        "bill of rights"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-025",
+      "question": "What was Skippy ( on TV )",
+      "context": "",
+      "answers": [
+        "bush kangaroo"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-026",
+      "question": "Which country was the first to introduce old age pensions",
+      "context": "",
+      "answers": [
+        "Germany"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-027",
+      "question": "What is the loudest animal on Earth?",
+      "context": "",
+      "answers": [
+        "sperm whale"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-028",
+      "question": "How many continents are in the world?",
+      "context": "",
+      "answers": [
+        "seven continents"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-029",
+      "question": "When was the Indian National Flag adopted",
+      "context": "",
+      "answers": [
+        "1947"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-030",
+      "question": "What colors are on the United States of America flag?",
+      "context": "",
+      "answers": [
+        "Red, white, blue"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-031",
+      "question": "What is Ralph Baer famous for?",
+      "context": "",
+      "answers": [
+        "Invented video games"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    },
+    {
+      "id": "dolly_open_qa_factoid_holdout_v1-032",
+      "question": "How many times has Tiger Woods won the Masters tournament?",
+      "context": "",
+      "answers": [
+        "5 times"
+      ],
+      "tags": [
+        "open_qa"
+      ]
+    }
+  ]
+}

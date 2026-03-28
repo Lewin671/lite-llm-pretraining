@@ -6,6 +6,7 @@ from lite_llm_pretraining.story_inference import (
     QA_TEMPLATE,
     build_qa_prompt,
     build_story_prompt,
+    extract_qa_answer,
 )
 
 
@@ -198,6 +199,7 @@ class QAApplication:
         prompt_template: str = QA_TEMPLATE,
         instruction_text: str = "",
         context_separator: str = " || ",
+        answer_word_limit: int | None = None,
     ):
         self.model = model
         self.question_prefix = question_prefix
@@ -206,6 +208,7 @@ class QAApplication:
         self.prompt_template = prompt_template
         self.instruction_text = instruction_text
         self.context_separator = context_separator
+        self.answer_word_limit = answer_word_limit
         self.messages: list[ChatMessage] = []
 
     def clear(self):
@@ -262,8 +265,9 @@ class QAApplication:
             repetition_penalty=repetition_penalty,
             repetition_window=repetition_window,
         )
-        self.add_message("answer", reply.strip())
-        return reply.strip()
+        answer_text = extract_qa_answer(reply, answer_word_limit=self.answer_word_limit)
+        self.add_message("answer", answer_text)
+        return answer_text
 
     def stream_reply(
         self,
@@ -291,4 +295,7 @@ class QAApplication:
         ):
             answer.content += piece
             yield piece
-        answer.content = answer.content.strip()
+        answer.content = extract_qa_answer(
+            answer.content,
+            answer_word_limit=self.answer_word_limit,
+        )

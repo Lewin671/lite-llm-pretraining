@@ -219,6 +219,34 @@ python -m lite_llm_pretraining.run_local \
 
 它是当前最强的窄任务问答基线，但还没有达到可用成品水平。
 
+如果要跑当前更强的 `factoid open_qa` 配置：
+
+```bash
+python -m lite_llm_pretraining.run_local \
+  --config configs/dolly-open-qa-factoid-c096-ft.json
+```
+
+这条线会：
+
+- 只保留 `open_qa`
+- 只保留 `factoid` 风格问题
+- 把答案归一化成 `1-3` 词的短事实
+- 复用同一套短答案裁剪到评测、采样和 TUI
+
+当前这条线的推荐推理口径是：
+
+```bash
+python -m lite_llm_pretraining.sample \
+  --checkpoint_dir checkpoints/dolly-open-qa-factoid-c096-ft/best_suite \
+  --mode qa \
+  --prompt "When did Uber IPO?" \
+  --max_new_tokens 5 \
+  --temperature 0.1 \
+  --top_k 1
+```
+
+它是目前最接近“非常简单的问题能答对”的本地基线。
+
 从 checkpoint 采样：
 
 ```bash
@@ -323,6 +351,8 @@ TUI 内置命令：
 - 评测集：`prompts/dolly_qa_simple_holdout_v1.json`
 - 评测集：`prompts/dolly_open_qa_short_dev_v1.json`
 - 评测集：`prompts/dolly_open_qa_short_holdout_v1.json`
+- 评测集：`prompts/dolly_open_qa_factoid_dev_v1.json`
+- 评测集：`prompts/dolly_open_qa_factoid_holdout_v1.json`
 - 训练输出：`checkpoints/tinyshakespeare-byte-smoke/`
 - 指标日志：`checkpoints/tinyshakespeare-byte-smoke/metrics.jsonl`
 - 采样结果：`checkpoints/tinyshakespeare-byte-smoke/samples/`

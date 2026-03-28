@@ -192,6 +192,7 @@ def resolve_tui_profile(checkpoint_dir: Path, requested_mode: str):
             "context_label": profile.get("context_label", "Context"),
             "answer_label": profile.get("answer_label", "Answer"),
             "instruction_text": profile.get("instruction_text", ""),
+            "answer_word_limit": profile.get("answer_word_limit"),
         }
     return profile
 
@@ -213,6 +214,7 @@ def run_tui(stdscr, args):
             context_label=profile.get("context_label", "Context"),
             prompt_template=profile.get("prompt_template", QA_TEMPLATE),
             instruction_text=profile.get("instruction_text", ""),
+            answer_word_limit=profile.get("answer_word_limit"),
         )
     else:
         app = ChatApplication(model)

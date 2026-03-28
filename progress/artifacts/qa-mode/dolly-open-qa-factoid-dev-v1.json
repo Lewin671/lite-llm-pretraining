@@ -1,0 +1,681 @@
+{
+  "checkpoint_dir": "checkpoints/dolly-open-qa-factoid-c096-ft/best_suite",
+  "suite_path": "prompts/dolly_open_qa_factoid_dev_v1.json",
+  "suite_name": "dolly_open_qa_factoid_dev_v1",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "qa",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer with only the exact short fact.",
+    "prompt_template": "Question: {question}\n{context_block}Answer:",
+    "answer_word_limit": 3
+  },
+  "samples": [
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-001",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What town is the Simpsons set in?",
+      "context": "",
+      "answers": [
+        "Springfield"
+      ],
+      "model_prompt": "Question: What town is the Simpsons set in?\nAnswer:",
+      "output": "Springfieldri",
+      "predicted_answer": "Springfieldri",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-002",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Which of the following city has the highest historical monuments?",
+      "context": "",
+      "answers": [
+        "Delhi"
+      ],
+      "model_prompt": "Question: Which of the following city has the highest historical monuments?\nAnswer:",
+      "output": "Delhis",
+      "predicted_answer": "Delhis",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-003",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the capital of Georgia?",
+      "context": "",
+      "answers": [
+        "Atlanta"
+      ],
+      "model_prompt": "Question: What is the capital of Georgia?\nAnswer:",
+      "output": "Atlantaelmas",
+      "predicted_answer": "Atlantaelmas",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-004",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is Orchesis - either professional or amateur",
+      "context": "",
+      "answers": [
+        "Art of Dancing"
+      ],
+      "model_prompt": "Question: What is Orchesis - either professional or amateur\nAnswer:",
+      "output": "Art of Dancing",
+      "predicted_answer": "Art of Dancing",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-005",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who wrote Beloved?",
+      "context": "",
+      "answers": [
+        "Toni Morrison"
+      ],
+      "model_prompt": "Question: Who wrote Beloved?\nAnswer:",
+      "output": "Topezkn",
+      "predicted_answer": "Topezkn",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-006",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the mascot of Stanford University?",
+      "context": "",
+      "answers": [
+        "redwood tree"
+      ],
+      "model_prompt": "Question: What is the mascot of Stanford University?\nAnswer:",
+      "output": "redwood treend",
+      "predicted_answer": "redwood treend",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-007",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "When was the first Academy Awards?",
+      "context": "",
+      "answers": [
+        "May 16, 1929"
+      ],
+      "model_prompt": "Question: When was the first Academy Awards?\nAnswer:",
+      "output": "May 16, 192",
+      "predicted_answer": "May 16, 192",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.6667,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-008",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What state is known as the Lone Star State?",
+      "context": "",
+      "answers": [
+        "Texas"
+      ],
+      "model_prompt": "Question: What state is known as the Lone Star State?\nAnswer:",
+      "output": "Texas Aus Caesar",
+      "predicted_answer": "Texas Aus Caesar",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-009",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who was the first man in space",
+      "context": "",
+      "answers": [
+        "Yuri Gagarin"
+      ],
+      "model_prompt": "Question: Who was the first man in space\nAnswer:",
+      "output": "Yuri Gagarin",
+      "predicted_answer": "Yuri Gagarin",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-010",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest spider?",
+      "context": "",
+      "answers": [
+        "Goliath Birdeater"
+      ],
+      "model_prompt": "Question: What is the largest spider?\nAnswer:",
+      "output": "Gus9,",
+      "predicted_answer": "Gus9,",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-011",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the capital of Maine?",
+      "context": "",
+      "answers": [
+        "Augusta"
+      ],
+      "model_prompt": "Question: What is the capital of Maine?\nAnswer:",
+      "output": "Augustaza",
+      "predicted_answer": "Augustaza",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-012",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the capital of Arkansas?",
+      "context": "",
+      "answers": [
+        "Little Rock"
+      ],
+      "model_prompt": "Question: What is the capital of Arkansas?\nAnswer:",
+      "output": "Beion",
+      "predicted_answer": "Beion",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-013",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who wrote the Man in the Iron Mask",
+      "context": "",
+      "answers": [
+        "Alexander Dumas"
+      ],
+      "model_prompt": "Question: Who wrote the Man in the Iron Mask\nAnswer:",
+      "output": "Alexander Duma",
+      "predicted_answer": "Alexander Duma",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-014",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What does CEO stand for",
+      "context": "",
+      "answers": [
+        "Chief Executive Officer"
+      ],
+      "model_prompt": "Question: What does CEO stand for\nAnswer:",
+      "output": "Delhi Mo",
+      "predicted_answer": "Delhi Mo",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-015",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What are the words of House Lannister?",
+      "context": "",
+      "answers": [
+        "\"Hear Me Roar\""
+      ],
+      "model_prompt": "Question: What are the words of House Lannister?\nAnswer:",
+      "output": "\"Hear Me",
+      "predicted_answer": "\"Hear Me",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.8,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-016",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many syllables are in the word reverberate?",
+      "context": "",
+      "answers": [
+        "4 syllables"
+      ],
+      "model_prompt": "Question: How many syllables are in the word reverberate?\nAnswer:",
+      "output": "4 syllables",
+      "predicted_answer": "4 syllables",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-017",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the tallest building in the San Francisco Bay Area?",
+      "context": "",
+      "answers": [
+        "Salesforce Tower"
+      ],
+      "model_prompt": "Question: What is the tallest building in the San Francisco Bay Area?\nAnswer:",
+      "output": "Salesfor",
+      "predicted_answer": "Salesfor",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-018",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who won the Golden Shoe Award for the season 2018-2019?",
+      "context": "",
+      "answers": [
+        "Lionel Messi"
+      ],
+      "model_prompt": "Question: Who won the Golden Shoe Award for the season 2018-2019?\nAnswer:",
+      "output": "Lionel Mes",
+      "predicted_answer": "Lionel Mes",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-019",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the largest city in North America?",
+      "context": "",
+      "answers": [
+        "Mexico City"
+      ],
+      "model_prompt": "Question: What is the largest city in North America?\nAnswer:",
+      "output": "Mexico City",
+      "predicted_answer": "Mexico City",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-020",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the east Asian process of training small trees called?",
+      "context": "",
+      "answers": [
+        "Bonsai"
+      ],
+      "model_prompt": "Question: What is the east Asian process of training small trees called?\nAnswer:",
+      "output": "Bonsai",
+      "predicted_answer": "Bonsai",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-021",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who invented punched cards used in early computing 1880s",
+      "context": "",
+      "answers": [
+        "Herman Hollerith"
+      ],
+      "model_prompt": "Question: Who invented punched cards used in early computing 1880s\nAnswer:",
+      "output": "Herman Hollerith",
+      "predicted_answer": "Herman Hollerith",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-022",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "How many innings are played in a professional baseball game?",
+      "context": "",
+      "answers": [
+        "Nine innings"
+      ],
+      "model_prompt": "Question: How many innings are played in a professional baseball game?\nAnswer:",
+      "output": "Nine innings",
+      "predicted_answer": "Nine innings",
+      "answer_metrics": {
+        "exact_match": true,
+        "token_f1": 1.0,
+        "contains_reference": true
+      },
+      "strict_pass": true
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-023",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who landed on Timor Island after being cast adrift",
+      "context": "",
+      "answers": [
+        "Captain Bligh"
+      ],
+      "model_prompt": "Question: Who landed on Timor Island after being cast adrift\nAnswer:",
+      "output": "Captain Blig",
+      "predicted_answer": "Captain Blig",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.5,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-024",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the proper greeting for Passover?",
+      "context": "",
+      "answers": [
+        "chag sameach"
+      ],
+      "model_prompt": "Question: What is the proper greeting for Passover?\nAnswer:",
+      "output": "San Franciscoriot",
+      "predicted_answer": "San Franciscoriot",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-025",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Where is Babylon remain located?",
+      "context": "",
+      "answers": [
+        "Irag"
+      ],
+      "model_prompt": "Question: Where is Babylon remain located?\nAnswer:",
+      "output": "Irag6",
+      "predicted_answer": "Irag6",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-026",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who is the most famous left-handed baseball player?",
+      "context": "",
+      "answers": [
+        "Babe Ruth"
+      ],
+      "model_prompt": "Question: Who is the most famous left-handed baseball player?\nAnswer:",
+      "output": "Michael Petitut",
+      "predicted_answer": "Michael Petitut",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-027",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who won an Oscar for the African Queen",
+      "context": "",
+      "answers": [
+        "Bogart"
+      ],
+      "model_prompt": "Question: Who won an Oscar for the African Queen\nAnswer:",
+      "output": "Lindbergle",
+      "predicted_answer": "Lindbergle",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-028",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who won six consecutive Wimbledon titles in the 1980s",
+      "context": "",
+      "answers": [
+        "Martina Navratilova"
+      ],
+      "model_prompt": "Question: Who won six consecutive Wimbledon titles in the 1980s\nAnswer:",
+      "output": "Roinra",
+      "predicted_answer": "Roinra",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-029",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What form of government is the United Kingdom?",
+      "context": "",
+      "answers": [
+        "constitutional monarchy"
+      ],
+      "model_prompt": "Question: What form of government is the United Kingdom?\nAnswer:",
+      "output": "constitutional",
+      "predicted_answer": "constitutional",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.6667,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-030",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What did Britain swap Havana for with Spain in 1763",
+      "context": "",
+      "answers": [
+        "Florida"
+      ],
+      "model_prompt": "Question: What did Britain swap Havana for with Spain in 1763\nAnswer:",
+      "output": "Floridari Gaga",
+      "predicted_answer": "Floridari Gaga",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-031",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "What is the capital of CA?",
+      "context": "",
+      "answers": [
+        "Sacramento"
+      ],
+      "model_prompt": "Question: What is the capital of CA?\nAnswer:",
+      "output": "Monale",
+      "predicted_answer": "Monale",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "dolly_open_qa_factoid_dev_v1-032",
+      "tags": [
+        "open_qa"
+      ],
+      "question": "Who gave the UN the land in NY to build their HQ",
+      "context": "",
+      "answers": [
+        "John D Rockerfeller"
+      ],
+      "model_prompt": "Question: Who gave the UN the land in NY to build their HQ\nAnswer:",
+      "output": "John D Rockerf",
+      "predicted_answer": "John D Rockerf",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.6667,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    }
+  ],
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 6.223963,
+    "val_ppl": 504.699529,
+    "checkpoint_step": 240,
+    "best_val_loss": 5.009622192382812
+  },
+  "summary": {
+    "strict_passed": 7,
+    "total_samples": 32,
+    "strict_pass_rate": 0.2188,
+    "exact_match": 0.2188,
+    "token_f1": 0.3844,
+    "answer_presence_rate": 0.4688,
+    "tag_summary": {
+      "open_qa": {
+        "total": 32,
+        "strict_passed": 7,
+        "strict_pass_rate": 0.2188,
+        "exact_match": 0.2188,
+        "token_f1": 0.3844
+      }
+    }
+  }
+}

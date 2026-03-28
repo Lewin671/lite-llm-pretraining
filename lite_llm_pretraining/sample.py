@@ -5,6 +5,7 @@ from pathlib import Path
 from lite_llm_pretraining.model import CheckpointLanguageModel
 from lite_llm_pretraining.story_inference import (
     build_prompt_from_profile,
+    extract_qa_answer,
     resolve_inference_profile,
 )
 
@@ -82,6 +83,13 @@ def resolve_prompt(checkpoint_dir: Path, prompt: str, mode: str, context: str | 
     return prompt
 
 
+def resolve_profile(checkpoint_dir: Path, mode: str):
+    profile = resolve_inference_profile(checkpoint_dir)
+    if mode in {"story", "qa"}:
+        return {**profile, "mode": mode}
+    return profile
+
+
 def sample_from_checkpoint(
     checkpoint_dir: Path,
     prompt: str,
@@ -94,6 +102,7 @@ def sample_from_checkpoint(
     repetition_window: int | None = None,
 ):
     model = CheckpointLanguageModel(checkpoint_dir)
+    profile = resolve_profile(checkpoint_dir, mode)
     model_prompt = resolve_prompt(checkpoint_dir, prompt, mode, context=context)
     output = model.generate(
         model_prompt,
@@ -103,6 +112,11 @@ def sample_from_checkpoint(
         repetition_penalty=repetition_penalty,
         repetition_window=repetition_window,
     )
+    if profile.get("mode") == "qa":
+        output = extract_qa_answer(
+            output,
+            answer_word_limit=profile.get("answer_word_limit"),
+        )
     return output, model.state
 
 
@@ -154,6 +168,7 @@ def main():
             sys.stdout.flush()
         print()
     else:
+        profile = resolve_profile(Path(args.checkpoint_dir), args.mode)
         output, state = sample_from_checkpoint(
             Path(args.checkpoint_dir),
             args.prompt,
@@ -166,7 +181,13 @@ def main():
             repetition_window=args.repetition_window,
         )
         print(f"loaded checkpoint step={state.get('step', 'unknown')}")
-        print(f"{args.prompt}{output}")
+        if profile.get("mode") == "qa":
+            print(f"Question: {args.prompt}")
+            if args.context:
+                print(f"Context: {args.context}")
+            print(f"Answer: {output}")
+        else:
+            print(f"{args.prompt}{output}")
 
 
 if __name__ == "__main__":

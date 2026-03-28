@@ -16,6 +16,7 @@ from lite_llm_pretraining.common import (
 )
 from lite_llm_pretraining.model import CheckpointLanguageModel
 from lite_llm_pretraining.story_inference import build_prompt_from_profile, resolve_inference_profile
+from lite_llm_pretraining.story_inference import extract_qa_answer
 
 
 def parse_args():
@@ -91,17 +92,6 @@ def answer_metrics(prediction: str, references: list[str]):
     }
 
 
-def extract_answer_text(text: str):
-    cleaned = text.strip()
-    if not cleaned:
-        return ""
-    cleaned = re.sub(r"^\s*answer\s*:\s*", "", cleaned, flags=re.IGNORECASE)
-    first_line = cleaned.splitlines()[0].strip()
-    if re.match(r"^(question|context|user|assistant)\s*:", first_line, flags=re.IGNORECASE):
-        return ""
-    return first_line
-
-
 def aggregate_tag_stats(samples):
     grouped = defaultdict(lambda: {"total": 0, "passed": 0, "exact_match": 0.0, "token_f1": 0.0})
     for sample in samples:
@@ -164,7 +154,10 @@ def evaluate_qa_suite(
             repetition_penalty=repetition_penalty,
             repetition_window=repetition_window,
         )
-        predicted_answer = extract_answer_text(output)
+        predicted_answer = extract_qa_answer(
+            output,
+            answer_word_limit=inference_profile.get("answer_word_limit"),
+        )
         metrics = answer_metrics(predicted_answer, references)
         strict_pass = metrics["exact_match"] or metrics["token_f1"] >= pass_f1_threshold
         report["samples"].append(

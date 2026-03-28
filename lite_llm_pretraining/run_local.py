@@ -144,6 +144,13 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             require_single_line_answer=prepare_config.get(
                 "require_single_line_answer", False
             ),
+            factoid_only=prepare_config.get("factoid_only", False),
+            normalize_factoid_answers=prepare_config.get(
+                "normalize_factoid_answers", False
+            ),
+            max_normalized_answer_words=prepare_config.get(
+                "max_normalized_answer_words"
+            ),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")
@@ -173,12 +180,18 @@ def main():
     prompt = args.prompt or config["sample_prompt"]
     max_new_tokens = args.max_new_tokens or config["train"]["sample_tokens"]
     sample_temperature = config["train"].get("sample_temperature", 1.0)
+    sample_top_k = config["train"].get("sample_top_k")
+    sample_repetition_penalty = config["train"].get("sample_repetition_penalty", 1.0)
+    sample_repetition_window = config["train"].get("sample_repetition_window")
     final_sample, sample_state = sample_from_checkpoint(
         checkpoint_dir,
         prompt,
         max_new_tokens,
         temperature=sample_temperature,
         context=config.get("sample_context"),
+        top_k=sample_top_k,
+        repetition_penalty=sample_repetition_penalty,
+        repetition_window=sample_repetition_window,
     )
 
     out_dir = Path(train_result["out_dir"])
@@ -192,6 +205,9 @@ def main():
         "final_sample_path": str(final_sample_path),
         "loaded_step": sample_state.get("step"),
         "sample_temperature": sample_temperature,
+        "sample_top_k": sample_top_k,
+        "sample_repetition_penalty": sample_repetition_penalty,
+        "sample_repetition_window": sample_repetition_window,
         **train_result,
     }
 

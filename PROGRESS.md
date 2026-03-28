@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 沿 `Dolly Q/A` 主线继续优化，目标先收紧成“简单问题能稳定答出来”
-- Latest Progress: 已跑出 `open_qa-only + short answer + small model` 基线；当前 best 在 `open_qa holdout` 上到 `token_f1=0.0949`，明显高于之前混合 `simple QA` 的 `0.0126`
-- Issues: 当前 `open_qa-only` 虽然把 holdout 拉高了，但 `strict_pass_rate=0.0 / exact_match=0.0` 仍没破，真实采样还是会把事实答成伪词或错误短语
-- Next Step: 继续沿 `open_qa-only` 主线优化，优先考虑把答案对齐再收紧一层，而不是回到混合任务
+- Latest Progress: 已跑通 `factoid open_qa` 微调线；当前最佳 user-facing 口径是 `5 tokens + greedy`，`holdout exact_match=0.3438`，第一次让一批极简单题出现稳定非零正确率
+- Issues: 虽然 `factoid` 线已经明显优于旧基线，但泛化仍弱；对手写简单题仍会答错，比如把德国/阿拉巴马州首府答成别的实体
+- Next Step: 继续沿 `factoid` 主线优化，优先压低实体混淆和首词后缀噪声，而不是回到更宽、更脏的 QA 任务
 
 ## How To Read
 

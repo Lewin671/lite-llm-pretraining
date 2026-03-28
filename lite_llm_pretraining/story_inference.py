@@ -29,10 +29,14 @@ def resolve_inference_profile_from_config(config, path_hint: str = ""):
             "context_label": inference.get("context_label", "Context"),
             "answer_label": inference.get("answer_label", "Answer"),
             "instruction_text": inference.get("instruction_text", ""),
+            "answer_word_limit": inference.get("answer_word_limit"),
         }
 
     prepare = config.get("prepare", {})
     if prepare.get("name") == "dolly_qa" or prepare.get("task_format") == "qa":
+        answer_word_limit = None
+        if prepare.get("normalize_factoid_answers"):
+            answer_word_limit = prepare.get("max_normalized_answer_words")
         return {
             "mode": "qa",
             "question_label": prepare.get("question_label", "Question"),
@@ -40,6 +44,7 @@ def resolve_inference_profile_from_config(config, path_hint: str = ""):
             "answer_label": prepare.get("answer_label", "Answer"),
             "instruction_text": prepare.get("instruction_text", "").strip(),
             "prompt_template": prepare.get("prompt_template", QA_TEMPLATE),
+            "answer_word_limit": answer_word_limit,
         }
     if prepare.get("story_format") == "prompt_continuation":
         prompt_label = prepare.get("prompt_label", "Prompt")
@@ -140,3 +145,20 @@ def build_prompt_from_profile(prompt: str, profile: dict, context: str | None = 
             instruction_text=profile.get("instruction_text", ""),
         )
     return prompt
+
+
+def extract_qa_answer(text: str, answer_word_limit: int | None = None):
+    cleaned = text.strip()
+    if not cleaned:
+        return ""
+    if cleaned.lower().startswith("answer:"):
+        cleaned = cleaned.split(":", 1)[1].strip()
+    first_line = cleaned.splitlines()[0].strip()
+    if not first_line:
+        return ""
+    if first_line.lower().startswith(("question:", "context:", "user:", "assistant:")):
+        return ""
+    if answer_word_limit is not None and answer_word_limit > 0:
+        words = first_line.split()
+        first_line = " ".join(words[:answer_word_limit]).strip()
+    return first_line

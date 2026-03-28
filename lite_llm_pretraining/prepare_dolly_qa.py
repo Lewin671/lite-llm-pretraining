@@ -1,5 +1,6 @@
 import argparse
 import json
+import re
 import shutil
 import tempfile
 from pathlib import Path
@@ -16,6 +17,92 @@ DEFAULT_DOLLY_URL = (
     "https://huggingface.co/datasets/databricks/databricks-dolly-15k/resolve/main/"
     "databricks-dolly-15k.jsonl"
 )
+
+FACTOID_ALLOWED_PREFIXES = (
+    "who",
+    "what",
+    "which",
+    "where",
+    "when",
+    "how many",
+    "how much",
+    "what's",
+    "whats",
+)
+FACTOID_EXCLUDED_SUBSTRINGS = (
+    "list ",
+    "name five",
+    "give ",
+    "why ",
+    "dad joke",
+    "joke",
+    "best ",
+    "what happens",
+    "some of",
+)
+NUMBER_WORDS = {
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety",
+    "hundred",
+    "thousand",
+}
+QUESTION_OVERLAP_STOPWORDS = {
+    "a",
+    "an",
+    "the",
+    "of",
+    "in",
+    "on",
+    "at",
+    "for",
+    "to",
+    "is",
+    "are",
+    "was",
+    "were",
+    "what",
+    "which",
+    "who",
+    "where",
+    "when",
+    "how",
+    "many",
+    "much",
+}
+LEADING_ARTICLE_RE = re.compile(r"^(?:a|an|the)\s+", re.IGNORECASE)
+DATE_RE = re.compile(
+    r"\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|"
+    r"aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)"
+    r"\s+\d{1,2},\s+\d{4}\b",
+    re.IGNORECASE,
+)
+YEAR_RE = re.compile(r"\b(?:1[0-9]{3}|20[0-9]{2})\b")
 
 
 def parse_args():
@@ -54,6 +141,9 @@ def parse_args():
     parser.add_argument("--max_answer_words", type=int, default=None)
     parser.add_argument("--max_question_words", type=int, default=None)
     parser.add_argument("--require_single_line_answer", action="store_true")
+    parser.add_argument("--factoid_only", action="store_true")
+    parser.add_argument("--normalize_factoid_answers", action="store_true")
+    parser.add_argument("--max_normalized_answer_words", type=int, default=None)
     return parser.parse_args()
 
 
@@ -100,6 +190,164 @@ def trim_context(context: str, context_word_limit: int):
 
 def answer_word_count(answer: str):
     return len(answer.replace("\n", " ").split())
+
+
+def compact_text(text: str):
+    return " ".join(
+        text.replace("“", '"')
+        .replace("”", '"')
+        .replace("’", "'")
+        .replace("–", "-")
+        .split()
+    ).strip()
+
+
+def strip_trailing_punctuation(text: str):
+    return text.strip().strip(" \t\r\n.,;:!?")
+
+
+def strip_leading_article(text: str):
+    return LEADING_ARTICLE_RE.sub("", text.strip()).strip()
+
+
+def factoid_question_allowed(question: str):
+    normalized = compact_text(question).lower()
+    if not normalized.startswith(FACTOID_ALLOWED_PREFIXES):
+        return False
+    return not any(fragment in normalized for fragment in FACTOID_EXCLUDED_SUBSTRINGS)
+
+
+def numeric_factoid_phrase(text: str):
+    tokens = compact_text(text).split()
+    if not tokens:
+        return None
+    for index in range(len(tokens) - 1, -1, -1):
+        token = tokens[index].strip(".,;:!?").lower()
+        if token.isdigit() or token in NUMBER_WORDS:
+            phrase = [tokens[index].strip(".,;:!?")]
+            if index + 1 < len(tokens):
+                next_token = tokens[index + 1].strip(".,;:!?")
+                if next_token and next_token[:1].isalnum():
+                    phrase.append(next_token)
+            return strip_trailing_punctuation(" ".join(phrase))
+    return None
+
+
+def clean_factoid_phrase(text: str):
+    return strip_leading_article(strip_trailing_punctuation(compact_text(text)))
+
+
+def has_excessive_question_overlap(question: str, answer: str):
+    answer_tokens = {
+        token
+        for token in re.findall(r"[a-z0-9]+", answer.lower())
+        if token not in QUESTION_OVERLAP_STOPWORDS
+    }
+    if not answer_tokens:
+        return True
+    question_tokens = set(re.findall(r"[a-z0-9]+", question.lower()))
+    return answer_tokens.issubset(question_tokens)
+
+
+def normalize_factoid_answer(question: str, answer: str):
+    question_text = compact_text(question)
+    answer_text = strip_trailing_punctuation(compact_text(answer))
+    if not question_text or not answer_text:
+        return None
+
+    lower_question = question_text.lower()
+    lower_answer = answer_text.lower()
+
+    if lower_question.startswith(("how many", "how much")):
+        phrase = numeric_factoid_phrase(answer_text)
+        return clean_factoid_phrase(phrase) if phrase else None
+
+    if lower_question.startswith("when"):
+        match = DATE_RE.search(answer_text) or YEAR_RE.search(answer_text)
+        return clean_factoid_phrase(match.group(0)) if match else None
+
+    if lower_question.startswith("where"):
+        match = re.search(r"\b(?:in|at|from|on)\s+([^.,;]+)$", answer_text, re.IGNORECASE)
+        if match:
+            return clean_factoid_phrase(match.group(1))
+
+    if lower_question.startswith("who"):
+        by_match = re.search(r"\bby\s+(.+)$", answer_text, re.IGNORECASE)
+        if by_match:
+            return clean_factoid_phrase(by_match.group(1))
+        subject_match = re.match(
+            r"^(.+?)(?:\s+(?:is|was|were|became|played|invented|gave|won|wrote|"
+            r"turned|died|saved|translated|prepared|founded)\b.*)?$",
+            answer_text,
+            re.IGNORECASE,
+        )
+        if subject_match:
+            return clean_factoid_phrase(subject_match.group(1))
+
+    generic_prefix_patterns = [
+        r"^(?:the name of .+? is )(.+)$",
+        r"^(?:the currency in use in .+? is )(.+)$",
+        r"^(?:the capital city of .+? is )(.+)$",
+        r"^(?:the capital of .+? is )(.+)$",
+        r"^(?:the largest city in .+? is )(.+)$",
+        r"^(?:the tallest building in .+? is )(.+)$",
+        r"^(?:the fastest train in the world is )(.+)$",
+        r"^(?:the scientific name for .+? is )(.+)$",
+        r"^(?:you can make .+? by mixing )(.+?)(?: together)?$",
+        r"^(?:there were )(.+)$",
+        r"^(?:there are )(.+)$",
+        r"^(?:there is )(.+)$",
+        r"^(?:it was )(.+)$",
+        r"^(?:his name was )(.+)$",
+        r"^(?:her name was )(.+)$",
+        r"^(?:the answer is )(.+)$",
+    ]
+    for pattern in generic_prefix_patterns:
+        match = re.match(pattern, answer_text, re.IGNORECASE)
+        if match:
+            return clean_factoid_phrase(match.group(1))
+
+    if lower_question.startswith(("what", "which", "what's", "whats")):
+        prefix_match = re.match(
+            r"^(.+?)\s+is\s+(?:the\s+)?(?:capital(?:\s+city)?|currency|mascot|"
+            r"winner|scientific\s+name|largest\s+city|tallest\s+building)\b",
+            answer_text,
+            re.IGNORECASE,
+        )
+        if prefix_match:
+            candidate = clean_factoid_phrase(prefix_match.group(1))
+            if candidate:
+                return candidate
+        if " is " in lower_answer:
+            candidate = re.split(r"\bis\b", answer_text, flags=re.IGNORECASE)[-1]
+            return clean_factoid_phrase(candidate)
+
+    return clean_factoid_phrase(answer_text)
+
+
+def transform_examples(
+    examples,
+    factoid_only: bool = False,
+    normalize_factoid_answers: bool = False,
+    max_normalized_answer_words: int | None = None,
+):
+    transformed = []
+    for example in examples:
+        updated = dict(example)
+        if factoid_only and not factoid_question_allowed(updated["instruction"]):
+            continue
+        if normalize_factoid_answers:
+            normalized = normalize_factoid_answer(updated["instruction"], updated["response"])
+            if not normalized:
+                continue
+            if has_excessive_question_overlap(updated["instruction"], normalized):
+                continue
+            updated["response"] = normalized
+        if max_normalized_answer_words is not None:
+            if answer_word_count(updated["response"]) > max_normalized_answer_words:
+                continue
+        transformed.append(updated)
+    return transformed
 
 
 def example_matches_filters(
@@ -320,6 +568,9 @@ def prepare_dataset(
     max_answer_words: int | None = None,
     max_question_words: int | None = None,
     require_single_line_answer: bool = False,
+    factoid_only: bool = False,
+    normalize_factoid_answers: bool = False,
+    max_normalized_answer_words: int | None = None,
 ):
     out_dir.mkdir(parents=True, exist_ok=True)
     source_path = out_dir / "databricks-dolly-15k.jsonl"
@@ -331,6 +582,12 @@ def prepare_dataset(
         max_answer_words=max_answer_words,
         max_question_words=max_question_words,
         require_single_line_answer=require_single_line_answer,
+    )
+    examples = transform_examples(
+        examples,
+        factoid_only=factoid_only,
+        normalize_factoid_answers=normalize_factoid_answers,
+        max_normalized_answer_words=max_normalized_answer_words,
     )
     if len(examples) < 2:
         raise ValueError("filtered Dolly dataset must contain at least 2 examples")
@@ -440,6 +697,9 @@ def prepare_dataset(
         "max_answer_words": max_answer_words,
         "max_question_words": max_question_words,
         "require_single_line_answer": require_single_line_answer,
+        "factoid_only": factoid_only,
+        "normalize_factoid_answers": normalize_factoid_answers,
+        "max_normalized_answer_words": max_normalized_answer_words,
         "question_label": question_label,
         "context_label": context_label,
         "answer_label": answer_label,
@@ -508,6 +768,9 @@ def main():
         max_answer_words=args.max_answer_words,
         max_question_words=args.max_question_words,
         require_single_line_answer=args.require_single_line_answer,
+        factoid_only=args.factoid_only,
+        normalize_factoid_answers=args.normalize_factoid_answers,
+        max_normalized_answer_words=args.max_normalized_answer_words,
     )
     print(f"saved dataset to {args.out_dir}")
     print(f"train examples: {meta['train_examples']}, val examples: {meta['val_examples']}")

@@ -5,7 +5,12 @@ from pathlib import Path
 import numpy as np
 
 from lite_llm_pretraining.common import save_json
-from lite_llm_pretraining.prepare_dolly_qa import filter_examples, load_examples, trim_context
+from lite_llm_pretraining.prepare_dolly_qa import (
+    filter_examples,
+    load_examples,
+    transform_examples,
+    trim_context,
+)
 
 
 def parse_args():
@@ -25,6 +30,9 @@ def parse_args():
     parser.add_argument("--max_answer_words", type=int, default=12)
     parser.add_argument("--max_question_words", type=int, default=24)
     parser.add_argument("--require_single_line_answer", action="store_true")
+    parser.add_argument("--factoid_only", action="store_true")
+    parser.add_argument("--normalize_factoid_answers", action="store_true")
+    parser.add_argument("--max_normalized_answer_words", type=int, default=None)
     parser.add_argument("--pass_f1_threshold", type=float, default=0.9)
     return parser.parse_args()
 
@@ -65,6 +73,12 @@ def main():
         max_answer_words=args.max_answer_words,
         max_question_words=args.max_question_words,
         require_single_line_answer=args.require_single_line_answer,
+    )
+    examples = transform_examples(
+        examples,
+        factoid_only=args.factoid_only,
+        normalize_factoid_answers=args.normalize_factoid_answers,
+        max_normalized_answer_words=args.max_normalized_answer_words,
     )
     required = args.dev_count + args.holdout_count
     if len(examples) < required:
