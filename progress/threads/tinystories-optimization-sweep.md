@@ -137,6 +137,34 @@
 - A19: `Byte-level clean 50M / 500step under strict validator`
 - A20: `Best overall carry-forward run`
 
+### A16
+
+- Change: 对 `A14` best checkpoint 降验证温度到 `0.4`
+- Validation: `validate_checkpoint`，固定 3 prompt，`max_new_tokens=120`，`seed=123`
+- Result: `0/3` 通过；`val_loss=4.4379`；未知标记总数 `14`
+- Conclusion: 继续降温没有帮助，只是让输出更钝
+
+### A17
+
+- Change: 对 `A14` best checkpoint 升验证温度到 `0.6`
+- Validation: 同 A16
+- Result: `0/3` 通过；`val_loss=4.4379`；未知标记总数 `10`
+- Conclusion: 未知标记更少，但通过数没提升，`A14@0.5` 仍是更直接的 carry-forward 候选
+
+### A18
+
+- Change: 现有 `byte-level 50M / 2000step` checkpoint 按新严格口径复核
+- Validation: 同 A16，温度 `0.6`
+- Result: `0/3` 通过；`val_loss=1.4395`；未知标记总数 `0`
+- Conclusion: 它的问题不是未知标记，而是大量伪词；严格口径下依然不够好
+
+### A19
+
+- Change: 现有 `byte-clean 50M / 500step` checkpoint 按新严格口径复核
+- Validation: 同 A16，温度 `0.6`
+- Result: `1/3` 通过；`val_loss=2.2684`；未知标记总数 `0`
+- Conclusion: 清洗 `<|endoftext|>` 的收益是真实的，但 byte-level 主线的文本质量上限仍然偏低
+
 ## Validation
 
 - 当前短结论：
@@ -144,8 +172,9 @@
 - 在当前 `200 step` 窗口里，结构 sweep 没有出现比基线更强的明显赢家
 - `context=384` 和 `batch=12` 都能降低 loss，但还没有转化成更干净的文本
 - 到目前为止，唯一在短训里真正改善通过数的是 `warmup=50`
+- byte-level 清洗线可以达到 `1/3`，但人类可读性仍然不如 SentencePiece 线
 
 ## Conclusion
 
 - 当前主线先不再继续放大模型或 context
-- A14 进入 carry-forward 候选，下一步优先做温度复核
+- A14 经过温度复核后仍保留为最佳 SentencePiece carry-forward 候选

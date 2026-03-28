@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 执行 `TinyStories` 连续优化 sweep，至少完成 20 个方案尝试
-- Latest Progress: 已完成 A13-A15；`warmup=50` 的 A14 成为当前首个短训 `1/3` 通过的配置，优先级上升为 carry-forward 候选
+- Latest Progress: 已完成 A16-A19 严格复核；A14 的温度复核没有继续提升通过数，A19 虽然也到 `1/3`，但 byte-level 仍不是更优主线
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 先对 A14 做 A16-A17 温度复核，再跑 A18-A19 的历史 checkpoint 严格复核，最后执行 A20 更长训练
+- Next Step: 直接执行 A20，把 A14 这条 SentencePiece 路线拉长训练，再按同一严格口径复核
 
 ## How To Read
 

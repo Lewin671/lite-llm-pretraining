@@ -1,0 +1,66 @@
+{
+  "attempt_id": "A18",
+  "notes": "shorter warmup 100 steps on rebuilt unigram-2048 baseline",
+  "base_config": "checkpoints/sweeps/a05-u2048-base/run_config.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-4xhxhtm2-a18.json",
+  "run_name": "tinystories-sweep-a18-warmup100",
+  "data_dir": "data/tinystories-sweep-u2048",
+  "out_dir": "checkpoints/tinystories-sweep-a18-warmup100",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a18-warmup100/best",
+  "prepare": {},
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 300,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 100,
+    "log_interval": 25,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 120,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.042718,
+    "val_ppl": 56.980994,
+    "checkpoint_step": 300,
+    "best_val_loss": 4.093412208557129
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "there was a little boy named Lily was a big, and  ⁇ The little girl named Lily. She was very scared and a little girl who didn't know what he went to explore the park. She was very happy to the park. She was so happy. She saw a big, the park. She was so happy. One day, he could go on the statather. She was a little girl named Lily was a big and said, \"Hello, she had to do and he was very happy to play with the box. She was a big and started",
+  "sample_state": {
+    "step": 300,
+    "best_val_loss": 4.093412208557129
+  },
+  "sample_flags": {
+    "contains_unknown_marker": true,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 7,
+  "train_result": {
+    "run_name": "tinystories-sweep-a18-warmup100",
+    "out_dir": "checkpoints/tinystories-sweep-a18-warmup100",
+    "best_val_loss": 4.093412208557129,
+    "last_val_loss": 4.093412208557129,
+    "final_step": 300,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a18-warmup100/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a18-warmup100/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a18-warmup100/metrics.jsonl"
+  }
+}

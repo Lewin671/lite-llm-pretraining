@@ -1,0 +1,20 @@
+{
+  "attempt_id": "A19",
+  "notes": "byte-level clean 50m 500step under strict validator",
+  "checkpoint_dir": "checkpoints/tinystories-byte-clean-50m-500step/best",
+  "data_dir": "data/tinystories-byte-clean",
+  "validation_temperature": 0.6,
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 2.268446,
+    "val_ppl": 9.664373,
+    "checkpoint_step": 500,
+    "best_val_loss": 2.2818516731262206
+  },
+  "validation_summary": {
+    "passed_samples": 1,
+    "total_samples": 3
+  },
+  "total_unknown_markers": 0,
+  "sample_excerpt": " the sin the the bir isay usore he hey, an he thered wandand there g four he lomes anacas anell cay. ande t as ne lot he"
+}

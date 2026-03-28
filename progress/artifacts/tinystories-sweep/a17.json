@@ -1,0 +1,20 @@
+{
+  "attempt_id": "A17",
+  "notes": "A14 checkpoint with higher validation temperature 0.6",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a14-warmup50/best",
+  "data_dir": "data/tinystories-spm",
+  "validation_temperature": 0.6,
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.437853,
+    "val_ppl": 84.593156,
+    "checkpoint_step": 200,
+    "best_val_loss": 4.547906494140625
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "total_unknown_markers": 10,
+  "sample_excerpt": "Timmy. ⁇ The girl felt so excited to the girl was so big girl was a big parents and be friends, \"I enjoyed a little girl. ⁇ His, the monkey to play and it. ⁇ Ahas. She said, \"Let and said, \"I felt soI called it a little girl's and said, \"No, \"I loved a little girl was happy. She's.\" ⁇ Mommy, he had a boy took a little girl were very so much a little girl named  ⁇ O upon a girl's a time, \"No, \""
+}
