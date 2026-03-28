@@ -1,0 +1,387 @@
+{
+  "name": "squad_qa_dev_v1",
+  "task": "qa",
+  "source_url": "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json",
+  "source_path": "data/squad/dev-v2.0.json",
+  "pass_f1_threshold": 0.8,
+  "context_char_limit": 420,
+  "samples": [
+    {
+      "id": "5730a314069b5314008321ef",
+      "question": "Who did the geographic scholars work for?",
+      "context": "According to geographic scholars under colonizing empires, the world could be split into climatic zones. These scholars believed that Northern Europe and the Mid-Atlantic temperate climate produced a hard-working, moral, and upstanding human being. Alternatively,",
+      "answers": [
+        "colonizing empires"
+      ],
+      "tags": [
+        "imperialism"
+      ]
+    },
+    {
+      "id": "572a1046af94a219006aa78f",
+      "question": "What are both Branko Milanovic and Joseph Stiglitz?",
+      "context": "Economist Joseph Stiglitz presented evidence in 2009 that both global inequality and inequality within countries prevent growth by limiting aggregate demand. Economist Branko Milanovic, wrote in 2001 that, \"The view that income inequality harms growth – or that improved equality can help sustain growth – has become more widely held in recent years. ... The main reason for",
+      "answers": [
+        "Economist"
+      ],
+      "tags": [
+        "economic_inequality"
+      ]
+    },
+    {
+      "id": "57261dab38643c19005ad039",
+      "question": "Some of the income went to the purchase of arms which exacerbated political tension especially in which area?",
+      "context": "been caught between higher oil prices and lower prices for their own export commodities, amid shrinking Western demand. Much went for arms purchases that exacerbated political tensions, particularly in the Middle East. Saudi Arabia spent over 100 billion dollars in the ensuing decades for helping spread its fundamentalist interpretation of Islam, known as Wahhabism, throughout the world, via religious charities such",
+      "answers": [
+        "Middle East"
+      ],
+      "tags": [
+        "1973_oil_crisis"
+      ]
+    },
+    {
+      "id": "5727ed2e3acd2414000df005",
+      "question": "Who works to get workers higher compensation?",
+      "context": "skills, rare abilities, or a high level of risk. Competition amongst employers tends to drive up wages due to the nature of the job, since there is a relative shortage of workers for the particular position. Professional and labor organizations may limit the supply of workers which results in higher demand and greater incomes for members. Members may also receive higher wages through collective bargaining, political influence, or corruption.",
+      "answers": [
+        "Professional and labor organizations"
+      ],
+      "tags": [
+        "economic_inequality"
+      ]
+    },
+    {
+      "id": "57309446396df919000961b9",
+      "question": "What were European countries doing during the 1700's?",
+      "context": "The Age of Imperialism, a time period beginning around 1700, saw (generally European) industrializing nations engaging in the process of colonizing, influencing, and annexing other parts of the world in order to gain political power.[citation needed] Although imperialist practices have existed for thousands of years, the term \"Age of Imperialism\"",
+      "answers": [
+        "colonizing",
+        "process of colonizing, influencing, and annexing other parts of the world",
+        "colonizing, influencing, and annexing other parts of the world in order to gain political power",
+        "colonizing, influencing, and annexing"
+      ],
+      "tags": [
+        "imperialism"
+      ]
+    },
+    {
+      "id": "572856beff5b5019007da191",
+      "question": "How man volumes does the The University of Chicago Library system hold?",
+      "context": "The University of Chicago Library system encompasses six libraries that contain a total of 9.8 million volumes, the 11th most among library systems in the United States. The university's main library is the Regenstein Library, which contains one of the largest collections of print volumes in the United States.",
+      "answers": [
+        "9.8 million"
+      ],
+      "tags": [
+        "university_of_chicago"
+      ]
+    },
+    {
+      "id": "5725c63438643c19005acca1",
+      "question": "How many miles does the dust travels over the Atlantic Ocean?",
+      "context": "satellite has measured the amount of dust transported by wind from the Sahara to the Amazon: an average 182 million tons of dust are windblown out of the Sahara each year, at 15 degrees west longitude, across 1,600 miles (2,600 km) over the Atlantic Ocean (some dust falls into the Atlantic), then at 35 degrees West longitude at the eastern coast of South America, 27.7 million tons (15%) of dust fall over the Amazon basin, 132",
+      "answers": [
+        "1,600 miles",
+        "1,600"
+      ],
+      "tags": [
+        "amazon_rainforest"
+      ]
+    },
+    {
+      "id": "572883153acd2414000dfa73",
+      "question": "Where were Persians more successful compared to Chinese in the Yuan?",
+      "context": "examination in the early 14th century. In general there were very few North Chinese or Southerners reaching the highest-post in the government compared with the possibility that Persians did so in the Ilkhanate. Later the Yongle Emperor of the Ming dynasty also mentioned the discrimination that existed during the Yuan dynasty. In response to an objection against the use of \"barbarians\" in his government, the Yongle",
+      "answers": [
+        "Ilkhanate",
+        "reaching the highest-post in the government"
+      ],
+      "tags": [
+        "yuan_dynasty"
+      ]
+    },
+    {
+      "id": "5729f4b41d0469140077968b",
+      "question": "What co-receptor recruits molecules inside the T cell that are responsible for cell activation?",
+      "context": "Helper T cells express T cell receptors (TCR) that recognize antigen bound to Class II MHC molecules. The MHC:antigen complex is also recognized by the helper cell's CD4 co-receptor, which recruits molecules inside the T cell (e.g., Lck) that are responsible for the T cell's activation. Helper T cells have a weaker association with the MHC:antigen complex than observed for killer T",
+      "answers": [
+        "CD4 co-receptor",
+        "CD4"
+      ],
+      "tags": [
+        "immune_system"
+      ]
+    },
+    {
+      "id": "57261dab38643c19005ad037",
+      "question": "How much did Saudi Arabia spend on spreading Wahhabism?",
+      "context": "prices and lower prices for their own export commodities, amid shrinking Western demand. Much went for arms purchases that exacerbated political tensions, particularly in the Middle East. Saudi Arabia spent over 100 billion dollars in the ensuing decades for helping spread its fundamentalist interpretation of Islam, known as Wahhabism, throughout the world, via religious charities such al-Haramain Foundation, which often also",
+      "answers": [
+        "over 100 billion dollars",
+        "100 billion dollars"
+      ],
+      "tags": [
+        "1973_oil_crisis"
+      ]
+    },
+    {
+      "id": "57299021af94a219006aa50d",
+      "question": "As of February 2011, how many numbers has Goldbach's conjecture been proven to?",
+      "context": "unsolved. One of them is Goldbach's conjecture, which asserts that every even integer n greater than 2 can be written as a sum of two primes. As of February 2011[update], this conjecture has been verified for all numbers up to n = 2 · 1017. Weaker statements than this have been proven, for example Vinogradov's theorem says that every sufficiently large odd integer can be written as a sum of three primes. Chen's theorem says that every",
+      "answers": [
+        "all numbers up to n = 2 · 1017",
+        "n = 2 · 1017",
+        "n = 2"
+      ],
+      "tags": [
+        "prime_number"
+      ]
+    },
+    {
+      "id": "5728e3c33acd2414000e0132",
+      "question": "What was the goal of this Roman disobedience?",
+      "context": "The earliest recorded incidents of collective civil disobedience took place during the Roman Empire[citation needed]. Unarmed Jews gathered in the streets to prevent the installation of pagan images in the Temple in Jerusalem.[citation needed][original research?] In modern times, some activists who commit civil disobedience as a group collectively refuse to sign bail until certain demands are met, such",
+      "answers": [
+        "prevent the installation of pagan images",
+        "prevent the installation of pagan images in the Temple in Jerusalem",
+        "to prevent the installation of pagan images in the Temple in Jerusalem"
+      ],
+      "tags": [
+        "civil_disobedience"
+      ]
+    },
+    {
+      "id": "5725f46289a1e219009ac0fe",
+      "question": "Are there any other aviation communities such as Sierra Sky Park in the United States?",
+      "context": "community born of a unique agreement in transportation law to allow personal aircraft and automobiles to share certain roads. Sierra Sky Park was the first aviation community to be built[citation needed] and there are now numerous such communities across the United States and around the world. Developer William Smilie created the nation's first planned aviation community. Still in operation today, the public use airport provides a unique neighborhood that spawned interest and",
+      "answers": [
+        "there are now numerous such communities across the United States",
+        "numerous"
+      ],
+      "tags": [
+        "fresno,_california"
+      ]
+    },
+    {
+      "id": "572867212ca10214002da2f5",
+      "question": "Who challenged Kublai Khan's right to succeed Mongke Khan?",
+      "context": "southern China was far greater than the force they sent to invade the Middle East in 1256. He died in 1259 without a successor. Kublai returned from fighting the Song in 1260 when he learned that his brother, Ariq Böke, was challenging his claim to the throne. Kublai convened a kurultai in Kaiping that elected him Great Khan. A rival kurultai in Mongolia proclaimed Ariq Böke Great Khan, beginning a civil war. Kublai",
+      "answers": [
+        "Ariq Böke"
+      ],
+      "tags": [
+        "yuan_dynasty"
+      ]
+    },
+    {
+      "id": "572a1a5c6aef051400155285",
+      "question": "What can the growth elasticity of poverty depend on?",
+      "context": "efforts must be made to ensure poorer sections of society are able to participate in economic growth. The effect of economic growth on poverty reduction – the growth elasticity of poverty – can depend on the existing level of inequality. For instance, with low inequality a country with a growth rate of 2% per head and 40% of its population living in poverty, can halve poverty in ten years, but a country with high inequality would take nearly",
+      "answers": [
+        "existing level of inequality"
+      ],
+      "tags": [
+        "economic_inequality"
+      ]
+    },
+    {
+      "id": "57094a79efce8f15003a7dc4",
+      "question": "What year was Setanta Sports awarded Primeier Leage rights to broadcast?",
+      "context": "battle with the European Commission, which deemed the exclusivity of the rights to be against the interests of competition and the consumer, BSkyB's monopoly came to an end from the 2007–08 season. In May 2006, the Irish broadcaster Setanta Sports was awarded two of the six Premier League packages that the English FA offered to broadcasters. Sky picked up the remaining four for £1.3bn. In February 2015, Sky bid",
+      "answers": [
+        "2006"
+      ],
+      "tags": [
+        "sky_(united_kingdom)"
+      ]
+    },
+    {
+      "id": "570d44abb3d812140066d5fd",
+      "question": "By August 2010 how many public schools did Victoria have?",
+      "context": "As of August 2010, Victoria had 1,548 public schools, 489 Catholic schools and 214 independent schools. Just under 540,800 students were enrolled in public schools, and just over 311,800 in private schools. Over 61 per cent of private students",
+      "answers": [
+        "1,548"
+      ],
+      "tags": [
+        "victoria_(australia)"
+      ]
+    },
+    {
+      "id": "57060eaf75f01819005e7912",
+      "question": "Jamboree Business Parks belongs to which business center?",
+      "context": "Coast Metro and Newport Center districts; as well as the Irvine business centers of The Irvine Spectrum, West Irvine, and international corporations headquartered at the University of California, Irvine. West Irvine includes the Irvine Tech Center and Jamboree Business Parks.",
+      "answers": [
+        "West Irvine"
+      ],
+      "tags": [
+        "southern_california"
+      ]
+    },
+    {
+      "id": "573009a004bcaa1900d7704f",
+      "question": "When did the Rhine become borders with Francia?",
+      "context": "By the 6th century, the Rhine was within the borders of Francia. In the 9th, it formed part of the border between Middle and Western Francia, but in the 10th century, it was fully within the Holy Roman Empire, flowing through",
+      "answers": [
+        "6th century"
+      ],
+      "tags": [
+        "rhine"
+      ]
+    },
+    {
+      "id": "57267640f1498d1400e8e078",
+      "question": "Where is the oldest known rock in the world located?",
+      "context": "geologically complex. In the southwestern United States, sedimentary, volcanic, and intrusive rocks have been metamorphosed, faulted, foliated, and folded. Even older rocks, such as the Acasta gneiss of the Slave craton in northwestern Canada, the oldest known rock in the world have been metamorphosed to the point where their origin is undiscernable without laboratory analysis. In addition, these processes can occur in stages. In many places, the",
+      "answers": [
+        "Slave craton in northwestern Canada",
+        "Canada",
+        "northwestern Canada"
+      ],
+      "tags": [
+        "geology"
+      ]
+    },
+    {
+      "id": "5729506d6aef051400154cad",
+      "question": "What remain unsolved problems with the Kyoto Protocol?",
+      "context": "The stepwise mitigation of the ozone layer challenge was based as well on successfully reducing regional burden sharing conflicts. In case of the IPCC conclusions and the failure of the Kyoto Protocol, varying regional cost-benefit analysis and burden-sharing conflicts with regard to the distribution of emission reductions remain an unsolved problem. In the UK, a report for a House of Lords committee asked to urge the IPCC to involve better assessments of costs and benefits of climate change but the Stern Review ordered by the",
+      "answers": [
+        "varying regional cost-benefit analysis and burden-sharing conflicts with regard to the distribution of emission reductions"
+      ],
+      "tags": [
+        "intergovernmental_panel_on_climate_change"
+      ]
+    },
+    {
+      "id": "5711623e50c2381900b54abd",
+      "question": "Along with a desire for more steam pressure, what were early drivers looking to generate when they fastened safety valves down?",
+      "context": "spring that restrained the valve against steam pressure. Early valves could be adjusted by engine drivers, leading to many accidents when a driver fastened the valve down to allow greater steam pressure and more power from the engine. The more recent type of safety valve uses an adjustable spring-loaded valve, which is locked such that operators may not tamper with its adjustment unless a seal illegally is broken. This",
+      "answers": [
+        "more power",
+        "greater steam pressure and more power"
+      ],
+      "tags": [
+        "steam_engine"
+      ]
+    },
+    {
+      "id": "57274beff1498d1400e8f5e7",
+      "question": "What body in India provides policy directions to schools?",
+      "context": "the power of both the union government and the state governments to govern schools since Education appears in the Concurrent list of legislative subjects in the constitution. The practice has been for the union government to provide the broad policy directions while the states create their own rules and regulations for the administration of the sector. Among other things, this has also resulted in 30 different Examination",
+      "answers": [
+        "union government",
+        "the union government"
+      ],
+      "tags": [
+        "private_school"
+      ]
+    },
+    {
+      "id": "5728d4c03acd2414000dffa2",
+      "question": "What does civil disobedience protest against?",
+      "context": "massive implementations was brought about by Egyptians against the British occupation in the 1919 Revolution. Civil disobedience is one of the many ways people have rebelled against what they deem to be unfair laws. It has been used in many nonviolent resistance movements in India (Gandhi's campaigns for independence from the British Empire), in Czechoslovakia's Velvet Revolution and in East Germany to oust their",
+      "answers": [
+        "unfair laws",
+        "unfair laws.",
+        "what they deem to be unfair"
+      ],
+      "tags": [
+        "civil_disobedience"
+      ]
+    },
+    {
+      "id": "5727ed2e3acd2414000df002",
+      "question": "When there are many workers competing for a few jobs its considered as what?",
+      "context": "A job where there are many workers willing to work a large amount of time (high supply) competing for a job that few require (low demand) will result in a low wage for that job. This is because competition between workers drives down the wage. An example of this would be jobs such as dish-washing or customer service. Competition amongst",
+      "answers": [
+        "low demand",
+        "high supply",
+        "low wage"
+      ],
+      "tags": [
+        "economic_inequality"
+      ]
+    },
+    {
+      "id": "57111428b654c5140001faff",
+      "question": "When was the St. Bartholomew's Day Massacre?",
+      "context": "In what became known as the St. Bartholomew's Day Massacre of 24 August – 3 October 1572, Catholics killed thousands of Huguenots in Paris. Similar massacres took place in other towns in the weeks following. The main provincial towns and cities experiencing the Massacre were Aix, Bordeaux,",
+      "answers": [
+        "24 August – 3 October 1572"
+      ],
+      "tags": [
+        "huguenot"
+      ]
+    },
+    {
+      "id": "570d391fb3d812140066d579",
+      "question": "What is the lowest recorded temperature in Victoria?",
+      "context": "east-west through the centre of Victoria. Average temperatures are less than 9 °C (48 °F) in winter and below 0 °C (32 °F) in the highest parts of the ranges. The state's lowest minimum temperature of −11.7 °C (10.9 °F) was recorded at Omeo on 13 June 1965, and again at Falls Creek on 3 July 1970. Temperature extremes for the state are listed in the table below:",
+      "answers": [
+        "−11.7 °C",
+        "−11.7 °C (10.9 °F)"
+      ],
+      "tags": [
+        "victoria_(australia)"
+      ]
+    },
+    {
+      "id": "572f567cb2c2fd140056803f",
+      "question": "What is the conventional method to measure the Rhine?",
+      "context": "The length of the Rhine is conventionally measured in \"Rhine-kilometers\" (Rheinkilometer), a scale introduced in 1939 which runs from the Old Rhine Bridge at Constance (0 km) to Hoek van Holland (1036.20 km). The river length is significantly shortened from the river's natural",
+      "answers": [
+        "Rhine-kilometers",
+        "\"Rhine-kilometers\""
+      ],
+      "tags": [
+        "rhine"
+      ]
+    },
+    {
+      "id": "572860e03acd2414000df979",
+      "question": "What dynasty came after the Yuan?",
+      "context": "khanate ruled by the successors of Möngke Khan after the division of the Mongol Empire. In official Chinese histories, the Yuan dynasty bore the Mandate of Heaven, following the Song dynasty and preceding the Ming dynasty. The dynasty was established by Kublai Khan, yet he placed his grandfather Genghis Khan on the imperial records as the official founder of the dynasty as Taizu.[b] In the Proclamation of the Dynastic Name",
+      "answers": [
+        "Ming dynasty",
+        "the Ming dynasty"
+      ],
+      "tags": [
+        "yuan_dynasty"
+      ]
+    },
+    {
+      "id": "5733e8ae4776f419006614a9",
+      "question": "What was result of French attack of trading centre?",
+      "context": "His objective was to punish the Miami people of Pickawillany for not following Céloron's orders to cease trading with the British. On June 21, the French war party attacked the trading centre at Pickawillany, capturing three traders and killing 14 people of the Miami nation, including Old Briton. He was reportedly ritually cannibalized by some aboriginal members of the expedition.",
+      "answers": [
+        "capturing three traders and killing 14 people of the Miami nation, including Old Briton",
+        "capturing three traders and killing 14 people of the Miami nation",
+        "capturing three traders and killing 14 people"
+      ],
+      "tags": [
+        "french_and_indian_war"
+      ]
+    },
+    {
+      "id": "572a13841d0469140077973b",
+      "question": "What have studies on income inequality sometimes found evidence confirming?",
+      "context": "Studies on income inequality and growth have sometimes found evidence confirming the Kuznets curve hypothesis, which states that with economic development, inequality first increases, then decreases. Economist Thomas Piketty challenges this notion, claiming that from 1914 to 1945 wars and \"violent economic and",
+      "answers": [
+        "Kuznets curve hypothesis"
+      ],
+      "tags": [
+        "economic_inequality"
+      ]
+    },
+    {
+      "id": "5733a32bd058e614000b5f33",
+      "question": "When did Polonia Warsaw win the country's championship prior to 2000?",
+      "context": "Their local rivals, Polonia Warsaw, have significantly fewer supporters, yet they managed to win Ekstraklasa Championship in 2000. They also won the country’s championship in 1946, and won the cup twice as well. Polonia's home venue is located at Konwiktorska Street, a ten-minute walk north from the Old Town. Polonia was relegated from the country's top flight in 2013 because of their",
+      "answers": [
+        "1946"
+      ],
+      "tags": [
+        "warsaw"
+      ]
+    }
+  ]
+}

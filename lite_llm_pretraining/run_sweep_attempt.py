@@ -101,7 +101,10 @@ def run_attempt(
         temp_config_path = Path(handle.name)
 
     train_result = train_from_config(temp_config_path)
-    checkpoint_dir = Path(train_result["best_checkpoint_dir"])
+    checkpoint_dir = Path(
+        train_result.get("best_suite_checkpoint_dir")
+        or train_result["best_checkpoint_dir"]
+    )
     sample_temperature = config["train"].get("sample_temperature", 1.0)
     sample_text, sample_state = sample_from_checkpoint(
         checkpoint_dir,
@@ -132,6 +135,11 @@ def run_attempt(
         sample["metrics"].get("unknown_marker_count", 0)
         for sample in validation_report["samples"]
     )
+    checkpoint_selection = (
+        "best_suite"
+        if train_result.get("best_suite_checkpoint_dir")
+        else "best_val_loss"
+    )
     artifact = {
         "attempt_id": attempt_id,
         "notes": notes,
@@ -141,9 +149,13 @@ def run_attempt(
         "data_dir": str(data_dir),
         "out_dir": config["out_dir"],
         "checkpoint_dir": str(checkpoint_dir),
+        "checkpoint_selection": checkpoint_selection,
+        "best_checkpoint_dir": train_result["best_checkpoint_dir"],
+        "best_suite_checkpoint_dir": train_result.get("best_suite_checkpoint_dir"),
         "prepare": config.get("prepare", {}),
         "model": config["model"],
         "train": config["train"],
+        "suite_eval": config.get("suite_eval"),
         "validation": validation_report.get("validation"),
         "validation_summary": validation_report["summary"],
         "validation_temperature": validation_config.get(

@@ -1,0 +1,389 @@
+{
+  "name": "squad_qa_holdout_v1",
+  "task": "qa",
+  "source_url": "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json",
+  "source_path": "data/squad/dev-v2.0.json",
+  "pass_f1_threshold": 0.8,
+  "context_char_limit": 420,
+  "samples": [
+    {
+      "id": "5710e8c8a58dae1900cd6b2a",
+      "question": "French troops put down the Camisard uprisings between what years?",
+      "context": "the Camisards who were Huguenots rioted against the Catholic Church in the region, burning churches and killing clergy. It took French troops years to hunt down and destroy all the bands of Camisards, between 1702 and 1709.",
+      "answers": [
+        "1702 and 1709"
+      ],
+      "tags": [
+        "huguenot"
+      ]
+    },
+    {
+      "id": "571c8198dd7acb1400e4c0ce",
+      "question": "Of what were materials that left little residue thought to contain?",
+      "context": "that leave little residue, such as wood or coal, were thought to be made mostly of phlogiston; whereas non-combustible substances that corrode, such as iron, contained very little. Air did not play a role in phlogiston theory, nor were any initial quantitative experiments conducted to test the idea; instead, it was based on observations of what happens when something burns, that most common objects appear to become lighter",
+      "answers": [
+        "phlogiston"
+      ],
+      "tags": [
+        "oxygen"
+      ]
+    },
+    {
+      "id": "572fffb1b2c2fd14005686fd",
+      "question": "What did Iqbal's Allahabad address inspire?",
+      "context": "session in Lahore in 1932. In his Allahabad Address on 29 December 1930, Iqbal outlined a vision of an independent state for Muslim-majority provinces in northwestern India. This address later inspired the Pakistan movement.",
+      "answers": [
+        "Pakistan movement",
+        "the Pakistan movement"
+      ],
+      "tags": [
+        "islamism"
+      ]
+    },
+    {
+      "id": "57113c6da58dae1900cd6d32",
+      "question": "In what century did the history of the steam engine begin?",
+      "context": "The history of the steam engine stretches back as far as the first century AD; the first recorded rudimentary steam engine being the aeolipile described by Greek mathematician Hero of Alexandria. In the following centuries, the few steam-powered \"engines\" known were, like",
+      "answers": [
+        "first",
+        "first century AD"
+      ],
+      "tags": [
+        "steam_engine"
+      ]
+    },
+    {
+      "id": "5726385e271a42140099d79a",
+      "question": "What happens to the packet at the destination",
+      "context": "the system has to do as much work for every packet as the connection-oriented system has to do in connection set-up, but with less information as to the application's requirements. At the destination, the original message/data is reassembled in the correct order, based on the packet sequence number. Thus a virtual connection, also known as a virtual circuit or byte stream is provided to the end-user by a transport layer protocol, although intermediate network nodes only provides a connectionless network",
+      "answers": [
+        "the original message/data is reassembled in the correct order, based on the packet sequence number",
+        "the original message/data is reassembled in the correct order",
+        "reassembled"
+      ],
+      "tags": [
+        "packet_switching"
+      ]
+    },
+    {
+      "id": "5706094b52bb8914006897e1",
+      "question": "Southern California's economy can be described as one of the largest in the United States and what other characteristic?",
+      "context": "Southern California's economy is diverse and one of the largest in the United States. It is dominated and heavily dependent upon abundance of petroleum, as opposed to other regions where automobiles not nearly as dominant, the vast majority of",
+      "answers": [
+        "diverse"
+      ],
+      "tags": [
+        "southern_california"
+      ]
+    },
+    {
+      "id": "5726a34bf1498d1400e8e59e",
+      "question": "When was the Lisbon Treaty established?",
+      "context": "The 2007 Lisbon Treaty explicitly recognised fundamental rights by providing in Article 6(1) that \"The Union recognises the rights, freedoms and principles set out in the Charter of Fundamental Rights of the European",
+      "answers": [
+        "2007"
+      ],
+      "tags": [
+        "european_union_law"
+      ]
+    },
+    {
+      "id": "5726a5525951b619008f78e1",
+      "question": "What did the Works Council Directive require?",
+      "context": "as the Social Chapter of the 1997 Treaty of Amsterdam. The UK subsequently adopted the main legislation previously agreed under the Agreement on Social Policy, the 1994 Works Council Directive, which required workforce consultation in businesses, and the 1996 Parental Leave Directive. In the 10 years following the 1997 Treaty of Amsterdam and adoption of the Social Chapter the European Union has undertaken policy initiatives in various social policy",
+      "answers": [
+        "workforce consultation in businesses"
+      ],
+      "tags": [
+        "european_union_law"
+      ]
+    },
+    {
+      "id": "57285213ff5b5019007da183",
+      "question": "What division offers more then one branch of studies that don't fit in with the other four?",
+      "context": "Division, the Social Sciences Collegiate Division, the Humanities Collegiate Division, and the New Collegiate Division. The first four are sections within their corresponding graduate divisions, while the New Collegiate Division administers interdisciplinary majors and studies which do not fit in one of the other four divisions.",
+      "answers": [
+        "the New Collegiate Division",
+        "New Collegiate Division"
+      ],
+      "tags": [
+        "university_of_chicago"
+      ]
+    },
+    {
+      "id": "571099b2b654c5140001f9b5",
+      "question": "Why did Berlin Huguenots switch to German from French in their services?",
+      "context": "By 1700, one-fifth of the city's population was French speaking. The Berlin Huguenots preserved the French language in their church services for nearly a century. They ultimately decided to switch to German in protest against the occupation of Prussia by Napoleon in 1806-07. Many of their descendents rose to positions of prominence. Several congregations were founded, such as those of Fredericia (Denmark), Berlin, Stockholm, Hamburg, Frankfurt, Helsinki, and Emden.",
+      "answers": [
+        "in protest against the occupation of Prussia by Napoleon",
+        "in protest"
+      ],
+      "tags": [
+        "huguenot"
+      ]
+    },
+    {
+      "id": "5730069004bcaa1900d7702d",
+      "question": "Where do the branches Waal and Nederrijn-Lek discharge to?",
+      "context": "At present, the branches Waal and Nederrijn-Lek discharge to the North Sea, through the former Meuse estuary, near Rotterdam. The river IJssel branch flows to the north and enters the IJsselmeer, formerly the Zuider Zee brackish lagoon; however, since 1932, a freshwater lake. The",
+      "answers": [
+        "North Sea"
+      ],
+      "tags": [
+        "rhine"
+      ]
+    },
+    {
+      "id": "5725ca4389a1e219009abeb5",
+      "question": "Are there any regions where the Treaty of European Union excludes from jurisdiction?",
+      "context": "the European Council to make specific provisions for regions, as for example done for customs matters in Gibraltar and Saint-Pierre-et-Miquelon. The TEU specifically excludes certain regions, for example the Faroe Islands, from the jurisdiction of European Union law. Treaties apply as soon as they enter into force, unless stated otherwise, and are generally concluded for an unlimited period. The TEU provides that commitments",
+      "answers": [
+        "the Faroe Islands"
+      ],
+      "tags": [
+        "european_union_law"
+      ]
+    },
+    {
+      "id": "572fd47fa23a5019007fca58",
+      "question": "Other than Scotland's Chief Law Officer, from whence are most ministers drawn from amongst?",
+      "context": "roles by the First Minister. Junior ministers, who do not attend cabinet, are also appointed to assist Scottish ministers in their departments. Most ministers and their juniors are drawn from amongst the elected MSPs, with the exception of Scotland's Chief Law Officers: the Lord Advocate and the Solicitor General. Whilst the First Minister chooses the ministers – and may decide to remove them at any time – the formal",
+      "answers": [
+        "elected MSPs",
+        "the elected MSPs",
+        "amongst the elected MSPs"
+      ],
+      "tags": [
+        "scottish_parliament"
+      ]
+    },
+    {
+      "id": "572fce13a23a5019007fca15",
+      "question": "If Parliament agrees in a vote to the general principle of a bill, what does it then proceed to?",
+      "context": "submitted to the whole Parliament for a full debate in the chamber on the general principles of the bill. If the whole Parliament agrees in a vote to the general principles of the bill, it then proceeds to Stage 2.",
+      "answers": [
+        "Stage 2"
+      ],
+      "tags": [
+        "scottish_parliament"
+      ]
+    },
+    {
+      "id": "57335ddbd058e614000b5932",
+      "question": "Where can Aeolian sand with a number of dunes be found?",
+      "context": "They consist of still quite natural streams and lakes as well as the pattern of drainage ditches. The right side of Warsaw has a different pattern of geomorphological forms. There are several levels of the plain Vistula terraces (flooded as well as former flooded once) and only small part and not so visible moraine escarpment. Aeolian sand with a number of dunes parted by peat swamps or small ponds cover the highest terrace. These",
+      "answers": [
+        "plain Vistula terraces",
+        "highest terrace"
+      ],
+      "tags": [
+        "warsaw"
+      ]
+    },
+    {
+      "id": "5726ef73f1498d1400e8f061",
+      "question": "Who defines what constitutes a patient-doctor relationship?",
+      "context": "purpose by a licensed practitioner acting in the course of legitimate doctor-patient relationship. The filling pharmacy has a corresponding responsibility to ensure that the prescription is valid. Often, individual state laws outline what defines a valid patient-doctor relationship.",
+      "answers": [
+        "individual state laws",
+        "Often, individual state laws outline what defines a valid patient-doctor relationship"
+      ],
+      "tags": [
+        "pharmacy"
+      ]
+    },
+    {
+      "id": "572fc8a904bcaa1900d76d1f",
+      "question": "What is set up to scrutinize private bills submitted by party outsiders?",
+      "context": "A further type of committee is normally set up to scrutinise private bills submitted to the Scottish Parliament by an outside party or promoter who is not a member of the Scottish Parliament or Scottish Government. Private bills",
+      "answers": [
+        "type of committee",
+        "committee"
+      ],
+      "tags": [
+        "scottish_parliament"
+      ]
+    },
+    {
+      "id": "57293d116aef051400154bca",
+      "question": "What is 'grey literature'?",
+      "context": "of IPCC reports assess the available information about climate change based on published sources. According to IPCC guidelines, authors should give priority to peer-reviewed sources. Authors may refer to non-peer-reviewed sources (the \"grey literature\"), provided that they are of sufficient quality. Examples of non-peer-reviewed sources include model results, reports from government agencies and non-governmental organizations, and",
+      "answers": [
+        "non-peer-reviewed sources"
+      ],
+      "tags": [
+        "intergovernmental_panel_on_climate_change"
+      ]
+    },
+    {
+      "id": "572fc41f947a6a140053cc84",
+      "question": "What language other than English has the Scottish Parliament had meetings in?",
+      "context": "to the chamber are normally delivered in English, but members may use Scots, Gaelic, or any other language with the agreement of the Presiding Officer. The Scottish Parliament has conducted debates in the Gaelic language.",
+      "answers": [
+        "Gaelic",
+        "Scots, Gaelic, or any other language with the agreement of the Presiding Officer"
+      ],
+      "tags": [
+        "scottish_parliament"
+      ]
+    },
+    {
+      "id": "5733e771d058e614000b6547",
+      "question": "What issues were not addressed in the Treaty of Aix-la-Chapelle?",
+      "context": "North American theater is known as King George's War) formally ended in 1748 with the signing of the Treaty of Aix-la-Chapelle. The treaty was primarily focused on resolving issues in Europe. The issues of conflicting territorial claims between British and French colonies in North America were turned over to a commission to resolve, but it reached no decision. Frontiers from between Nova Scotia and Acadia in the north, to the Ohio Country in the south, were claimed by",
+      "answers": [
+        "conflicting territorial claims between British and French",
+        "conflicting territorial claims between British and French colonies in North America",
+        "conflicting territorial claims",
+        "The issues of conflicting territorial claims between British and French colonies"
+      ],
+      "tags": [
+        "french_and_indian_war"
+      ]
+    },
+    {
+      "id": "5733a1854776f41900660f0c",
+      "question": "What type of theatre is the Warsaw Fotoplastikon?",
+      "context": "history of Poland can be found in the Warsaw Uprising Museum and in the Katyń Museum which preserves the memory of the crime. The Warsaw Uprising Museum also operates a rare preserved and operating historic stereoscopic theatre, the Warsaw Fotoplastikon. The Museum of Independence preserves patriotic and political objects connected with Poland's struggles for independence. Dating back to 1936 Warsaw Historical Museum",
+      "answers": [
+        "stereoscopic",
+        "stereoscopic theatre"
+      ],
+      "tags": [
+        "warsaw"
+      ]
+    },
+    {
+      "id": "571153422419e31400955581",
+      "question": "For what railroad did Stephenson build a locomotive in 1825?",
+      "context": "Only four years later, the successful twin-cylinder locomotive Salamanca by Matthew Murray was used by the edge railed rack and pinion Middleton Railway. In 1825 George Stephenson built the Locomotion for the Stockton and Darlington Railway. This was the first public steam railway in the world and then in 1829, he built The Rocket which was entered in and won the Rainhill Trials. The Liverpool and Manchester Railway opened in 1830 making",
+      "answers": [
+        "Stockton and Darlington",
+        "Stockton and Darlington Railway"
+      ],
+      "tags": [
+        "steam_engine"
+      ]
+    },
+    {
+      "id": "5728d9403acd2414000e001d",
+      "question": "What type of person can not be attributed civil disobedience?",
+      "context": "branches of government, conflict. For instance, if the head of government of a country were to refuse to enforce a decision of that country's highest court, it would not be civil disobedience, since the head of government would be acting in her or his capacity as public official rather than private citizen.",
+      "answers": [
+        "head of government",
+        "public official",
+        "public"
+      ],
+      "tags": [
+        "civil_disobedience"
+      ]
+    },
+    {
+      "id": "57293b843f37b31900478133",
+      "question": "What organization is the IPCC a part of?",
+      "context": "The Intergovernmental Panel on Climate Change (IPCC) is a scientific intergovernmental body under the auspices of the United Nations, set up at the request of member governments. It was first established in 1988 by two United Nations organizations, the World Meteorological Organization (WMO) and the United Nations Environment Programme",
+      "answers": [
+        "the United Nations"
+      ],
+      "tags": [
+        "intergovernmental_panel_on_climate_change"
+      ]
+    },
+    {
+      "id": "570602fa52bb8914006897a0",
+      "question": "Cities that anchor the regions are often the hub for what kind of activity?",
+      "context": "and economically into distinctive regions, each containing its own culture and atmosphere, anchored usually by a city with both national and sometimes global recognition, which are often the hub of economic activity for its respective region and being home to many tourist destinations. Each region is further divided into many culturally distinct areas but as a whole combine to create the southern California",
+      "answers": [
+        "economic",
+        "economic activity"
+      ],
+      "tags": [
+        "southern_california"
+      ]
+    },
+    {
+      "id": "5726a00cf1498d1400e8e551",
+      "question": "What are some of the accepted general principles of European Union law?",
+      "context": "doctrines and principles present in the legal systems of European Union member states and in the jurisprudence of the European Court of Human Rights. Accepted general principles of European Union Law include fundamental rights (see human rights), proportionality, legal certainty, equality before the law and subsidiarity.",
+      "answers": [
+        "fundamental rights (see human rights), proportionality, legal certainty, equality before the law and subsidiarity"
+      ],
+      "tags": [
+        "european_union_law"
+      ]
+    },
+    {
+      "id": "572656e4dd62a815002e81fe",
+      "question": "Within the EU, which court believes they have the final word deciding on EU's competence?",
+      "context": "question: who ultimately has the \"competence\" to define the EU's \"competence\". Many member state courts believe they decide, other member state Parliaments believe they decide, while within the EU, the Court of Justice believes it has the final say.",
+      "answers": [
+        "Court of Justice",
+        "the Court of Justice"
+      ],
+      "tags": [
+        "european_union_law"
+      ]
+    },
+    {
+      "id": "572fc49d04bcaa1900d76ccc",
+      "question": "What is heralded by the sounding of the division bell?",
+      "context": "Each sitting day, normally at 5 pm, MSPs decide on all the motions and amendments that have been moved that day. This \"Decision Time\" is heralded by the sounding of the division bell, which is heard throughout the Parliamentary campus and alerts MSPs who are not in the chamber to return and vote. At Decision Time, the Presiding Officer puts",
+      "answers": [
+        "\"Decision Time\"",
+        "Decision Time"
+      ],
+      "tags": [
+        "scottish_parliament"
+      ]
+    },
+    {
+      "id": "572fe288a23a5019007fcad9",
+      "question": "What is the Proto-Germanic adoption of the Gaulish name of the Rhine?",
+      "context": "with Rh- in English Rhine as well as in German Rhein and French Rhin is due to the influence of Greek orthography, while the vocalisation -i- is due to the Proto-Germanic adoption of the Gaulish name as *Rīnaz, via Old Frankish giving Old English Rín, Old High German Rīn, Dutch Rijn (formerly also spelled Rhijn)). The diphthong in modern German Rhein (also adopted in Romansh Rein, Rain) is a Central German",
+      "answers": [
+        "Rīnaz"
+      ],
+      "tags": [
+        "rhine"
+      ]
+    },
+    {
+      "id": "571c8198dd7acb1400e4c0cf",
+      "question": "What type of combustible materials were considered to have little philogiston?",
+      "context": "Highly combustible materials that leave little residue, such as wood or coal, were thought to be made mostly of phlogiston; whereas non-combustible substances that corrode, such as iron, contained very little. Air did not play a role in phlogiston theory, nor were any initial quantitative experiments conducted to test the idea; instead, it was based on",
+      "answers": [
+        "non-combustible",
+        "non-combustible substances that corrode",
+        "wood"
+      ],
+      "tags": [
+        "oxygen"
+      ]
+    },
+    {
+      "id": "5710ed7bb654c5140001fa2f",
+      "question": "What was the Dutch leader's religious affiliation?",
+      "context": "by his court minister, the Huguenot Pierre L'Oyseleur, lord of Villiers. Louise de Coligny, daughter of the murdered Huguenot leader Gaspard de Coligny, married William the Silent, leader of the Dutch (Calvinist) revolt against Spanish (Catholic) rule. As both spoke French in daily life, their court church in the Prinsenhof in Delft held services in French. The practice has continued to the present day. The",
+      "answers": [
+        "Calvinist",
+        "Walloon"
+      ],
+      "tags": [
+        "huguenot"
+      ]
+    },
+    {
+      "id": "5725bad5271a42140099d0bf",
+      "question": "How many times more did the other nations have to pay for oil after the surprise attack?",
+      "context": "and cement... You buy our crude oil and sell it back to us, refined as petrochemicals, at a hundred times the price you've paid us... It's only fair that, from now on, you should pay more for oil. Let's say ten times more.\"",
+      "answers": [
+        "ten times more",
+        "ten",
+        "a hundred"
+      ],
+      "tags": [
+        "1973_oil_crisis"
+      ]
+    }
+  ]
+}

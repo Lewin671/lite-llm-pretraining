@@ -1,0 +1,54 @@
+{
+  "run_name": "dolly-qa-spm-smoke",
+  "seed": 42,
+  "prepare": {
+    "name": "dolly_qa",
+    "source_url": "https://huggingface.co/datasets/databricks/databricks-dolly-15k/resolve/main/databricks-dolly-15k.jsonl",
+    "train_split": 0.95,
+    "split_seed": 42,
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer the question using the context when it is provided.",
+    "context_word_limit": 96,
+    "prompt_loss_weight": 0.0
+  },
+  "data_dir": "data/dolly-qa-spm-u4096",
+  "out_dir": "checkpoints/dolly-qa-spm-smoke",
+  "sample_prompt": "When did Virgin Australia start operating?",
+  "sample_context": "Virgin Australia, the trading name of Virgin Australia Airlines Pty Ltd, is an Australian-based airline. It commenced services on 31 August 2000 as Virgin Blue, with two aircraft on a single route.",
+  "suite_eval": {
+    "suite_path": "prompts/squad_qa_dev_v1.json",
+    "temperature": 0.3,
+    "max_new_tokens": 48,
+    "eval_batches": 10,
+    "seed": 123
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 384,
+    "num_layers": 8,
+    "num_heads": 6,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 200,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 50,
+    "eval_batches": 10,
+    "checkpoint_interval": 50,
+    "sample_interval": 50,
+    "sample_tokens": 64,
+    "sample_temperature": 0.3,
+    "batch_sampling_mode": "example_start"
+  }
+}

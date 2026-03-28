@@ -24,10 +24,10 @@ from lite_llm_pretraining.common import (
     set_seed,
     token_dtype_from_meta,
 )
+from lite_llm_pretraining.evaluate_suite import evaluate_suite
 from lite_llm_pretraining.tokenizer import load_tokenizer_from_meta
 from lite_llm_pretraining.story_inference import (
-    PLAIN_STORY_TEMPLATE,
-    build_story_prompt,
+    build_prompt_from_profile,
     resolve_inference_profile_from_config,
 )
 
@@ -46,6 +46,22 @@ def append_metrics(path: Path, payload):
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
+def suite_score(summary, val_loss: float):
+    if "required_group_hit_ratio" in summary:
+        return (
+            float(summary.get("required_group_hit_ratio", 0.0)),
+            float(summary.get("strict_pass_rate", 0.0)),
+            float(summary.get("early_anchor_hit_rate", 0.0)),
+            -float(val_loss),
+        )
+    return (
+        float(summary.get("token_f1", 0.0)),
+        float(summary.get("exact_match", 0.0)),
+        float(summary.get("strict_pass_rate", 0.0)),
+        -float(val_loss),
+    )
 
 
 def train_from_config(config_path: Path):
@@ -107,8 +123,12 @@ def train_from_config(config_path: Path):
             context_size,
         )
     best_val_loss = float("inf")
+    best_suite_score = None
     metrics_path = out_dir / "metrics.jsonl"
     metrics_path.unlink(missing_ok=True)
+    suite_metrics_path = out_dir / "suite_metrics.jsonl"
+    suite_metrics_path.unlink(missing_ok=True)
+    suite_eval_config = config.get("suite_eval")
 
     print(f"run: {config['run_name']}")
     print(f"params: {count_parameters(model):,}")
@@ -192,13 +212,78 @@ def train_from_config(config_path: Path):
                 {"best_val_loss": best_val_loss},
                 tokenizer=tokenizer,
             )
+            if suite_eval_config:
+                suite_report = evaluate_suite(
+                    out_dir / "latest",
+                    Path(suite_eval_config["suite_path"]),
+                    data_dir=data_dir,
+                    max_new_tokens=suite_eval_config.get("max_new_tokens", 120),
+                    temperature=suite_eval_config.get("temperature", sample_temperature),
+                    top_k=suite_eval_config.get("top_k"),
+                    repetition_penalty=suite_eval_config.get("repetition_penalty", 1.0),
+                    repetition_window=suite_eval_config.get("repetition_window"),
+                    eval_batches=suite_eval_config.get(
+                        "eval_batches",
+                        train_config.get("eval_batches", 10),
+                    ),
+                    seed=suite_eval_config.get("seed", config["seed"]),
+                )
+                suite_summary = suite_report["summary"]
+                suite_metric = {
+                    "step": step,
+                    "val_loss": round(last_val_loss, 6) if last_val_loss is not None else None,
+                    "strict_pass_rate": suite_summary["strict_pass_rate"],
+                    "suite_path": suite_report["suite_path"],
+                }
+                if "required_group_hit_ratio" in suite_summary:
+                    suite_metric["required_group_hit_ratio"] = suite_summary["required_group_hit_ratio"]
+                    suite_metric["early_anchor_hit_rate"] = suite_summary["early_anchor_hit_rate"]
+                else:
+                    suite_metric["token_f1"] = suite_summary.get("token_f1")
+                    suite_metric["exact_match"] = suite_summary.get("exact_match")
+                append_metrics(suite_metrics_path, suite_metric)
+                suite_eval_dir = out_dir / "suite_eval"
+                suite_eval_dir.mkdir(parents=True, exist_ok=True)
+                save_json(suite_eval_dir / f"step-{step:04d}.json", suite_report)
+                current_suite_score = suite_score(
+                    suite_summary,
+                    last_val_loss if last_val_loss is not None else float("inf"),
+                )
+                print(
+                    (
+                        f"step {step:04d} "
+                        f"suite_required={suite_summary['required_group_hit_ratio']:.4f} "
+                        f"suite_strict={suite_summary['strict_pass_rate']:.4f}"
+                    )
+                    if "required_group_hit_ratio" in suite_summary
+                    else (
+                        f"step {step:04d} "
+                        f"suite_f1={suite_summary.get('token_f1', 0.0):.4f} "
+                        f"suite_em={suite_summary.get('exact_match', 0.0):.4f}"
+                    )
+                )
+                if best_suite_score is None or current_suite_score > best_suite_score:
+                    best_suite_score = current_suite_score
+                    best_suite_state = {"best_val_loss": best_val_loss}
+                    for key, value in suite_summary.items():
+                        if isinstance(value, (int, float, str, bool)):
+                            best_suite_state[key] = value
+                    save_checkpoint(
+                        out_dir / "best_suite",
+                        model,
+                        step,
+                        best_suite_state,
+                        tokenizer=tokenizer,
+                    )
+                    save_json(out_dir / "best_suite_report.json", suite_report)
 
         if step % train_config["sample_interval"] == 0 or step == train_config["max_steps"]:
             sample_prompt = config["sample_prompt"]
-            if inference_profile.get("mode") == "story":
-                sample_prompt = build_story_prompt(
+            if inference_profile.get("mode") in {"story", "qa"}:
+                sample_prompt = build_prompt_from_profile(
                     config["sample_prompt"],
-                    inference_profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
+                    inference_profile,
+                    context=config.get("sample_context"),
                 )
             sample = sample_text(
                 model,
@@ -224,6 +309,10 @@ def train_from_config(config_path: Path):
         "best_checkpoint_dir": str(out_dir / "best"),
         "latest_checkpoint_dir": str(out_dir / "latest"),
         "metrics_path": str(metrics_path),
+        "suite_metrics_path": str(suite_metrics_path) if suite_eval_config else None,
+        "best_suite_checkpoint_dir": str(out_dir / "best_suite")
+        if suite_eval_config and (out_dir / "best_suite").exists()
+        else None,
     }
 
 

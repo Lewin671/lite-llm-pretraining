@@ -15,8 +15,7 @@ from lite_llm_pretraining.common import (
 )
 from lite_llm_pretraining.model import CheckpointLanguageModel
 from lite_llm_pretraining.story_inference import (
-    PLAIN_STORY_TEMPLATE,
-    build_story_prompt,
+    build_prompt_from_profile,
     resolve_inference_profile,
 )
 
@@ -300,11 +299,8 @@ def validate_checkpoint(
     lm = CheckpointLanguageModel(checkpoint_dir)
     for prompt in prompts:
         model_prompt = prompt
-        if inference_profile.get("mode") == "story":
-            model_prompt = build_story_prompt(
-                prompt,
-                inference_profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
-            )
+        if inference_profile.get("mode") in {"story", "qa"}:
+            model_prompt = build_prompt_from_profile(prompt, inference_profile)
         output = lm.generate(
             model_prompt,
             max_new_tokens=max_new_tokens,

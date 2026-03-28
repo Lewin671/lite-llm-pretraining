@@ -5,6 +5,7 @@ from lite_llm_pretraining.common import load_json
 
 PLAIN_STORY_TEMPLATE = "{prompt}"
 PROMPT_CONTINUATION_TEMPLATE = "Prompt: {prompt}\nContinuation:"
+QA_TEMPLATE = "Question: {question}\n{context_block}Answer:"
 
 
 def checkpoint_run_config_path(checkpoint_dir: Path):
@@ -24,9 +25,22 @@ def resolve_inference_profile_from_config(config, path_hint: str = ""):
         return {
             "mode": inference.get("mode", "chat"),
             "prompt_template": inference.get("prompt_template", PLAIN_STORY_TEMPLATE),
+            "question_label": inference.get("question_label", "Question"),
+            "context_label": inference.get("context_label", "Context"),
+            "answer_label": inference.get("answer_label", "Answer"),
+            "instruction_text": inference.get("instruction_text", ""),
         }
 
     prepare = config.get("prepare", {})
+    if prepare.get("name") == "dolly_qa" or prepare.get("task_format") == "qa":
+        return {
+            "mode": "qa",
+            "question_label": prepare.get("question_label", "Question"),
+            "context_label": prepare.get("context_label", "Context"),
+            "answer_label": prepare.get("answer_label", "Answer"),
+            "instruction_text": prepare.get("instruction_text", "").strip(),
+            "prompt_template": prepare.get("prompt_template", QA_TEMPLATE),
+        }
     if prepare.get("story_format") == "prompt_continuation":
         prompt_label = prepare.get("prompt_label", "Prompt")
         continuation_label = prepare.get("continuation_label", "Continuation")
@@ -41,6 +55,15 @@ def resolve_inference_profile_from_config(config, path_hint: str = ""):
         }
 
     data_dir = str(config.get("data_dir", "")).lower()
+    if "dolly" in data_dir or "qa" in path_hint.lower():
+        return {
+            "mode": "qa",
+            "question_label": "Question",
+            "context_label": "Context",
+            "answer_label": "Answer",
+            "instruction_text": "",
+            "prompt_template": QA_TEMPLATE,
+        }
     if "tinystories" in data_dir or "tinystories" in path_hint.lower():
         return {
             "mode": "story",
@@ -60,3 +83,60 @@ def resolve_inference_profile(checkpoint_dir: Path):
 
 def build_story_prompt(prompt: str, prompt_template: str):
     return prompt_template.format(prompt=prompt.strip())
+
+
+def build_qa_prompt(
+    question: str,
+    prompt_template: str = QA_TEMPLATE,
+    context: str | None = None,
+    question_label: str = "Question",
+    context_label: str = "Context",
+    answer_label: str = "Answer",
+    instruction_text: str = "",
+):
+    question = question.strip()
+    context = (context or "").strip()
+    rendered_template = prompt_template or QA_TEMPLATE
+    context_block = ""
+    if context:
+        context_block = f"{context_label}: {context}\n"
+    if "{" in rendered_template:
+        return rendered_template.format(
+            prompt=question,
+            question=question,
+            context=context,
+            context_block=context_block,
+            question_label=question_label,
+            context_label=context_label,
+            answer_label=answer_label,
+            instruction_text=instruction_text.strip(),
+        )
+
+    parts = []
+    if instruction_text.strip():
+        parts.append(instruction_text.strip())
+    parts.append(f"{question_label}: {question}")
+    if context:
+        parts.append(f"{context_label}: {context}")
+    parts.append(f"{answer_label}:")
+    return "\n".join(parts)
+
+
+def build_prompt_from_profile(prompt: str, profile: dict, context: str | None = None):
+    mode = profile.get("mode")
+    if mode == "story":
+        return build_story_prompt(
+            prompt,
+            profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
+        )
+    if mode == "qa":
+        return build_qa_prompt(
+            prompt,
+            prompt_template=profile.get("prompt_template", QA_TEMPLATE),
+            context=context,
+            question_label=profile.get("question_label", "Question"),
+            context_label=profile.get("context_label", "Context"),
+            answer_label=profile.get("answer_label", "Answer"),
+            instruction_text=profile.get("instruction_text", ""),
+        )
+    return prompt

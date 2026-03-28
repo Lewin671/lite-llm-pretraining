@@ -2,6 +2,7 @@ import argparse
 from pathlib import Path
 
 from lite_llm_pretraining.common import load_json, save_json
+from lite_llm_pretraining.prepare_dolly_qa import prepare_dataset as prepare_dolly_qa
 from lite_llm_pretraining.prepare_tiny_shakespeare import prepare_dataset
 from lite_llm_pretraining.prepare_tinystories import prepare_dataset as prepare_tinystories
 from lite_llm_pretraining.prepare_tinystories_sentencepiece import (
@@ -81,6 +82,11 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             input_sentence_size=prepare_config.get("input_sentence_size", 200000),
             max_sentence_length=prepare_config.get("max_sentence_length", 16384),
             shuffle_input_sentence=prepare_config.get("shuffle_input_sentence", True),
+            tokenizer_model_path=(
+                Path(prepare_config["tokenizer_model_path"])
+                if prepare_config.get("tokenizer_model_path")
+                else None
+            ),
             story_format=prepare_config.get("story_format", "plain"),
             prompt_sentence_count=prepare_config.get("prompt_sentence_count", 1),
             continuation_sentence_limit=prepare_config.get("continuation_sentence_limit"),
@@ -89,6 +95,49 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             instruction_text=prepare_config.get("instruction_text", ""),
             use_loss_mask=prepare_config.get("use_loss_mask"),
             prompt_loss_weight=prepare_config.get("prompt_loss_weight", 0.0),
+            continuation_head_token_count=prepare_config.get(
+                "continuation_head_token_count",
+                0,
+            ),
+            continuation_head_loss_weight=prepare_config.get(
+                "continuation_head_loss_weight",
+                1.0,
+            ),
+        )
+
+    if prepare_name == "dolly_qa":
+        split = prepare_config.get("train_split", train_split)
+        return prepare_dolly_qa(
+            data_dir,
+            source_url=prepare_config.get("source_url"),
+            train_split=split,
+            split_seed=prepare_config.get("split_seed", 42),
+            vocab_size=prepare_config.get("vocab_size", 4096),
+            model_type=prepare_config.get("model_type", "unigram"),
+            byte_fallback=prepare_config.get("byte_fallback", True),
+            input_sentence_size=prepare_config.get("input_sentence_size", 200000),
+            max_sentence_length=prepare_config.get("max_sentence_length", 16384),
+            shuffle_input_sentence=prepare_config.get("shuffle_input_sentence", True),
+            tokenizer_model_path=(
+                Path(prepare_config["tokenizer_model_path"])
+                if prepare_config.get("tokenizer_model_path")
+                else None
+            ),
+            question_label=prepare_config.get("question_label", "Question"),
+            context_label=prepare_config.get("context_label", "Context"),
+            answer_label=prepare_config.get("answer_label", "Answer"),
+            instruction_text=prepare_config.get("instruction_text", ""),
+            prompt_loss_weight=prepare_config.get("prompt_loss_weight", 0.0),
+            continuation_head_token_count=prepare_config.get(
+                "continuation_head_token_count",
+                0,
+            ),
+            continuation_head_loss_weight=prepare_config.get(
+                "continuation_head_loss_weight",
+                1.0,
+            ),
+            context_word_limit=prepare_config.get("context_word_limit", 96),
+            allowed_categories=prepare_config.get("allowed_categories"),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")
@@ -111,12 +160,19 @@ def main():
         print(f"train tokens: {meta['train_tokens']}, val tokens: {meta['val_tokens']}")
 
     train_result = train_from_config(config_path)
-    checkpoint_dir = Path(train_result["best_checkpoint_dir"])
+    checkpoint_dir = Path(
+        train_result.get("best_suite_checkpoint_dir")
+        or train_result["best_checkpoint_dir"]
+    )
     prompt = args.prompt or config["sample_prompt"]
     max_new_tokens = args.max_new_tokens or config["train"]["sample_tokens"]
     sample_temperature = config["train"].get("sample_temperature", 1.0)
     final_sample, sample_state = sample_from_checkpoint(
-        checkpoint_dir, prompt, max_new_tokens, temperature=sample_temperature
+        checkpoint_dir,
+        prompt,
+        max_new_tokens,
+        temperature=sample_temperature,
+        context=config.get("sample_context"),
     )
 
     out_dir = Path(train_result["out_dir"])

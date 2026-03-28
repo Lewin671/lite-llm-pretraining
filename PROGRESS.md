@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 沿 `v2 dev/holdout` 评测继续优化 TinyStories 条件续写能力
-- Latest Progress: 已完成 `A42-A45` 一轮新 sweep；`A42/A43` 证明 short context 能把锚点命中从全零拉回非零，但 `A44/A45` 又说明把 context 拉回 `96/128` 会重新退化；同时 instruction 模板链路已经接入，`A46` 正在准备和训练
-- Issues: 当前最佳信号仍然很弱，`A43` 只在 `dev` 上出现少量锚点回流，holdout 仍然是 `0`；bare prompt 模板和 loss mask 设计仍可能抑制条件跟踪泛化
-- Next Step: 跑完 instruction 线，并比较同一份 instruction 数据上的 `masked` / `full-loss`；继续围绕 `A43` 的 `short context + example_start` 主线做更强任务对齐
+- Current Task: 已落地 `Dolly 15k -> Q/A 训练 -> SQuAD 风格评测 -> Q/A TUI` 主线，下一步转到 `Q/A` 质量优化
+- Latest Progress: 新增了 `prepare_dolly_qa.py`、`prepare_squad_qa_eval.py`、`evaluate_qa_suite.py`、通用 `evaluate_suite.py`，并把 `sample.py`、`tui_chat.py`、训练内 sample 和 `run_local.py` 全部接到真正的 `Question / Context / Answer` 模式；`configs/dolly-qa-spm-smoke.json` 已完成一次本机 smoke 闭环
+- Issues: 当前 `Dolly Q/A smoke` 只能证明链路打通，质量仍然很弱；当前 `best_suite` 在 `SQuAD dev/holdout v1` 上都是 `strict_pass_rate=0.0`，`token_f1` 仅约 `0.0281 / 0.0340`
+- Next Step: 以当前 `Q/A` 主线为基线开始做质量优化，优先收紧训练数据形态与损失设计，而不是继续沿故事续写路线调参
 
 ## How To Read
 
@@ -26,6 +26,7 @@
 - [progress/threads/tinystories-full-training.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-full-training.md)
 - [progress/threads/tinystories-optimization-sweep.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-optimization-sweep.md)
 - [progress/threads/tinystories-eval-suite.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/tinystories-eval-suite.md)
+- [progress/threads/qa-mode.md](/Users/qingyingliu/Code/lite-llm-pretraining/progress/threads/qa-mode.md)
 
 ## Closed Threads
 

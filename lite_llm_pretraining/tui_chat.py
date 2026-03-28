@@ -3,16 +3,18 @@ import curses
 import textwrap
 from pathlib import Path
 
-from lite_llm_pretraining.app import ChatApplication, StoryApplication
+from lite_llm_pretraining.app import ChatApplication, QAApplication, StoryApplication
 from lite_llm_pretraining.model import CheckpointLanguageModel
 from lite_llm_pretraining.story_inference import (
     PLAIN_STORY_TEMPLATE,
+    QA_TEMPLATE,
     resolve_inference_profile,
 )
 
 
 CHAT_HELP_TEXT = "Enter send | /clear reset | /quit exit"
 STORY_HELP_TEXT = "Enter a story opening | /clear reset | /quit exit"
+QA_HELP_TEXT = "Enter question or question || context | /clear reset | /quit exit"
 
 
 def parse_args():
@@ -55,8 +57,8 @@ def parse_args():
     parser.add_argument(
         "--mode",
         default="auto",
-        choices=["auto", "chat", "story"],
-        help="Prompt format. auto uses story mode for TinyStories checkpoints.",
+        choices=["auto", "chat", "story", "qa"],
+        help="Prompt format. auto uses task-specific mode from checkpoint metadata.",
     )
     return parser.parse_args()
 
@@ -80,7 +82,14 @@ class ChatTUI:
         self.repetition_penalty = repetition_penalty
         self.repetition_window = repetition_window
         self.input_buffer = ""
-        self.status = STORY_HELP_TEXT if isinstance(app, StoryApplication) else CHAT_HELP_TEXT
+        self.status = self._default_status()
+
+    def _default_status(self):
+        if isinstance(self.app, StoryApplication):
+            return STORY_HELP_TEXT
+        if isinstance(self.app, QAApplication):
+            return QA_HELP_TEXT
+        return CHAT_HELP_TEXT
 
     def _wrap_block(self, text: str, width: int):
         if not text:
@@ -129,9 +138,7 @@ class ChatTUI:
         user_text = self.input_buffer.strip()
         self.input_buffer = ""
         if not user_text:
-            self.status = (
-                STORY_HELP_TEXT if isinstance(self.app, StoryApplication) else CHAT_HELP_TEXT
-            )
+            self.status = self._default_status()
             return True
         if user_text.startswith("/"):
             return self._run_command(user_text)
@@ -148,9 +155,7 @@ class ChatTUI:
         ):
             self._render()
 
-        self.status = (
-            STORY_HELP_TEXT if isinstance(self.app, StoryApplication) else CHAT_HELP_TEXT
-        )
+        self.status = self._default_status()
         return True
 
     def run(self):
@@ -179,6 +184,15 @@ def resolve_tui_profile(checkpoint_dir: Path, requested_mode: str):
             "mode": "story",
             "prompt_template": profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
         }
+    if requested_mode == "qa":
+        return {
+            "mode": "qa",
+            "prompt_template": profile.get("prompt_template", QA_TEMPLATE),
+            "question_label": profile.get("question_label", "Question"),
+            "context_label": profile.get("context_label", "Context"),
+            "answer_label": profile.get("answer_label", "Answer"),
+            "instruction_text": profile.get("instruction_text", ""),
+        }
     return profile
 
 
@@ -190,6 +204,15 @@ def run_tui(stdscr, args):
         app = StoryApplication(
             model,
             prompt_template=profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
+        )
+    elif profile.get("mode") == "qa":
+        app = QAApplication(
+            model,
+            question_prefix=profile.get("question_label", "Question"),
+            answer_prefix=profile.get("answer_label", "Answer"),
+            context_label=profile.get("context_label", "Context"),
+            prompt_template=profile.get("prompt_template", QA_TEMPLATE),
+            instruction_text=profile.get("instruction_text", ""),
         )
     else:
         app = ChatApplication(model)

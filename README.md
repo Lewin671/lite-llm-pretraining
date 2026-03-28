@@ -5,12 +5,12 @@
 当前仓库已经落地一条可在 Apple Silicon Mac 16GB 上直接运行的最小闭环：
 
 - 框架：`MLX + Metal`
-- 数据：`Tiny Shakespeare` / `TinyStories`
+- 数据：`Tiny Shakespeare` / `TinyStories` / `Databricks Dolly 15k`
 - tokenizer：`UTF-8 byte-level`
 - 可选 tokenizer 升级：`SentencePiece`
 - 模型：decoder-only Transformer
-- 验证目标：训练、验证、checkpoint 保存/加载、基础采样
-- 交互入口：streaming 采样与交互式 TUI 对话
+- 验证目标：训练、验证、checkpoint 保存/加载、基础采样、任务评测
+- 交互入口：streaming 采样与交互式 TUI 对话 / Q&A
 
 ## 范围
 
@@ -24,13 +24,16 @@
 - 下载并准备 `TinyStories` 全量字节级数据集
 - 默认清理 `TinyStories` 原文中的字面量 `<|endoftext|>` 分隔标记
 - 支持将 `TinyStories` 编码成 `SentencePiece` 子词数据集
+- 下载并准备 `Databricks Dolly 15k` 的 `Question / Context / Answer` 数据集
+- 准备紧凑版 `SQuAD 2.0` Q/A 评测集
 - 在本机用 `MLX` 启动一个最小 decoder-only LM 训练
 - 周期性输出 train/val loss，并写入 `metrics.jsonl`
 - 保存 `best` / `latest` checkpoint
 - 从保存的 checkpoint 重新加载并采样
 - 生成基于 sample 和 val loss 的基础质量验证报告
+- 支持基于结构化 suite 的 `TinyStories` / `Q/A` 评测
 - 提供模型层 / 应用层分离的对话结构
-- 提供终端交互式 TUI 聊天入口
+- 提供终端交互式 TUI 聊天入口与 `qa` 入口
 
 ## 环境
 
@@ -84,6 +87,20 @@ python -m lite_llm_pretraining.prepare_tinystories_sentencepiece \
   --out_dir data/tinystories-spm
 ```
 
+准备 `Dolly 15k` 的 `Q/A` 数据：
+
+```bash
+python -m lite_llm_pretraining.prepare_dolly_qa \
+  --out_dir data/dolly-qa-spm-u4096 \
+  --byte_fallback
+```
+
+准备紧凑版 `SQuAD 2.0` 本地评测集：
+
+```bash
+python -m lite_llm_pretraining.prepare_squad_qa_eval
+```
+
 启动默认 smoke 训练：
 
 ```bash
@@ -135,6 +152,27 @@ python -m lite_llm_pretraining.run_local \
 - `num_heads=8`
 - 参数量约 `33.7M`
 
+如果要跑 `Dolly 15k` 的 `Q/A` smoke 配置：
+
+```bash
+python -m lite_llm_pretraining.run_local \
+  --config configs/dolly-qa-spm-smoke.json \
+  --force_prepare
+```
+
+这份配置的核心参数为：
+
+- `task=Question -> Answer`
+- `dataset=Databricks Dolly 15k`
+- `tokenizer=SentencePiece unigram`
+- `context_size=256`
+- `dim=384`
+- `num_layers=8`
+- `num_heads=6`
+- 训练内 `suite_eval` 指向 `prompts/squad_qa_dev_v1.json`
+
+这份 `smoke` 配置主要用于验证 `Q/A` 训练闭环，不代表当前已经得到高质量问答模型。
+
 从 checkpoint 采样：
 
 ```bash
@@ -172,6 +210,42 @@ python -m lite_llm_pretraining.tui_chat \
   --temperature 0.5
 ```
 
+如果 checkpoint 是 `Q/A` 模型，可以直接用问答模式：
+
+```bash
+python -m lite_llm_pretraining.sample \
+  --checkpoint_dir checkpoints/dolly-qa-spm-smoke/best_suite \
+  --mode qa \
+  --prompt "When did Virgin Australia start operating?" \
+  --context "Virgin Australia commenced services on 31 August 2000 as Virgin Blue." \
+  --max_new_tokens 48 \
+  --temperature 0.3
+```
+
+```bash
+python -m lite_llm_pretraining.tui_chat \
+  --checkpoint_dir checkpoints/dolly-qa-spm-smoke/best_suite \
+  --mode qa \
+  --max_new_tokens 64 \
+  --temperature 0.3
+```
+
+`qa` TUI 输入格式支持：
+
+- 仅问题：`When did Virgin Australia start operating?`
+- 问题加上下文：`When did Virgin Australia start operating? || Virgin Australia commenced services on 31 August 2000 as Virgin Blue.`
+
+单独运行 `Q/A` 评测：
+
+```bash
+python -m lite_llm_pretraining.evaluate_qa_suite \
+  --checkpoint_dir checkpoints/dolly-qa-spm-smoke/best_suite \
+  --suite_path prompts/squad_qa_holdout_v1.json \
+  --data_dir data/dolly-qa-spm-u4096 \
+  --max_new_tokens 48 \
+  --temperature 0.3
+```
+
 TUI 内置命令：
 
 - `/clear` 清空当前会话
@@ -196,6 +270,9 @@ TUI 内置命令：
 - 数据输出：`data/tinyshakespeare-byte/`
 - 数据输出：`data/tinystories-byte/`
 - 数据输出：`data/tinystories-spm/`
+- 数据输出：`data/dolly-qa-spm-u4096/`
+- 评测集：`prompts/squad_qa_dev_v1.json`
+- 评测集：`prompts/squad_qa_holdout_v1.json`
 - 训练输出：`checkpoints/tinyshakespeare-byte-smoke/`
 - 指标日志：`checkpoints/tinyshakespeare-byte-smoke/metrics.jsonl`
 - 采样结果：`checkpoints/tinyshakespeare-byte-smoke/samples/`

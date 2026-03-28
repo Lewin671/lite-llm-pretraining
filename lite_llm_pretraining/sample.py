@@ -4,8 +4,7 @@ from pathlib import Path
 
 from lite_llm_pretraining.model import CheckpointLanguageModel
 from lite_llm_pretraining.story_inference import (
-    PLAIN_STORY_TEMPLATE,
-    build_story_prompt,
+    build_prompt_from_profile,
     resolve_inference_profile,
 )
 
@@ -21,6 +20,11 @@ def parse_args():
         "--prompt",
         default="ROMEO:\n",
         help="UTF-8 prompt to seed generation.",
+    )
+    parser.add_argument(
+        "--context",
+        default=None,
+        help="Optional context used by qa mode.",
     )
     parser.add_argument(
         "--max_new_tokens",
@@ -60,28 +64,21 @@ def parse_args():
     parser.add_argument(
         "--mode",
         default="auto",
-        choices=["auto", "raw", "story"],
-        help="Prompt handling mode. auto uses checkpoint metadata for TinyStories.",
+        choices=["auto", "raw", "story", "qa"],
+        help="Prompt handling mode. auto uses checkpoint metadata for task-specific templates.",
     )
     return parser.parse_args()
 
 
-def resolve_prompt(checkpoint_dir: Path, prompt: str, mode: str):
+def resolve_prompt(checkpoint_dir: Path, prompt: str, mode: str, context: str | None = None):
     if mode == "raw":
         return prompt
-    if mode == "story":
-        profile = resolve_inference_profile(checkpoint_dir)
-        return build_story_prompt(
-            prompt,
-            profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
-        )
-
     profile = resolve_inference_profile(checkpoint_dir)
-    if profile.get("mode") == "story":
-        return build_story_prompt(
-            prompt,
-            profile.get("prompt_template", PLAIN_STORY_TEMPLATE),
-        )
+    if mode in {"story", "qa"}:
+        profile = {**profile, "mode": mode}
+        return build_prompt_from_profile(prompt, profile, context=context)
+    if profile.get("mode") in {"story", "qa"}:
+        return build_prompt_from_profile(prompt, profile, context=context)
     return prompt
 
 
@@ -91,12 +88,13 @@ def sample_from_checkpoint(
     max_new_tokens: int,
     temperature: float = 1.0,
     mode: str = "auto",
+    context: str | None = None,
     top_k: int | None = None,
     repetition_penalty: float = 1.0,
     repetition_window: int | None = None,
 ):
     model = CheckpointLanguageModel(checkpoint_dir)
-    model_prompt = resolve_prompt(checkpoint_dir, prompt, mode)
+    model_prompt = resolve_prompt(checkpoint_dir, prompt, mode, context=context)
     output = model.generate(
         model_prompt,
         max_new_tokens,
@@ -114,12 +112,13 @@ def stream_from_checkpoint(
     max_new_tokens: int,
     temperature: float = 1.0,
     mode: str = "auto",
+    context: str | None = None,
     top_k: int | None = None,
     repetition_penalty: float = 1.0,
     repetition_window: int | None = None,
 ):
     model = CheckpointLanguageModel(checkpoint_dir)
-    model_prompt = resolve_prompt(checkpoint_dir, prompt, mode)
+    model_prompt = resolve_prompt(checkpoint_dir, prompt, mode, context=context)
     return (
         model.stream_generate(
             model_prompt,
@@ -142,6 +141,7 @@ def main():
             args.max_new_tokens,
             args.temperature,
             mode=args.mode,
+            context=args.context,
             top_k=args.top_k,
             repetition_penalty=args.repetition_penalty,
             repetition_window=args.repetition_window,
@@ -160,6 +160,7 @@ def main():
             args.max_new_tokens,
             args.temperature,
             mode=args.mode,
+            context=args.context,
             top_k=args.top_k,
             repetition_penalty=args.repetition_penalty,
             repetition_window=args.repetition_window,
