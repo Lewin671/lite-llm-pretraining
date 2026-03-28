@@ -1,0 +1,352 @@
+{
+  "name": "tinystories_eval_holdout_v2",
+  "description": "Holdout prompt suite for strict TinyStories continuation evaluation with required and optional anchors.",
+  "early_anchor_word_budget": 40,
+  "default_early_anchor_groups": ["name", "focus"],
+  "samples": [
+    {
+      "id": "HOLD001",
+      "prompt": "Clara tucked a blue compass into her coat before crossing the windy field.",
+      "tags": ["object", "weather", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["clara"],
+          "focus": ["compass"],
+          "container": ["coat"],
+          "place": ["field"],
+          "weather": ["windy"]
+        },
+        "optional": {
+          "event": ["tucked", "tuck", "crossing", "cross"],
+          "color": ["blue"]
+        }
+      }
+    },
+    {
+      "id": "HOLD002",
+      "prompt": "Dylan watched his hedgehog crawl under the piano bench at sunrise.",
+      "tags": ["animal", "indoor", "time"],
+      "anchors": {
+        "required": {
+          "name": ["dylan"],
+          "focus": ["hedgehog"],
+          "object": ["piano"],
+          "place": ["bench"],
+          "time": ["sunrise"]
+        },
+        "optional": {
+          "event": ["crawl", "crawled"]
+        }
+      }
+    },
+    {
+      "id": "HOLD003",
+      "prompt": "Hazel carried a striped scarf to the bus shelter during the hailstorm.",
+      "tags": ["object", "weather", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["hazel"],
+          "focus": ["scarf"],
+          "place": ["bus shelter"],
+          "weather": ["hailstorm"]
+        },
+        "optional": {
+          "event": ["carried", "carry"],
+          "pattern": ["striped"]
+        }
+      }
+    },
+    {
+      "id": "HOLD004",
+      "prompt": "Jonah hid a lemon cookie behind the flower vase in the kitchen.",
+      "tags": ["food", "indoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["jonah"],
+          "focus": ["cookie"],
+          "object": ["vase"],
+          "place": ["kitchen"]
+        },
+        "optional": {
+          "event": ["hid", "hide"],
+          "flavor": ["lemon"],
+          "detail": ["flower"]
+        }
+      }
+    },
+    {
+      "id": "HOLD005",
+      "prompt": "Keira found a bronze key beside the garden gate after the parade.",
+      "tags": ["object", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["keira"],
+          "focus": ["key"],
+          "place": ["garden"],
+          "object": ["gate"],
+          "occasion": ["parade"]
+        },
+        "optional": {
+          "event": ["found", "find"],
+          "color": ["bronze"]
+        }
+      }
+    },
+    {
+      "id": "HOLD006",
+      "prompt": "Logan shared his flashlight with a fox near the mountain trail.",
+      "tags": ["animal", "object", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["logan"],
+          "focus": ["flashlight"],
+          "animal": ["fox"],
+          "place": ["mountain"],
+          "path": ["trail"]
+        },
+        "optional": {
+          "event": ["shared", "share"]
+        }
+      }
+    },
+    {
+      "id": "HOLD007",
+      "prompt": "Mira balanced a basket of pears on the porch rail at sunset.",
+      "tags": ["food", "outdoor", "time"],
+      "anchors": {
+        "required": {
+          "name": ["mira"],
+          "focus": ["basket"],
+          "contents": ["pears", "pear"],
+          "place": ["porch"],
+          "surface": ["rail"],
+          "time": ["sunset"]
+        },
+        "optional": {
+          "event": ["balanced", "balance"]
+        }
+      }
+    },
+    {
+      "id": "HOLD008",
+      "prompt": "Nolan heard a trumpet inside the attic while the thunder rolled.",
+      "tags": ["object", "weather", "indoor"],
+      "anchors": {
+        "required": {
+          "name": ["nolan"],
+          "focus": ["trumpet"],
+          "place": ["attic"],
+          "weather": ["thunder"]
+        },
+        "optional": {
+          "event": ["heard", "hear", "rolled", "roll"]
+        }
+      }
+    },
+    {
+      "id": "HOLD009",
+      "prompt": "Olive rescued her duckling from the laundry basket by the stairs.",
+      "tags": ["animal", "indoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["olive"],
+          "focus": ["duckling", "duck"],
+          "container": ["basket"],
+          "place": ["stairs"],
+          "detail": ["laundry"]
+        },
+        "optional": {
+          "event": ["rescued", "rescue"]
+        }
+      }
+    },
+    {
+      "id": "HOLD010",
+      "prompt": "Piper taped a note onto the music stand before the choir began.",
+      "tags": ["object", "school", "action"],
+      "anchors": {
+        "required": {
+          "name": ["piper"],
+          "focus": ["note"],
+          "object": ["music stand"],
+          "occasion": ["choir"]
+        },
+        "optional": {
+          "event": ["taped", "tape", "began", "begin"]
+        }
+      }
+    },
+    {
+      "id": "HOLD011",
+      "prompt": "Quinn chased a paper airplane across the library rug after lunch.",
+      "tags": ["object", "school", "action"],
+      "anchors": {
+        "required": {
+          "name": ["quinn"],
+          "focus": ["airplane"],
+          "place": ["library"],
+          "surface": ["rug"],
+          "time": ["lunch"]
+        },
+        "optional": {
+          "event": ["paper", "chased", "chase"]
+        }
+      }
+    },
+    {
+      "id": "HOLD012",
+      "prompt": "Rosa placed her violin case under the bench in the train station.",
+      "tags": ["object", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["rosa"],
+          "focus": ["violin", "case"],
+          "object": ["bench"],
+          "place": ["train station"]
+        },
+        "optional": {
+          "event": ["placed", "place"]
+        }
+      }
+    },
+    {
+      "id": "HOLD013",
+      "prompt": "Silas fed a shy alpaca beside the red barn before bedtime.",
+      "tags": ["animal", "outdoor", "time"],
+      "anchors": {
+        "required": {
+          "name": ["silas"],
+          "focus": ["alpaca"],
+          "place": ["barn"],
+          "time": ["bedtime"]
+        },
+        "optional": {
+          "event": ["fed", "feed"],
+          "state": ["shy"],
+          "color": ["red"]
+        }
+      }
+    },
+    {
+      "id": "HOLD014",
+      "prompt": "Tessa lost her marble ring in the sandbox during recess.",
+      "tags": ["object", "school", "action"],
+      "anchors": {
+        "required": {
+          "name": ["tessa"],
+          "focus": ["ring"],
+          "place": ["sandbox"],
+          "occasion": ["recess"]
+        },
+        "optional": {
+          "event": ["lost", "lose"],
+          "material": ["marble"]
+        }
+      }
+    },
+    {
+      "id": "HOLD015",
+      "prompt": "Uri found a sleepy owl perched above the orchard ladder.",
+      "tags": ["animal", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["uri"],
+          "focus": ["owl"],
+          "place": ["orchard"],
+          "object": ["ladder"]
+        },
+        "optional": {
+          "event": ["found", "find", "perched", "perch"],
+          "state": ["sleepy"]
+        }
+      }
+    },
+    {
+      "id": "HOLD016",
+      "prompt": "Vera carried hot cocoa to the skating pond in the frosty morning.",
+      "tags": ["food", "weather", "time"],
+      "anchors": {
+        "required": {
+          "name": ["vera"],
+          "focus": ["cocoa"],
+          "place": ["pond"],
+          "weather": ["frosty"],
+          "time": ["morning"]
+        },
+        "optional": {
+          "event": ["carried", "carry"],
+          "activity": ["skating"],
+          "state": ["hot"]
+        }
+      }
+    },
+    {
+      "id": "HOLD017",
+      "prompt": "Wes tucked a paintbrush inside the toolbox under the stage stairs.",
+      "tags": ["object", "indoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["wes"],
+          "focus": ["paintbrush"],
+          "container": ["toolbox"],
+          "place": ["stage"],
+          "area": ["stage stairs"]
+        },
+        "optional": {
+          "event": ["tucked", "tuck"]
+        }
+      }
+    },
+    {
+      "id": "HOLD018",
+      "prompt": "Xena watched her ferret sniff the picnic basket near the fountain.",
+      "tags": ["animal", "food", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["xena"],
+          "focus": ["ferret"],
+          "object": ["basket"],
+          "place": ["fountain"],
+          "food_context": ["picnic"]
+        },
+        "optional": {
+          "event": ["sniff", "sniffed"]
+        }
+      }
+    },
+    {
+      "id": "HOLD019",
+      "prompt": "Yara planted mint seeds beside the fence after the summer fair.",
+      "tags": ["food", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["yara"],
+          "focus": ["mint", "seeds", "seed"],
+          "place": ["fence"],
+          "season": ["summer"],
+          "occasion": ["fair"]
+        },
+        "optional": {
+          "event": ["planted", "plant"]
+        }
+      }
+    },
+    {
+      "id": "HOLD020",
+      "prompt": "Zane held a silver bucket under the waterfall beside the cave.",
+      "tags": ["object", "outdoor", "water"],
+      "anchors": {
+        "required": {
+          "name": ["zane"],
+          "focus": ["bucket"],
+          "water": ["waterfall"],
+          "place": ["cave"]
+        },
+        "optional": {
+          "event": ["held", "hold"],
+          "color": ["silver"]
+        }
+      }
+    }
+  ]
+}

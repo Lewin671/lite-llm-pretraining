@@ -35,3 +35,41 @@
 - 这套 suite 比原来的 `3` 条 prompt 更能区分“看起来像故事”和“真的保留 prompt 锚点”
 - 当前模型在名字、物体、场景三类锚点上仍然几乎完全失效
 - `A40` 至少在早段锚点命中上出现了微弱改善，所以后续优化可以继续沿这条截短 continuation 路线追踪
+
+## Review Follow-up
+
+- 当前 `v1` 仍然存在三个问题：
+  - 只有一个公开 suite，容易被调参过拟合
+  - 组内任意词命中即算通过，要求还不够高
+  - 多条 prompt 的关键事件没有被纳入 anchors
+- 下一版直接做：
+  - `dev` / `holdout` 双 suite
+  - `required` / `optional` anchors
+  - 前段约束改成名字或主物体必须在前 `30-40` 个词内出现
+
+## V2 Implementation
+
+- 新增 [prompts/tinystories_eval_dev_v2.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/tinystories_eval_dev_v2.json) 和 [prompts/tinystories_eval_holdout_v2.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/tinystories_eval_holdout_v2.json)，各 `20` 条样本
+- `v2` 每条样本把旧的宽松 `setting` 拆成更细的 required groups，例如 `place / time / weather / container`
+- tags 也收敛到更粗粒度的集合，便于后续按类统计
+- [evaluate_prompt_suite.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/evaluate_prompt_suite.py) 已支持：
+  - `required` / `optional` anchors
+  - `default_early_anchor_groups`
+  - 多词短语锚点匹配，例如 `bus stop`、`window seat`
+
+## V2 Baseline
+
+- `A40 dev`: [a40-dev-v2.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/eval-suite/a40-dev-v2.json)
+- `A40 holdout`: [a40-holdout-v2.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/eval-suite/a40-holdout-v2.json)
+- `A41 dev`: [a41-dev-v2.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/eval-suite/a41-dev-v2.json)
+- `A41 holdout`: [a41-holdout-v2.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/eval-suite/a41-holdout-v2.json)
+- 当前基线结论：
+  - `A40`: `dev 0/20`，`holdout 0/20`
+  - `A41`: `dev 0/20`，`holdout 0/20`
+  - `required_group_hit_ratio` 全部是 `0.0`
+
+## V2 Conclusion
+
+- `v2` 没有再被“只命中场景里一个词就算通过”的宽松规则稀释
+- 当前 best route 的问题已经很明确：模型能写出像样故事，但几乎完全不会保留 prompt 锚点
+- 之后的优化不能再只拉长训练；必须继续改数据形态、训练目标或推理约束，专门提升条件跟踪

@@ -369,3 +369,23 @@
 - Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
 - Result: masked `best_val_loss=4.1011`；旧 3-prompt 严格相关性 `0/3`
 - Conclusion: 截短路线已经能稳定跑通，但仍未学会保留关键锚点；下一轮不该再看旧 3-prompt，而要切到新的 suite 口径继续拉长训练
+
+### Next Hypothesis
+
+- Change: 维持 `A40` 的两句 continuation + `context128 + continuation-only + example-start` 路线不变，直接拉长训练
+- Validation: 用新的 `tinystories_eval_suite_v1` 复核，而不再看旧 `3` 条 prompt
+- Conclusion: 当前最有价值的问题不是“路线对不对”，而是这条路线是否只是训练预算太短
+
+### A41
+
+- Change: 维持 `A40` 的两句 continuation + `context128 + continuation-only + example-start` 路线不变，拉长到 `1500 step`
+- Validation:
+  - `run_sweep_attempt`，旧 `3` prompt 严格口径，`temperature=0.5`
+  - `tinystories_eval_dev_v2`
+  - `tinystories_eval_holdout_v2`
+- Result:
+  - masked `best_val_loss=3.7725`
+  - 旧 `3` prompt 严格相关性 `0/3`
+  - `dev 0/20`
+  - `holdout 0/20`
+- Conclusion: 这条 continuation 路线不是“只差一点训练步数”，而是条件跟踪能力本身没有建立起来；继续单纯堆步数不值得

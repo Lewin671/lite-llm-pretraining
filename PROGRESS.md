@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 用新的 TinyStories prompt suite 作为北极星继续做条件续写优化
-- Latest Progress: 已落 `24` 条结构化评测集和 suite 汇总脚本；`A36` 与 `A40` 在新口径下都还是 `0/24`，但 `A40` 的前段锚点命中率从 `0.0` 升到 `0.0417`
-- Issues: 当前模型几乎完全学不会稳定保留名字、物体和场景锚点；同时 `A40` 的 example-aligned 窗口只有 `1091` 条，短训很可能还没把截短路线训透
-- Next Step: 提交新的评测集与基线结果，然后直接把 `A40` 这条截短 continuation 路线拉长训练，继续用 suite 复核
+- Current Task: 用新的 TinyStories `dev/holdout` suite 作为北极星继续做条件续写优化
+- Latest Progress: 已完成 `v2` 评测重构，新增 `dev/holdout` 双 suite、`required/optional` anchors 和短语锚点匹配；`A40` 与 `A41` 在 `dev/holdout` 上都仍是 `0/20`
+- Issues: 当前模型会生成通顺故事，但几乎完全不会保留 prompt 里的名字、物体和场景；当前 continuation 路线即使拉长训练也没有把锚点命中拉起来
+- Next Step: 用 `v2` suite 继续做数据形态和训练目标对齐优化，优先解决“输出像故事但不跟 prompt”这个核心问题
 
 ## How To Read
 

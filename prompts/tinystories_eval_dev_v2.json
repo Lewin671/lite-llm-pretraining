@@ -1,0 +1,356 @@
+{
+  "name": "tinystories_eval_dev_v2",
+  "description": "Development prompt suite for strict TinyStories continuation evaluation with required and optional anchors.",
+  "early_anchor_word_budget": 40,
+  "default_early_anchor_groups": ["name", "focus"],
+  "samples": [
+    {
+      "id": "DEV001",
+      "prompt": "Emma dropped her yellow lantern near the quiet lake at dusk.",
+      "tags": ["object", "outdoor", "time"],
+      "anchors": {
+        "required": {
+          "name": ["emma"],
+          "focus": ["lantern"],
+          "place": ["lake"],
+          "time": ["dusk"]
+        },
+        "optional": {
+          "event": ["dropped", "drop"],
+          "color": ["yellow"]
+        }
+      }
+    },
+    {
+      "id": "DEV002",
+      "prompt": "Noah hid a tiny drum inside the treehouse before the rain started.",
+      "tags": ["object", "outdoor", "weather"],
+      "anchors": {
+        "required": {
+          "name": ["noah"],
+          "focus": ["drum"],
+          "place": ["treehouse"],
+          "weather": ["rain"]
+        },
+        "optional": {
+          "event": ["hid", "hide"],
+          "size": ["tiny"]
+        }
+      }
+    },
+    {
+      "id": "DEV003",
+      "prompt": "Lila and her turtle waited beside the bakery for the first snow.",
+      "tags": ["animal", "outdoor", "weather"],
+      "anchors": {
+        "required": {
+          "name": ["lila"],
+          "focus": ["turtle"],
+          "place": ["bakery"],
+          "weather": ["snow"]
+        },
+        "optional": {
+          "event": ["waited", "wait"]
+        }
+      }
+    },
+    {
+      "id": "DEV004",
+      "prompt": "Owen found a silver whistle under the bridge by the river.",
+      "tags": ["object", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["owen"],
+          "focus": ["whistle"],
+          "place": ["bridge"],
+          "water": ["river"]
+        },
+        "optional": {
+          "event": ["found", "find"],
+          "color": ["silver"]
+        }
+      }
+    },
+    {
+      "id": "DEV005",
+      "prompt": "Ruby carried a peach pie to her grandma's porch in the windy afternoon.",
+      "tags": ["food", "weather", "time"],
+      "anchors": {
+        "required": {
+          "name": ["ruby"],
+          "focus": ["pie"],
+          "place": ["porch"],
+          "weather": ["windy"],
+          "time": ["afternoon"]
+        },
+        "optional": {
+          "event": ["carried", "carry"],
+          "person": ["grandma"],
+          "flavor": ["peach"]
+        }
+      }
+    },
+    {
+      "id": "DEV006",
+      "prompt": "Milo lost his green boot in the muddy garden after chasing a duck.",
+      "tags": ["object", "animal", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["milo"],
+          "focus": ["boot"],
+          "place": ["garden"],
+          "surface": ["muddy"]
+        },
+        "optional": {
+          "animal": ["duck"],
+          "event": ["lost", "lose", "chasing", "chase"],
+          "color": ["green"]
+        }
+      }
+    },
+    {
+      "id": "DEV007",
+      "prompt": "Ava and her puppy heard a bell inside the foggy forest cabin.",
+      "tags": ["animal", "weather", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["ava"],
+          "focus": ["puppy", "dog"],
+          "place": ["forest"],
+          "structure": ["cabin"],
+          "weather": ["foggy"]
+        },
+        "optional": {
+          "sound": ["bell"]
+        }
+      }
+    },
+    {
+      "id": "DEV008",
+      "prompt": "Ben painted a red kite on the wall of the old shed.",
+      "tags": ["object", "indoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["ben"],
+          "focus": ["kite"],
+          "surface": ["wall"],
+          "place": ["shed"]
+        },
+        "optional": {
+          "event": ["painted", "paint"],
+          "color": ["red"]
+        }
+      }
+    },
+    {
+      "id": "DEV009",
+      "prompt": "Chloe rescued a wet kitten from the cardboard boat by the pond.",
+      "tags": ["animal", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["chloe"],
+          "focus": ["kitten", "cat"],
+          "container": ["boat"],
+          "water": ["pond"]
+        },
+        "optional": {
+          "event": ["rescued", "rescue"],
+          "state": ["wet", "cardboard"]
+        }
+      }
+    },
+    {
+      "id": "DEV010",
+      "prompt": "Jack kept a secret map in his backpack during the class picnic.",
+      "tags": ["object", "school", "action"],
+      "anchors": {
+        "required": {
+          "name": ["jack"],
+          "focus": ["map"],
+          "container": ["backpack"],
+          "occasion": ["picnic"]
+        },
+        "optional": {
+          "event": ["secret"],
+          "group": ["class"]
+        }
+      }
+    },
+    {
+      "id": "DEV011",
+      "prompt": "Nina fed her rabbit beside the moonlit fountain in the square.",
+      "tags": ["animal", "outdoor", "time"],
+      "anchors": {
+        "required": {
+          "name": ["nina"],
+          "focus": ["rabbit", "bunny"],
+          "place": ["fountain"],
+          "area": ["square"],
+          "time": ["moonlit"]
+        },
+        "optional": {
+          "event": ["fed", "feed"]
+        }
+      }
+    },
+    {
+      "id": "DEV012",
+      "prompt": "Theo spilled blueberry juice on the blanket during the hill concert.",
+      "tags": ["food", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["theo"],
+          "focus": ["juice"],
+          "surface": ["blanket"],
+          "place": ["hill"],
+          "occasion": ["concert"]
+        },
+        "optional": {
+          "event": ["spilled", "spill"],
+          "flavor": ["blueberry"]
+        }
+      }
+    },
+    {
+      "id": "DEV013",
+      "prompt": "Ivy wore a paper crown while guarding the sandcastle at the beach.",
+      "tags": ["object", "outdoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["ivy"],
+          "focus": ["crown"],
+          "protected_object": ["sandcastle"],
+          "place": ["beach"]
+        },
+        "optional": {
+          "event": ["guarding", "guard"],
+          "material": ["paper"]
+        }
+      }
+    },
+    {
+      "id": "DEV014",
+      "prompt": "Leo heard his hamster scratching inside the cereal box at breakfast.",
+      "tags": ["animal", "indoor", "time"],
+      "anchors": {
+        "required": {
+          "name": ["leo"],
+          "focus": ["hamster"],
+          "container": ["box"],
+          "time": ["breakfast"]
+        },
+        "optional": {
+          "event": ["scratching", "scratch"],
+          "food": ["cereal"]
+        }
+      }
+    },
+    {
+      "id": "DEV015",
+      "prompt": "Maya balanced a glass jar of fireflies on the window seat.",
+      "tags": ["object", "indoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["maya"],
+          "focus": ["jar"],
+          "contents": ["fireflies", "firefly"],
+          "place": ["window seat"]
+        },
+        "optional": {
+          "event": ["balanced", "balance"],
+          "material": ["glass"]
+        }
+      }
+    },
+    {
+      "id": "DEV016",
+      "prompt": "Eli chased his striped ball across the museum hallway before closing time.",
+      "tags": ["object", "indoor", "action"],
+      "anchors": {
+        "required": {
+          "name": ["eli"],
+          "focus": ["ball"],
+          "place": ["museum"],
+          "area": ["hallway"]
+        },
+        "optional": {
+          "event": ["chased", "chase"],
+          "time": ["closing"],
+          "pattern": ["striped"]
+        }
+      }
+    },
+    {
+      "id": "DEV017",
+      "prompt": "Sara tucked a note inside the flower pot on the classroom shelf.",
+      "tags": ["object", "school", "action"],
+      "anchors": {
+        "required": {
+          "name": ["sara"],
+          "focus": ["note"],
+          "container": ["pot"],
+          "place": ["classroom"],
+          "surface": ["shelf"]
+        },
+        "optional": {
+          "event": ["tucked", "tuck"],
+          "object_detail": ["flower"]
+        }
+      }
+    },
+    {
+      "id": "DEV018",
+      "prompt": "Finn and his goat waited by the market cart for fresh apples.",
+      "tags": ["animal", "food", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["finn"],
+          "focus": ["goat"],
+          "place": ["market"],
+          "object": ["cart"],
+          "food": ["apples", "apple"]
+        },
+        "optional": {
+          "event": ["waited", "wait"],
+          "state": ["fresh"]
+        }
+      }
+    },
+    {
+      "id": "DEV019",
+      "prompt": "Grace saw a purple umbrella spinning near the bus stop puddle.",
+      "tags": ["object", "weather", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["grace"],
+          "focus": ["umbrella"],
+          "place": ["bus stop"],
+          "weather_trace": ["puddle"]
+        },
+        "optional": {
+          "event": ["spinning", "spin"],
+          "color": ["purple"]
+        }
+      }
+    },
+    {
+      "id": "DEV020",
+      "prompt": "Henry carried warm soup to the firefighter station on the snowy street.",
+      "tags": ["food", "weather", "outdoor"],
+      "anchors": {
+        "required": {
+          "name": ["henry"],
+          "focus": ["soup"],
+          "place": ["station"],
+          "area": ["street"],
+          "weather": ["snowy"]
+        },
+        "optional": {
+          "event": ["carried", "carry"],
+          "community": ["firefighter"],
+          "state": ["warm"]
+        }
+      }
+    }
+  ]
+}

@@ -44,34 +44,97 @@ def normalize_terms(terms):
     return [term.lower() for term in terms]
 
 
-def anchor_metrics(anchors, text: str, early_anchor_word_budget: int):
-    output_words = re.findall(r"[A-Za-z']+", text.lower())
-    output_word_set = set(output_words)
-    leading_word_set = set(output_words[:early_anchor_word_budget])
+def normalize_anchor_groups(anchor_groups):
+    normalized = {}
+    for group_name, group_terms in anchor_groups.items():
+        normalized[group_name] = normalize_terms(group_terms)
+    return normalized
 
-    groups = {}
+
+def resolve_anchor_spec(sample: dict, suite: dict):
+    anchors = sample.get("anchors", {})
+    if "required" in anchors or "optional" in anchors:
+        required_groups = normalize_anchor_groups(anchors.get("required", {}))
+        optional_groups = normalize_anchor_groups(anchors.get("optional", {}))
+    else:
+        required_groups = normalize_anchor_groups(anchors)
+        optional_groups = {}
+
+    early_anchor_groups = sample.get(
+        "early_anchor_groups",
+        suite.get("default_early_anchor_groups", ["name", "object"]),
+    )
+    return {
+        "required": required_groups,
+        "optional": optional_groups,
+        "early_anchor_groups": list(early_anchor_groups),
+    }
+
+
+def term_in_text(term: str, normalized_text: str, output_word_set: set[str]):
+    if " " in term:
+        return bool(
+            re.search(rf"(?<![A-Za-z']){re.escape(term)}(?![A-Za-z'])", normalized_text)
+        )
+    return term in output_word_set
+
+
+def group_match_metrics(groups, normalized_text: str, output_word_set):
+    summary = {}
     total_groups = 0
     hit_groups = 0
-    all_anchor_terms = []
-    for group_name, group_terms in anchors.items():
-        normalized_terms = normalize_terms(group_terms)
-        all_anchor_terms.extend(normalized_terms)
-        matched_terms = sorted(term for term in normalized_terms if term in output_word_set)
+    for group_name, normalized_terms in groups.items():
+        matched_terms = sorted(
+            term
+            for term in normalized_terms
+            if term_in_text(term, normalized_text, output_word_set)
+        )
         hit = len(matched_terms) > 0
         total_groups += 1
         hit_groups += int(hit)
-        groups[group_name] = {
+        summary[group_name] = {
             "expected_terms": normalized_terms,
             "matched_terms": matched_terms,
             "hit": hit,
         }
+    return summary, total_groups, hit_groups
 
-    early_anchor_hit = any(term in leading_word_set for term in all_anchor_terms)
+
+def anchor_metrics(anchor_spec, text: str, early_anchor_word_budget: int):
+    output_words = re.findall(r"[A-Za-z']+", text.lower())
+    normalized_text = " ".join(output_words)
+    output_word_set = set(output_words)
+    leading_words = output_words[:early_anchor_word_budget]
+    leading_text = " ".join(leading_words)
+    leading_word_set = set(leading_words)
+
+    required_groups, required_count, required_hits = group_match_metrics(
+        anchor_spec["required"],
+        normalized_text,
+        output_word_set,
+    )
+    optional_groups, optional_count, optional_hits = group_match_metrics(
+        anchor_spec["optional"],
+        normalized_text,
+        output_word_set,
+    )
+    early_terms = []
+    for group_name in anchor_spec["early_anchor_groups"]:
+        early_terms.extend(anchor_spec["required"].get(group_name, []))
+        early_terms.extend(anchor_spec["optional"].get(group_name, []))
+    early_anchor_hit = any(
+        term_in_text(term, leading_text, leading_word_set) for term in early_terms
+    )
     return {
-        "groups": groups,
-        "anchor_group_count": total_groups,
-        "anchor_group_hit_count": hit_groups,
-        "anchor_group_hit_ratio": round(hit_groups / max(1, total_groups), 4),
+        "required_groups": required_groups,
+        "required_group_count": required_count,
+        "required_group_hit_count": required_hits,
+        "required_group_hit_ratio": round(required_hits / max(1, required_count), 4),
+        "optional_groups": optional_groups,
+        "optional_group_count": optional_count,
+        "optional_group_hit_count": optional_hits,
+        "optional_group_hit_ratio": round(optional_hits / max(1, optional_count), 4),
+        "early_anchor_groups": list(anchor_spec["early_anchor_groups"]),
         "early_anchor_hit": early_anchor_hit,
     }
 
@@ -85,13 +148,15 @@ def quality_checks_only(checks):
 
 
 def aggregate_tag_stats(samples):
-    grouped = defaultdict(lambda: {"total": 0, "strict_passed": 0, "anchor_groups_hit": 0.0})
+    grouped = defaultdict(
+        lambda: {"total": 0, "strict_passed": 0, "required_groups_hit": 0.0}
+    )
     for sample in samples:
         for tag in sample["tags"]:
             grouped[tag]["total"] += 1
             grouped[tag]["strict_passed"] += int(sample["strict_pass"])
-            grouped[tag]["anchor_groups_hit"] += sample["anchor_metrics"][
-                "anchor_group_hit_ratio"
+            grouped[tag]["required_groups_hit"] += sample["anchor_metrics"][
+                "required_group_hit_ratio"
             ]
 
     tag_summary = {}
@@ -100,8 +165,8 @@ def aggregate_tag_stats(samples):
             "total": stats["total"],
             "strict_passed": stats["strict_passed"],
             "strict_pass_rate": round(stats["strict_passed"] / max(1, stats["total"]), 4),
-            "avg_anchor_group_hit_ratio": round(
-                stats["anchor_groups_hit"] / max(1, stats["total"]),
+            "avg_required_group_hit_ratio": round(
+                stats["required_groups_hit"] / max(1, stats["total"]),
                 4,
             ),
         }
@@ -137,6 +202,7 @@ def evaluate_prompt_suite(
     lm = CheckpointLanguageModel(checkpoint_dir)
     for sample in suite["samples"]:
         prompt = sample["prompt"]
+        anchor_spec = resolve_anchor_spec(sample, suite)
         model_prompt = prompt
         if inference_profile.get("mode") == "story":
             model_prompt = build_story_prompt(
@@ -153,14 +219,14 @@ def evaluate_prompt_suite(
         )
         metrics, checks = sample_metrics(prompt, output)
         anchor_eval = anchor_metrics(
-            sample["anchors"],
+            anchor_spec,
             output,
             early_anchor_word_budget=early_anchor_word_budget,
         )
         quality_checks = quality_checks_only(checks)
         strict_pass = (
             all(quality_checks.values())
-            and anchor_eval["anchor_group_hit_count"] == anchor_eval["anchor_group_count"]
+            and anchor_eval["required_group_hit_count"] == anchor_eval["required_group_count"]
             and anchor_eval["early_anchor_hit"]
         )
         report["samples"].append(
@@ -169,7 +235,7 @@ def evaluate_prompt_suite(
                 "tags": sample.get("tags", []),
                 "prompt": prompt,
                 "model_prompt": model_prompt,
-                "anchors": sample["anchors"],
+                "anchors": anchor_spec,
                 "output": output,
                 "metrics": metrics,
                 "quality_checks": quality_checks,
@@ -201,11 +267,11 @@ def evaluate_prompt_suite(
         }
 
     strict_passed = sum(int(sample["strict_pass"]) for sample in report["samples"])
-    anchor_group_hits = sum(
-        sample["anchor_metrics"]["anchor_group_hit_count"] for sample in report["samples"]
+    required_group_hits = sum(
+        sample["anchor_metrics"]["required_group_hit_count"] for sample in report["samples"]
     )
-    anchor_group_total = sum(
-        sample["anchor_metrics"]["anchor_group_count"] for sample in report["samples"]
+    required_group_total = sum(
+        sample["anchor_metrics"]["required_group_count"] for sample in report["samples"]
     )
     early_anchor_hits = sum(
         int(sample["anchor_metrics"]["early_anchor_hit"]) for sample in report["samples"]
@@ -214,7 +280,10 @@ def evaluate_prompt_suite(
         "strict_passed": strict_passed,
         "total_samples": len(report["samples"]),
         "strict_pass_rate": round(strict_passed / max(1, len(report["samples"])), 4),
-        "anchor_group_hit_ratio": round(anchor_group_hits / max(1, anchor_group_total), 4),
+        "required_group_hit_ratio": round(
+            required_group_hits / max(1, required_group_total),
+            4,
+        ),
         "early_anchor_hit_rate": round(
             early_anchor_hits / max(1, len(report["samples"])),
             4,
