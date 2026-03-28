@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 执行 `TinyStories` 连续优化 sweep，至少完成 20 个方案尝试
-- Latest Progress: 已补齐 attempt runner、SentencePiece prepare 兼容参数和更严格的未知标记校验；正在重建统一 tokenizer 数据集进入短训练矩阵
+- Latest Progress: 已完成 A05-A08 第一批结构 sweep；当前 `context=128` 在 200 step 窗口里最稳，`context=384` 虽然 loss 更低但 sample 更差且更慢
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 先完成 `u2048/u4096/b2048/b4096/u1024` 统一数据集准备，再按固定短训练 protocol 跑 A05 之后的结构与超参数对照
+- Next Step: 继续跑 A09-A15 的学习率 / batch / warmup / gradient checkpointing 对照，再把最优短训路线做更长训练
 
 ## How To Read
 

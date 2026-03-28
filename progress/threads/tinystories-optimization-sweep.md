@@ -28,59 +28,81 @@
 
 - Change: 现有 `SentencePiece unigram 2048 / 32M / 1000step` checkpoint，验证温度改为 `0.5`
 - Validation: `validate_checkpoint`，3 个固定 prompt，`max_new_tokens=120`，`seed=123`
-- Result: `3/3` 通过；`val_loss=3.353845`
-- Conclusion: 文本最稳，仍有重复，但怪词和 `⁇` 最少
+- Result: `0/3` 通过；`val_loss=3.353845`；未知标记计数 `[2, 3, 2]`
+- Conclusion: 旧校验口径太宽，严格计入 `⁇` 后这条不再通过
 
 ### A02
 
 - Change: 同一 checkpoint，验证温度改为 `0.6`
 - Validation: 同 A01
-- Result: `3/3` 通过；`val_loss=3.353845`
-- Conclusion: 也很稳，但比 `0.5` 略多重复和 `⁇`
+- Result: `1/3` 通过；`val_loss=3.353845`；未知标记计数 `[2, 1, 0]`
+- Conclusion: 在当前 `32M / 1000step` 基线上，`0.6` 比 `0.5/0.7/0.8` 更接近可用
 
 ### A03
 
 - Change: 同一 checkpoint，验证温度改为 `0.7`
 - Validation: 同 A01
-- Result: `3/3` 通过；`val_loss=3.353845`
-- Conclusion: 可读性下降，开始稳定出现更奇怪的词形
+- Result: `0/3` 通过；`val_loss=3.353845`；未知标记计数 `[2, 2, 2]`
+- Conclusion: 温度升高会稳定放大 `⁇` 和坏词形
 
 ### A04
 
 - Change: 同一 checkpoint，验证温度改为 `0.8`
 - Validation: 同 A01
-- Result: `3/3` 通过；`val_loss=3.353845`
-- Conclusion: 形式上通过，但主观质量继续下降，不适合作为后续 sweep 默认温度
+- Result: `0/3` 通过；`val_loss=3.353845`；未知标记计数 `[5, 1, 2]`
+- Conclusion: `0.8` 继续恶化，后续 sweep 默认不再用高温
+
+### A05
+
+- Change: `context_size=128`，其余沿用 `SentencePiece unigram 2048` 结构，`200 step`
+- Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
+- Result: `best_val_loss=4.4526`；严格校验 `0/3`；未知标记总数 `10`
+- Conclusion: 短窗口里 sample 比更大 context 更完整，但仍远未达标
+
+### A06
+
+- Change: `context_size=384`，其余不变，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.1247`；严格校验 `0/3`；未知标记总数 `12`
+- Conclusion: token loss 更低，但 sample 更差且训练更慢，不适合作为当前主线
+
+### A07
+
+- Change: 更小模型 `dim=384 / layers=8 / heads=6`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.2479`；严格校验 `0/3`；未知标记总数 `17`
+- Conclusion: 小模型没有换来更干净的文本，退化明显
+
+### A08
+
+- Change: 更大模型 `dim=640 / layers=12 / heads=10 / batch=4`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.5742`；严格校验 `0/3`；未知标记总数 `15`
+- Conclusion: 在短训练预算下，大模型反而更差，不值得当前阶段继续加大
 
 ### Pending Batch
 
-- A05: `SentencePiece unigram 2048` 重建统一 tokenizer 基线数据集
-- A06: `SentencePiece unigram 4096`
-- A07: `SentencePiece BPE 2048`
-- A08: `SentencePiece BPE 4096`
-- A09: `SentencePiece unigram 2048 + byte_fallback`
-- A10: `SentencePiece BPE 2048 + byte_fallback`
-- A11: `SentencePiece unigram 2048 + smaller context`
-- A12: `SentencePiece unigram 2048 + larger context`
-- A13: `SentencePiece unigram 2048 + smaller model`
-- A14: `SentencePiece unigram 2048 + larger model`
-- A15: `SentencePiece unigram 2048 + lower learning rate`
-- A16: `SentencePiece unigram 2048 + higher learning rate`
-- A17: `SentencePiece unigram 2048 + smaller batch`
-- A18: `SentencePiece unigram 2048 + larger batch`
-- A19: `SentencePiece unigram 2048 + longer warmup`
-- A20: `SentencePiece unigram 2048 + shorter warmup`
-- A21: `Best short-run winner + longer run`
-- A22: `Best overall carry-forward run`
+- A09: `SentencePiece unigram 2048 + lower learning rate`
+- A10: `SentencePiece unigram 2048 + higher learning rate`
+- A11: `SentencePiece unigram 2048 + smaller batch`
+- A12: `SentencePiece unigram 2048 + larger batch`
+- A13: `SentencePiece unigram 2048 + longer warmup`
+- A14: `SentencePiece unigram 2048 + shorter warmup`
+- A15: `SentencePiece unigram 2048 + no gradient checkpointing`
+- A16: `Best short-run checkpoint + lower temperature`
+- A17: `Best short-run checkpoint + higher temperature`
+- A18: `Byte-level 50M / 2000step under strict validator`
+- A19: `Byte-level clean 50M / 500step under strict validator`
+- A20: `Best overall carry-forward run`
 
 ## Validation
 
 - 当前短结论：
-- `SentencePiece` 默认温度先收敛到 `0.5`
-- 高温度会放大当前 checkpoint 的伪词与不稳定输出
-- 需要继续看 tokenizer 变量和训练超参数，确认最优路线是否仍是 `unigram 2048`
+- 严格校验后，旧 `32M / 1000step` 基线只在 `temperature=0.6` 下有 `1/3` 通过
+- 在当前 `200 step` 窗口里，结构 sweep 没有出现比基线更强的明显赢家
+- `context=384` 虽然 loss 更低，但 sample 质量和速度都不值这个代价
 
 ## Conclusion
 
-- 第一轮先不继续调高采样温度
-- 后续短训练对照默认使用 `temperature=0.5`
+- 当前主线先不再继续放大模型或 context
+- 下一批重点转到学习率、batch 和 warmup，而不是结构扩张

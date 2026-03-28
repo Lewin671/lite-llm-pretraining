@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A05",
+  "notes": "smaller context 128 on existing unigram-2048 dataset",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-_ua7m0r8-a05.json",
+  "run_name": "tinystories-sweep-a05-context128",
+  "data_dir": "data/tinystories-spm",
+  "out_dir": "checkpoints/tinystories-sweep-a05-context128",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a05-context128/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 200,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 300,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 200,
+    "sample_interval": 200,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.368764,
+    "val_ppl": 78.945964,
+    "checkpoint_step": 200,
+    "best_val_loss": 4.4525505065917965
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "there was a big mum, she time, there was a little girl was very girl, the end. He was so so happy, the bird was so she wanted to go the  ⁇ The sky in the little girl named it was so she loved to play and wanted to her of of the few. He was so excited and she was so happy. He was very much, she had a little girl. He was very happy to play back to play, she was so he had a time, with her. He saw a little boy. ⁇ Mom, the little girl named she decided to show a moral of at her mom, it is a little gi",
+  "sample_state": {
+    "step": 200,
+    "best_val_loss": 4.4525505065917965
+  },
+  "sample_flags": {
+    "contains_unknown_marker": true,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 10,
+  "train_result": {
+    "run_name": "tinystories-sweep-a05-context128",
+    "out_dir": "checkpoints/tinystories-sweep-a05-context128",
+    "best_val_loss": 4.4525505065917965,
+    "last_val_loss": 4.4525505065917965,
+    "final_step": 200,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a05-context128/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a05-context128/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a05-context128/metrics.jsonl"
+  }
+}
