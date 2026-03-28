@@ -16,9 +16,9 @@ from lite_llm_pretraining.model import CheckpointLanguageModel
 
 
 DEFAULT_PROMPTS = [
-    "Once upon a time,",
-    "There was a little",
-    "One day, a child named",
+    "There was a little boy named Timmy who loved red kites.",
+    "Lily found a shiny key under the old tree.",
+    "Maya and her puppy got lost in the big park.",
 ]
 
 COMMON_WORDS = {
@@ -59,6 +59,19 @@ COMMON_WORDS = {
     "went",
     "with",
     "you",
+}
+
+PROMPT_STOPWORDS = COMMON_WORDS | {
+    "big",
+    "found",
+    "little",
+    "loved",
+    "named",
+    "old",
+    "park",
+    "puppy",
+    "shiny",
+    "tree",
 }
 
 
@@ -132,7 +145,23 @@ def max_run_length(text: str):
     return longest
 
 
-def sample_metrics(text: str):
+def prompt_keyword_metrics(prompt: str, text: str):
+    prompt_words = [
+        word
+        for word in re.findall(r"[A-Za-z']+", prompt.lower())
+        if len(word) >= 3 and word not in PROMPT_STOPWORDS
+    ]
+    output_words = set(re.findall(r"[A-Za-z']+", text.lower()))
+    unique_prompt_words = sorted(set(prompt_words))
+    hit_count = sum(word in output_words for word in unique_prompt_words)
+    return {
+        "prompt_keyword_count": len(unique_prompt_words),
+        "prompt_keyword_hit_count": hit_count,
+        "prompt_keyword_hit_ratio": round(hit_count / max(1, len(unique_prompt_words)), 4),
+    }
+
+
+def sample_metrics(prompt: str, text: str):
     stripped = text.strip()
     words = re.findall(r"[A-Za-z']+", stripped.lower())
     printable_chars = sum(char.isprintable() or char in "\n\r\t" for char in text)
@@ -155,6 +184,7 @@ def sample_metrics(text: str):
         "sentence_end_count": sentence_end_count,
         "max_char_run": max_run_length(text),
         "unknown_marker_count": unknown_marker_count,
+        **prompt_keyword_metrics(prompt, text),
     }
     checks = {
         "enough_words": metrics["word_count"] >= 25,
@@ -165,6 +195,7 @@ def sample_metrics(text: str):
         "limited_repetition": metrics["repeated_trigram_ratio"] <= 0.35,
         "no_long_char_runs": metrics["max_char_run"] <= 8,
         "no_unknown_markers": metrics["unknown_marker_count"] == 0,
+        "prompt_relevance": metrics["prompt_keyword_hit_count"] >= 1,
     }
     return metrics, checks
 
@@ -199,7 +230,7 @@ def validate_checkpoint(
     lm = CheckpointLanguageModel(checkpoint_dir)
     for prompt in prompts:
         output = lm.generate(prompt, max_new_tokens=max_new_tokens, temperature=temperature)
-        metrics, checks = sample_metrics(output)
+        metrics, checks = sample_metrics(prompt, output)
         report["samples"].append(
             {
                 "prompt": prompt,

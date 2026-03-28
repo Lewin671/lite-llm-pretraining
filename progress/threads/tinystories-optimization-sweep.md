@@ -191,6 +191,16 @@
 - 新一轮实验目标是先消掉 `⁇ / <unk>`，再看 sample 是否真正提升
 - 当前新增问题：TUI / chat prompt 格式与 TinyStories 分布不一致，需要同步修正推理入口与验证相关性
 
+### Inference / Eval Alignment
+
+- TUI 已切到 TinyStories 自动 story mode，避免继续用 chat transcript 包装 prompt
+- `validate_checkpoint` 默认 prompt 已切到完整 TinyStories 风格起始句，并新增 prompt keyword 命中检查
+- 新口径复核结果：
+- `A24`: `best_val_loss=3.5205`，相关性严格校验 `1/3`
+- `A25`: `best_val_loss=3.5658`，相关性严格校验 `1/3`
+- 新结论：之前的 `3/3` 更像是“文本像故事”，不是“文本继续了这个 prompt 的故事”
+- 下一轮 sweep 需要优先提升条件跟踪能力，而不是只继续压低 token loss
+
 ### A21
 
 - Change: `SentencePiece unigram 4096 + byte_fallback + max_sentence_length=16384`，训练配置沿用 `context=128 + warmup=50`，`300 step`

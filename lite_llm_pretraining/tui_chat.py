@@ -4,10 +4,12 @@ import textwrap
 from pathlib import Path
 
 from lite_llm_pretraining.app import ChatApplication, StoryApplication
+from lite_llm_pretraining.common import load_json
 from lite_llm_pretraining.model import CheckpointLanguageModel
 
 
-HELP_TEXT = "Enter send | /clear reset | /quit exit"
+CHAT_HELP_TEXT = "Enter send | /clear reset | /quit exit"
+STORY_HELP_TEXT = "Enter a story opening | /clear reset | /quit exit"
 
 
 def parse_args():
@@ -45,7 +47,7 @@ class ChatTUI:
         self.max_new_tokens = max_new_tokens
         self.temperature = temperature
         self.input_buffer = ""
-        self.status = HELP_TEXT
+        self.status = STORY_HELP_TEXT if isinstance(app, StoryApplication) else CHAT_HELP_TEXT
 
     def _wrap_block(self, text: str, width: int):
         if not text:
@@ -94,7 +96,9 @@ class ChatTUI:
         user_text = self.input_buffer.strip()
         self.input_buffer = ""
         if not user_text:
-            self.status = HELP_TEXT
+            self.status = (
+                STORY_HELP_TEXT if isinstance(self.app, StoryApplication) else CHAT_HELP_TEXT
+            )
             return True
         if user_text.startswith("/"):
             return self._run_command(user_text)
@@ -108,7 +112,9 @@ class ChatTUI:
         ):
             self._render()
 
-        self.status = HELP_TEXT
+        self.status = (
+            STORY_HELP_TEXT if isinstance(self.app, StoryApplication) else CHAT_HELP_TEXT
+        )
         return True
 
     def run(self):
@@ -128,11 +134,21 @@ class ChatTUI:
                 self.input_buffer += key
 
 
+def infer_mode(checkpoint_dir: Path, requested_mode: str):
+    if requested_mode != "auto":
+        return requested_mode
+    run_config_path = checkpoint_dir.parent / "run_config.json"
+    if run_config_path.exists():
+        config = load_json(run_config_path)
+        if "tinystories" in str(config.get("data_dir", "")).lower():
+            return "story"
+    return "story" if "tinystories" in str(checkpoint_dir).lower() else "chat"
+
+
 def run_tui(stdscr, args):
-    model = CheckpointLanguageModel(Path(args.checkpoint_dir))
-    mode = args.mode
-    if mode == "auto":
-        mode = "story" if "tinystories" in str(args.checkpoint_dir).lower() else "chat"
+    checkpoint_dir = Path(args.checkpoint_dir)
+    model = CheckpointLanguageModel(checkpoint_dir)
+    mode = infer_mode(checkpoint_dir, args.mode)
     if mode == "story":
         app = StoryApplication(model)
     else:

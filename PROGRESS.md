@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 基于 `TinyStories` 全量数据集继续做推理对齐与最佳模型优化
-- Latest Progress: 已确认当前 TUI 的 chat prompt 格式和 TinyStories 训练分布不匹配，正在同步修正推理层与评测口径
-- Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 先修正 TinyStories 的推理/评测对齐，再在 A24 最优路线之上继续优化
+- Latest Progress: 已完成 TinyStories 推理入口与相关性评测对齐；新口径下 A24/A25 都只有 `1/3` 通过，暴露出 prompt 条件跟踪不足
+- Issues: 当前最佳模型会快速偏离 prompt 里的实体和事件，需要继续通过 sweep 提升相关性与连贯性
+- Next Step: 基于新评测口径继续做 `context`、模型容量和训练长度优化
 
 ## How To Read
 
