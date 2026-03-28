@@ -1,0 +1,76 @@
+{
+  "attempt_id": "A34",
+  "notes": "prompted continuation with context256 and relevance-aligned temperature 0.5",
+  "base_config": "configs/tinystories-spm-prompted-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-jlm4c233-a34.json",
+  "run_name": "tinystories-sweep-a34-pc1-u4096bf-c256-600",
+  "data_dir": "data/tinystories-spm-u4096-bf-pc1",
+  "out_dir": "checkpoints/tinystories-sweep-a34-pc1-u4096bf-c256-600",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a34-pc1-u4096bf-c256-600/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "story_format": "prompt_continuation",
+    "prompt_sentence_count": 1
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 600,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 150,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 3.645733,
+    "val_ppl": 38.310864,
+    "checkpoint_step": 600,
+    "best_val_loss": 3.600396823883057
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "She loved to play with his mom and his toys and saw a big and they had a big and said they were playing with their toys. One day, the bird. The bear was happy to the ground. They were very happy and the sky. They saw a big and started to play with their friends. They was very happy. They wanted to go to see the park. They were very happy. They had fun and ran to the tree. They were very happy. They had fun. Prompt: Lily and Lily and Ben were playing in the river.\nContinuation: They liked to play",
+  "sample_state": {
+    "step": 600,
+    "best_val_loss": 3.600396823883057
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a34-pc1-u4096bf-c256-600",
+    "out_dir": "checkpoints/tinystories-sweep-a34-pc1-u4096bf-c256-600",
+    "best_val_loss": 3.600396823883057,
+    "last_val_loss": 3.600396823883057,
+    "final_step": 600,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a34-pc1-u4096bf-c256-600/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a34-pc1-u4096bf-c256-600/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a34-pc1-u4096bf-c256-600/metrics.jsonl"
+  }
+}

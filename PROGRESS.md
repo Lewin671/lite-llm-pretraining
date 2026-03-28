@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 基于 `TinyStories` 全量数据集继续做任务对齐优化，提升“按给定开头续写”的相关性
-- Latest Progress: plain-story 当前最佳已切到 `A30 (context=256 + unigram8192 + byte_fallback)`，相关性 `2/3`；首轮 `Prompt/Continuation` 对照 `A31` 在 `300 step` 下出现强重复，暂时只有 `0/3`
-- Issues: 当前最佳 plain-story 仍有 prompt 漂移；`Prompt/Continuation` 路线虽然任务更对齐，但短训练窗口里会退化成高重复输出
-- Next Step: 围绕 `A31` 继续做去重复与稳态训练尝试，优先试更长训练、不同温度和更长 context
+- Latest Progress: 已确认 committed `A30 (context=256 + unigram8192 + byte_fallback)` 仍是当前最稳的 best；prompted continuation 路线在 `0.4/0.5` 下能恢复到 `2/3`，但新跑的 `A34 (context256 + 600step)` 又掉回 `0/3`
+- Issues: 两条主线都还没拿到稳定 `3/3`；prompted continuation 对训练长度和解码温度非常敏感，稳定性不足
+- Next Step: 继续围绕 prompted continuation 做稳态优化，优先找出为什么 `300 step @ 0.5` 能到 `2/3`，但 `600 step @ 0.5` 会再次失稳
 
 ## How To Read
 

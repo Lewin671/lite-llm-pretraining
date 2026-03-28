@@ -1,0 +1,74 @@
+{
+  "attempt_id": "A33",
+  "notes": "post-commit local run: extend plain-story u4096bf context256 route to 1500 steps; recorded as A33 to avoid committed A31 collision",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-8dt04_6a-a31.json",
+  "run_name": "tinystories-sweep-a31-u4096bf-c256-1500",
+  "data_dir": "data/tinystories-spm-u4096-bf",
+  "out_dir": "checkpoints/tinystories-sweep-a31-u4096bf-c256-1500",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a31-u4096bf-c256-1500/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 4096,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384
+  },
+  "model": {
+    "context_size": 256,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 1500,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 300,
+    "log_interval": 10,
+    "eval_interval": 300,
+    "eval_batches": 10,
+    "checkpoint_interval": 750,
+    "sample_interval": 750,
+    "sample_tokens": 160,
+    "sample_temperature": 0.3
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 3.26743,
+    "val_ppl": 26.243815,
+    "checkpoint_step": 1200,
+    "best_val_loss": 3.0381109714508057
+  },
+  "validation_summary": {
+    "passed_samples": 1,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.3,
+  "sample_temperature": 0.3,
+  "sample_prompt": "There was a little boy named Timmy who loved red kites.",
+  "sample_excerpt": "One day, Timmy's mom asked his mom if they could play with the toy. Timmy said he was so excited that he wanted to go outside. Timmy was so excited that he ran to the park and asked his mom for help. Timmy was so excited and excited.\nAs they got to the park with his mom. Timmy's mom said they were so happy and happy. Timmy was happy and grateful for his mom. Timmy said they had to go home. Timmy said they were so happy and they had a great time. Once upon a time, there was a little girl named Li",
+  "sample_state": {
+    "step": 1200,
+    "best_val_loss": 3.0381109714508057
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a31-u4096bf-c256-1500",
+    "out_dir": "checkpoints/tinystories-sweep-a31-u4096bf-c256-1500",
+    "best_val_loss": 3.0381109714508057,
+    "last_val_loss": 3.0403198480606077,
+    "final_step": 1500,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a31-u4096bf-c256-1500/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a31-u4096bf-c256-1500/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a31-u4096bf-c256-1500/metrics.jsonl"
+  }
+}

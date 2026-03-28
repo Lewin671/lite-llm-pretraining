@@ -199,9 +199,12 @@
 - 新口径复核结果：
 - `A24`: `best_val_loss=3.5205`，相关性严格校验 `1/3`
 - `A25`: `best_val_loss=3.5658`，相关性严格校验 `1/3`
+- `A31 @ temperature=0.4/0.5`: 显式 `Prompt/Continuation` 路线都能恢复到 `2/3`
+- `A28 @ temperature=0.5`: 更长的 prompted checkpoint 也能恢复到 `2/3`
+- `A29 @ temperature=0.5`: `Prompt/Continuation + context256` 在 `300 step` 下也能到 `2/3`
 - 新结论：之前的 `3/3` 更像是“文本像故事”，不是“文本继续了这个 prompt 的故事”
 - 当前 plain-story 最强相关性基线是 `2/3`
-- 下一轮 sweep 需要优先提升条件跟踪能力，而不是只继续压低 token loss
+- 下一轮 sweep 需要优先提升条件跟踪能力和温度稳态，而不是只继续压低 token loss
 
 ### A21
 
@@ -279,3 +282,24 @@
 - Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.3`
 - Result: `best_val_loss=4.1340`；相关性严格校验 `0/3`
 - Conclusion: 任务对齐方向本身没错，但在当前短训练窗口里这条线会先塌到高重复输出；下一轮要优先解决 repetition，而不是立刻判定这条路线失败
+
+### A32
+
+- Change: post-commit local run，沿着 `u4096 + byte_fallback + context256` plain-story 路线继续拉到 `1000 step`
+- Validation: `validate_checkpoint`，完整 TinyStories prompt，`temperature=0.3`
+- Result: 严格相关性 `2/3`
+- Conclusion: 继续训练这条 `u4096` plain-story 线可以保持 `2/3`，但没有超过 committed `A30` 的相关性上限
+
+### A33
+
+- Change: post-commit local run，继续把同一条 `u4096 + byte_fallback + context256` plain-story 路线拉到 `1500 step`
+- Validation: `validate_checkpoint`，完整 TinyStories prompt，`temperature=0.3`
+- Result: 严格相关性 `1/3`
+- Conclusion: 继续硬拉 plain-story `u4096` 会再次出现“loss 更低但续写相关性更差”的老问题
+
+### A34
+
+- Change: 回到显式 `Prompt/Continuation` 路线，用 `context256`、`600 step`，并把验证温度改到更合适的 `0.5`
+- Validation: `run_sweep_attempt`，通过 `Prompt: ... / Continuation:` 模板做推理，`temperature=0.5`
+- Result: `best_val_loss=3.6004`；严格相关性 `0/3`
+- Conclusion: prompted continuation 的问题不只是温度太低；这条线在更长训练后仍然容易失稳，下一轮要优先查清为什么 `300 step` 能到 `2/3`，而 `600 step` 又掉回 `0/3`
