@@ -105,7 +105,9 @@ python -m lite_llm_pretraining.prepare_squad_qa_eval
 
 ```bash
 python -m lite_llm_pretraining.prepare_dolly_qa_eval \
-  --source_path data/dolly-qa-spm-u4096/databricks-dolly-15k.jsonl \
+  --source_path data/dolly-qa-simple-spm-u4096/val_examples.jsonl \
+  --dev_out prompts/dolly_qa_simple_dev_v1.json \
+  --holdout_out prompts/dolly_qa_simple_holdout_v1.json \
   --allowed_categories_json '["open_qa","closed_qa","information_extraction"]' \
   --min_answer_words 1 \
   --max_answer_words 12 \
@@ -185,15 +187,21 @@ python -m lite_llm_pretraining.run_local \
 
 这份 `smoke` 配置主要用于验证 `Q/A` 训练闭环，不代表当前已经得到高质量问答模型。
 
-如果要跑当前更聚焦的 `simple QA` compact 配置：
+如果要跑当前更聚焦的 `simple QA` 配置：
 
 ```bash
 python -m lite_llm_pretraining.run_local \
-  --config configs/dolly-qa-simple-spm-c128-compact.json \
-  --force_prepare
+  --config configs/dolly-qa-simple-spm-random-cw32-screen.json
 ```
 
-这条线会先过滤到 `Dolly` 中更接近简单问答的短答案样本，并使用 `loss_window` 采样避免大量全零 loss 窗口。它是当前比基础 `smoke` 更好的 `simple QA` 基线，但还不是可用成品。
+这条线会：
+
+- 只保留 `open_qa / closed_qa / information_extraction`
+- 把 `context_word_limit` 压到 `32`
+- 使用 `random` batch 采样，避免短样本被 `example_start` 直接排除
+- 用 `prompts/dolly_qa_simple_cw32_dev_v1.json` 做训练内 `suite_eval`
+
+它比基础 `smoke` 更贴近“简单问题回答”，但当前仍不是可用成品。
 
 从 checkpoint 采样：
 
