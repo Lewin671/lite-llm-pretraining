@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 执行 `TinyStories` 连续优化 sweep，至少完成 20 个方案尝试
-- Latest Progress: 已完成温度 sweep 第一轮，`0.5` 暂时是最稳默认值；正在重建统一 tokenizer 数据集进入短训练矩阵
+- Latest Progress: 已补齐 attempt runner、SentencePiece prepare 兼容参数和更严格的未知标记校验；正在重建统一 tokenizer 数据集进入短训练矩阵
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 完成 tokenizer 变量面数据准备，随后按统一短训练 protocol 跑 A05 之后的结构与超参数对照
+- Next Step: 先完成 `u2048/u4096/b2048/b4096/u1024` 统一数据集准备，再按固定短训练 protocol 跑 A05 之后的结构与超参数对照
 
 ## How To Read
 

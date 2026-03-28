@@ -137,6 +137,9 @@ def sample_metrics(text: str):
     words = re.findall(r"[A-Za-z']+", stripped.lower())
     printable_chars = sum(char.isprintable() or char in "\n\r\t" for char in text)
     sentence_end_count = sum(text.count(mark) for mark in ".!?")
+    unknown_marker_count = (
+        text.count("⁇") + text.count("<unk>") + text.count("<|endoftext|>")
+    )
     metrics = {
         "char_count": len(text),
         "word_count": len(words),
@@ -151,6 +154,7 @@ def sample_metrics(text: str):
         "printable_ratio": round(printable_chars / max(1, len(text)), 4),
         "sentence_end_count": sentence_end_count,
         "max_char_run": max_run_length(text),
+        "unknown_marker_count": unknown_marker_count,
     }
     checks = {
         "enough_words": metrics["word_count"] >= 25,
@@ -160,6 +164,7 @@ def sample_metrics(text: str):
         "limited_short_words": metrics["short_word_ratio"] <= 0.2,
         "limited_repetition": metrics["repeated_trigram_ratio"] <= 0.35,
         "no_long_char_runs": metrics["max_char_run"] <= 8,
+        "no_unknown_markers": metrics["unknown_marker_count"] == 0,
     }
     return metrics, checks
 

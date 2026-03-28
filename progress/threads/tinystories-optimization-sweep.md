@@ -15,6 +15,12 @@
 - 每个尝试至少记录：配置变化、验证方法、主要结果、结论
 - 先用短训练筛方向，再把最好路线继续拉长
 - 尽量只改变少量变量，避免无法归因
+- 从本轮开始，`validate_checkpoint` 额外把 `⁇`、`<unk>`、`<|endoftext|>` 记为未知标记并参与 pass/fail
+
+## Tooling
+
+- 已新增 `python -m lite_llm_pretraining.run_sweep_attempt`
+- 每个新 attempt 会把配置、核心指标和 sample 摘要写到 `progress/artifacts/tinystories-sweep/`
 
 ## Attempts
 

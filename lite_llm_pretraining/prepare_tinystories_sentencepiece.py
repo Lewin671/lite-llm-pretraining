@@ -47,7 +47,7 @@ def parse_args():
     parser.add_argument(
         "--input_sentence_size",
         type=int,
-        default=0,
+        default=200000,
         help="Optional number of sampled sentences used for tokenizer training.",
     )
     return parser.parse_args()
@@ -66,7 +66,7 @@ def train_sentencepiece(
     vocab_size: int,
     model_type: str,
     byte_fallback: bool = False,
-    input_sentence_size: int = 0,
+    input_sentence_size: int = 200000,
 ):
     model_prefix = out_dir / "tokenizer"
     spm.SentencePieceTrainer.train(
@@ -120,7 +120,7 @@ def prepare_dataset(
     vocab_size: int = 2048,
     model_type: str = "bpe",
     byte_fallback: bool = False,
-    input_sentence_size: int = 0,
+    input_sentence_size: int = 200000,
 ):
     out_dir.mkdir(parents=True, exist_ok=True)
     ensure_clean_byte_data(byte_data_dir)

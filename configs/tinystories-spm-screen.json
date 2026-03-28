@@ -1,5 +1,5 @@
 {
-  "run_name": "tinystories-spm-32m",
+  "run_name": "tinystories-spm-screen",
   "seed": 42,
   "prepare": {
     "name": "tinystories_sentencepiece",
@@ -8,8 +8,8 @@
     "model_type": "unigram",
     "input_sentence_size": 200000
   },
-  "data_dir": "data/tinystories-spm",
-  "out_dir": "checkpoints/tinystories-spm-32m",
+  "data_dir": "data/tinystories-spm-u2048",
+  "out_dir": "checkpoints/tinystories-spm-screen",
   "sample_prompt": "Once upon a time,",
   "validation": {
     "prompts": [
@@ -30,15 +30,15 @@
   },
   "train": {
     "batch_size": 8,
-    "max_steps": 50000,
+    "max_steps": 300,
     "learning_rate": 0.00025,
     "weight_decay": 0.01,
-    "warmup_steps": 500,
+    "warmup_steps": 300,
     "log_interval": 10,
-    "eval_interval": 200,
-    "eval_batches": 20,
-    "checkpoint_interval": 1000,
-    "sample_interval": 1000,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 300,
+    "sample_interval": 300,
     "sample_tokens": 160,
     "sample_temperature": 0.7
   }
