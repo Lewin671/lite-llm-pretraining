@@ -3,7 +3,7 @@ import curses
 import textwrap
 from pathlib import Path
 
-from lite_llm_pretraining.app import ChatApplication
+from lite_llm_pretraining.app import ChatApplication, StoryApplication
 from lite_llm_pretraining.model import CheckpointLanguageModel
 
 
@@ -28,6 +28,12 @@ def parse_args():
         type=float,
         default=1.0,
         help="Sampling temperature.",
+    )
+    parser.add_argument(
+        "--mode",
+        default="auto",
+        choices=["auto", "chat", "story"],
+        help="Prompt format. auto uses story mode for TinyStories checkpoints.",
     )
     return parser.parse_args()
 
@@ -124,7 +130,13 @@ class ChatTUI:
 
 def run_tui(stdscr, args):
     model = CheckpointLanguageModel(Path(args.checkpoint_dir))
-    app = ChatApplication(model)
+    mode = args.mode
+    if mode == "auto":
+        mode = "story" if "tinystories" in str(args.checkpoint_dir).lower() else "chat"
+    if mode == "story":
+        app = StoryApplication(model)
+    else:
+        app = ChatApplication(model)
     ChatTUI(stdscr, app, args.max_new_tokens, args.temperature).run()
 
 

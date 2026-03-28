@@ -189,6 +189,7 @@
 - 优先尝试 `SentencePiece + byte_fallback`
 - 同时放开 `vocab_size` 和 `max_sentence_length`
 - 新一轮实验目标是先消掉 `⁇ / <unk>`，再看 sample 是否真正提升
+- 当前新增问题：TUI / chat prompt 格式与 TinyStories 分布不一致，需要同步修正推理入口与验证相关性
 
 ### A21
 

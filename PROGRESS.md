@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 基于 `TinyStories` 全量数据集继续做 tokenizer 主线优化
-- Latest Progress: A24 把当前最佳推进到 `best_val_loss=3.5205` 且严格校验 `3/3`；A25 的 cosine decay 对照没有超过它
+- Current Task: 基于 `TinyStories` 全量数据集继续做推理对齐与最佳模型优化
+- Latest Progress: 已确认当前 TUI 的 chat prompt 格式和 TinyStories 训练分布不匹配，正在同步修正推理层与评测口径
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 当前最优是 A24 的 `u4096 + byte_fallback + 1500 step` 路线；后续如继续优化，应围绕更细的 tokenizer 或解码约束，而不是简单改 decay
+- Next Step: 先修正 TinyStories 的推理/评测对齐，再在 A24 最优路线之上继续优化
 
 ## How To Read
 

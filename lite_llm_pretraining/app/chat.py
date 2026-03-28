@@ -73,3 +73,60 @@ class ChatApplication:
             assistant_message.content += piece
             yield piece
         assistant_message.content = assistant_message.content.strip()
+
+
+class StoryApplication:
+    def __init__(
+        self,
+        model: CheckpointLanguageModel,
+        prompt_prefix: str = "Prompt",
+        continuation_prefix: str = "Continuation",
+    ):
+        self.model = model
+        self.prompt_prefix = prompt_prefix
+        self.continuation_prefix = continuation_prefix
+        self.messages: list[ChatMessage] = []
+
+    def clear(self):
+        self.messages.clear()
+
+    def add_message(self, role: str, content: str):
+        self.messages.append(ChatMessage(role=role, content=content))
+
+    def history_lines(self):
+        lines = []
+        for message in self.messages:
+            prefix = (
+                self.prompt_prefix
+                if message.role == "prompt"
+                else self.continuation_prefix
+            )
+            lines.append(f"{prefix}: {message.content}")
+            lines.append("")
+        return lines
+
+    def build_prompt(self, prompt_text: str):
+        return prompt_text
+
+    def generate_reply(self, user_text: str, max_new_tokens: int, temperature: float = 1.0):
+        self.add_message("prompt", user_text)
+        reply = self.model.generate(
+            self.build_prompt(user_text),
+            max_new_tokens=max_new_tokens,
+            temperature=temperature,
+        )
+        self.add_message("continuation", reply.strip())
+        return reply.strip()
+
+    def stream_reply(self, user_text: str, max_new_tokens: int, temperature: float = 1.0):
+        self.add_message("prompt", user_text)
+        self.add_message("continuation", "")
+        continuation = self.messages[-1]
+        for piece in self.model.stream_generate(
+            self.build_prompt(user_text),
+            max_new_tokens=max_new_tokens,
+            temperature=temperature,
+        ):
+            continuation.content += piece
+            yield piece
+        continuation.content = continuation.content.strip()

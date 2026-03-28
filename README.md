@@ -162,6 +162,16 @@ python -m lite_llm_pretraining.tui_chat \
   --max_new_tokens 120
 ```
 
+如果 checkpoint 是 `TinyStories`，更推荐直接用故事续写模式：
+
+```bash
+python -m lite_llm_pretraining.tui_chat \
+  --checkpoint_dir checkpoints/tinystories-sweep-a24-u4096bf-1500/best \
+  --mode story \
+  --max_new_tokens 160 \
+  --temperature 0.5
+```
+
 TUI 内置命令：
 
 - `/clear` 清空当前会话
