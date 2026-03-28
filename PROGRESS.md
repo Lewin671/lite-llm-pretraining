@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 执行 `TinyStories` 连续优化 sweep，至少完成 20 个方案尝试
-- Latest Progress: 已完成 A05-A08 第一批结构 sweep；当前 `context=128` 在 200 step 窗口里最稳，`context=384` 虽然 loss 更低但 sample 更差且更慢
+- Latest Progress: 已完成 A09-A12 的学习率与 batch sweep；`batch=12` 把短窗 `val_loss` 压到当前最好，但 sample 仍然充满未知标记
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 继续跑 A09-A15 的学习率 / batch / warmup / gradient checkpointing 对照，再把最优短训路线做更长训练
+- Next Step: 跑完 A13-A15 的 warmup / checkpointing 对照，再做 A16-A19 的严格复核，最后把最优路线拉长
 
 ## How To Read
 

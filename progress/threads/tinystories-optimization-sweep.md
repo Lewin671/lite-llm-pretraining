@@ -80,12 +80,36 @@
 - Result: `best_val_loss=4.5742`；严格校验 `0/3`；未知标记总数 `15`
 - Conclusion: 在短训练预算下，大模型反而更差，不值得当前阶段继续加大
 
+### A09
+
+- Change: 以 `A05` 的 `context=128` 为基座，学习率降到 `1.5e-4`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.5820`；严格校验 `0/3`；未知标记总数 `10`
+- Conclusion: 降学习率没有带来更好 sample，短窗内只是在更慢地学
+
+### A10
+
+- Change: 以 `A05` 为基座，学习率升到 `4.0e-4`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.4488`；严格校验 `0/3`；未知标记总数 `16`
+- Conclusion: 更高学习率稍微压低了 loss，但文本更脏，不能只看 loss
+
+### A11
+
+- Change: 以 `A05` 为基座，`batch_size=4`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.9558`；严格校验 `0/3`；未知标记总数 `17`
+- Conclusion: 更小 batch 明显退化，当前主线不考虑
+
+### A12
+
+- Change: 以 `A05` 为基座，`batch_size=12`，`200 step`
+- Validation: 同 A05
+- Result: `best_val_loss=4.2541`；严格校验 `0/3`；未知标记总数 `16`
+- Conclusion: 这是目前短窗里最好的 loss，但 sample 仍不干净，只能保留为备选
+
 ### Pending Batch
 
-- A09: `SentencePiece unigram 2048 + lower learning rate`
-- A10: `SentencePiece unigram 2048 + higher learning rate`
-- A11: `SentencePiece unigram 2048 + smaller batch`
-- A12: `SentencePiece unigram 2048 + larger batch`
 - A13: `SentencePiece unigram 2048 + longer warmup`
 - A14: `SentencePiece unigram 2048 + shorter warmup`
 - A15: `SentencePiece unigram 2048 + no gradient checkpointing`
@@ -100,7 +124,7 @@
 - 当前短结论：
 - 严格校验后，旧 `32M / 1000step` 基线只在 `temperature=0.6` 下有 `1/3` 通过
 - 在当前 `200 step` 窗口里，结构 sweep 没有出现比基线更强的明显赢家
-- `context=384` 虽然 loss 更低，但 sample 质量和速度都不值这个代价
+- `context=384` 和 `batch=12` 都能降低 loss，但还没有转化成更干净的文本
 
 ## Conclusion
 

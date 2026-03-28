@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A12",
+  "notes": "context128 larger batch 12",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-802btuci-a12.json",
+  "run_name": "tinystories-sweep-a12-batch12",
+  "data_dir": "data/tinystories-spm",
+  "out_dir": "checkpoints/tinystories-sweep-a12-batch12",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a12-batch12/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 12,
+    "max_steps": 200,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 300,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 200,
+    "sample_interval": 200,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.168845,
+    "val_ppl": 64.640728,
+    "checkpoint_step": 200,
+    "best_val_loss": 4.254143238067627
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "there was a big  ⁇ \"What will go and the park. ⁇ \"We are not not be the box. She said, \"Yous. She was amazed. ⁇ They. She was so happy to play with the sun. She was a bigy. She had a big. She said, and excited and gave the  ⁇ \"It's. She said, \"It is very happy. She had a big, \"\"Whats mom and a big. He saw a big, I are a big. We are not have to the clouds. You are happy. I will help you, you have a big and Ben. They are good. ⁇ \"Wow, mom. It is happy. ⁇ \"We. ⁇ \"Whats. She. ⁇ The",
+  "sample_state": {
+    "step": 200,
+    "best_val_loss": 4.254143238067627
+  },
+  "sample_flags": {
+    "contains_unknown_marker": true,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 16,
+  "train_result": {
+    "run_name": "tinystories-sweep-a12-batch12",
+    "out_dir": "checkpoints/tinystories-sweep-a12-batch12",
+    "best_val_loss": 4.254143238067627,
+    "last_val_loss": 4.254143238067627,
+    "final_step": 200,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a12-batch12/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a12-batch12/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a12-batch12/metrics.jsonl"
+  }
+}

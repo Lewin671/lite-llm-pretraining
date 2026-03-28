@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A09",
+  "notes": "context128 lower lr 1.5e-4",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-m7fumwkx-a09.json",
+  "run_name": "tinystories-sweep-a09-lr150e5",
+  "data_dir": "data/tinystories-spm",
+  "out_dir": "checkpoints/tinystories-sweep-a09-lr150e5",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a09-lr150e5/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 200,
+    "learning_rate": 0.00015,
+    "weight_decay": 0.01,
+    "warmup_steps": 300,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "eval_batches": 10,
+    "checkpoint_interval": 200,
+    "sample_interval": 200,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 4.514544,
+    "val_ppl": 91.33593,
+    "checkpoint_step": 200,
+    "best_val_loss": 4.581952714920044
+  },
+  "validation_summary": {
+    "passed_samples": 0,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "there was a big mum, she time, there was a little girl was a little girl, she new friends and got a little girl named she was a little boy. He the  ⁇ The little girl named she tree. She was so she loved to play and wanted to the bird was so she was very  ⁇ One day, the w with her friends of, she had a little girl. She was very happy to play. He was a little girl named she big friends. He was so happy and saw a little boy. The best to the little girl named she little girl was a time, she was so s",
+  "sample_state": {
+    "step": 200,
+    "best_val_loss": 4.581952714920044
+  },
+  "sample_flags": {
+    "contains_unknown_marker": true,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 10,
+  "train_result": {
+    "run_name": "tinystories-sweep-a09-lr150e5",
+    "out_dir": "checkpoints/tinystories-sweep-a09-lr150e5",
+    "best_val_loss": 4.581952714920044,
+    "last_val_loss": 4.581952714920044,
+    "final_step": 200,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a09-lr150e5/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a09-lr150e5/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a09-lr150e5/metrics.jsonl"
+  }
+}
