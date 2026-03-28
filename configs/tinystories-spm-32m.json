@@ -1,11 +1,15 @@
 {
-  "run_name": "tinystories-byte-50m",
+  "run_name": "tinystories-spm-32m",
   "seed": 42,
   "prepare": {
-    "name": "tinystories"
+    "name": "tinystories_sentencepiece",
+    "source_data_dir": "data/tinystories-byte",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
   },
-  "data_dir": "data/tinystories-byte",
-  "out_dir": "checkpoints/tinystories-byte-50m",
+  "data_dir": "data/tinystories-spm",
+  "out_dir": "checkpoints/tinystories-spm-32m",
   "sample_prompt": "Once upon a time,",
   "validation": {
     "prompts": [
@@ -13,21 +17,21 @@
       "There was a little",
       "One day, a child named"
     ],
-    "max_new_tokens": 160,
-    "temperature": 0.6,
+    "max_new_tokens": 120,
+    "temperature": 0.7,
     "eval_batches": 10
   },
   "model": {
     "context_size": 256,
-    "dim": 640,
+    "dim": 512,
     "num_layers": 10,
     "num_heads": 8,
     "gradient_checkpointing": true
   },
   "train": {
-    "batch_size": 4,
+    "batch_size": 8,
     "max_steps": 50000,
-    "learning_rate": 0.0002,
+    "learning_rate": 0.00025,
     "weight_decay": 0.01,
     "warmup_steps": 500,
     "log_interval": 10,
@@ -35,7 +39,7 @@
     "eval_batches": 20,
     "checkpoint_interval": 1000,
     "sample_interval": 1000,
-    "sample_tokens": 200,
-    "sample_temperature": 0.6
+    "sample_tokens": 160,
+    "sample_temperature": 0.7
   }
 }

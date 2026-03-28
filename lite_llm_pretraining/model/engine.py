@@ -1,12 +1,14 @@
 from pathlib import Path
 
 from lite_llm_pretraining.common import load_checkpoint, sample_text, sample_text_stream
+from lite_llm_pretraining.tokenizer import load_tokenizer_from_checkpoint
 
 
 class CheckpointLanguageModel:
     def __init__(self, checkpoint_dir: Path):
         self.checkpoint_dir = checkpoint_dir
         self.model, self.model_config, self.state = load_checkpoint(checkpoint_dir)
+        self.tokenizer = load_tokenizer_from_checkpoint(checkpoint_dir)
 
     @property
     def loaded_step(self):
@@ -19,6 +21,7 @@ class CheckpointLanguageModel:
             max_new_tokens,
             temperature=temperature,
             include_prompt=False,
+            tokenizer=self.tokenizer,
         )
 
     def stream_generate(
@@ -30,5 +33,5 @@ class CheckpointLanguageModel:
             max_new_tokens,
             temperature=temperature,
             include_prompt=False,
+            tokenizer=self.tokenizer,
         )
-

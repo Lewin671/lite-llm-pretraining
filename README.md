@@ -7,6 +7,7 @@
 - 框架：`MLX + Metal`
 - 数据：`Tiny Shakespeare` / `TinyStories`
 - tokenizer：`UTF-8 byte-level`
+- 可选 tokenizer 升级：`SentencePiece`
 - 模型：decoder-only Transformer
 - 验证目标：训练、验证、checkpoint 保存/加载、基础采样
 - 交互入口：streaming 采样与交互式 TUI 对话
@@ -21,6 +22,8 @@
 
 - 下载并准备 `Tiny Shakespeare` 字节级数据集
 - 下载并准备 `TinyStories` 全量字节级数据集
+- 默认清理 `TinyStories` 原文中的字面量 `<|endoftext|>` 分隔标记
+- 支持将 `TinyStories` 编码成 `SentencePiece` 子词数据集
 - 在本机用 `MLX` 启动一个最小 decoder-only LM 训练
 - 周期性输出 train/val loss，并写入 `metrics.jsonl`
 - 保存 `best` / `latest` checkpoint
@@ -73,6 +76,14 @@ python -m lite_llm_pretraining.prepare_tiny_shakespeare
 python -m lite_llm_pretraining.prepare_tinystories
 ```
 
+准备 `TinyStories` 的 `SentencePiece` 子词数据：
+
+```bash
+python -m lite_llm_pretraining.prepare_tinystories_sentencepiece \
+  --source_data_dir data/tinystories-byte \
+  --out_dir data/tinystories-spm
+```
+
 启动默认 smoke 训练：
 
 ```bash
@@ -103,7 +114,26 @@ python -m lite_llm_pretraining.run_local \
 - `num_layers=10`
 - `num_heads=8`
 - `gradient_checkpointing=true`
+- `sample_temperature=0.6`
 - 参数量约 `49.7M`
+
+如果要跑当前更推荐的 `SentencePiece` 对照配置：
+
+```bash
+python -m lite_llm_pretraining.run_local \
+  --config configs/tinystories-spm-32m.json \
+  --force_prepare
+```
+
+这份配置的核心参数为：
+
+- `tokenizer=SentencePiece unigram`
+- `vocab_size=2048`
+- `context_size=256`
+- `dim=512`
+- `num_layers=10`
+- `num_heads=8`
+- 参数量约 `33.7M`
 
 从 checkpoint 采样：
 
@@ -155,6 +185,7 @@ TUI 内置命令：
 
 - 数据输出：`data/tinyshakespeare-byte/`
 - 数据输出：`data/tinystories-byte/`
+- 数据输出：`data/tinystories-spm/`
 - 训练输出：`checkpoints/tinyshakespeare-byte-smoke/`
 - 指标日志：`checkpoints/tinyshakespeare-byte-smoke/metrics.jsonl`
 - 采样结果：`checkpoints/tinyshakespeare-byte-smoke/samples/`
@@ -188,12 +219,13 @@ logs/        训练日志
 - 已生成可加载 checkpoint，并完成一次基础采样
 - 已验证 `python -m lite_llm_pretraining.run_local --force_prepare` 可直接完成本地完整链路
 - 已补齐 `TinyStories` 全量数据准备、约 `50M` 参数配置和自动化质量验证入口
+- 已补齐 `SentencePiece` 对照路线，并验证其短训练样本质量优于 byte-level 对照
 
 ## 下一步
 
 如果要继续扩展，不再优先补“有没有闭环”，而是优先补“闭环之后的第二阶段能力”：
 
-1. 把 `TinyStories` `50M` 配置从探路阶段推进到更长训练阶段
-2. 引入更接近 LLM 习惯的 tokenizer 方案
+1. 把 `SentencePiece` 路线从短训练对照推进到更长训练阶段
+2. 继续处理 `unk` / `byte_fallback` 等 tokenizer 细节
 3. 补更清晰的 eval / sample 对比标准
 4. 再考虑是否引入更大语料的小型清洗子集

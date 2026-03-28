@@ -22,6 +22,7 @@ from lite_llm_pretraining.common import (
     set_seed,
     token_dtype_from_meta,
 )
+from lite_llm_pretraining.tokenizer import load_tokenizer_from_meta
 
 
 def parse_args():
@@ -50,11 +51,13 @@ def train_from_config(config_path: Path):
     save_json(out_dir / "run_config.json", config)
 
     meta = load_json(data_dir / "meta.json")
+    tokenizer = load_tokenizer_from_meta(meta, data_dir)
     model_config = {
         **config["model"],
-        "vocab_size": meta["vocab_size"],
+        "vocab_size": tokenizer.vocab_size,
     }
     train_config = config["train"]
+    sample_temperature = train_config.get("sample_temperature", 1.0)
 
     model = TransformerLM(**model_config)
     optimizer = optim.AdamW(
@@ -130,6 +133,7 @@ def train_from_config(config_path: Path):
                     model,
                     step,
                     {"best_val_loss": best_val_loss},
+                    tokenizer=tokenizer,
                 )
 
         if step % train_config["checkpoint_interval"] == 0 or step == train_config["max_steps"]:
@@ -138,6 +142,7 @@ def train_from_config(config_path: Path):
                 model,
                 step,
                 {"best_val_loss": best_val_loss},
+                tokenizer=tokenizer,
             )
 
         if step % train_config["sample_interval"] == 0 or step == train_config["max_steps"]:
@@ -145,6 +150,8 @@ def train_from_config(config_path: Path):
                 model,
                 config["sample_prompt"],
                 train_config["sample_tokens"],
+                temperature=sample_temperature,
+                tokenizer=tokenizer,
             )
             sample_path = out_dir / "samples" / f"step-{step:04d}.txt"
             sample_path.parent.mkdir(parents=True, exist_ok=True)

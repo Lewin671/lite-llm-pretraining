@@ -4,10 +4,10 @@
 
 ## Current Status
 
-- Current Task: 已落地 `TinyStories` 全量训练闭环，并验证约 `50M` 参数模型可在本机训练
-- Latest Progress: 已跑通 `TinyStories` 全量数据准备、`49.7M` 配置、自动化验证，并完成到 `2000` 步的真实训练探路
-- Issues: `2000` 步训练后 `val_loss` 已降到 `1.4707`，但固定 seed 的严格验证只通过 `3` 个 prompt 中的 `1` 个，当前还不能称为高质量模型
-- Next Step: 在现有 `TinyStories` 路线上继续拉长训练，并优先评估切换 tokenizer 以提升文本质量
+- Current Task: 优化 `TinyStories` 路线的文本质量
+- Latest Progress: 已完成 `SentencePiece` 对照，`33.7M` 模型在 `1000` 步时的样本质量已明显优于 `byte-level 49.7M`
+- Issues: `SentencePiece` 路线仍偶尔出现 `⁇`，下一步需要继续处理 unk / byte fallback 和训练时长
+- Next Step: 继续沿 `SentencePiece` 路线优化，而不是回到 byte-level 继续堆步数
 
 ## How To Read
 

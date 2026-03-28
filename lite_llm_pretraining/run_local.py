@@ -4,6 +4,9 @@ from pathlib import Path
 from lite_llm_pretraining.common import load_json, save_json
 from lite_llm_pretraining.prepare_tiny_shakespeare import prepare_dataset
 from lite_llm_pretraining.prepare_tinystories import prepare_dataset as prepare_tinystories
+from lite_llm_pretraining.prepare_tinystories_sentencepiece import (
+    prepare_dataset as prepare_tinystories_sentencepiece,
+)
 from lite_llm_pretraining.sample import sample_from_checkpoint
 from lite_llm_pretraining.train import train_from_config
 from lite_llm_pretraining.validate_checkpoint import validate_checkpoint
@@ -54,7 +57,22 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
     if prepare_name == "tinystories":
         train_url = prepare_config.get("train_url")
         val_url = prepare_config.get("val_url")
-        return prepare_tinystories(data_dir, train_url=train_url, val_url=val_url)
+        return prepare_tinystories(
+            data_dir,
+            train_url=train_url,
+            val_url=val_url,
+            preserve_eot_marker=prepare_config.get("preserve_eot_marker", False),
+        )
+
+    if prepare_name == "tinystories_sentencepiece":
+        return prepare_tinystories_sentencepiece(
+            data_dir,
+            byte_data_dir=Path(
+                prepare_config.get("byte_data_dir", "data/tinystories-byte-clean")
+            ),
+            vocab_size=prepare_config.get("vocab_size", 2048),
+            model_type=prepare_config.get("model_type", "bpe"),
+        )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")
 
@@ -79,8 +97,9 @@ def main():
     checkpoint_dir = Path(train_result["best_checkpoint_dir"])
     prompt = args.prompt or config["sample_prompt"]
     max_new_tokens = args.max_new_tokens or config["train"]["sample_tokens"]
+    sample_temperature = config["train"].get("sample_temperature", 1.0)
     final_sample, sample_state = sample_from_checkpoint(
-        checkpoint_dir, prompt, max_new_tokens
+        checkpoint_dir, prompt, max_new_tokens, temperature=sample_temperature
     )
 
     out_dir = Path(train_result["out_dir"])
@@ -93,6 +112,7 @@ def main():
         "checkpoint_dir": str(checkpoint_dir),
         "final_sample_path": str(final_sample_path),
         "loaded_step": sample_state.get("step"),
+        "sample_temperature": sample_temperature,
         **train_result,
     }
 

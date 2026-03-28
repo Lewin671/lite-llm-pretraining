@@ -1,4 +1,3 @@
-import codecs
 import json
 import math
 import random
@@ -8,6 +7,8 @@ import mlx.core as mx
 import mlx.nn as nn
 import numpy as np
 from mlx.utils import tree_flatten
+
+from lite_llm_pretraining.tokenizer import ByteTokenizer
 
 
 DEFAULT_TOKEN_DTYPE = "uint16"
@@ -131,11 +132,19 @@ def count_parameters(model: TransformerLM):
     return sum(param.size for _, param in tree_flatten(model.parameters()))
 
 
-def save_checkpoint(checkpoint_dir: Path, model: TransformerLM, step: int, extra_state):
+def save_checkpoint(
+    checkpoint_dir: Path,
+    model: TransformerLM,
+    step: int,
+    extra_state,
+    tokenizer=None,
+):
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     model.save_weights(str(checkpoint_dir / "weights.npz"))
     save_json(checkpoint_dir / "model_config.json", model.config_dict())
     save_json(checkpoint_dir / "state.json", {"step": step, **extra_state})
+    if tokenizer is not None:
+        tokenizer.save_to_checkpoint(checkpoint_dir)
 
 
 def load_checkpoint(checkpoint_dir: Path):
@@ -149,11 +158,11 @@ def load_checkpoint(checkpoint_dir: Path):
 
 
 def encode_text(text: str):
-    return list(text.encode("utf-8"))
+    return ByteTokenizer().encode(text)
 
 
 def decode_tokens(tokens):
-    return bytes(int(token) for token in tokens).decode("utf-8", errors="ignore")
+    return ByteTokenizer().decode(tokens)
 
 
 def sample_text(
@@ -162,6 +171,7 @@ def sample_text(
     max_new_tokens: int,
     temperature: float = 1.0,
     include_prompt: bool = True,
+    tokenizer=None,
 ):
     return "".join(
         sample_text_stream(
@@ -170,6 +180,7 @@ def sample_text(
             max_new_tokens,
             temperature=temperature,
             include_prompt=include_prompt,
+            tokenizer=tokenizer,
         )
     )
 
@@ -180,10 +191,13 @@ def sample_text_stream(
     max_new_tokens: int,
     temperature: float = 1.0,
     include_prompt: bool = True,
+    tokenizer=None,
 ):
-    prompt_tokens = encode_text(prompt) or [10]
+    tokenizer = tokenizer or ByteTokenizer()
+    prompt_tokens = tokenizer.encode(prompt) or tokenizer.default_prompt_tokens()
     tokens = list(prompt_tokens)
-    decoder = codecs.getincrementaldecoder("utf-8")("ignore")
+    generated_tokens = []
+    decoded_generated = ""
     model.eval()
 
     if prompt and include_prompt:
@@ -198,14 +212,16 @@ def sample_text_stream(
         mx.eval(next_token)
         token_value = int(next_token.item())
         tokens.append(token_value)
+        generated_tokens.append(token_value)
 
-        piece = decoder.decode(bytes([token_value]), final=False)
+        current_text = tokenizer.decode(generated_tokens)
+        if current_text.startswith(decoded_generated):
+            piece = current_text[len(decoded_generated) :]
+        else:
+            piece = current_text
+        decoded_generated = current_text
         if piece:
             yield piece
-
-    tail = decoder.decode(b"", final=True)
-    if tail:
-        yield tail
 
 
 def perplexity(loss_value: float):
