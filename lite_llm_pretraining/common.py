@@ -121,10 +121,25 @@ def estimate_loss(model: TransformerLM, data, batch_size: int, context_size: int
     return sum(losses) / len(losses)
 
 
-def learning_rate_at(step: int, base_lr: float, warmup_steps: int):
-    if warmup_steps <= 0:
+def learning_rate_at(
+    step: int,
+    base_lr: float,
+    warmup_steps: int,
+    min_lr: float | None = None,
+    decay_steps: int | None = None,
+):
+    if warmup_steps > 0 and step <= warmup_steps:
+        return min(1.0, step / warmup_steps) * base_lr
+
+    if min_lr is None or decay_steps is None or decay_steps <= warmup_steps:
         return base_lr
-    return min(1.0, step / warmup_steps) * base_lr
+
+    if step >= decay_steps:
+        return min_lr
+
+    decay_progress = (step - warmup_steps) / max(1, decay_steps - warmup_steps)
+    cosine = 0.5 * (1.0 + math.cos(math.pi * decay_progress))
+    return min_lr + (base_lr - min_lr) * cosine
 
 
 def count_parameters(model: TransformerLM):

@@ -87,6 +87,8 @@ def train_from_config(config_path: Path):
             step,
             train_config["learning_rate"],
             train_config["warmup_steps"],
+            min_lr=train_config.get("min_learning_rate"),
+            decay_steps=train_config.get("lr_decay_steps"),
         )
         optimizer.learning_rate = current_lr
 
