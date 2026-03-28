@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 基于 `TinyStories` 全量数据集继续做 tokenizer 主线优化
-- Latest Progress: `unigram 4096 + byte_fallback` 的 A23 已跑到 `1000 step`，严格校验仍是 `3/3`，`best_val_loss` 继续降到 `3.6301`
+- Latest Progress: A24 把当前最佳推进到 `best_val_loss=3.5205` 且严格校验 `3/3`；A25 的 cosine decay 对照没有超过它
 - Issues: 当前最佳样本仍不够稳定，需要通过 sweep 收敛真正有效的改进项
-- Next Step: 继续拉长同一最优配置，确认更长训练是否还在稳定改善
+- Next Step: 当前最优是 A24 的 `u4096 + byte_fallback + 1500 step` 路线；后续如继续优化，应围绕更细的 tokenizer 或解码约束，而不是简单改 decay
 
 ## How To Read
 

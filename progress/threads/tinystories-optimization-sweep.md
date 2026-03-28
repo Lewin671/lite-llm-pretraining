@@ -173,12 +173,15 @@
 - 到目前为止，唯一在短训里真正改善通过数的是 `warmup=50`
 - byte-level 清洗线可以达到 `1/3`，但人类可读性仍然不如 SentencePiece 线
 - A20 说明继续堆当前 `SentencePiece 2048` 路线的步数，收益主要体现在 loss，而不是真实 sample 质量
+- 新 tokenizer 路线 `u4096 + byte_fallback` 已经把未知标记稳定压到 `0`
+- 当前最佳 checkpoint 来自 `A24` 的 `step 1200`
 
 ## Conclusion
 
 - 当前主线先不再继续放大模型或 context
 - A14 经过温度复核后仍保留为最佳 SentencePiece carry-forward 候选
 - 本轮 20 个 attempt 已完成；下一轮最值得做的是 tokenizer 路线重开，而不是继续在当前配置上硬拉步数
+- tokenizer 路线已经重开并验证成功，当前最佳主线是 `u4096 + byte_fallback + context128 + warmup50`
 
 ## Next Phase
 
@@ -207,3 +210,17 @@
 - Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
 - Result: `best_val_loss=3.6301`；严格校验 `3/3`；未知标记总数 `0`
 - Conclusion: 当前最优路线继续单调改善，说明这条 tokenizer 主线还没到头
+
+### A24
+
+- Change: 继续使用 `A23` 的 tokenizer 路线，把训练拉长到 `1500 step`
+- Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
+- Result: `best_val_loss=3.5205`；严格校验 `3/3`；未知标记总数 `0`
+- Conclusion: 这是目前最优 checkpoint；质量继续改善，但固定学习率在后段开始轻微抖动
+
+### A25
+
+- Change: 维持 `A24` 的 tokenizer 路线不变，只加入 cosine decay，`min_learning_rate=2.5e-5`
+- Validation: `run_sweep_attempt`，固定 3 prompt，`temperature=0.5`
+- Result: `best_val_loss=3.5658`；严格校验 `3/3`；未知标记总数 `0`
+- Conclusion: decay 没有赢过常数学习率，当前最佳仍然是 `A24`

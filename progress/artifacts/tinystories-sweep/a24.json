@@ -1,0 +1,72 @@
+{
+  "attempt_id": "A24",
+  "notes": "carry forward unigram 4096 + byte_fallback route to 1500 steps",
+  "base_config": "configs/tinystories-spm-screen.json",
+  "temp_config": "/var/folders/8m/1gqpwt5d47l106jspd1qjp3m0000gn/T/lite-llm-pretraining-nlksf17c-a24.json",
+  "run_name": "tinystories-sweep-a24-u4096bf-1500",
+  "data_dir": "data/tinystories-spm-u4096-bf",
+  "out_dir": "checkpoints/tinystories-sweep-a24-u4096bf-1500",
+  "checkpoint_dir": "checkpoints/tinystories-sweep-a24-u4096bf-1500/best",
+  "prepare": {
+    "name": "tinystories_sentencepiece",
+    "byte_data_dir": "data/tinystories-byte-clean",
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "input_sentence_size": 200000
+  },
+  "model": {
+    "context_size": 128,
+    "dim": 512,
+    "num_layers": 10,
+    "num_heads": 8,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 8,
+    "max_steps": 1500,
+    "learning_rate": 0.00025,
+    "weight_decay": 0.01,
+    "warmup_steps": 50,
+    "log_interval": 10,
+    "eval_interval": 300,
+    "eval_batches": 10,
+    "checkpoint_interval": 1500,
+    "sample_interval": 1500,
+    "sample_tokens": 160,
+    "sample_temperature": 0.5
+  },
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 3.735043,
+    "val_ppl": 41.889831,
+    "checkpoint_step": 1200,
+    "best_val_loss": 3.520472764968872
+  },
+  "validation_summary": {
+    "passed_samples": 3,
+    "total_samples": 3
+  },
+  "validation_temperature": 0.5,
+  "sample_temperature": 0.5,
+  "sample_prompt": "Once upon a time,",
+  "sample_excerpt": "there was a boy named Timmy. Timmy loved to play with his mommy. Timmy loved to play with his friend. One day, Timmy saw a big tree with a big, but it was a big and decided to play with a big tree. Timmy wanted to play. One day, Timmy got to make a big, but he saw a big hug. Timmy was very excited. Timmy asked. Timmy decided to play with his mom. He was very sad and went to the park to stay. Timmy was so happy. \nJack saw that he could never see that he could go and go to the ball in the park. He",
+  "sample_state": {
+    "step": 1200,
+    "best_val_loss": 3.520472764968872
+  },
+  "sample_flags": {
+    "contains_unknown_marker": false,
+    "contains_eot_marker": false
+  },
+  "total_unknown_markers": 0,
+  "train_result": {
+    "run_name": "tinystories-sweep-a24-u4096bf-1500",
+    "out_dir": "checkpoints/tinystories-sweep-a24-u4096bf-1500",
+    "best_val_loss": 3.520472764968872,
+    "last_val_loss": 3.549535059928894,
+    "final_step": 1500,
+    "best_checkpoint_dir": "checkpoints/tinystories-sweep-a24-u4096bf-1500/best",
+    "latest_checkpoint_dir": "checkpoints/tinystories-sweep-a24-u4096bf-1500/latest",
+    "metrics_path": "checkpoints/tinystories-sweep-a24-u4096bf-1500/metrics.jsonl"
+  }
+}
