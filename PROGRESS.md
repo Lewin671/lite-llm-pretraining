@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 沿 `Dolly Q/A` 主线继续优化，目标先收紧成“简单问题能稳定答出来”
-- Latest Progress: 已继续试了 `OpenTriviaQA` 和 `WebQuestions` 两条更宽数据线；结果都没把 generalization suite 拉起来，当前“更通用的简单问答”仍然是失败态
+- Latest Progress: 已把当前最佳模型的手测方法、建议题单和“不泛化”的原因补进文档；同时保留了 `OpenTriviaQA / WebQuestions` 失败结论，避免继续高估现状
 - Issues: 问题已经不是只缺一点调参，而是当前 tiny 模型 + 现有公开数据子集这条路线本身泛化很差；换数据源后 general suite 仍接近全零
-- Next Step: 基于这些失败结果，下一轮不再盲目换相似数据，而是优先找更干净的 direct question -> short answer 数据，或重做训练目标以减少模式崩塌
+- Next Step: 基于现有手测口径继续优化，优先找更干净的 direct question -> short answer 数据，或重做训练目标以减少模式崩塌
 
 ## How To Read
 

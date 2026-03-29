@@ -247,6 +247,44 @@ python -m lite_llm_pretraining.sample \
 
 它是目前最接近“非常简单的问题能答对”的本地基线。
 
+如果要手工测试当前 `factoid` 最优模型，推荐直接用：
+
+```bash
+python -m lite_llm_pretraining.tui_chat \
+  --checkpoint_dir checkpoints/dolly-open-qa-factoid-c096-ft/best_suite \
+  --mode qa \
+  --max_new_tokens 5 \
+  --temperature 0.1 \
+  --top_k 1
+```
+
+建议先测两组题：
+
+- 更贴近当前训练分布：
+  - `When did Uber IPO?`
+  - `What is another name for the Great Pyramid in Egypt?`
+  - `What colors are on the United States of America flag?`
+  - `What is Ralph Baer famous for?`
+- 更偏通用简单问答：
+  - `What is the capital of France?`
+  - `What is the capital of Japan?`
+  - `Who wrote Hamlet?`
+  - `Who painted the Mona Lisa?`
+  - `What is the chemical symbol for gold?`
+  - `How many continents are there on Earth?`
+
+如果想直接复核“通用简单题”评测：
+
+```bash
+python -m lite_llm_pretraining.evaluate_qa_suite \
+  --checkpoint_dir checkpoints/dolly-open-qa-factoid-c096-ft/best_suite \
+  --suite_path prompts/qa_general_simple_v1.json \
+  --data_dir data/dolly-open-qa-factoid-u2048 \
+  --max_new_tokens 5 \
+  --temperature 0.1 \
+  --top_k 1
+```
+
 从 checkpoint 采样：
 
 ```bash

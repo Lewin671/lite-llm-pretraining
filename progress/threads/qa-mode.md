@@ -338,3 +338,41 @@
 - 当前更可信的结论是：
   - 这台机器上这类 tiny 模型，想做“更通用的简单问答”，需要更干净、更直接的 supervision
   - 继续在这几条现有公开数据子集上抠超参，收益已经很低
+
+## Manual Testing
+
+- 推荐手测入口：
+  - `python -m lite_llm_pretraining.tui_chat --checkpoint_dir checkpoints/dolly-open-qa-factoid-c096-ft/best_suite --mode qa --max_new_tokens 5 --temperature 0.1 --top_k 1`
+- 建议先测两组题：
+  - 训练分布内：
+    - `When did Uber IPO?`
+    - `What is another name for the Great Pyramid in Egypt?`
+    - `What colors are on the United States of America flag?`
+  - 泛化题：
+    - `What is the capital of France?`
+    - `What is the capital of Japan?`
+    - `Who wrote Hamlet?`
+    - `Who painted the Mona Lisa?`
+    - `What is the chemical symbol for gold?`
+    - `How many continents are there on Earth?`
+- 推荐判读方式：
+  - 如果分布内题能答，泛化题大面积失效，说明模型只是学到局部题面模式
+  - 如果答案前缀接近正确、后缀崩掉，优先看 decode 与答案长度约束
+  - 如果整句直接跳到无关实体，优先判断数据分布和训练目标是否错位
+
+## Why It Does Not Generalize
+
+- 当前无法泛化，不是单点 bug，而是几层问题叠加：
+  - 训练数据过窄：
+    - `Dolly factoid` 太贴近少数题面模式
+    - `OpenTriviaQA` 噪声重
+    - `WebQuestions` 样本太少且答案分布不稳
+  - 模型太小：
+    - 这条本机 tiny 模型线更容易记模板和局部词面，不足以形成稳健常识表示
+  - 训练目标过弱：
+    - 目前主要是短答案生成，不是真正针对“跨题面泛化”设计的监督
+  - 评测曾经过于乐观：
+    - 早期 `factoid holdout` 太像训练集，导致阶段性高估
+- 现在最可信的判断是：
+  - 当前 best 只是“在接近训练分布的简单题上有一定效果”
+  - 它还不是“通用简单问答模型”
