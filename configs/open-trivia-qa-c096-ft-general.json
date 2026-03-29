@@ -1,0 +1,73 @@
+{
+  "run_name": "open-trivia-qa-c096-ft-general",
+  "seed": 42,
+  "init_checkpoint_dir": "checkpoints/dolly-open-qa-factoid-c096-ft/best_suite",
+  "prepare": {
+    "name": "open_trivia_qa",
+    "repo_url": "https://github.com/uberspot/OpenTriviaQA",
+    "train_split": 0.95,
+    "split_seed": 42,
+    "vocab_size": 2048,
+    "model_type": "unigram",
+    "byte_fallback": true,
+    "input_sentence_size": 200000,
+    "max_sentence_length": 16384,
+    "tokenizer_model_path": "data/dolly-open-qa-short-u2048/tokenizer.model",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer the trivia question with the exact short answer.",
+    "prompt_loss_weight": 0.0,
+    "continuation_head_token_count": 8,
+    "continuation_head_loss_weight": 2.5,
+    "selected_categories": [
+      "general",
+      "world",
+      "science-technology",
+      "history",
+      "geography",
+      "humanities"
+    ],
+    "question_prefixes": ["what", "which", "who", "where", "when", "how"],
+    "require_question_style": true,
+    "min_answer_words": 1,
+    "max_answer_words": 4,
+    "max_question_words": 28,
+    "require_single_line_answer": true
+  },
+  "data_dir": "data/open-trivia-qa-u2048-general",
+  "out_dir": "checkpoints/open-trivia-qa-c096-ft-general",
+  "sample_prompt": "What is the capital of France?",
+  "sample_context": null,
+  "suite_eval": {
+    "suite_path": "prompts/qa_general_simple_v1.json",
+    "temperature": 0.1,
+    "top_k": 1,
+    "max_new_tokens": 5,
+    "eval_batches": 10,
+    "seed": 123
+  },
+  "model": {
+    "context_size": 96,
+    "dim": 256,
+    "num_layers": 4,
+    "num_heads": 4,
+    "gradient_checkpointing": true
+  },
+  "train": {
+    "batch_size": 16,
+    "max_steps": 500,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "warmup_steps": 30,
+    "log_interval": 10,
+    "eval_interval": 50,
+    "eval_batches": 10,
+    "checkpoint_interval": 50,
+    "sample_interval": 50,
+    "sample_tokens": 5,
+    "sample_temperature": 0.1,
+    "sample_top_k": 1,
+    "batch_sampling_mode": "loss_window"
+  }
+}

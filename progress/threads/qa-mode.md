@@ -293,3 +293,48 @@
 - 用户的判断是对的：当前模型一点都不通用
 - `factoid` 线比旧基线强，但这种强主要体现在“更接近训练分布的简单题”
 - 一旦换成更普通、更日常的简单事实题，当前模型基本立即失效
+
+## Broader Data Attempts
+
+- 新增数据准备入口：
+  - [prepare_open_trivia_qa.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/prepare_open_trivia_qa.py)
+  - [prepare_webquestions_qa.py](/Users/qingyingliu/Code/lite-llm-pretraining/lite_llm_pretraining/prepare_webquestions_qa.py)
+- `run_local.py` 现在支持：
+  - `prepare.name = open_trivia_qa`
+  - `prepare.name = webquestions_qa`
+- 新配置：
+  - [open-trivia-qa-c096-ft-general.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/open-trivia-qa-c096-ft-general.json)
+  - [open-trivia-qa-u4096-scratch-general.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/open-trivia-qa-u4096-scratch-general.json)
+  - [webquestions-qa-c096-ft-general.json](/Users/qingyingliu/Code/lite-llm-pretraining/configs/webquestions-qa-c096-ft-general.json)
+
+## Broader Data Results
+
+- `OpenTriviaQA + old tokenizer finetune`
+  - checkpoint: `checkpoints/open-trivia-qa-c096-ft-general/best_suite`
+  - general suite: `exact_match=0.0`, `token_f1=0.0208`
+  - 典型输出：
+    - `What is the capital of France?` -> `Phoenixicalile`
+    - `Who wrote Hamlet?` -> `Guri`
+- `OpenTriviaQA + fresh 4096 tokenizer scratch`
+  - checkpoint: `checkpoints/open-trivia-qa-u4096-scratch-general/best`
+  - general suite: `exact_match=0.0`, `token_f1=0.0`
+  - 典型输出：
+    - `What is the capital of France?` -> `All`
+    - `Who wrote Hamlet?` -> `All`
+- `WebQuestions + old tokenizer finetune`
+  - checkpoint: `checkpoints/webquestions-qa-c096-ft-general/best`
+  - general suite: `exact_match=0.0`, `token_f1=0.0`
+  - 典型输出：
+    - `What is the capital of France?` -> `Austt`
+    - `Who wrote Hamlet?` -> `San Francisco Sph`
+
+## Broader Data Conclusion
+
+- 单纯把数据源从 `Dolly` 换成更宽的 trivia / web QA，并没有自动带来通用简单问答能力
+- 当前失败模式已经很清楚：
+  - `OpenTriviaQA` 更像题库，但题面和答案噪声很重
+  - `WebQuestions` 更像真实问句，但样本量和质量都不够稳
+  - 即使 fresh tokenizer 也没救回来，说明不是 tokenizer 单点问题
+- 当前更可信的结论是：
+  - 这台机器上这类 tiny 模型，想做“更通用的简单问答”，需要更干净、更直接的 supervision
+  - 继续在这几条现有公开数据子集上抠超参，收益已经很低

@@ -3,10 +3,16 @@ from pathlib import Path
 
 from lite_llm_pretraining.common import load_json, save_json
 from lite_llm_pretraining.prepare_dolly_qa import prepare_dataset as prepare_dolly_qa
+from lite_llm_pretraining.prepare_open_trivia_qa import (
+    prepare_dataset as prepare_open_trivia_qa,
+)
 from lite_llm_pretraining.prepare_tiny_shakespeare import prepare_dataset
 from lite_llm_pretraining.prepare_tinystories import prepare_dataset as prepare_tinystories
 from lite_llm_pretraining.prepare_tinystories_sentencepiece import (
     prepare_dataset as prepare_tinystories_sentencepiece,
+)
+from lite_llm_pretraining.prepare_webquestions_qa import (
+    prepare_dataset as prepare_webquestions_qa,
 )
 from lite_llm_pretraining.sample import sample_from_checkpoint
 from lite_llm_pretraining.train import train_from_config
@@ -151,6 +157,111 @@ def prepare_from_config(config, data_dir: Path, train_split: float):
             max_normalized_answer_words=prepare_config.get(
                 "max_normalized_answer_words"
             ),
+        )
+
+    if prepare_name == "open_trivia_qa":
+        split = prepare_config.get("train_split", train_split)
+        return prepare_open_trivia_qa(
+            data_dir,
+            repo_url=prepare_config.get("repo_url"),
+            repo_dir=(
+                Path(prepare_config["repo_dir"])
+                if prepare_config.get("repo_dir")
+                else None
+            ),
+            train_split=split,
+            split_seed=prepare_config.get("split_seed", 42),
+            vocab_size=prepare_config.get("vocab_size", 2048),
+            model_type=prepare_config.get("model_type", "unigram"),
+            byte_fallback=prepare_config.get("byte_fallback", True),
+            input_sentence_size=prepare_config.get("input_sentence_size", 200000),
+            max_sentence_length=prepare_config.get("max_sentence_length", 16384),
+            shuffle_input_sentence=prepare_config.get("shuffle_input_sentence", True),
+            tokenizer_model_path=(
+                Path(prepare_config["tokenizer_model_path"])
+                if prepare_config.get("tokenizer_model_path")
+                else None
+            ),
+            question_label=prepare_config.get("question_label", "Question"),
+            context_label=prepare_config.get("context_label", "Context"),
+            answer_label=prepare_config.get("answer_label", "Answer"),
+            instruction_text=prepare_config.get("instruction_text", ""),
+            prompt_loss_weight=prepare_config.get("prompt_loss_weight", 0.0),
+            continuation_head_token_count=prepare_config.get(
+                "continuation_head_token_count",
+                0,
+            ),
+            continuation_head_loss_weight=prepare_config.get(
+                "continuation_head_loss_weight",
+                1.0,
+            ),
+            min_answer_words=prepare_config.get("min_answer_words", 1),
+            max_answer_words=prepare_config.get("max_answer_words", 4),
+            max_question_words=prepare_config.get("max_question_words", 28),
+            require_single_line_answer=prepare_config.get(
+                "require_single_line_answer", False
+            ),
+            factoid_only=prepare_config.get("factoid_only", False),
+            normalize_factoid_answers=prepare_config.get(
+                "normalize_factoid_answers", False
+            ),
+            max_normalized_answer_words=prepare_config.get(
+                "max_normalized_answer_words"
+            ),
+            selected_categories=prepare_config.get("selected_categories"),
+            question_prefixes=prepare_config.get("question_prefixes"),
+            require_question_style=prepare_config.get("require_question_style", False),
+        )
+
+    if prepare_name == "webquestions_qa":
+        return prepare_webquestions_qa(
+            data_dir,
+            repo_url=prepare_config.get("repo_url"),
+            repo_dir=(
+                Path(prepare_config["repo_dir"])
+                if prepare_config.get("repo_dir")
+                else None
+            ),
+            train_split_name=prepare_config.get("train_split_name", "trainmodel"),
+            val_split_name=prepare_config.get("val_split_name", "val"),
+            vocab_size=prepare_config.get("vocab_size", 2048),
+            model_type=prepare_config.get("model_type", "unigram"),
+            byte_fallback=prepare_config.get("byte_fallback", True),
+            input_sentence_size=prepare_config.get("input_sentence_size", 200000),
+            max_sentence_length=prepare_config.get("max_sentence_length", 16384),
+            shuffle_input_sentence=prepare_config.get("shuffle_input_sentence", True),
+            tokenizer_model_path=(
+                Path(prepare_config["tokenizer_model_path"])
+                if prepare_config.get("tokenizer_model_path")
+                else None
+            ),
+            question_label=prepare_config.get("question_label", "Question"),
+            context_label=prepare_config.get("context_label", "Context"),
+            answer_label=prepare_config.get("answer_label", "Answer"),
+            instruction_text=prepare_config.get("instruction_text", ""),
+            prompt_loss_weight=prepare_config.get("prompt_loss_weight", 0.0),
+            continuation_head_token_count=prepare_config.get(
+                "continuation_head_token_count",
+                0,
+            ),
+            continuation_head_loss_weight=prepare_config.get(
+                "continuation_head_loss_weight",
+                1.0,
+            ),
+            min_answer_words=prepare_config.get("min_answer_words", 1),
+            max_answer_words=prepare_config.get("max_answer_words", 4),
+            max_question_words=prepare_config.get("max_question_words", 24),
+            require_single_line_answer=prepare_config.get(
+                "require_single_line_answer", False
+            ),
+            factoid_only=prepare_config.get("factoid_only", False),
+            normalize_factoid_answers=prepare_config.get(
+                "normalize_factoid_answers", False
+            ),
+            max_normalized_answer_words=prepare_config.get(
+                "max_normalized_answer_words"
+            ),
+            single_answer_only=prepare_config.get("single_answer_only", False),
         )
 
     raise ValueError(f"unsupported prepare dataset: {prepare_name}")
