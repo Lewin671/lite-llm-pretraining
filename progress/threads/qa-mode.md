@@ -261,3 +261,35 @@
   - `holdout exact_match` 首次到 `0.3438`
   - 手写问题仍会出现实体混淆
   - 常见错误从“纯伪词”变成了“答到相近实体”
+
+## Generalization Check
+
+- 新增手工泛化评测：
+  - [qa_general_simple_v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/prompts/qa_general_simple_v1.json)
+  - 内容刻意避开当前 Dolly `factoid` 题面风格，覆盖：
+    - `capital`
+    - `science`
+    - `literature`
+    - `history`
+    - `currency`
+    - `math`
+    - `language`
+- 结果：
+  - `factoid best`
+    - [qa-general-simple-factoid-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/qa-general-simple-factoid-v1.json)
+    - `exact_match=0.0`
+    - `token_f1=0.0333`
+    - `answer_presence_rate=0.0417`
+  - `open_qa_short best`
+    - [qa-general-simple-openqa-short-v1.json](/Users/qingyingliu/Code/lite-llm-pretraining/progress/artifacts/qa-mode/qa-general-simple-openqa-short-v1.json)
+    - `exact_match=0.0`
+    - `token_f1=0.0278`
+- 手工 spot check：
+  - `What is the capital of France?` -> `Tallahasse`
+  - `Who wrote Hamlet?` -> `Albert Electric cha`
+
+## Generalization Conclusion
+
+- 用户的判断是对的：当前模型一点都不通用
+- `factoid` 线比旧基线强，但这种强主要体现在“更接近训练分布的简单题”
+- 一旦换成更普通、更日常的简单事实题，当前模型基本立即失效

@@ -1,0 +1,175 @@
+{
+  "name": "qa_general_simple_v1",
+  "task": "qa",
+  "pass_f1_threshold": 0.9,
+  "samples": [
+    {
+      "id": "qa_general_simple_v1-001",
+      "question": "What is the capital of France?",
+      "context": "",
+      "answers": ["Paris"],
+      "tags": ["capital"]
+    },
+    {
+      "id": "qa_general_simple_v1-002",
+      "question": "What is the capital of Japan?",
+      "context": "",
+      "answers": ["Tokyo"],
+      "tags": ["capital"]
+    },
+    {
+      "id": "qa_general_simple_v1-003",
+      "question": "What is the capital of Canada?",
+      "context": "",
+      "answers": ["Ottawa"],
+      "tags": ["capital"]
+    },
+    {
+      "id": "qa_general_simple_v1-004",
+      "question": "What is the capital of Spain?",
+      "context": "",
+      "answers": ["Madrid"],
+      "tags": ["capital"]
+    },
+    {
+      "id": "qa_general_simple_v1-005",
+      "question": "What is the largest planet in the Solar System?",
+      "context": "",
+      "answers": ["Jupiter"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-006",
+      "question": "Which planet is known as the Red Planet?",
+      "context": "",
+      "answers": ["Mars"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-007",
+      "question": "What is the chemical symbol for gold?",
+      "context": "",
+      "answers": ["Au"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-008",
+      "question": "What is H2O commonly called?",
+      "context": "",
+      "answers": ["water"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-009",
+      "question": "What gas do plants absorb from the atmosphere?",
+      "context": "",
+      "answers": ["carbon dioxide"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-010",
+      "question": "What is the square root of 64?",
+      "context": "",
+      "answers": ["8", "eight"],
+      "tags": ["math"]
+    },
+    {
+      "id": "qa_general_simple_v1-011",
+      "question": "How many continents are there on Earth?",
+      "context": "",
+      "answers": ["7", "seven"],
+      "tags": ["count"]
+    },
+    {
+      "id": "qa_general_simple_v1-012",
+      "question": "Who wrote Hamlet?",
+      "context": "",
+      "answers": ["William Shakespeare", "Shakespeare"],
+      "tags": ["literature"]
+    },
+    {
+      "id": "qa_general_simple_v1-013",
+      "question": "Who wrote Pride and Prejudice?",
+      "context": "",
+      "answers": ["Jane Austen", "Austen"],
+      "tags": ["literature"]
+    },
+    {
+      "id": "qa_general_simple_v1-014",
+      "question": "Who painted the Mona Lisa?",
+      "context": "",
+      "answers": ["Leonardo da Vinci", "da Vinci"],
+      "tags": ["art"]
+    },
+    {
+      "id": "qa_general_simple_v1-015",
+      "question": "Who developed the theory of relativity?",
+      "context": "",
+      "answers": ["Albert Einstein", "Einstein"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-016",
+      "question": "Who was the first President of the United States?",
+      "context": "",
+      "answers": ["George Washington", "Washington"],
+      "tags": ["history"]
+    },
+    {
+      "id": "qa_general_simple_v1-017",
+      "question": "What is the currency of Japan?",
+      "context": "",
+      "answers": ["yen", "Japanese yen"],
+      "tags": ["currency"]
+    },
+    {
+      "id": "qa_general_simple_v1-018",
+      "question": "Where is the Eiffel Tower located?",
+      "context": "",
+      "answers": ["Paris", "Paris, France", "France"],
+      "tags": ["location"]
+    },
+    {
+      "id": "qa_general_simple_v1-019",
+      "question": "What is the boiling point of water at sea level in Celsius?",
+      "context": "",
+      "answers": ["100 degrees Celsius", "100 Celsius", "100"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-020",
+      "question": "What do bees make?",
+      "context": "",
+      "answers": ["honey"],
+      "tags": ["nature"]
+    },
+    {
+      "id": "qa_general_simple_v1-021",
+      "question": "What is the largest ocean on Earth?",
+      "context": "",
+      "answers": ["Pacific Ocean", "Pacific"],
+      "tags": ["geography"]
+    },
+    {
+      "id": "qa_general_simple_v1-022",
+      "question": "What is the hardest natural substance?",
+      "context": "",
+      "answers": ["diamond"],
+      "tags": ["science"]
+    },
+    {
+      "id": "qa_general_simple_v1-023",
+      "question": "What is the primary language of Brazil?",
+      "context": "",
+      "answers": ["Portuguese"],
+      "tags": ["language"]
+    },
+    {
+      "id": "qa_general_simple_v1-024",
+      "question": "What force keeps planets in orbit around the Sun?",
+      "context": "",
+      "answers": ["gravity"],
+      "tags": ["science"]
+    }
+  ]
+}

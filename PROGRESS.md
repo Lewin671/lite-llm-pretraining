@@ -5,9 +5,9 @@
 ## Current Status
 
 - Current Task: 沿 `Dolly Q/A` 主线继续优化，目标先收紧成“简单问题能稳定答出来”
-- Latest Progress: 已跑通 `factoid open_qa` 微调线；当前最佳 user-facing 口径是 `5 tokens + greedy`，`holdout exact_match=0.3438`，第一次让一批极简单题出现稳定非零正确率
-- Issues: 虽然 `factoid` 线已经明显优于旧基线，但泛化仍弱；对手写简单题仍会答错，比如把德国/阿拉巴马州首府答成别的实体
-- Next Step: 继续沿 `factoid` 主线优化，优先压低实体混淆和首词后缀噪声，而不是回到更宽、更脏的 QA 任务
+- Latest Progress: 更宽的手工 simple-QA 泛化评测已经补上；当前 `factoid best` 在这套新题上 `exact_match=0.0 / token_f1=0.0333`，基本证明它仍然不通用
+- Issues: 之前的 `factoid holdout` 口径过于贴近训练分布，会高估模型质量；真实的通用简单题表现目前几乎为零
+- Next Step: 基于这套更宽的 generalization suite 重定优化目标，优先想办法减少训练分布依赖，而不是继续只在 Dolly 风格题面上抠分
 
 ## How To Read
 

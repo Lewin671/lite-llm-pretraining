@@ -1,0 +1,611 @@
+{
+  "checkpoint_dir": "checkpoints/dolly-open-qa-short-c096-compact/best_suite",
+  "suite_path": "prompts/qa_general_simple_v1.json",
+  "suite_name": "qa_general_simple_v1",
+  "seed": 123,
+  "inference_profile": {
+    "mode": "qa",
+    "question_label": "Question",
+    "context_label": "Context",
+    "answer_label": "Answer",
+    "instruction_text": "Answer with a short factual phrase.",
+    "prompt_template": "Question: {question}\n{context_block}Answer:",
+    "answer_word_limit": null
+  },
+  "samples": [
+    {
+      "id": "qa_general_simple_v1-001",
+      "tags": [
+        "capital"
+      ],
+      "question": "What is the capital of France?",
+      "context": "",
+      "answers": [
+        "Paris"
+      ],
+      "model_prompt": "Question: What is the capital of France?\nAnswer:",
+      "output": "Little Rock is the",
+      "predicted_answer": "Little Rock is the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-002",
+      "tags": [
+        "capital"
+      ],
+      "question": "What is the capital of Japan?",
+      "context": "",
+      "answers": [
+        "Tokyo"
+      ],
+      "model_prompt": "Question: What is the capital of Japan?\nAnswer:",
+      "output": "George Washington D city of",
+      "predicted_answer": "George Washington D city of",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-003",
+      "tags": [
+        "capital"
+      ],
+      "question": "What is the capital of Canada?",
+      "context": "",
+      "answers": [
+        "Ottawa"
+      ],
+      "model_prompt": "Question: What is the capital of Canada?\nAnswer:",
+      "output": "George Washington D city of",
+      "predicted_answer": "George Washington D city of",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-004",
+      "tags": [
+        "capital"
+      ],
+      "question": "What is the capital of Spain?",
+      "context": "",
+      "answers": [
+        "Madrid"
+      ],
+      "model_prompt": "Question: What is the capital of Spain?\nAnswer:",
+      "output": "George Washington D city of",
+      "predicted_answer": "George Washington D city of",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-005",
+      "tags": [
+        "science"
+      ],
+      "question": "What is the largest planet in the Solar System?",
+      "context": "",
+      "answers": [
+        "Jupiter"
+      ],
+      "model_prompt": "Question: What is the largest planet in the Solar System?\nAnswer:",
+      "output": "Alextamerith",
+      "predicted_answer": "Alextamerith",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-006",
+      "tags": [
+        "science"
+      ],
+      "question": "Which planet is known as the Red Planet?",
+      "context": "",
+      "answers": [
+        "Mars"
+      ],
+      "model_prompt": "Question: Which planet is known as the Red Planet?\nAnswer:",
+      "output": "Augustusing the first",
+      "predicted_answer": "Augustusing the first",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-007",
+      "tags": [
+        "science"
+      ],
+      "question": "What is the chemical symbol for gold?",
+      "context": "",
+      "answers": [
+        "Au"
+      ],
+      "model_prompt": "Question: What is the chemical symbol for gold?\nAnswer:",
+      "output": "Lifeomeose",
+      "predicted_answer": "Lifeomeose",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-008",
+      "tags": [
+        "science"
+      ],
+      "question": "What is H2O commonly called?",
+      "context": "",
+      "answers": [
+        "water"
+      ],
+      "model_prompt": "Question: What is H2O commonly called?\nAnswer:",
+      "output": "ABO Blood",
+      "predicted_answer": "ABO Blood",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-009",
+      "tags": [
+        "science"
+      ],
+      "question": "What gas do plants absorb from the atmosphere?",
+      "context": "",
+      "answers": [
+        "carbon dioxide"
+      ],
+      "model_prompt": "Question: What gas do plants absorb from the atmosphere?\nAnswer:",
+      "output": "Piperley is",
+      "predicted_answer": "Piperley is",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-010",
+      "tags": [
+        "math"
+      ],
+      "question": "What is the square root of 64?",
+      "context": "",
+      "answers": [
+        "8",
+        "eight"
+      ],
+      "model_prompt": "Question: What is the square root of 64?\nAnswer:",
+      "output": "Lizeatous",
+      "predicted_answer": "Lizeatous",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-011",
+      "tags": [
+        "count"
+      ],
+      "question": "How many continents are there on Earth?",
+      "context": "",
+      "answers": [
+        "7",
+        "seven"
+      ],
+      "model_prompt": "Question: How many continents are there on Earth?\nAnswer:",
+      "output": "39 members",
+      "predicted_answer": "39 members",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-012",
+      "tags": [
+        "literature"
+      ],
+      "question": "Who wrote Hamlet?",
+      "context": "",
+      "answers": [
+        "William Shakespeare",
+        "Shakespeare"
+      ],
+      "model_prompt": "Question: Who wrote Hamlet?\nAnswer:",
+      "output": "Alexis de Tocque",
+      "predicted_answer": "Alexis de Tocque",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-013",
+      "tags": [
+        "literature"
+      ],
+      "question": "Who wrote Pride and Prejudice?",
+      "context": "",
+      "answers": [
+        "Jane Austen",
+        "Austen"
+      ],
+      "model_prompt": "Question: Who wrote Pride and Prejudice?\nAnswer:",
+      "output": "Theirst Amendment",
+      "predicted_answer": "Theirst Amendment",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-014",
+      "tags": [
+        "art"
+      ],
+      "question": "Who painted the Mona Lisa?",
+      "context": "",
+      "answers": [
+        "Leonardo da Vinci",
+        "da Vinci"
+      ],
+      "model_prompt": "Question: Who painted the Mona Lisa?\nAnswer:",
+      "output": "The DC in the",
+      "predicted_answer": "The DC in the",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-015",
+      "tags": [
+        "science"
+      ],
+      "question": "Who developed the theory of relativity?",
+      "context": "",
+      "answers": [
+        "Albert Einstein",
+        "Einstein"
+      ],
+      "model_prompt": "Question: Who developed the theory of relativity?\nAnswer:",
+      "output": "Alexisial owner",
+      "predicted_answer": "Alexisial owner",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-016",
+      "tags": [
+        "history"
+      ],
+      "question": "Who was the first President of the United States?",
+      "context": "",
+      "answers": [
+        "George Washington",
+        "Washington"
+      ],
+      "model_prompt": "Question: Who was the first President of the United States?\nAnswer:",
+      "output": "George Washington Richard S",
+      "predicted_answer": "George Washington Richard S",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.6667,
+        "contains_reference": true
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-017",
+      "tags": [
+        "currency"
+      ],
+      "question": "What is the currency of Japan?",
+      "context": "",
+      "answers": [
+        "yen",
+        "Japanese yen"
+      ],
+      "model_prompt": "Question: What is the currency of Japan?\nAnswer:",
+      "output": "Romeocet",
+      "predicted_answer": "Romeocet",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-018",
+      "tags": [
+        "location"
+      ],
+      "question": "Where is the Eiffel Tower located?",
+      "context": "",
+      "answers": [
+        "Paris",
+        "Paris, France",
+        "France"
+      ],
+      "model_prompt": "Question: Where is the Eiffel Tower located?\nAnswer:",
+      "output": "The Denver Broncos",
+      "predicted_answer": "The Denver Broncos",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-019",
+      "tags": [
+        "science"
+      ],
+      "question": "What is the boiling point of water at sea level in Celsius?",
+      "context": "",
+      "answers": [
+        "100 degrees Celsius",
+        "100 Celsius",
+        "100"
+      ],
+      "model_prompt": "Question: What is the boiling point of water at sea level in Celsius?\nAnswer:",
+      "output": "Because therenake",
+      "predicted_answer": "Because therenake",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-020",
+      "tags": [
+        "nature"
+      ],
+      "question": "What do bees make?",
+      "context": "",
+      "answers": [
+        "honey"
+      ],
+      "model_prompt": "Question: What do bees make?\nAnswer:",
+      "output": "Cleveland Brownsisn",
+      "predicted_answer": "Cleveland Brownsisn",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-021",
+      "tags": [
+        "geography"
+      ],
+      "question": "What is the largest ocean on Earth?",
+      "context": "",
+      "answers": [
+        "Pacific Ocean",
+        "Pacific"
+      ],
+      "model_prompt": "Question: What is the largest ocean on Earth?\nAnswer:",
+      "output": "Brandonal Madrid(",
+      "predicted_answer": "Brandonal Madrid(",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-022",
+      "tags": [
+        "science"
+      ],
+      "question": "What is the hardest natural substance?",
+      "context": "",
+      "answers": [
+        "diamond"
+      ],
+      "model_prompt": "Question: What is the hardest natural substance?\nAnswer:",
+      "output": "Nal to vote for",
+      "predicted_answer": "Nal to vote for",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-023",
+      "tags": [
+        "language"
+      ],
+      "question": "What is the primary language of Brazil?",
+      "context": "",
+      "answers": [
+        "Portuguese"
+      ],
+      "model_prompt": "Question: What is the primary language of Brazil?\nAnswer:",
+      "output": "Lyomeoc",
+      "predicted_answer": "Lyomeoc",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    },
+    {
+      "id": "qa_general_simple_v1-024",
+      "tags": [
+        "science"
+      ],
+      "question": "What force keeps planets in orbit around the Sun?",
+      "context": "",
+      "answers": [
+        "gravity"
+      ],
+      "model_prompt": "Question: What force keeps planets in orbit around the Sun?\nAnswer:",
+      "output": "Fikail",
+      "predicted_answer": "Fikail",
+      "answer_metrics": {
+        "exact_match": false,
+        "token_f1": 0.0,
+        "contains_reference": false
+      },
+      "strict_pass": false
+    }
+  ],
+  "validation": {
+    "eval_batches": 10,
+    "val_loss": 7.262631,
+    "val_ppl": 1426.003879,
+    "checkpoint_step": 500,
+    "best_val_loss": 5.798303031921387
+  },
+  "summary": {
+    "strict_passed": 0,
+    "total_samples": 24,
+    "strict_pass_rate": 0.0,
+    "exact_match": 0.0,
+    "token_f1": 0.0278,
+    "answer_presence_rate": 0.0417,
+    "tag_summary": {
+      "art": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "capital": {
+        "total": 4,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "count": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "currency": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "geography": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "history": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.6667
+      },
+      "language": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "literature": {
+        "total": 2,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "location": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "math": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "nature": {
+        "total": 1,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "science": {
+        "total": 9,
+        "strict_passed": 0,
+        "strict_pass_rate": 0.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      }
+    }
+  }
+}
